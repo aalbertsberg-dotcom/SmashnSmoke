@@ -151,12 +151,12 @@
     background: rgba(27,95,204,0.12);
     border: 1px solid rgba(27,95,204,0.35);
     border-radius: 4px;
-    padding: 1.25rem 2.5rem;
+    padding: 0.85rem 2rem;
     animation: fade-up 1s 0.6s cubic-bezier(0.16,1,0.3,1) both;
   }
   .special-label {
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.85rem;
+    font-size: 0.7rem;
     letter-spacing: 3px;
     text-transform: uppercase;
     color: var(--blue-bright);
@@ -168,7 +168,7 @@
   }
   .special-text {
     font-family: 'Bangers', cursive;
-    font-size: 1.9rem;
+    font-size: 1.4rem;
     letter-spacing: 2px;
     color: var(--white);
   }
@@ -1128,7 +1128,61 @@
     <a href="#find">Find Us</a>
     <a href="#about">Our Story</a>
   </div>
-  <p class="footer-copy">© 2026 Smash N Smoke · Gulf Coast, MS &nbsp;·&nbsp; <a href="https://aalbertsberg.us">Built by Double-A Solutions</a></p>
+  <!-- Partner strip -->
+  <div style="margin: 0 auto 2rem; max-width:700px; display:flex; align-items:center; justify-content:center; gap:1.5rem; flex-wrap:wrap; padding:1.25rem 2rem; background:rgba(27,95,204,0.06); border:1px solid rgba(27,95,204,0.18); border-radius:4px;">
+    <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:rgba(245,245,245,0.35);">Proudly Sourced From</span>
+    <div style="width:1px; height:24px; background:rgba(27,95,204,0.3);"></div>
+    <a href="https://www.thebutcherontucker.com/" target="_blank" rel="noopener"
+       style="display:flex; align-items:center; gap:0.75rem; text-decoration:none; transition:opacity 0.2s;" onmouseover="this.style.opacity=0.7" onmouseout="this.style.opacity=1">
+      <div style="width:38px; height:38px; background:#8B1A1A; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.2rem; flex-shrink:0;">🥩</div>
+      <div style="text-align:left;">
+        <div style="font-family:'Bangers',cursive; font-size:1.1rem; letter-spacing:2px; color:white; line-height:1;">The Butcher on Tucker</div>
+        <div style="font-family:'Barlow Condensed',sans-serif; font-size:0.65rem; letter-spacing:2px; text-transform:uppercase; color:rgba(245,245,245,0.4); margin-top:2px;">Our Meat. Their Truck. Gulf Coast Quality.</div>
+      </div>
+    </a>
+  </div>
+
+  <!-- Built by -->
+  <div style="display:flex; align-items:center; justify-content:center; gap:0.75rem; margin-bottom:1rem;">
+    <a href="https://aalbertsberg.us" target="_blank" rel="noopener" title="Double-A Solutions" style="display:flex; align-items:center; gap:0.6rem; text-decoration:none; opacity:0.6; transition:opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
+      <svg viewBox="0 0 200 200" width="40" height="40" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0c1e47;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Hexagon shape -->
+  <path d="M 100 20 L 170 60 L 170 140 L 100 180 L 30 140 L 30 60 Z" 
+        fill="url(#grad2)" 
+        stroke="#06b6d4" 
+        stroke-width="3" />
+  
+  <!-- Inner hexagon detail -->
+  <path d="M 100 35 L 155 65 L 155 135 L 100 165 L 45 135 L 45 65 Z" 
+        fill="none" 
+        stroke="#06b6d4" 
+        stroke-width="1" 
+        opacity="0.3" />
+  
+  <!-- AA Text -->
+  <text x="100" y="120" 
+        font-family="Arial, sans-serif" 
+        font-size="70" 
+        font-weight="bold" 
+        fill="#06b6d4" 
+        text-anchor="middle">AA</text>
+  
+  <!-- Corner tech details -->
+  <circle cx="100" cy="20" r="4" fill="#06b6d4" />
+  <circle cx="170" cy="60" r="4" fill="#06b6d4" />
+  <circle cx="170" cy="140" r="4" fill="#06b6d4" />
+</svg>
+      <span style="font-family:'Barlow Condensed',sans-serif; font-size:0.75rem; letter-spacing:2px; text-transform:uppercase; color:rgba(245,245,245,0.6);">Built by Double-A Solutions</span>
+    </a>
+  </div>
+  <p class="footer-copy">© 2026 Smash N Smoke · Gulf Coast, MS</p>
 </footer>
 
 <script>
@@ -1155,32 +1209,16 @@ document.querySelectorAll('.special-card').forEach(card => {
 });
 
 // Update hero special badge dynamically
-// ─────────────────────────────────────────────
-// WEEKLY SPECIAL OVERRIDES
-// To plan ahead: add a date entry in YYYY-MM-DD format.
-// It will show instead of the default day-of-week special.
-// Leave empty ({}) to use the default rotating schedule below.
-// Example: '2026-05-02': ['Brisket Friday', 'Limited rack special — first come first served'],
-const weeklyOverrides = {
-
-};
-// ─────────────────────────────────────────────
-// DEFAULT ROTATING SCHEDULE
-// Edit these anytime to change the weekly rotation.
 const specialMap = {
-  Sunday:    ['Weekend Wild Card',   'Check social for today\'s special'],
-  Monday:    ['Smash Monday',        'Double smash burger specials all day'],
-  Tuesday:   ['Brisket Tuesday',     'Smoked brisket — limited quantity'],
-  Wednesday: ['Wing Wednesday',      'Nashville Hot — bone-in or boneless'],
-  Thursday:  ['Rib Thursday',        'Smoked ribs while they last'],
-  Friday:    ['Pulled Pork Friday',  'Slow-smoked pulled pork sandwich'],
-  Saturday:  ['Weekend Wild Card',   'Check social for today\'s special'],
+  Sunday: ['Weekend Wild Card', 'Check social for today\'s special'],
+  Monday: ['Smash Monday', 'Double smash burger specials all day'],
+  Tuesday: ['Brisket Tuesday', 'Smoked brisket — limited quantity'],
+  Wednesday: ['Wing Wednesday', 'Nashville Hot — bone-in or boneless'],
+  Thursday: ['Rib Thursday', 'Smoked ribs while they last'],
+  Friday: ['Pulled Pork Friday', 'Slow-smoked pulled pork sandwich'],
+  Saturday: ['Weekend Wild Card', 'Check social for today\'s special'],
 };
-// ─────────────────────────────────────────────
-const days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-const todayDate = new Date().toISOString().slice(0,10);
-const todayDay  = days[new Date().getDay()];
-const todaySpecial = weeklyOverrides[todayDate] || specialMap[todayDay];
+const todaySpecial = specialMap[today];
 if (todaySpecial) {
   document.querySelector('.special-text').innerHTML = `<em>${todaySpecial[0]}</em> — ${todaySpecial[1]}`;
 }
