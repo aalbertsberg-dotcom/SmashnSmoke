@@ -595,98 +595,32 @@
     transform: translateY(0);
   }
 
+  
+.menu-source {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(245,245,245,0.6);
+}
+.menu-source span {
+  color: var(--blue-bright);
+}
 
-  /* ── BUTCHER-ALIGNED MENU UPGRADES ── */
-  .menu-feature {
-    margin-bottom: 1.5rem;
-    padding: 1.5rem 1.75rem;
-    background:
-      linear-gradient(135deg, rgba(27,95,204,0.18), rgba(192,69,0,0.10)),
-      var(--navy-mid);
-    border: 1px solid rgba(75,150,255,0.35);
-    border-left: 4px solid var(--blue-bright);
-    border-radius: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    box-shadow: 0 0 32px rgba(27,95,204,0.12);
-  }
-  .feature-kicker {
-    display: block;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.68rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--blue-bright);
-    font-weight: 700;
-    margin-bottom: 0.35rem;
-  }
-  .menu-feature h3 {
-    font-family: 'Bangers', cursive;
-    font-size: clamp(1.5rem, 4vw, 2.25rem);
-    letter-spacing: 2px;
-    margin-bottom: 0.35rem;
-  }
-  .menu-feature p {
-    color: rgba(245,245,245,0.65);
-    font-size: 0.88rem;
-    line-height: 1.55;
-    max-width: 620px;
-  }
-  .menu-feature strong {
-    font-family: 'Bangers', cursive;
-    font-size: 1.5rem;
-    letter-spacing: 2px;
-    color: var(--orange-bright);
-    white-space: nowrap;
-  }
-  .menu-cat-priority {
-    background:
-      linear-gradient(180deg, rgba(27,95,204,0.14), rgba(13,22,48,1));
-  }
-  .menu-cat-money {
-    background:
-      linear-gradient(180deg, rgba(192,69,0,0.16), rgba(13,22,48,1));
-  }
-  .item-price {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 1.05rem;
-    color: var(--white);
-    letter-spacing: 1px;
-    margin-left: 1rem;
-    white-space: nowrap;
-  }
-  .featured-item {
-    background: rgba(27,95,204,0.10);
-    margin: 0 -0.35rem;
-    padding-left: 0.35rem !important;
-    padding-right: 0.35rem !important;
-    border-radius: 3px;
-  }
-  .item-badge {
-    display: inline-block;
-    margin-left: 0.5rem;
-    padding: 0.12rem 0.38rem;
-    border: 1px solid rgba(224,112,16,0.5);
-    border-radius: 2px;
-    color: var(--orange-bright);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.62rem;
-    font-weight: 700;
-    letter-spacing: 1.3px;
-    text-transform: uppercase;
-    vertical-align: middle;
-  }
-  @media (max-width: 768px) {
-    .menu-feature {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-  }
 
-  /* ── RESPONSIVE ── */
+.menu-source-line {
+  margin-top: 6px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(75,150,255,0.9);
+  font-weight: 600;
+}
+
+/* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     nav ul { display: none; }
     .find-inner { grid-template-columns: 1fr; gap: 3rem; }
@@ -1032,89 +966,88 @@
 <!-- MENU -->
 <section id="menu">
   <div class="menu-inner reveal">
-    <div class="section-label">The Menu</div>
-    <h2 class="section-title">BUTCHER-BACKED. TRUCK-BUILT.</h2>
+    <p class="section-label">What We Serve</p>
+    <h2 class="section-title">Built for the Truck</h2>
     <div class="section-rule"></div>
 
-    <div class="menu-feature">
-      <div>
-        <span class="feature-kicker">Signature Advantage</span>
-        <h3>Butcher’s Daily Special</h3>
-        <p>Rotating specials built around fresh cuts, custom grinds, and whatever deserves the spotlight that day.</p>
+    <div class="menu-board">
+      <div class="menu-board-header">
+        <div>
+          <p class="menu-kicker">Wings · Smash Burgers · And Things</p>
+          <h3>Smash N Smoke Menu</h3>
+        </div>
+        <div class="menu-special-callout">
+          <span>Daily Special</span>
+          <strong>Ask what’s hitting today</strong>
+        </div>
       </div>
-      <strong>ASK TODAY</strong>
+
+      <div class="menu-board-grid">
+        <article class="menu-panel">
+          <div class="panel-title-row">
+            <h4>Wings</h4>
+            <span>Nashville Hot · Bold Flavor</span>
+          </div>
+          <ul class="board-items">
+            <li><div><strong>6 PC</strong><small>Bone-in wings</small></div><b>$10</b></li>
+            <li class="featured"><div><strong>10 PC</strong><small>Most popular</small></div><b>$15</b></li>
+            <li><div><strong>15 PC</strong><small>Shareable order</small></div><b>$21</b></li>
+            <li><div><strong>20 PC</strong><small>Big crew order</small></div><b>$27</b></li>
+          </ul>
+          <div class="addon-box">
+            <p><strong>+ $2</strong> Tossed Nashville Hot</p>
+            <p><strong>+ $3</strong> Loaded — extra sauce + topping</p>
+          </div>
+        </article>
+
+        <article class="menu-panel primary-panel">
+          <div class="panel-title-row">
+            <h4>Smashburgers</h4>
+            <span>Simple · Smashed · Done Right</span>
+          </div>
+          <ul class="board-items">
+            <li><div><strong>Classic Smash</strong><small>Beef, cheese, pickles, onions, smash sauce</small></div><b>$11</b></li>
+            <li class="featured"><div><strong>Double Smash</strong><small>Best value</small></div><b>$13</b></li>
+            <li><div><strong>LOKÉ Burger</strong><small>Bacon, lettuce, onions, LOKÉ sauce</small></div><b>$15</b></li>
+            <li><div><strong>Owens Stacker</strong><small>Double smash, bacon, onion ring, BBQ + smash sauce</small></div><b>$17</b></li>
+          </ul>
+        </article>
+
+        <article class="menu-panel combo-panel">
+          <div class="panel-title-row">
+            <h4>Combos</h4>
+            <span>Includes fries + drink</span>
+          </div>
+          <ul class="board-items">
+            <li><div><strong>Smash Combo</strong><small>Any classic smashburger</small></div><b>$16</b></li>
+            <li class="featured"><div><strong>10 PC Wing Combo</strong><small>10 wings tossed in sauce</small></div><b>$19</b></li>
+            <li><div><strong>15 PC Wing Combo</strong><small>15 wings tossed in sauce</small></div><b>$24</b></li>
+          </ul>
+
+          <div class="side-drink-grid">
+            <div>
+              <h5>Sides</h5>
+              <p><span>Fries</span><b>$5</b></p>
+              <p><span>Loaded Fries</span><b>$9</b></p>
+              <p><span>Onion Rings</span><b>$7</b></p>
+              <p><span>Corn Bites</span><b>$6</b></p>
+            </div>
+            <div>
+              <h5>Drinks</h5>
+              <p><span>Soda</span><b>$3</b></p>
+              <p><span>Water</span><b>$2</b></p>
+              <p><span>Specialty Drink</span><b>$5</b></p>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="menu-footer-strip">
+        <span>Bold Flavor.</span><span>Family Made.</span><span>Done Right.</span>
+      </div>
     </div>
 
-    <div class="menu-categories">
-      <div class="menu-cat menu-cat-priority">
-        <span class="menu-cat-icon">🔥</span>
-        <h3 class="menu-cat-title">Wings</h3>
-        <ul class="menu-items">
-          <li><span><span class="item-name">6 PC Wings</span></span><span class="item-price">$10</span></li>
-          <li class="featured-item"><span><span class="item-name">10 PC Wings</span><span class="item-badge">Most Popular</span></span><span class="item-price">$15</span></li>
-          <li><span><span class="item-name">15 PC Wings</span></span><span class="item-price">$21</span></li>
-          <li><span><span class="item-name">20 PC Wings</span></span><span class="item-price">$27</span></li>
-          <li><span><span class="item-name">Nashville Hot Toss</span><span class="item-note">add-on</span></span><span class="item-price">+$2</span></li>
-          <li><span><span class="item-name">Extra Sauce / Loaded</span><span class="item-note">add-on</span></span><span class="item-price">+$3</span></li>
-        </ul>
-      </div>
-
-      <div class="menu-cat menu-cat-priority">
-        <span class="menu-cat-icon">🍔</span>
-        <h3 class="menu-cat-title">Smashburgers</h3>
-        <ul class="menu-items">
-          <li><span><span class="item-name">Classic Smash</span></span><span class="item-price">$11</span></li>
-          <li class="featured-item"><span><span class="item-name">Double Smash</span><span class="item-badge">Best Value</span></span><span class="item-price">$13</span></li>
-          <li><span><span class="item-name">Butcher Blend Burger</span><span class="item-note">custom ground beef</span></span><span class="item-price">$15</span></li>
-          <li><span><span class="item-name">Owens Stacker</span><span class="item-note">premium double stack</span></span><span class="item-price">$17</span></li>
-        </ul>
-      </div>
-
-      <div class="menu-cat menu-cat-money">
-        <span class="menu-cat-icon">💰</span>
-        <h3 class="menu-cat-title">Combos</h3>
-        <ul class="menu-items">
-          <li><span><span class="item-name">Smash Combo</span><span class="item-note">burger + fries + drink</span></span><span class="item-price">$16</span></li>
-          <li class="featured-item"><span><span class="item-name">10 PC Wing Combo</span><span class="item-badge">Truck Favorite</span></span><span class="item-price">$19</span></li>
-          <li><span><span class="item-name">15 PC Wing Combo</span><span class="item-note">fries + drink</span></span><span class="item-price">$24</span></li>
-          <li><span><span class="item-name">Butcher Special Combo</span><span class="item-note">daily price</span></span><span class="item-price">MP</span></li>
-        </ul>
-      </div>
-
-      <div class="menu-cat">
-        <span class="menu-cat-icon">🥩</span>
-        <h3 class="menu-cat-title">Butcher Specials</h3>
-        <ul class="menu-items">
-          <li><span><span class="item-name">Brisket Smash</span><span class="item-note">when available</span></span><span class="item-price">$16</span></li>
-          <li><span><span class="item-name">Smoked Sausage Smash</span><span class="item-note">butcher case special</span></span><span class="item-price">$14</span></li>
-          <li><span><span class="item-name">Chopped Steak Burger</span><span class="item-note">fresh cut feature</span></span><span class="item-price">$16</span></li>
-          <li><span><span class="item-name">Hot Chicken Sandwich</span><span class="item-note">Nashville style</span></span><span class="item-price">$15</span></li>
-        </ul>
-      </div>
-
-      <div class="menu-cat">
-        <span class="menu-cat-icon">🍟</span>
-        <h3 class="menu-cat-title">Sides</h3>
-        <ul class="menu-items">
-          <li><span><span class="item-name">Fries</span></span><span class="item-price">$5</span></li>
-          <li class="featured-item"><span><span class="item-name">Loaded Fries</span><span class="item-badge">Add It</span></span><span class="item-price">$9</span></li>
-          <li><span><span class="item-name">Onion Rings</span></span><span class="item-price">$7</span></li>
-        </ul>
-      </div>
-
-      <div class="menu-cat">
-        <span class="menu-cat-icon">🥤</span>
-        <h3 class="menu-cat-title">Drinks</h3>
-        <ul class="menu-items">
-          <li><span><span class="item-name">Water</span></span><span class="item-price">$2</span></li>
-          <li><span><span class="item-name">Soda</span></span><span class="item-price">$3</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="menu-note">
-      Smash N Smoke is built around wings, smash burgers, and rotating butcher-backed specials. Menu items and specials may change based on availability.
-    </div>
+    <p class="menu-note">Prices listed at the truck. Menu subject to availability — daily specials may sell out. Follow us on social for the day’s lineup.</p>
   </div>
 </section>
 
