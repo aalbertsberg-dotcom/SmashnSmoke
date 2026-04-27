@@ -603,6 +603,258 @@
     .about-logo-wrap { display: none; }
     section { padding: 4rem 1.5rem; }
   }
+
+  /* ── UPDATED HIGH-CONVERSION MENU BOARD ── */
+  #menu {
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .menu-board {
+    position: relative;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at top left, rgba(27,95,204,0.18), transparent 38%),
+      linear-gradient(135deg, rgba(13,22,48,0.96), rgba(4,8,16,0.98));
+    border: 1px solid rgba(75,150,255,0.28);
+    border-radius: 8px;
+    box-shadow: 0 0 40px rgba(27,95,204,0.14);
+  }
+  .menu-board::before {
+    content: 'LOKÉ';
+    position: absolute;
+    inset: auto auto 10% 50%;
+    transform: translateX(-50%) rotate(-5deg);
+    font-family: 'Bangers', cursive;
+    font-size: clamp(7rem, 18vw, 14rem);
+    letter-spacing: 10px;
+    color: rgba(27,95,204,0.11);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+  .menu-board-header {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    align-items: center;
+    padding: 1.75rem 2rem;
+    border-bottom: 1px solid rgba(75,150,255,0.22);
+  }
+  .menu-kicker {
+    font-family: 'Barlow Condensed', sans-serif;
+    color: var(--blue-bright);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    margin-bottom: 0.35rem;
+  }
+  .menu-board-header h3 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2rem, 5vw, 3.25rem);
+    letter-spacing: 3px;
+    line-height: 0.9;
+  }
+  .menu-special-callout {
+    min-width: 220px;
+    border: 1px solid rgba(224,112,16,0.55);
+    background: rgba(192,69,0,0.12);
+    box-shadow: 0 0 20px rgba(192,69,0,0.12);
+    padding: 1rem 1.25rem;
+    border-radius: 5px;
+    text-align: right;
+  }
+  .menu-special-callout span {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    color: var(--orange-bright);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+  .menu-special-callout strong {
+    display: block;
+    margin-top: 0.25rem;
+    font-family: 'Bangers', cursive;
+    letter-spacing: 1px;
+    font-size: 1.35rem;
+    color: var(--white);
+  }
+  .menu-board-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1.12fr 1fr;
+  }
+  .menu-panel {
+    padding: 2rem;
+    border-right: 1px solid rgba(75,150,255,0.22);
+  }
+  .menu-panel:last-child { border-right: none; }
+  .primary-panel {
+    background: rgba(27,95,204,0.07);
+  }
+  .combo-panel {
+    background: rgba(7,12,24,0.35);
+  }
+  .panel-title-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-end;
+    border-bottom: 2px solid rgba(75,150,255,0.3);
+    padding-bottom: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .panel-title-row h4 {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2rem, 4vw, 2.7rem);
+    letter-spacing: 2px;
+    color: var(--white);
+    line-height: 0.9;
+    text-shadow: 3px 3px 0 rgba(27,95,204,0.4);
+  }
+  .panel-title-row span {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 0.65rem;
+    color: rgba(245,245,245,0.55);
+    text-align: right;
+  }
+  .board-items {
+    list-style: none;
+  }
+  .board-items li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: 0.95rem 0;
+    border-bottom: 1px solid rgba(245,245,245,0.07);
+  }
+  .board-items li::before {
+    content: '';
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--orange-bright);
+    box-shadow: 0 0 12px rgba(224,112,16,0.4);
+    flex-shrink: 0;
+  }
+  .primary-panel .board-items li::before { background: var(--blue-bright); box-shadow: 0 0 12px rgba(75,150,255,0.35); }
+  .board-items li > div {
+    flex: 1;
+  }
+  .board-items strong {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.25rem;
+    line-height: 1;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .board-items small {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.72rem;
+    line-height: 1.35;
+    color: rgba(245,245,245,0.45);
+  }
+  .board-items b {
+    font-family: 'Bangers', cursive;
+    font-size: 1.65rem;
+    letter-spacing: 1px;
+    color: var(--white);
+  }
+  .board-items li.featured {
+    position: relative;
+    margin: 0.25rem -0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    background: rgba(224,112,16,0.1);
+    border: 1px solid rgba(224,112,16,0.24);
+    border-radius: 4px;
+  }
+  .primary-panel .board-items li.featured {
+    background: rgba(27,95,204,0.14);
+    border-color: rgba(75,150,255,0.3);
+  }
+  .board-items li.featured small::after {
+    content: ' ★';
+    color: var(--orange-bright);
+  }
+  .addon-box {
+    margin-top: 1.5rem;
+    border: 1px solid rgba(75,150,255,0.35);
+    background: rgba(27,95,204,0.08);
+    border-radius: 5px;
+    padding: 1rem 1.1rem;
+  }
+  .addon-box p {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(245,245,245,0.78);
+  }
+  .addon-box p + p { margin-top: 0.55rem; }
+  .addon-box strong { color: var(--orange-bright); }
+  .side-drink-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+  }
+  .side-drink-grid h5 {
+    font-family: 'Bangers', cursive;
+    font-size: 1.45rem;
+    letter-spacing: 2px;
+    color: var(--blue-bright);
+    margin-bottom: 0.65rem;
+  }
+  .side-drink-grid p {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.35rem 0;
+    border-bottom: 1px solid rgba(245,245,245,0.06);
+    font-family: 'Barlow Condensed', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .side-drink-grid b { color: var(--white); }
+  .menu-footer-strip {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    gap: clamp(1rem, 4vw, 3rem);
+    padding: 1rem 1.5rem;
+    background: linear-gradient(90deg, transparent, rgba(27,95,204,0.55), transparent);
+    border-top: 1px solid rgba(75,150,255,0.22);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(245,245,245,0.82);
+  }
+  @media (max-width: 900px) {
+    .menu-board-header { flex-direction: column; align-items: stretch; }
+    .menu-special-callout { text-align: left; min-width: 0; }
+    .menu-board-grid { grid-template-columns: 1fr; }
+    .menu-panel { border-right: none; border-bottom: 1px solid rgba(75,150,255,0.22); }
+    .menu-panel:last-child { border-bottom: none; }
+    .side-drink-grid { grid-template-columns: 1fr; }
+    .menu-footer-strip { flex-direction: column; gap: 0.3rem; text-align: center; letter-spacing: 3px; }
+  }
+
 </style>
 </head>
 <body>
@@ -687,49 +939,90 @@
 </section>
 
 <!-- MENU -->
-<section>
+<section id="menu">
   <div class="menu-inner reveal">
     <p class="section-label">What We Serve</p>
-    <h2 class="section-title">The Menu</h2>
+    <h2 class="section-title">Built for the Truck</h2>
     <div class="section-rule"></div>
-    <div class="menu-categories">
-      <div class="menu-cat">
-        <span class="menu-cat-icon">🔥</span>
-        <p class="menu-cat-title">Nashville Hot Wings</p>
-        <ul class="menu-items">
-          <li><span class="item-name">6 Wings</span><span class="item-heat">$10</span></li>
-          <li><span class="item-name">10 Wings</span><span class="item-heat">$15</span></li>
-          <li><span class="item-name">15 Wings</span><span class="item-heat">$21</span></li>
-          <li><span class="item-name">20 Wings</span><span class="item-heat">$27</span></li>
-          <li><span class="item-name">10 Wing Combo <span class="item-note">fries + drink</span></span><span class="item-heat">$19</span></li>
-          <li><span class="item-name">15 Wing Combo <span class="item-note">fries + drink</span></span><span class="item-heat">$24</span></li>
-        </ul>
+
+    <div class="menu-board">
+      <div class="menu-board-header">
+        <div>
+          <p class="menu-kicker">Wings · Smash Burgers · And Things</p>
+          <h3>Smash N Smoke Menu</h3>
+        </div>
+        <div class="menu-special-callout">
+          <span>Daily Special</span>
+          <strong>Ask what’s hitting today</strong>
+        </div>
       </div>
-      <div class="menu-cat">
-        <span class="menu-cat-icon">🍔</span>
-        <p class="menu-cat-title">Smash Burgers</p>
-        <ul class="menu-items">
-          <li><span class="item-name">Classic Smash Burger</span><span class="item-heat">$11</span></li>
-          <li><span class="item-name">Double Smash Burger</span><span class="item-heat">$14</span></li>
-          <li><span class="item-name">Bacon Smash Burger</span><span class="item-heat">$15</span></li>
-          <li><span class="item-name">Owens Stacker <span class="item-note">double + bacon + egg + sauce</span></span><span class="item-heat">$17</span></li>
-          <li><span class="item-name">Smash Combo <span class="item-note">fries + drink</span></span><span class="item-heat">$16</span></li>
-          <li><span class="item-name">Double Combo <span class="item-note">fries + drink</span></span><span class="item-heat">$19</span></li>
-        </ul>
+
+      <div class="menu-board-grid">
+        <article class="menu-panel">
+          <div class="panel-title-row">
+            <h4>Wings</h4>
+            <span>Nashville Hot · Bold Flavor</span>
+          </div>
+          <ul class="board-items">
+            <li><div><strong>6 PC</strong><small>Bone-in wings</small></div><b>$10</b></li>
+            <li class="featured"><div><strong>10 PC</strong><small>Most popular</small></div><b>$15</b></li>
+            <li><div><strong>15 PC</strong><small>Shareable order</small></div><b>$21</b></li>
+            <li><div><strong>20 PC</strong><small>Big crew order</small></div><b>$27</b></li>
+          </ul>
+          <div class="addon-box">
+            <p><strong>+ $2</strong> Tossed Nashville Hot</p>
+            <p><strong>+ $3</strong> Loaded — extra sauce + topping</p>
+          </div>
+        </article>
+
+        <article class="menu-panel primary-panel">
+          <div class="panel-title-row">
+            <h4>Smashburgers</h4>
+            <span>Simple · Smashed · Done Right</span>
+          </div>
+          <ul class="board-items">
+            <li><div><strong>Classic Smash</strong><small>Beef, cheese, pickles, onions, smash sauce</small></div><b>$11</b></li>
+            <li class="featured"><div><strong>Double Smash</strong><small>Best value</small></div><b>$13</b></li>
+            <li><div><strong>LOKÉ Burger</strong><small>Bacon, lettuce, onions, LOKÉ sauce</small></div><b>$15</b></li>
+            <li><div><strong>Owens Stacker</strong><small>Double smash, bacon, onion ring, BBQ + smash sauce</small></div><b>$17</b></li>
+          </ul>
+        </article>
+
+        <article class="menu-panel combo-panel">
+          <div class="panel-title-row">
+            <h4>Combos</h4>
+            <span>Includes fries + drink</span>
+          </div>
+          <ul class="board-items">
+            <li><div><strong>Smash Combo</strong><small>Any classic smashburger</small></div><b>$16</b></li>
+            <li class="featured"><div><strong>10 PC Wing Combo</strong><small>10 wings tossed in sauce</small></div><b>$19</b></li>
+            <li><div><strong>15 PC Wing Combo</strong><small>15 wings tossed in sauce</small></div><b>$24</b></li>
+          </ul>
+
+          <div class="side-drink-grid">
+            <div>
+              <h5>Sides</h5>
+              <p><span>Fries</span><b>$5</b></p>
+              <p><span>Loaded Fries</span><b>$9</b></p>
+              <p><span>Onion Rings</span><b>$7</b></p>
+              <p><span>Corn Bites</span><b>$6</b></p>
+            </div>
+            <div>
+              <h5>Drinks</h5>
+              <p><span>Soda</span><b>$3</b></p>
+              <p><span>Water</span><b>$2</b></p>
+              <p><span>Specialty Drink</span><b>$5</b></p>
+            </div>
+          </div>
+        </article>
       </div>
-      <div class="menu-cat">
-        <span class="menu-cat-icon">🍟</span>
-        <p class="menu-cat-title">Sides &amp; Drinks</p>
-        <ul class="menu-items">
-          <li><span class="item-name">Fries</span><span class="item-heat">$5</span></li>
-          <li><span class="item-name">Loaded Fries</span><span class="item-heat">$9</span></li>
-          <li><span class="item-name">Onion Rings</span><span class="item-heat">$7</span></li>
-          <li><span class="item-name">Soda / Water</span><span class="item-heat">$3</span></li>
-          <li><span class="item-name">Sweet Tea</span><span class="item-heat">$4</span></li>
-        </ul>
+
+      <div class="menu-footer-strip">
+        <span>Bold Flavor.</span><span>Family Made.</span><span>Done Right.</span>
       </div>
     </div>
-    <p class="menu-note">Prices listed at the truck. Menu subject to availability — daily specials may sell out. Follow us on social for the day's lineup.</p>
+
+    <p class="menu-note">Prices listed at the truck. Menu subject to availability — daily specials may sell out. Follow us on social for the day’s lineup.</p>
   </div>
 </section>
 
