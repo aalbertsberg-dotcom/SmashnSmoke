@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>SNS // Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy: #070C18;
+    --navy-mid: #0D1630;
+    --navy-light: #121F40;
+    --blue: #1B5FCC;
+    --blue-bright: #4B96FF;
+    --purple: #6B38EE;
+    --green: #00CC66;
+    --green-dim: rgba(0,204,102,0.12);
+    --orange: #E07010;
+    --red: #CC2200;
+    --red-dim: rgba(204,34,0,0.12);
+    --white: #F0F4FF;
+    --dim: rgba(240,244,255,0.5);
+    --border: rgba(27,95,204,0.2);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── GATE ── */
+  #gate {
+    position: fixed; inset: 0;
+    background: var(--navy);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+  .gate-logo {
+    font-family: 'Bangers', cursive;
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    letter-spacing: 5px;
+    color: var(--white);
+    text-shadow: 0 0 30px rgba(27,95,204,0.5);
+    text-align: center;
+  }
+  .gate-logo span { color: var(--blue-bright); }
+  .gate-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--dim);
+  }
+  .gate-form {
+    width: 100%;
+    max-width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .gate-input {
+    width: 100%;
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1rem 1.25rem;
+    color: var(--white);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 4px;
+    text-align: center;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .gate-input:focus { border-color: var(--blue-bright); }
+  .gate-input.error { border-color: var(--red); animation: shake 0.3s ease; }
+  @keyframes shake { 0%,100%{transform:translateX(0)} 25%,75%{transform:translateX(-8px)} 50%{transform:translateX(8px)} }
+  .gate-btn {
+    width: 100%;
+    background: var(--blue);
+    border: none;
+    border-radius: 6px;
+    padding: 1rem;
+    color: var(--white);
+    font-family: 'Bangers', cursive;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .gate-btn:hover { background: var(--blue-bright); }
+  .gate-error { font-size: 0.75rem; color: var(--red); text-align: center; display: none; }
+
+  /* ── APP ── */
+  #app { display: none; }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(7,12,24,0.97);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.5rem;
+    gap: 1rem;
+  }
+  .topbar-brand {
+    font-family: 'Bangers', cursive;
+    font-size: 1.3rem;
+    letter-spacing: 3px;
+    white-space: nowrap;
+  }
+  .topbar-brand span { color: var(--blue-bright); }
+  .topbar-right { display: flex; align-items: center; gap: 1rem; }
+  .live-link {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    text-decoration: none;
+    border: 1px solid rgba(75,150,255,0.3);
+    padding: 0.4rem 0.9rem;
+    border-radius: 4px;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .live-link:hover { background: rgba(75,150,255,0.1); }
+  .save-status {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--dim);
+    white-space: nowrap;
+  }
+  .save-status.saved { color: var(--green); }
+  .save-status.saving { color: var(--orange); }
+
+  /* ── TAB NAV ── */
+  .tab-nav {
+    display: flex;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--border);
+    background: var(--navy-mid);
+    scrollbar-width: none;
+  }
+  .tab-nav::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    flex-shrink: 0;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 1rem 1.5rem;
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    color: var(--dim);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .tab-btn:hover { color: var(--white); }
+  .tab-btn.active { color: var(--blue-bright); border-bottom-color: var(--blue-bright); }
+  .tab-icon { font-size: 1rem; }
+
+  /* ── TAB PANELS ── */
+  .tab-panel { display: none; padding: 2rem 1.5rem; max-width: 900px; margin: 0 auto; }
+  .tab-panel.active { display: block; }
+
+  /* ── SECTION TITLE ── */
+  .panel-title {
+    font-family: 'Bangers', cursive;
+    font-size: 1.8rem;
+    letter-spacing: 3px;
+    margin-bottom: 0.4rem;
+  }
+  .panel-desc {
+    font-size: 0.82rem;
+    color: var(--dim);
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  /* ── CARDS / ROWS ── */
+  .card {
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+    transition: border-color 0.2s;
+  }
+  .card:focus-within { border-color: var(--blue); }
+  .card.today-card { border-color: rgba(0,204,102,0.3); }
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+  .card-day {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+  }
+  .today-chip {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    background: var(--green-dim);
+    border: 1px solid rgba(0,204,102,0.3);
+    padding: 0.15rem 0.6rem;
+    border-radius: 20px;
+  }
+  .sold-out-chip {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    background: var(--red-dim);
+    border: 1px solid rgba(204,34,0,0.3);
+    padding: 0.15rem 0.6rem;
+    border-radius: 20px;
+  }
+
+  /* ── FORM ELEMENTS ── */
+  .field { margin-bottom: 0.75rem; }
+  .field label {
+    display: block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--dim);
+    margin-bottom: 0.35rem;
+  }
+  .field input, .field textarea, .field select {
+    width: 100%;
+    background: var(--navy);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    color: var(--white);
+    font-family: 'Barlow', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--blue-bright); }
+  .field textarea { resize: vertical; min-height: 80px; }
+  .field select { cursor: pointer; }
+  .field select option { background: var(--navy-mid); }
+
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+  @media(max-width:480px){ .field-row { grid-template-columns: 1fr; } }
+
+  /* ── TOGGLE ── */
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .toggle-row:last-child { border: none; }
+  .toggle-label {
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+  .toggle-sub {
+    font-size: 0.75rem;
+    color: var(--dim);
+    margin-top: 0.1rem;
+  }
+  .toggle {
+    position: relative;
+    width: 46px; height: 24px;
+    flex-shrink: 0;
+  }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+  .toggle-track {
+    position: absolute; inset: 0;
+    background: rgba(255,255,255,0.1);
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .toggle-track::before {
+    content: '';
+    position: absolute;
+    left: 3px; top: 3px;
+    width: 18px; height: 18px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }
+  .toggle input:checked + .toggle-track { background: var(--blue); }
+  .toggle input:checked + .toggle-track::before { transform: translateX(22px); }
+  .toggle input.green-toggle:checked + .toggle-track { background: var(--red); }
+
+  /* ── BUTTONS ── */
+  .btn {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.82rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 0.75rem 1.75rem;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .btn-primary { background: var(--blue); color: white; }
+  .btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); }
+  .btn-primary:active { transform: translateY(0); }
+  .btn-danger { background: var(--red-dim); color: var(--red); border: 1px solid rgba(204,34,0,0.3); }
+  .btn-danger:hover { background: rgba(204,34,0,0.2); }
+  .btn-ghost { background: transparent; color: var(--dim); border: 1px solid var(--border); }
+  .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
+  .btn-full { width: 100%; justify-content: center; }
+  .btn-sm { padding: 0.45rem 1rem; font-size: 0.72rem; }
+
+  /* ── LOCATION MAP ── */
+  .map-placeholder {
+    background: var(--navy);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .map-placeholder::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(27,95,204,0.04) 20px),
+                repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(27,95,204,0.04) 20px);
+  }
+  .map-pin-anim { animation: pin-bob 2s ease-in-out infinite; filter: drop-shadow(0 0 8px rgba(27,95,204,0.5)); }
+  @keyframes pin-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+
+  /* ── ANNOUNCEMENT BANNER PREVIEW ── */
+  .announcement-preview {
+    background: rgba(27,95,204,0.1);
+    border: 1px solid rgba(27,95,204,0.3);
+    border-radius: 6px;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .announcement-preview::before {
+    content: 'PREVIEW';
+    position: absolute;
+    top: -8px; left: 12px;
+    background: var(--navy-mid);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.55rem;
+    letter-spacing: 2px;
+    color: var(--dim);
+    padding: 0 6px;
+  }
+
+  /* ── MENU ITEMS ── */
+  .menu-item-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1rem;
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    gap: 1rem;
+    transition: border-color 0.2s;
+  }
+  .menu-item-row.is-86d {
+    opacity: 0.5;
+    border-color: rgba(204,34,0,0.2);
+    background: rgba(204,34,0,0.04);
+  }
+  .menu-item-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    flex: 1;
+  }
+  .menu-item-badges { display: flex; gap: 0.4rem; align-items: center; }
+  .badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 0.15rem 0.5rem;
+    border-radius: 3px;
+  }
+  .badge-86 { background: var(--red-dim); color: var(--red); border: 1px solid rgba(204,34,0,0.3); }
+  .badge-featured { background: rgba(224,112,16,0.12); color: var(--orange); border: 1px solid rgba(224,112,16,0.3); }
+  .item-actions { display: flex; gap: 0.4rem; }
+
+  /* ── PHOTO UPLOAD ── */
+  .upload-zone {
+    border: 2px dashed rgba(27,95,204,0.3);
+    border-radius: 8px;
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .upload-zone:hover, .upload-zone.drag-over {
+    border-color: var(--blue-bright);
+    background: rgba(27,95,204,0.06);
+  }
+  .upload-zone input[type="file"] {
+    position: absolute; inset: 0;
+    opacity: 0; cursor: pointer;
+    width: 100%; height: 100%;
+  }
+  .upload-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
+  .upload-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; color: var(--dim); }
+  .upload-sub { font-size: 0.75rem; color: rgba(240,244,255,0.3); margin-top: 0.25rem; }
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  .photo-thumb {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+  }
+  .photo-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .photo-thumb-del {
+    position: absolute; top: 4px; right: 4px;
+    background: rgba(0,0,0,0.7);
+    border: none; border-radius: 50%;
+    width: 22px; height: 22px;
+    color: white; font-size: 0.7rem;
+    cursor: pointer; display: flex;
+    align-items: center; justify-content: center;
+  }
+
+  /* ── SOCIAL ── */
+  .social-row {
+    display: grid;
+    grid-template-columns: 100px 1fr 1fr;
+    gap: 0.75rem;
+    align-items: end;
+    margin-bottom: 0.75rem;
+  }
+  @media(max-width:480px){ .social-row { grid-template-columns: 1fr; } }
+  .platform-badge {
+    height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--navy-mid);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: var(--dim);
+  }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 1.5rem; left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--navy-mid);
+    border: 1px solid var(--green);
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--green);
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
+    z-index: 9999;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+  .toast.error { border-color: var(--red); color: var(--red); }
+
+  /* ── LOADING ── */
+  .loading-overlay {
+    position: fixed; inset: 0;
+    background: rgba(7,12,24,0.8);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: none;
+  }
+  .spinner {
+    width: 40px; height: 40px;
+    border: 3px solid rgba(27,95,204,0.2);
+    border-top-color: var(--blue-bright);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+
+<!-- GATE -->
+<div id="gate">
+  <div class="gate-logo">SMASH <span>N</span> SMOKE</div>
+  <p class="gate-sub">Owner Portal</p>
+  <div class="gate-form">
+    <input type="password" class="gate-input" id="pwInput" placeholder="Password" autocomplete="off" autofocus/>
+    <p class="gate-error" id="gateError">Wrong password. Try again.</p>
+    <button class="gate-btn" onclick="checkPw()">Enter</button>
+  </div>
+</div>
+
+<!-- LOADING -->
+<div class="loading-overlay" id="loadingOverlay"><div class="spinner"></div></div>
+
+<!-- APP -->
+<div id="app">
+  <div class="topbar">
+    <div class="topbar-brand">SMASH <span>N</span> SMOKE</div>
+    <div class="topbar-right">
+      <span class="save-status" id="saveStatus">All saved</span>
+      <a href="index.html" target="_blank" class="live-link">View Live Site →</a>
+    </div>
+  </div>
+
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('specials',this)"><span class="tab-icon">🔥</span>Specials</button>
+    <button class="tab-btn" onclick="switchTab('location',this)"><span class="tab-icon">📍</span>Location</button>
+    <button class="tab-btn" onclick="switchTab('announce',this)"><span class="tab-icon">📢</span>Announce</button>
+    <button class="tab-btn" onclick="switchTab('menu',this)"><span class="tab-icon">🍔</span>Menu</button>
+    <button class="tab-btn" onclick="switchTab('photos',this)"><span class="tab-icon">📸</span>Photos</button>
+    <button class="tab-btn" onclick="switchTab('social',this)"><span class="tab-icon">📱</span>Social</button>
+  </div>
+
+  <!-- ── SPECIALS ── -->
+  <div class="tab-panel active" id="tab-specials">
+    <h2 class="panel-title">Daily Specials</h2>
+    <p class="panel-desc">Set the special for each day of the week. Today's special shows automatically on the site.</p>
+    <div id="specialsGrid"></div>
+    <button class="btn btn-primary btn-full" onclick="saveSpecials()" style="margin-top:1rem;">Save All Specials</button>
+  </div>
+
+  <!-- ── LOCATION ── -->
+  <div class="tab-panel" id="tab-location">
+    <h2 class="panel-title">Today's Location</h2>
+    <p class="panel-desc">Update where the truck is today. This shows on the site's Find Us section.</p>
+    <div class="map-placeholder">
+      <span class="map-pin-anim">📍</span>
+    </div>
+    <div class="card">
+      <div class="field">
+        <label>Street Address / Location Name</label>
+        <input type="text" id="loc-address" placeholder="e.g. 123 Main St, Biloxi MS — or Crossroads Parking Lot"/>
+      </div>
+      <div class="field">
+        <label>Google Maps Link (optional)</label>
+        <input type="url" id="loc-maps" placeholder="Paste Google Maps share link here"/>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label>Opening Time</label>
+          <input type="time" id="loc-open"/>
+        </div>
+        <div class="field">
+          <label>Closing Time</label>
+          <input type="time" id="loc-close"/>
+        </div>
+      </div>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">Closed Today</div>
+          <div class="toggle-sub">Hides the location and shows a closed message</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="loc-closed" class="green-toggle"/>
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+      <div class="field" id="closedReasonField" style="margin-top:0.75rem;display:none;">
+        <label>Reason (optional)</label>
+        <input type="text" id="loc-reason" placeholder="e.g. Taking a well-deserved day off"/>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-full" onclick="saveLocation()">Save Location</button>
+  </div>
+
+  <!-- ── ANNOUNCEMENTS ── -->
+  <div class="tab-panel" id="tab-announce">
+    <h2 class="panel-title">Announcements</h2>
+    <p class="panel-desc">Post a banner message that appears at the top of the site. Great for events, holidays, or big news.</p>
+    <div class="card">
+      <div class="field">
+        <label>Announcement Message</label>
+        <textarea id="announce-msg" placeholder="e.g. We'll be at the Biloxi Crawfish Festival this Saturday - come find us!" oninput="updateAnnouncementPreview()"></textarea>
+      </div>
+      <div class="announcement-preview" id="announcementPreview">Your message will appear here as a banner on the site.</div>
+      <div class="toggle-row">
+        <div>
+          <div class="toggle-label">Show on Site</div>
+          <div class="toggle-sub">Turn off to hide without deleting</div>
+        </div>
+        <label class="toggle">
+          <input type="checkbox" id="announce-active" checked/>
+          <span class="toggle-track"></span>
+        </label>
+      </div>
+    </div>
+    <button class="btn btn-primary btn-full" onclick="saveAnnouncement()">Post Announcement</button>
+
+    <h3 style="font-family:'Bangers',cursive;font-size:1.3rem;letter-spacing:2px;margin:2rem 0 1rem;">Past Announcements</h3>
+    <div id="announceHistory"></div>
+  </div>
+
+  <!-- ── MENU ── -->
+  <div class="tab-panel" id="tab-menu">
+    <h2 class="panel-title">Menu Control</h2>
+    <p class="panel-desc">Mark items as sold out (86'd) or feature them to highlight on the menu.</p>
+    <div id="menuGrid"></div>
+    <button class="btn btn-primary btn-full" onclick="saveMenu()" style="margin-top:1rem;">Save Menu</button>
+  </div>
+
+  <!-- ── PHOTOS ── -->
+  <div class="tab-panel" id="tab-photos">
+    <h2 class="panel-title">Photos</h2>
+    <p class="panel-desc">Upload photos of today's special or menu items. They'll appear on the site with a "See It" link.</p>
+    <div class="card">
+      <div class="field">
+        <label>What's this a photo of?</label>
+        <select id="photo-item">
+          <option value="">Select item...</option>
+          <option>Today's Special</option>
+          <option>Wing Wednesday</option>
+          <option>Brisket Tuesday</option>
+          <option>LOKÉ Burger</option>
+          <option>Owens Stacker</option>
+          <option>Classic Smash</option>
+          <option>Double Smash</option>
+          <option>The Truck</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Caption (optional)</label>
+        <input type="text" id="photo-caption" placeholder="e.g. Fresh off the griddle - Wing Wednesday is LIVE"/>
+      </div>
+      <div class="upload-zone" id="uploadZone">
+        <input type="file" id="photoFile" accept="image/*" onchange="handlePhotoUpload(event)"/>
+        <div class="upload-icon">📷</div>
+        <div class="upload-text">Tap to upload a photo</div>
+        <div class="upload-sub">JPG, PNG — best from your phone camera</div>
+      </div>
+    </div>
+    <div class="photo-grid" id="photoGrid"></div>
+  </div>
+
+  <!-- ── SOCIAL ── -->
+  <div class="tab-panel" id="tab-social">
+    <h2 class="panel-title">Social Links</h2>
+    <p class="panel-desc">Update your social media handles. These link up everywhere on the site at once.</p>
+    <div class="card" id="socialForm"></div>
+    <button class="btn btn-primary btn-full" onclick="saveSocial()" style="margin-top:1rem;">Save Social Links</button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── CONFIG ──
+const SUPABASE_URL = 'https://iywvdvuawflyxlumemqy.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_qy06iCwzteu3WNio_VOIUg_sG3iPgr2';
+const ADMIN_PASSWORD = 'tracey';
+
+const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+const TODAY = DAYS[new Date().getDay()];
+
+// ── SUPABASE HELPER ──
+async function sb(table, method='GET', body=null, filter='') {
+  const url = `${SUPABASE_URL}/rest/v1/${table}${filter}`;
+  const headers = {
+    'apikey': SUPABASE_KEY,
+    'Authorization': `Bearer ${SUPABASE_KEY}`,
+    'Content-Type': 'application/json',
+    'Prefer': method === 'POST' ? 'return=representation' : 'return=representation',
+  };
+  const opts = { method, headers };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(url, opts);
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(err);
+  }
+  const text = await res.text();
+  return text ? JSON.parse(text) : [];
+}
+
+async function sbGet(table, filter='') { return sb(table,'GET',null,filter); }
+async function sbPatch(table, body, filter) { return sb(table,'PATCH',body,filter); }
+async function sbPost(table, body) { return sb(table,'POST',body); }
+async function sbDelete(table, filter) { return sb(table,'DELETE',null,filter); }
+
+// ── GATE ──
+function checkPw() {
+  const val = document.getElementById('pwInput').value;
+  if (val.toLowerCase() === ADMIN_PASSWORD) {
+    const gate = document.getElementById('gate');
+    gate.style.opacity = '0';
+    gate.style.transition = 'opacity 0.4s';
+    setTimeout(() => {
+      gate.style.display = 'none';
+      document.getElementById('app').style.display = 'block';
+      loadAll();
+    }, 400);
+  } else {
+    const inp = document.getElementById('pwInput');
+    inp.classList.add('error');
+    document.getElementById('gateError').style.display = 'block';
+    setTimeout(() => { inp.classList.remove('error'); inp.value = ''; }, 800);
+  }
+}
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && document.getElementById('gate').style.display !== 'none') checkPw();
+});
+
+// ── TABS ──
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── LOAD ALL ──
+async function loadAll() {
+  showLoading(true);
+  try {
+    await Promise.all([loadSpecials(), loadLocation(), loadAnnouncements(), loadMenu(), loadPhotos(), loadSocial()]);
+  } catch(e) { showToast('Error loading data', true); }
+  showLoading(false);
+}
+
+// ── SPECIALS ──
+let specialsData = [];
+async function loadSpecials() {
+  const data = await sbGet('specials', '?order=id');
+  specialsData = data;
+  renderSpecials(data);
+}
+
+function renderSpecials(data) {
+  const grid = document.getElementById('specialsGrid');
+  grid.innerHTML = '';
+  DAYS.forEach(day => {
+    const spec = data.find(s => s.day === day) || { name: '', description: '', is_sold_out: false };
+    const isToday = day === TODAY;
+    grid.innerHTML += `
+      <div class="card ${isToday ? 'today-card' : ''}">
+        <div class="card-header">
+          <span class="card-day">${day}</span>
+          <div style="display:flex;gap:0.5rem;align-items:center;">
+            ${isToday ? '<span class="today-chip">Today</span>' : ''}
+            ${spec.is_sold_out ? '<span class="sold-out-chip">Sold Out</span>' : ''}
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Special Name</label>
+            <input type="text" id="spec-name-${day}" value="${spec.name}" placeholder="e.g. Wing Wednesday"/>
+          </div>
+          <div class="field">
+            <label>Description</label>
+            <input type="text" id="spec-desc-${day}" value="${spec.description}" placeholder="One line description"/>
+          </div>
+        </div>
+        <div class="toggle-row">
+          <div>
+            <div class="toggle-label">Mark as Sold Out</div>
+            <div class="toggle-sub">Shows a sold out tag on this day</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="spec-sold-${day}" class="green-toggle" ${spec.is_sold_out ? 'checked' : ''}/>
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+      </div>`;
+  });
+}
+
+async function saveSpecials() {
+  setSaveStatus('saving');
+  try {
+    for (const day of DAYS) {
+      const name = document.getElementById(`spec-name-${day}`).value;
+      const description = document.getElementById(`spec-desc-${day}`).value;
+      const is_sold_out = document.getElementById(`spec-sold-${day}`).checked;
+      const existing = specialsData.find(s => s.day === day);
+      if (existing) {
+        await sbPatch('specials', { name, description, is_sold_out, updated_at: new Date().toISOString() }, `?day=eq.${day}`);
+      } else {
+        await sbPost('specials', { day, name, description, is_sold_out });
+      }
+    }
+    setSaveStatus('saved');
+    showToast('Specials saved!');
+    await loadSpecials();
+  } catch(e) { setSaveStatus(''); showToast('Error saving specials', true); }
+}
+
+// ── LOCATION ──
+async function loadLocation() {
+  const today = new Date().toISOString().slice(0,10);
+  const data = await sbGet('location', `?date=eq.${today}&order=updated_at.desc&limit=1`);
+  if (data.length > 0) {
+    const loc = data[0];
+    document.getElementById('loc-address').value = loc.address || '';
+    document.getElementById('loc-maps').value = loc.maps_url || '';
+    if (loc.hours) {
+      const [open, close] = (loc.hours || '').split('-');
+      document.getElementById('loc-open').value = open?.trim() || '';
+      document.getElementById('loc-close').value = close?.trim() || '';
+    }
+    document.getElementById('loc-closed').checked = loc.is_closed || false;
+    document.getElementById('loc-reason').value = loc.closed_reason || '';
+    if (loc.is_closed) document.getElementById('closedReasonField').style.display = 'block';
+  }
+}
+
+document.addEventListener('change', e => {
+  if (e.target.id === 'loc-closed') {
+    document.getElementById('closedReasonField').style.display = e.target.checked ? 'block' : 'none';
+  }
+});
+
+async function saveLocation() {
+  setSaveStatus('saving');
+  try {
+    const today = new Date().toISOString().slice(0,10);
+    const open = document.getElementById('loc-open').value;
+    const close = document.getElementById('loc-close').value;
+    const hours = open && close ? `${open} - ${close}` : (open || close || null);
+    const payload = {
+      date: today,
+      address: document.getElementById('loc-address').value,
+      maps_url: document.getElementById('loc-maps').value,
+      hours,
+      is_closed: document.getElementById('loc-closed').checked,
+      closed_reason: document.getElementById('loc-reason').value,
+      updated_at: new Date().toISOString()
+    };
+    // Delete today's existing entry and insert fresh
+    await sbDelete('location', `?date=eq.${today}`);
+    await sbPost('location', payload);
+    setSaveStatus('saved');
+    showToast('Location updated!');
+  } catch(e) { setSaveStatus(''); showToast('Error saving location', true); }
+}
+
+// ── ANNOUNCEMENTS ──
+async function loadAnnouncements() {
+  const data = await sbGet('announcements', '?order=created_at.desc&limit=10');
+  const active = data.find(a => a.is_active);
+  if (active) {
+    document.getElementById('announce-msg').value = active.message;
+    document.getElementById('announce-active').checked = true;
+    updateAnnouncementPreview();
+  }
+  renderAnnounceHistory(data);
+}
+
+function updateAnnouncementPreview() {
+  const msg = document.getElementById('announce-msg').value;
+  document.getElementById('announcementPreview').textContent = msg || 'Your message will appear here as a banner on the site.';
+}
+
+function renderAnnounceHistory(data) {
+  const el = document.getElementById('announceHistory');
+  if (!data.length) { el.innerHTML = '<p style="color:var(--dim);font-size:0.82rem;">No announcements yet.</p>'; return; }
+  el.innerHTML = data.map(a => `
+    <div class="card" style="opacity:${a.is_active?1:0.5}">
+      <div class="card-header">
+        <span style="font-size:0.75rem;color:var(--dim);">${new Date(a.created_at).toLocaleDateString()}</span>
+        <div style="display:flex;gap:0.5rem;">
+          ${a.is_active ? '<span class="today-chip">Active</span>' : ''}
+          <button class="btn btn-danger btn-sm" onclick="deleteAnnouncement(${a.id})">Delete</button>
+        </div>
+      </div>
+      <p style="font-size:0.88rem;line-height:1.5;">${a.message}</p>
+    </div>`).join('');
+}
+
+async function saveAnnouncement() {
+  const msg = document.getElementById('announce-msg').value.trim();
+  if (!msg) { showToast('Write a message first', true); return; }
+  setSaveStatus('saving');
+  try {
+    // Deactivate all existing
+    await sbPatch('announcements', { is_active: false }, '?is_active=eq.true');
+    if (document.getElementById('announce-active').checked) {
+      await sbPost('announcements', { message: msg, is_active: true });
+    }
+    setSaveStatus('saved');
+    showToast('Announcement posted!');
+    await loadAnnouncements();
+  } catch(e) { setSaveStatus(''); showToast('Error posting', true); }
+}
+
+async function deleteAnnouncement(id) {
+  try {
+    await sbDelete('announcements', `?id=eq.${id}`);
+    showToast('Deleted');
+    await loadAnnouncements();
+  } catch(e) { showToast('Error', true); }
+}
+
+// ── MENU ──
+let menuData = [];
+async function loadMenu() {
+  const data = await sbGet('menu_overrides', '?order=id');
+  menuData = data;
+  renderMenu(data);
+}
+
+function renderMenu(data) {
+  const grid = document.getElementById('menuGrid');
+  grid.innerHTML = data.map(item => `
+    <div class="menu-item-row ${item.is_86d ? 'is-86d' : ''}" id="menu-row-${item.id}">
+      <span class="menu-item-name">${item.item_name}</span>
+      <div class="menu-item-badges">
+        ${item.is_86d ? '<span class="badge badge-86">86\'d</span>' : ''}
+        ${item.is_featured ? '<span class="badge badge-featured">Featured</span>' : ''}
+      </div>
+      <div class="item-actions">
+        <button class="btn btn-sm ${item.is_86d ? 'btn-primary' : 'btn-danger'}" onclick="toggle86(${item.id},${item.is_86d})">
+          ${item.is_86d ? 'Bring Back' : "86 It"}
+        </button>
+        <button class="btn btn-sm btn-ghost" onclick="toggleFeatured(${item.id},${item.is_featured})">
+          ${item.is_featured ? 'Unfeature' : 'Feature'}
+        </button>
+      </div>
+    </div>`).join('');
+}
+
+async function toggle86(id, current) {
+  try {
+    await sbPatch('menu_overrides', { is_86d: !current, updated_at: new Date().toISOString() }, `?id=eq.${id}`);
+    showToast(current ? 'Item restored!' : "Item 86'd");
+    await loadMenu();
+  } catch(e) { showToast('Error', true); }
+}
+
+async function toggleFeatured(id, current) {
+  try {
+    await sbPatch('menu_overrides', { is_featured: !current, updated_at: new Date().toISOString() }, `?id=eq.${id}`);
+    showToast(current ? 'Unfeatured' : 'Now featured!');
+    await loadMenu();
+  } catch(e) { showToast('Error', true); }
+}
+
+async function saveMenu() { showToast('Menu saved!'); }
+
+// ── PHOTOS ──
+async function loadPhotos() {
+  const data = await sbGet('photos', '?order=created_at.desc&limit=20');
+  renderPhotos(data);
+}
+
+function renderPhotos(data) {
+  const grid = document.getElementById('photoGrid');
+  if (!data.length) { grid.innerHTML = ''; return; }
+  grid.innerHTML = data.map(p => `
+    <div class="photo-thumb">
+      <img src="${p.url}" alt="${p.item_name}" onerror="this.style.display='none'"/>
+      <button class="photo-thumb-del" onclick="deletePhoto(${p.id})">✕</button>
+    </div>`).join('');
+}
+
+async function handlePhotoUpload(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const item = document.getElementById('photo-item').value;
+  const caption = document.getElementById('photo-caption').value;
+  if (!item) { showToast('Select what this photo is of', true); return; }
+
+  showLoading(true);
+  try {
+    // Upload to Supabase Storage
+    const fileName = `${Date.now()}-${file.name.replace(/\s/g,'_')}`;
+    const uploadRes = await fetch(`${SUPABASE_URL}/storage/v1/object/photos/${fileName}`, {
+      method: 'POST',
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': file.type,
+        'x-upsert': 'true'
+      },
+      body: file
+    });
+    if (!uploadRes.ok) throw new Error('Upload failed');
+    const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/photos/${fileName}`;
+    await sbPost('photos', { item_name: item, url: publicUrl, caption, is_active: true });
+    showToast('Photo uploaded!');
+    await loadPhotos();
+    event.target.value = '';
+  } catch(e) {
+    showToast('Create a "photos" storage bucket in Supabase first', true);
+  }
+  showLoading(false);
+}
+
+async function deletePhoto(id) {
+  try {
+    await sbDelete('photos', `?id=eq.${id}`);
+    showToast('Photo deleted');
+    await loadPhotos();
+  } catch(e) { showToast('Error', true); }
+}
+
+// ── SOCIAL ──
+let socialData = [];
+async function loadSocial() {
+  const data = await sbGet('social_links', '?order=id');
+  socialData = data;
+  renderSocial(data);
+}
+
+function renderSocial(data) {
+  const form = document.getElementById('socialForm');
+  form.innerHTML = `<div style="display:flex;flex-direction:column;gap:0.75rem;">` +
+    data.map(s => `
+      <div class="social-row">
+        <div class="platform-badge">${s.platform}</div>
+        <div class="field" style="margin:0;">
+          <label>Handle</label>
+          <input type="text" id="social-handle-${s.id}" value="${s.handle||''}" placeholder="@SmashnSmoke"/>
+        </div>
+        <div class="field" style="margin:0;">
+          <label>Full URL</label>
+          <input type="url" id="social-url-${s.id}" value="${s.url==='#'?'':s.url||''}" placeholder="https://facebook.com/..."/>
+        </div>
+      </div>`).join('') + `</div>`;
+}
+
+async function saveSocial() {
+  setSaveStatus('saving');
+  try {
+    for (const s of socialData) {
+      const handle = document.getElementById(`social-handle-${s.id}`).value;
+      const url = document.getElementById(`social-url-${s.id}`).value || '#';
+      await sbPatch('social_links', { handle, url, updated_at: new Date().toISOString() }, `?id=eq.${s.id}`);
+    }
+    setSaveStatus('saved');
+    showToast('Social links saved!');
+  } catch(e) { setSaveStatus(''); showToast('Error saving', true); }
+}
+
+// ── UI HELPERS ──
+function showToast(msg, isError=false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show' + (isError ? ' error' : '');
+  setTimeout(() => t.className = 'toast', 3000);
+}
+
+function setSaveStatus(state) {
+  const el = document.getElementById('saveStatus');
+  if (state === 'saving') { el.textContent = 'Saving...'; el.className = 'save-status saving'; }
+  else if (state === 'saved') { el.textContent = 'All saved ✓'; el.className = 'save-status saved'; setTimeout(()=>{ el.textContent='All saved'; el.className='save-status saved'; }, 3000); }
+  else { el.textContent = ''; el.className = 'save-status'; }
+}
+
+function showLoading(show) {
+  document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
+}
+</script>
+</body>
+</html>
