@@ -880,6 +880,140 @@
     .menu-footer-strip { flex-direction: column; gap: 0.3rem; text-align: center; letter-spacing: 3px; }
   }
 
+
+  /* ── PHOTO SYSTEM ── */
+  .special-photo-wrap {
+    position: relative;
+    z-index: 2;
+    margin-top: 1.5rem;
+    cursor: pointer;
+    animation: fade-up 1s 0.7s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  .special-photo {
+    width: 220px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid rgba(27,95,204,0.4);
+    box-shadow: 0 0 30px rgba(27,95,204,0.25);
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    display: block;
+  }
+  .special-photo:hover {
+    transform: scale(1.04);
+    box-shadow: 0 0 50px rgba(27,95,204,0.45);
+    border-color: var(--blue-bright);
+  }
+  .special-photo-placeholder {
+    width: 220px;
+    height: 160px;
+    border-radius: 8px;
+    border: 2px dashed rgba(27,95,204,0.25);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: rgba(27,95,204,0.05);
+    color: rgba(240,244,255,0.25);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .special-photo-tap {
+    position: absolute;
+    bottom: 8px; right: 8px;
+    background: rgba(7,12,24,0.8);
+    border: 1px solid rgba(27,95,204,0.4);
+    border-radius: 4px;
+    padding: 0.25rem 0.6rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--blue-bright);
+    pointer-events: none;
+  }
+  .menu-cam {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+  .menu-cam:hover { opacity: 1; }
+  .menu-cam img {
+    width: 60px;
+    height: 45px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid rgba(27,95,204,0.3);
+  }
+  .menu-cam-icon {
+    font-size: 0.9rem;
+    color: var(--blue-bright);
+  }
+  /* LIGHTBOX */
+  .lightbox {
+    position: fixed; inset: 0;
+    background: rgba(4,8,16,0.96);
+    z-index: 9000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .lightbox.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .lightbox-inner {
+    position: relative;
+    max-width: min(90vw, 700px);
+    width: 100%;
+    transform: scale(0.92);
+    transition: transform 0.25s ease;
+  }
+  .lightbox.open .lightbox-inner { transform: scale(1); }
+  .lightbox img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(27,95,204,0.3);
+    box-shadow: 0 0 60px rgba(27,95,204,0.3);
+    display: block;
+  }
+  .lightbox-caption {
+    margin-top: 1rem;
+    text-align: center;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    color: rgba(240,244,255,0.6);
+  }
+  .lightbox-close {
+    position: absolute;
+    top: -14px; right: -14px;
+    width: 32px; height: 32px;
+    background: var(--navy-mid);
+    border: 1px solid rgba(27,95,204,0.4);
+    border-radius: 50%;
+    color: var(--white);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .lightbox-close:hover { background: var(--blue); }
 </style>
 </head>
 <body>
@@ -912,6 +1046,19 @@
     <div class="special-divider"></div>
     <span class="special-text"><em>Wing Wednesday</em> - Nashville Hot</span>
   </div>
+
+  <!-- TODAY'S SPECIAL PHOTO -->
+  <div class="special-photo-wrap" id="specialPhotoWrap" style="display:none;" onclick="openLightbox(window._todayPhotoUrl, window._todayPhotoCaption)">
+    <img src="" alt="Today's Special" class="special-photo" id="specialPhotoImg"/>
+    <span class="special-photo-tap">Tap to see more</span>
+  </div>
+  <div class="special-photo-wrap" id="specialPhotoPlaceholder">
+    <div class="special-photo-placeholder">
+      <span style="font-size:1.5rem;">📷</span>
+      <span>Photo coming soon</span>
+    </div>
+  </div>
+
 
   <div class="hero-cta">
     <a href="#find" class="btn-primary">Find the Truck</a>
@@ -1316,7 +1463,86 @@ const specialMap = {
 const todaySpecial = specialMap[today];
 if (todaySpecial) {
   document.querySelector('.special-text').innerHTML = `<em>${todaySpecial[0]}</em> - ${todaySpecial[1]}`;
+  window._todaySpecialName = todaySpecial[0];
 }
+
+// ── SUPABASE PHOTO SYSTEM ──
+const SB_URL = 'https://iywvdvuawflyxlumemqy.supabase.co';
+const SB_KEY = 'sb_publishable_qy06iCwzteu3WNio_VOIUg_sG3iPgr2';
+
+async function fetchPhotos() {
+  try {
+    const res = await fetch(`${SB_URL}/rest/v1/photos?is_active=eq.true&order=created_at.desc`, {
+      headers: { 'apikey': SB_KEY, 'Authorization': `Bearer ${SB_KEY}` }
+    });
+    return await res.json();
+  } catch(e) { return []; }
+}
+
+async function loadSitePhotos() {
+  const photos = await fetchPhotos();
+  if (!photos.length) return;
+
+  // Hero special photo — match today's special name
+  const todayName = (window._todaySpecialName || '').toLowerCase();
+  const heroPhoto = photos.find(p =>
+    p.item_name.toLowerCase().includes('today') ||
+    (todayName && p.item_name.toLowerCase().includes(todayName.split(' ')[0]))
+  ) || photos.find(p => p.item_name.toLowerCase().includes('special'));
+
+  if (heroPhoto) {
+    window._todayPhotoUrl = heroPhoto.url;
+    window._todayPhotoCaption = heroPhoto.caption || heroPhoto.item_name;
+    document.getElementById('specialPhotoImg').src = heroPhoto.url;
+    document.getElementById('specialPhotoWrap').style.display = 'block';
+    document.getElementById('specialPhotoPlaceholder').style.display = 'none';
+  }
+
+  // Menu item camera icons
+  const menuItems = document.querySelectorAll('.board-items li, .menu-items li');
+  menuItems.forEach(li => {
+    const nameEl = li.querySelector('strong, .item-name');
+    if (!nameEl) return;
+    const itemName = nameEl.textContent.replace('*','').trim().toLowerCase();
+    const photo = photos.find(p => p.item_name.toLowerCase().includes(itemName.split(' ')[0]) && itemName.length > 3);
+    if (photo) {
+      const cam = document.createElement('span');
+      cam.className = 'menu-cam';
+      cam.onclick = (e) => { e.stopPropagation(); openLightbox(photo.url, photo.caption || photo.item_name); };
+      cam.innerHTML = `<img src="${photo.url}" alt="${photo.item_name}"/><span class="menu-cam-icon">🔍</span>`;
+      nameEl.appendChild(cam);
+    }
+  });
+}
+
+function openLightbox(url, caption) {
+  if (!url) return;
+  document.getElementById('lightboxImg').src = url;
+  document.getElementById('lightboxCaption').textContent = caption || '';
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox(e) {
+  if (e && e.target !== document.getElementById('lightbox') && !e.target.classList.contains('lightbox-close')) return;
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox({target: document.getElementById('lightbox')}); });
+
+// Load photos after specials load
+setTimeout(loadSitePhotos, 800);
+
 </script>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+    <img src="" alt="" id="lightboxImg"/>
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+</div>
 </body>
 </html>

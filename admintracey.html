@@ -1027,8 +1027,12 @@ async function handlePhotoUpload(event) {
 
   showLoading(true);
   try {
-    // Upload to Supabase Storage
-    const fileName = `${Date.now()}-${file.name.replace(/\s/g,'_')}`;
+    // Use a consistent filename per item so Supabase always has ONE live photo per item
+    // Dropbox gets a dated filename (handled by Make) so archive builds up there
+    const safeName = item.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+    const fileName = `${safeName}_current.jpg`;
+
+    // Upload to Supabase Storage (overwrites previous for this item)
     const uploadRes = await fetch(`${SUPABASE_URL}/storage/v1/object/photos/${fileName}`, {
       method: 'POST',
       headers: {
@@ -1040,13 +1044,21 @@ async function handlePhotoUpload(event) {
       body: file
     });
     if (!uploadRes.ok) throw new Error('Upload failed');
-    const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/photos/${fileName}`;
+
+    // Add cache-buster so browser doesn't show old cached photo
+    const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/photos/${fileName}?t=${Date.now()}`;
+
+    // Deactivate old photo record for this item, insert new one
+    await sbPatch('photos', { is_active: false }, `?item_name=eq.${encodeURIComponent(item)}`);
     await sbPost('photos', { item_name: item, url: publicUrl, caption, is_active: true });
-    showToast('Photo uploaded!');
+
+    showToast('Photo uploaded and live!');
     await loadPhotos();
     event.target.value = '';
+    document.getElementById('photo-caption').value = '';
   } catch(e) {
-    showToast('Create a "photos" storage bucket in Supabase first', true);
+    console.error(e);
+    showToast('Upload failed - check Supabase storage bucket is public', true);
   }
   showLoading(false);
 }
