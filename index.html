@@ -1018,6 +1018,11 @@
 </head>
 <body>
 
+<!-- ANNOUNCEMENT BANNER -->
+<div id="announcementBanner" style="display:none;background:rgba(27,95,204,0.15);border-bottom:1px solid rgba(27,95,204,0.3);padding:0.6rem 2rem;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:0.85rem;letter-spacing:1px;color:var(--white);position:relative;z-index:200;">
+  <span id="announcementText"></span>
+</div>
+
 <nav>
   <a href="#hero" class="nav-logo">SMASH <span>N</span> SMOKE</a>
   <ul>
@@ -1355,15 +1360,15 @@
       <div class="find-detail">
         <div class="find-icon">📍</div>
         <div class="find-detail-text">
-          <strong>Gulf Coast Area</strong>
-          <span>Serving Biloxi, Gulfport, D'Iberville, and surrounding communities. Locations change daily.</span>
+          <strong id="locAddressLabel">Gulf Coast Area</strong>
+          <span id="locAddressText">Serving Biloxi, Gulfport, D'Iberville, and surrounding communities. Locations change daily.</span>
         </div>
       </div>
       <div class="find-detail">
         <div class="find-icon">📅</div>
         <div class="find-detail-text">
           <strong>Hours</strong>
-          <span>Check social media each day for hours and location. We post every morning.</span>
+          <span id="locHoursText">Check social media each day for hours and location. We post every morning.</span>
         </div>
       </div>
       <div class="find-detail">
@@ -1533,6 +1538,150 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbo
 
 // Load photos after specials load
 setTimeout(loadSitePhotos, 800);
+
+// ── SUPABASE LIVE DATA ──
+const SITE_SB_URL = 'https://iywvdvuawflyxlumemqy.supabase.co';
+const SITE_SB_KEY = 'sb_publishable_qy06iCwzteu3WNio_VOIUg_sG3iPgr2';
+
+async function sbFetch(table, filter='') {
+  try {
+    const res = await fetch(`${SITE_SB_URL}/rest/v1/${table}${filter}`, {
+      headers: { 'apikey': SITE_SB_KEY, 'Authorization': `Bearer ${SITE_SB_KEY}` }
+    });
+    return await res.json();
+  } catch(e) { return []; }
+}
+
+async function loadLiveData() {
+  // Run all in parallel
+  const [specials, location, announcements, menuOverrides, socialLinks] = await Promise.all([
+    sbFetch('specials', '?order=id'),
+    sbFetch('location', `?date=eq.${new Date().toISOString().slice(0,10)}&order=updated_at.desc&limit=1`),
+    sbFetch('announcements', '?is_active=eq.true&order=created_at.desc&limit=1'),
+    sbFetch('menu_overrides', '?order=id'),
+    sbFetch('social_links', '?order=id'),
+  ]);
+
+  // 1. UPDATE SPECIALS
+  if (specials.length) {
+    const todayDay = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'][new Date().getDay()];
+    const todaySpec = specials.find(s => s.day === todayDay);
+    if (todaySpec) {
+      const name = todaySpec.is_sold_out ? todaySpec.name + ' (Sold Out)' : todaySpec.name;
+      const badge = document.querySelector('.special-text');
+      if (badge) badge.innerHTML = `<em>${name}</em> - ${todaySpec.description}`;
+      window._todaySpecialName = todaySpec.name;
+    }
+    // Update specials grid cards
+    document.querySelectorAll('.special-card').forEach(card => {
+      const dayEl = card.querySelector('.special-day');
+      if (!dayEl) return;
+      const cardDay = dayEl.textContent.trim();
+      const spec = specials.find(s => cardDay.startsWith(s.day));
+      if (!spec) return;
+      const nameEl = card.querySelector('.special-name');
+      const descEl = card.querySelector('.special-desc');
+      if (nameEl) nameEl.textContent = spec.name;
+      if (descEl) descEl.textContent = spec.description;
+      if (spec.is_sold_out) {
+        card.style.opacity = '0.6';
+        if (nameEl) nameEl.style.textDecoration = 'line-through';
+        const sold = document.createElement('span');
+        sold.style.cssText = 'font-size:0.7rem;color:#CC2200;letter-spacing:2px;text-transform:uppercase;font-family:Barlow Condensed,sans-serif;margin-left:0.5rem;';
+        sold.textContent = 'SOLD OUT';
+        if (nameEl) nameEl.appendChild(sold);
+      }
+    });
+  }
+
+  // 2. UPDATE LOCATION
+  if (location.length) {
+    const loc = location[0];
+    const addrEl = document.getElementById('locAddressLabel');
+    const addrText = document.getElementById('locAddressText');
+    const hoursEl = document.getElementById('locHoursText');
+    if (loc.is_closed) {
+      if (addrEl) addrEl.textContent = 'Closed Today';
+      if (addrText) addrText.textContent = loc.closed_reason || 'Taking a well-deserved day off. See you tomorrow!';
+      if (hoursEl) hoursEl.textContent = 'Closed today.';
+    } else {
+      if (loc.address && addrEl) {
+        addrEl.textContent = loc.address;
+        if (addrText) addrText.textContent = 'Come find us today!';
+      }
+      if (loc.hours && hoursEl) hoursEl.textContent = loc.hours;
+      // If maps URL exists, make address clickable
+      if (loc.maps_url && loc.maps_url !== '#' && addrEl) {
+        const link = document.createElement('a');
+        link.href = loc.maps_url;
+        link.target = '_blank';
+        link.style.color = 'var(--blue-bright)';
+        link.style.textDecoration = 'none';
+        link.textContent = addrEl.textContent;
+        addrEl.textContent = '';
+        addrEl.appendChild(link);
+      }
+    }
+  }
+
+  // 3. ANNOUNCEMENT BANNER
+  if (announcements.length) {
+    const ann = announcements[0];
+    const banner = document.getElementById('announcementBanner');
+    const text = document.getElementById('announcementText');
+    if (banner && text && ann.message) {
+      text.textContent = '📢 ' + ann.message;
+      banner.style.display = 'block';
+    }
+  }
+
+  // 4. MENU OVERRIDES — mark 86'd and featured items
+  if (menuOverrides.length) {
+    const allItems = document.querySelectorAll('.board-items li, .menu-items li');
+    allItems.forEach(li => {
+      const nameEl = li.querySelector('strong, .item-name');
+      if (!nameEl) return;
+      const itemText = nameEl.textContent.replace('*','').trim().toLowerCase();
+      const override = menuOverrides.find(m => m.item_name.toLowerCase().includes(itemText.split(' ')[0]) && itemText.length > 3);
+      if (!override) return;
+      if (override.is_86d) {
+        li.style.opacity = '0.4';
+        li.style.textDecoration = 'line-through';
+        li.title = 'Not available today';
+        const tag = document.createElement('span');
+        tag.style.cssText = 'font-size:0.6rem;color:#CC2200;letter-spacing:1px;font-family:Barlow Condensed,sans-serif;margin-left:0.5rem;text-decoration:none;display:inline-block;';
+        tag.textContent = '86'd';
+        nameEl.appendChild(tag);
+      }
+      if (override.is_featured) {
+        li.style.background = 'rgba(224,112,16,0.08)';
+        li.style.borderLeft = '2px solid var(--orange)';
+        li.style.paddingLeft = '0.5rem';
+        const tag = document.createElement('span');
+        tag.style.cssText = 'font-size:0.6rem;color:var(--orange-bright, #E07010);letter-spacing:1px;font-family:Barlow Condensed,sans-serif;margin-left:0.5rem;';
+        tag.textContent = '⭐ Featured';
+        nameEl.appendChild(tag);
+      }
+    });
+  }
+
+  // 5. SOCIAL LINKS
+  if (socialLinks.length) {
+    socialLinks.forEach(s => {
+      if (!s.url || s.url === '#') return;
+      document.querySelectorAll('.social-btn').forEach(btn => {
+        if (btn.textContent.trim().toLowerCase().includes(s.platform.toLowerCase()) ||
+            btn.textContent.trim().toLowerCase().includes(s.handle?.toLowerCase().replace('@',''))) {
+          btn.href = s.url;
+        }
+      });
+    });
+  }
+}
+
+// Run live data load on page ready
+document.addEventListener('DOMContentLoaded', loadLiveData);
+
 
 </script>
 
