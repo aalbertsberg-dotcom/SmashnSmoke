@@ -590,17 +590,42 @@
   <div class="tab-panel" id="tab-location">
     <h2 class="panel-title">Today's Location</h2>
     <p class="panel-desc">Update where the truck is today. This shows on the site's Find Us section.</p>
-    <div class="map-placeholder">
-      <span class="map-pin-anim">📍</span>
+    <!-- LIVE MAP PREVIEW -->
+    <div style="border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:1rem;position:relative;height:220px;">
+      <iframe id="adminMapFrame"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-89.0%2C30.3%2C-88.8%2C30.5&layer=mapnik&marker=30.4%2C-88.9"
+        style="width:100%;height:100%;border:none;"
+        loading="lazy" title="Location Preview">
+      </iframe>
+      <div id="mapSearching" style="display:none;position:absolute;inset:0;background:rgba(7,12,24,0.8);align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:2px;color:var(--blue-bright);">
+        Searching...
+      </div>
     </div>
+
+    <!-- GPS + SEARCH BUTTONS -->
+    <div style="display:flex;gap:0.75rem;margin-bottom:1rem;flex-wrap:wrap;">
+      <button class="btn btn-green" onclick="useMyLocation()" style="flex:1;min-width:140px;">
+        📍 Use My Location
+      </button>
+      <button class="btn btn-ghost" onclick="searchAddress()" style="flex:1;min-width:140px;">
+        🔍 Search Address
+      </button>
+    </div>
+
     <div class="card">
       <div class="field">
         <label>Street Address / Location Name</label>
-        <input type="text" id="loc-address" placeholder="e.g. 123 Main St, Biloxi MS — or Crossroads Parking Lot"/>
+        <input type="text" id="loc-address" placeholder="e.g. 123 Main St, Biloxi MS"
+          onkeydown="if(event.key==='Enter'){searchAddress();}"/>
+        <p style="font-size:0.65rem;color:var(--dim);margin-top:0.3rem;letter-spacing:1px;">Type address and hit Search, or tap Use My Location</p>
       </div>
-      <div class="field">
-        <label>Google Maps Link (optional)</label>
-        <input type="url" id="loc-maps" placeholder="Paste Google Maps share link here"/>
+      <div class="field" style="display:none;">
+        <label>Maps URL (auto-filled)</label>
+        <input type="url" id="loc-maps" placeholder="Auto-filled when you search or use GPS"/>
+      </div>
+      <div style="display:flex;gap:1rem;">
+        <input type="hidden" id="loc-lat"/>
+        <input type="hidden" id="loc-lng"/>
       </div>
       <div class="field-row">
         <div class="field">
@@ -851,6 +876,83 @@ async function saveSpecials() {
   } catch(e) { setSaveStatus(''); showToast('Error saving specials', true); }
 }
 
+
+// ── LOCATION GPS & SEARCH ──
+function showMapSearching(show) {
+  const el = document.getElementById('mapSearching');
+  if (el) el.style.display = show ? 'flex' : 'none';
+}
+
+function updateAdminMap(lat, lng) {
+  const frame = document.getElementById('adminMapFrame');
+  if (!frame) return;
+  const delta = 0.008;
+  frame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lng-delta}%2C${lat-delta}%2C${parseFloat(lng)+delta}%2C${parseFloat(lat)+delta}&layer=mapnik&marker=${lat}%2C${lng}`;
+  document.getElementById('loc-lat').value = lat;
+  document.getElementById('loc-lng').value = lng;
+  // Build OSM directions link as maps URL
+  document.getElementById('loc-maps').value = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=16/${lat}/${lng}`;
+}
+
+async function useMyLocation() {
+  if (!navigator.geolocation) { showToast('GPS not available on this device', true); return; }
+  showMapSearching(true);
+  navigator.geolocation.getCurrentPosition(async (pos) => {
+    const { latitude: lat, longitude: lng } = pos.coords;
+    try {
+      // Reverse geocode with Nominatim
+      const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`, {
+        headers: { 'Accept-Language': 'en', 'User-Agent': 'SmashnSmoke-Admin/1.0' }
+      });
+      const data = await res.json();
+      if (data.display_name) {
+        // Clean up address - just street + city
+        const parts = data.address;
+        const street = [parts.house_number, parts.road].filter(Boolean).join(' ');
+        const city = parts.city || parts.town || parts.village || parts.county || '';
+        const state = parts.state_abbreviation || parts.state || '';
+        const friendly = [street, city, state].filter(Boolean).join(', ');
+        document.getElementById('loc-address').value = friendly || data.display_name.split(',').slice(0,3).join(',');
+      }
+    } catch(e) {
+      document.getElementById('loc-address').value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+    }
+    updateAdminMap(lat, lng);
+    showMapSearching(false);
+    showToast('Location found!');
+  }, (err) => {
+    showMapSearching(false);
+    showToast('Could not get location - check permissions', true);
+  }, { enableHighAccuracy: true, timeout: 10000 });
+}
+
+async function searchAddress() {
+  const addr = document.getElementById('loc-address').value.trim();
+  if (!addr) { showToast('Enter an address first', true); return; }
+  showMapSearching(true);
+  try {
+    const query = addr.toLowerCase().includes('ms') || addr.toLowerCase().includes('mississippi')
+      ? addr : addr + ', Mississippi';
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`, {
+      headers: { 'Accept-Language': 'en', 'User-Agent': 'SmashnSmoke-Admin/1.0' }
+    });
+    const data = await res.json();
+    if (data.length) {
+      const { lat, lon, display_name } = data[0];
+      updateAdminMap(parseFloat(lat), parseFloat(lon));
+      // Clean up display name
+      const clean = display_name.split(',').slice(0,4).join(',');
+      document.getElementById('loc-address').value = clean;
+      showToast('Address found!');
+    } else {
+      showToast('Address not found - try being more specific', true);
+    }
+  } catch(e) {
+    showToast('Search failed', true);
+  }
+  showMapSearching(false);
+}
+
 // ── LOCATION ──
 async function loadLocation() {
   const today = new Date().toISOString().slice(0,10);
@@ -883,10 +985,14 @@ async function saveLocation() {
     const open = document.getElementById('loc-open').value;
     const close = document.getElementById('loc-close').value;
     const hours = open && close ? `${open} - ${close}` : (open || close || null);
+    const lat = document.getElementById('loc-lat').value;
+    const lng = document.getElementById('loc-lng').value;
     const payload = {
       date: today,
       address: document.getElementById('loc-address').value,
       maps_url: document.getElementById('loc-maps').value,
+      lat: lat ? parseFloat(lat) : null,
+      lng: lng ? parseFloat(lng) : null,
       hours,
       is_closed: document.getElementById('loc-closed').checked,
       closed_reason: document.getElementById('loc-reason').value,

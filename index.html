@@ -450,20 +450,12 @@
     transform: translateY(-2px);
   }
   .find-map {
-    background: var(--navy);
     border: 1px solid rgba(27,95,204,0.2);
     border-radius: 4px;
     overflow: hidden;
     aspect-ratio: 4/3;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    color: rgba(245,245,245,0.3);
-    font-family: 'Barlow Condensed', sans-serif;
-    letter-spacing: 2px;
-    font-size: 0.8rem;
+    position: relative;
+    min-height: 280px;
     text-transform: uppercase;
     position: relative;
   }
@@ -1386,10 +1378,18 @@
       </div>
     </div>
     <div class="reveal">
-      <div class="find-map">
-        <div class="map-pin">📍</div>
-        <p>Gulf Coast, MS</p>
-        <p style="font-size:0.65rem; color:rgba(245,245,245,0.2); letter-spacing:1px;">Follow us for today's location</p>
+      <div class="find-map" id="siteMapWrap">
+        <iframe id="siteMapFrame"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-89.0%2C30.3%2C-88.8%2C30.5&layer=mapnik&marker=30.4%2C-88.9"
+          style="width:100%;height:100%;border:none;min-height:280px;"
+          allowfullscreen loading="lazy"
+          title="Smash N Smoke Location">
+        </iframe>
+        <div id="mapPlaceholder" style="display:none;position:absolute;inset:0;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.75rem;color:rgba(240,244,255,0.3);font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;">
+          <span style="font-size:2rem;filter:drop-shadow(0 0 10px rgba(27,95,204,0.5))">📍</span>
+          <span>Gulf Coast, MS</span>
+          <span style="font-size:0.6rem;opacity:0.5;">Follow us for today's spot</span>
+        </div>
       </div>
     </div>
   </div>
@@ -1539,6 +1539,28 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbo
 // Load photos after specials load
 setTimeout(loadSitePhotos, 800);
 
+
+// ── OSM MAP UPDATE ──
+async function updateSiteMap(address, lat, lng) {
+  const frame = document.getElementById('siteMapFrame');
+  if (!frame) return;
+  // If we have coords use them directly
+  if (lat && lng) {
+    frame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lng-0.01}%2C${lat-0.01}%2C${lng+0.01}%2C${lat+0.01}&layer=mapnik&marker=${lat}%2C${lng}`;
+    return;
+  }
+  // Otherwise geocode the address via Nominatim (free, no API key)
+  try {
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address + ', Mississippi')}&format=json&limit=1`, {
+      headers: { 'Accept-Language': 'en', 'User-Agent': 'SmashnSmoke/1.0' }
+    });
+    const data = await res.json();
+    if (data.length) {
+      const { lat: la, lon: lo } = data[0];
+      frame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lo-0.008}%2C${la-0.008}%2C${parseFloat(lo)+0.008}%2C${parseFloat(la)+0.008}&layer=mapnik&marker=${la}%2C${lo}`;
+    }
+  } catch(e) { console.log('Map geocode failed', e); }
+}
 // ── SUPABASE LIVE DATA ──
 const SITE_SB_URL = 'https://iywvdvuawflyxlumemqy.supabase.co';
 const SITE_SB_KEY = 'sb_publishable_qy06iCwzteu3WNio_VOIUg_sG3iPgr2';
@@ -1620,6 +1642,10 @@ async function loadLiveData() {
         link.textContent = addrEl.textContent;
         addrEl.textContent = '';
         addrEl.appendChild(link);
+      }
+      // Update OSM map if we have coordinates from the maps_url or use geocoding
+      if (loc.address && !loc.is_closed) {
+        updateSiteMap(loc.address, loc.lat, loc.lng);
       }
     }
   }
