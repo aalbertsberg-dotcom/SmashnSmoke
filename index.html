@@ -1378,17 +1378,21 @@
       </div>
     </div>
     <div class="reveal">
-      <div class="find-map" id="siteMapWrap">
-        <iframe id="siteMapFrame"
-          src="https://www.openstreetmap.org/export/embed.html?bbox=-89.0%2C30.3%2C-88.8%2C30.5&layer=mapnik&marker=30.4%2C-88.9"
-          style="width:100%;height:100%;border:none;min-height:280px;"
-          allowfullscreen loading="lazy"
-          title="Smash N Smoke Location">
-        </iframe>
-        <div id="mapPlaceholder" style="display:none;position:absolute;inset:0;background:var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.75rem;color:rgba(240,244,255,0.3);font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;">
-          <span style="font-size:2rem;filter:drop-shadow(0 0 10px rgba(27,95,204,0.5))">📍</span>
-          <span>Gulf Coast, MS</span>
-          <span style="font-size:0.6rem;opacity:0.5;">Follow us for today's spot</span>
+      <div class="find-map" id="siteMapWrap" style="position:relative;cursor:pointer;" onclick="if(window._mapLink)window.open(window._mapLink,'_blank')">
+        <!-- Static tile map — no iframe, no CORS issues -->
+        <img id="siteMapImg"
+          src="https://staticmap.openstreetmap.de/staticmap.php?center=30.4,-88.9&zoom=13&size=600x400&markers=30.4,-88.9,red-pushpin"
+          alt="Truck Location Map"
+          style="width:100%;height:100%;object-fit:cover;min-height:280px;display:block;"
+          onerror="this.style.display='none';document.getElementById('mapFallback').style.display='flex';"
+        />
+        <div id="mapFallback" style="display:none;position:absolute;inset:0;background:var(--navy-mid);flex-direction:column;align-items:center;justify-content:center;gap:0.75rem;color:rgba(240,244,255,0.3);font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;">
+          <span style="font-size:2.5rem;filter:drop-shadow(0 0 12px rgba(27,95,204,0.5))">📍</span>
+          <span id="mapFallbackAddr">Gulf Coast, MS</span>
+          <span style="font-size:0.6rem;opacity:0.5;">Tap to open in maps</span>
+        </div>
+        <div style="position:absolute;bottom:10px;right:10px;background:rgba(7,12,24,0.8);border:1px solid rgba(27,95,204,0.4);border-radius:4px;padding:0.3rem 0.75rem;font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:2px;color:var(--blue-bright);text-transform:uppercase;">
+          Tap for Directions
         </div>
       </div>
     </div>
@@ -1542,15 +1546,18 @@ setTimeout(loadSitePhotos, 800);
 
 // ── OSM MAP UPDATE ──
 async function updateSiteMap(address, lat, lng) {
-  const frame = document.getElementById('siteMapFrame');
-  if (!frame) return;
-  // Use saved coords if available
-  if (lat && lng) {
-    const d = 0.008;
-    frame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lng-d}%2C${lat-d}%2C${parseFloat(lng)+d}%2C${parseFloat(lat)+d}&layer=mapnik&marker=${lat}%2C${lng}`;
-    return;
+  const img = document.getElementById('siteMapImg');
+  if (!img) return;
+
+  function setMapPin(la, lo) {
+    img.src = `https://staticmap.openstreetmap.de/staticmap.php?center=${la},${lo}&zoom=15&size=600x400&markers=${la},${lo},red-pushpin`;
+    window._mapLink = `https://www.openstreetmap.org/?mlat=${la}&mlon=${lo}#map=16/${la}/${lo}`;
+    const fb = document.getElementById('mapFallbackAddr');
+    if (fb) fb.textContent = address || 'View on Map';
+    img.style.display = 'block';
   }
-  // Geocode via Nominatim
+
+  if (lat && lng) { setMapPin(lat, lng); return; }
   if (!address) return;
   try {
     const q = /ms|mississippi/i.test(address) ? address : address + ', Mississippi';
@@ -1559,10 +1566,7 @@ async function updateSiteMap(address, lat, lng) {
     });
     const data = await res.json();
     if (data && data.length) {
-      const la = parseFloat(data[0].lat);
-      const lo = parseFloat(data[0].lon);
-      const d = 0.008;
-      frame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lo-d}%2C${la-d}%2C${lo+d}%2C${la+d}&layer=mapnik&marker=${la}%2C${lo}`;
+      setMapPin(parseFloat(data[0].lat), parseFloat(data[0].lon));
     }
   } catch(e) { console.log('Map geocode failed:', e); }
 }
