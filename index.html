@@ -1544,22 +1544,27 @@ setTimeout(loadSitePhotos, 800);
 async function updateSiteMap(address, lat, lng) {
   const frame = document.getElementById('siteMapFrame');
   if (!frame) return;
-  // If we have coords use them directly
+  // Use saved coords if available
   if (lat && lng) {
-    frame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lng-0.01}%2C${lat-0.01}%2C${lng+0.01}%2C${lat+0.01}&layer=mapnik&marker=${lat}%2C${lng}`;
+    const d = 0.008;
+    frame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lng-d}%2C${lat-d}%2C${parseFloat(lng)+d}%2C${parseFloat(lat)+d}&layer=mapnik&marker=${lat}%2C${lng}`;
     return;
   }
-  // Otherwise geocode the address via Nominatim (free, no API key)
+  // Geocode via Nominatim
+  if (!address) return;
   try {
-    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(address + ', Mississippi')}&format=json&limit=1`, {
+    const q = /ms|mississippi/i.test(address) ? address : address + ', Mississippi';
+    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=1`, {
       headers: { 'Accept-Language': 'en', 'User-Agent': 'SmashnSmoke/1.0' }
     });
     const data = await res.json();
-    if (data.length) {
-      const { lat: la, lon: lo } = data[0];
-      frame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lo-0.008}%2C${la-0.008}%2C${parseFloat(lo)+0.008}%2C${parseFloat(la)+0.008}&layer=mapnik&marker=${la}%2C${lo}`;
+    if (data && data.length) {
+      const la = parseFloat(data[0].lat);
+      const lo = parseFloat(data[0].lon);
+      const d = 0.008;
+      frame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lo-d}%2C${la-d}%2C${lo+d}%2C${la+d}&layer=mapnik&marker=${la}%2C${lo}`;
     }
-  } catch(e) { console.log('Map geocode failed', e); }
+  } catch(e) { console.log('Map geocode failed:', e); }
 }
 // ── SUPABASE LIVE DATA ──
 const SITE_SB_URL = 'https://iywvdvuawflyxlumemqy.supabase.co';
@@ -1643,9 +1648,13 @@ async function loadLiveData() {
         addrEl.textContent = '';
         addrEl.appendChild(link);
       }
-      // Update OSM map if we have coordinates from the maps_url or use geocoding
-      if (loc.address && !loc.is_closed) {
-        updateSiteMap(loc.address, loc.lat, loc.lng);
+      // Update OSM map - use saved coords if available, else geocode address
+      if (!loc.is_closed) {
+        if (loc.lat && loc.lng) {
+          updateSiteMap(loc.address, loc.lat, loc.lng);
+        } else if (loc.address) {
+          updateSiteMap(loc.address, null, null);
+        }
       }
     }
   }
