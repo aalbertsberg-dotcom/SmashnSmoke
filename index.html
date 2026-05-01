@@ -639,6 +639,49 @@
   font-weight: 600;
 }
 
+
+  /* ── FOOTER BUILDER CREDIT LOGO ── */
+  .footer-logo {
+    font-family: 'Bangers', cursive;
+    font-size: 1.4rem;
+    letter-spacing: 3px;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .footer-logo span {
+    color: var(--blue-bright);
+  }
+
+  .footer-credit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+  }
+
+  .builder-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: rgba(75,150,255,0.65);
+    text-decoration: none;
+  }
+
+  .builder-logo {
+    height: 18px;
+    width: auto;
+    opacity: 0.85;
+    filter: drop-shadow(0 0 6px rgba(75,150,255,0.35));
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .builder-link:hover .builder-logo {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+
 /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
     /* NAV */
@@ -1502,9 +1545,7 @@
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">
-    <a href="https://aalbertsberg.com" target="_blank" rel="noopener">
-      <img src="logo.png" alt="A³ Logo">
-    </a>
+    SMASH <span>N</span> SMOKE
   </div>
 
   <div class="footer-tagline">
@@ -1518,8 +1559,12 @@
     <a href="#about">Our Story</a>
   </div>
 
-  <div class="footer-copy">
-    © Smash N Smoke · Built by <a href="https://aalbertsberg.com" target="_blank" rel="noopener">A³</a>
+  <div class="footer-copy footer-credit">
+    © Smash N Smoke · Built by
+    <a href="https://aalbertsberg.com" target="_blank" rel="noopener" class="builder-link">
+      <img src="logo.png" alt="A³ Logo" class="builder-logo">
+      <span>A³</span>
+    </a>
   </div>
 </footer>
 
