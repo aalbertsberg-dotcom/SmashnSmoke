@@ -576,6 +576,33 @@
   }
   .footer-copy a { color: rgba(75,150,255,0.5); text-decoration: none; }
 
+
+  /* ── A³ FOOTER LOGO ── */
+  .footer-logo {
+    margin-bottom: 0.75rem;
+  }
+
+  .footer-logo a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+
+  .footer-logo img {
+    height: 42px;
+    width: auto;
+    opacity: 0.9;
+    filter: drop-shadow(0 0 12px rgba(75,150,255,0.35));
+    transition: all 0.25s ease;
+  }
+
+  .footer-logo img:hover {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.03);
+    filter: drop-shadow(0 0 18px rgba(75,150,255,0.55));
+  }
+
   /* ── SCROLL REVEALS ── */
   .reveal {
     opacity: 0;
@@ -1474,15 +1501,26 @@
 
 <!-- FOOTER -->
 <footer>
-  <p class="footer-logo">SMASH <span>N</span> SMOKE</p>
-  <p class="footer-tagline">Bold Flavor · Family Made · Done Right</p>
+  <div class="footer-logo">
+    <a href="https://aalbertsberg.com" target="_blank" rel="noopener">
+      <img src="logo.png" alt="A³ Logo">
+    </a>
+  </div>
+
+  <div class="footer-tagline">
+    WINGS · SMASH BURGERS · DONE RIGHT
+  </div>
+
   <div class="footer-links">
     <a href="#specials">Specials</a>
     <a href="#menu">Menu</a>
     <a href="#find">Find Us</a>
     <a href="#about">Our Story</a>
   </div>
-  <p class="footer-copy">© 2026 Smash N Smoke · Gulf Coast, MS &nbsp;·&nbsp; <a href="https://aalbertsberg.us">Built by Double-A Solutions</a></p>
+
+  <div class="footer-copy">
+    © Smash N Smoke · Built by <a href="https://aalbertsberg.com" target="_blank" rel="noopener">A³</a>
+  </div>
 </footer>
 
 <script>
