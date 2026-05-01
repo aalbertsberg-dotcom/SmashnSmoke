@@ -157,6 +157,144 @@ html, body { height: 100%; background: var(--navy); color: var(--white); font-fa
 .loader { position: fixed; inset: 0; background: rgba(7,12,24,0.8); z-index: 500; display: none; align-items: center; justify-content: center; }
 .spinner { width: 44px; height: 44px; border: 3px solid rgba(27,95,204,0.2); border-top-color: var(--blue2); border-radius: 50%; animation: spin 0.8s linear infinite; }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── DESKTOP LAYOUT ── */
+  @media (min-width: 768px) {
+    html, body { overflow: auto; }
+
+    #app {
+      flex-direction: row;
+      height: 100vh;
+    }
+
+    /* SIDEBAR replaces bottom tab bar */
+    .tabbar {
+      position: relative;
+      width: 200px;
+      height: 100vh;
+      flex-direction: column;
+      border-top: none;
+      border-right: 1px solid var(--border);
+      padding: 0;
+      flex-shrink: 0;
+      padding-top: calc(env(safe-area-inset-top, 0px));
+      overflow-y: auto;
+    }
+
+    .tab-btn {
+      flex: none;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 0.85rem;
+      padding: 1rem 1.25rem;
+      border-left: 3px solid transparent;
+      font-size: 0;
+      width: 100%;
+    }
+    .tab-btn.active {
+      border-left-color: var(--blue2);
+      background: rgba(75,150,255,0.08);
+    }
+    .tab-icon { font-size: 1.2rem; }
+    .tab-label {
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+    }
+
+    /* Sidebar brand at top */
+    .tabbar::before {
+      content: 'ADMIN';
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700;
+      font-size: 0.65rem;
+      letter-spacing: 4px;
+      color: var(--dim);
+      padding: 1.5rem 1.25rem 0.75rem;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0.5rem;
+    }
+
+    /* Main content area */
+    .scroll-area {
+      flex: 1;
+      padding-bottom: 2rem;
+      overflow-y: auto;
+      height: 100vh;
+    }
+
+    .topbar {
+      padding-top: 0.85rem;
+    }
+
+    /* Wider panels */
+    .tab-panel {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 2rem 2.5rem;
+    }
+
+    /* Two column specials grid */
+    #specialsGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    #specialsGrid .card { margin-bottom: 0; }
+
+    /* Wider cards */
+    .card { padding: 1.5rem 1.75rem; }
+
+    /* Field rows more spacious */
+    .field input, .field textarea, .field select {
+      font-size: 0.95rem;
+    }
+
+    /* Bigger section titles */
+    .section-title { font-size: 2.5rem; }
+    .section-desc { font-size: 0.92rem; margin-bottom: 2rem; }
+
+    /* Map taller on desktop */
+    .map-wrap { height: 300px; }
+
+    /* Button row inline */
+    .btn { font-size: 1rem; }
+    .btn-row { gap: 1rem; }
+
+    /* Menu groups side by side */
+    #menuGrid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    #menuGrid .menu-group { margin-bottom: 0; }
+
+    /* Photo grid bigger */
+    .photo-grid { grid-template-columns: repeat(4, 1fr); gap: 0.75rem; }
+
+    /* Toast position for desktop */
+    .toast {
+      bottom: 2rem;
+      left: auto;
+      right: 2rem;
+      width: auto;
+      min-width: 280px;
+    }
+
+    /* Chips more spacious */
+    .chip { font-size: 0.88rem; padding: 0.6rem 1.2rem; }
+
+    /* Social form grid */
+    #socialForm .social-row { gap: 1rem; }
+    .platform-tag { width: 110px; }
+  }
+
+  @media (min-width: 1100px) {
+    .tabbar { width: 220px; }
+    .tab-panel { padding: 2.5rem 3rem; }
+  }
+
 </style>
 </head>
 <body>
