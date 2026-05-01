@@ -2,1238 +2,835 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
-<title>SNS // Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+<title>SNS Admin</title>
 <link rel="icon" href="favicon.ico"/>
-<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Barlow+Condensed:wght@400;600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet"/>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCYoFohV3Fi7-U3OOlKjxta0u_Y8fKkbdY&libraries=places&callback=initMaps" async defer></script>
 <style>
-  :root {
-    --navy: #070C18;
-    --navy-mid: #0D1630;
-    --navy-light: #121F40;
-    --blue: #1B5FCC;
-    --blue-bright: #4B96FF;
-    --purple: #6B38EE;
-    --green: #00CC66;
-    --green-dim: rgba(0,204,102,0.12);
-    --orange: #E07010;
-    --red: #CC2200;
-    --red-dim: rgba(204,34,0,0.12);
-    --white: #F0F4FF;
-    --dim: rgba(240,244,255,0.5);
-    --border: rgba(27,95,204,0.2);
-  }
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    background: var(--navy);
-    color: var(--white);
-    font-family: 'Barlow', sans-serif;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
+:root {
+  --navy: #070C18;
+  --navy2: #0D1630;
+  --navy3: #162040;
+  --blue: #1B5FCC;
+  --blue2: #4B96FF;
+  --green: #00C96B;
+  --red: #E02020;
+  --orange: #E07010;
+  --white: #F0F4FF;
+  --dim: rgba(240,244,255,0.5);
+  --border: rgba(75,150,255,0.18);
+  --safe-bottom: env(safe-area-inset-bottom, 20px);
+  --tab-h: 72px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; background: var(--navy); color: var(--white); font-family: 'Barlow', sans-serif; overflow: hidden; }
 
-  /* ── GATE ── */
-  #gate {
-    position: fixed; inset: 0;
-    background: var(--navy);
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    padding: 2rem;
-  }
-  .gate-logo {
-    font-family: 'Bangers', cursive;
-    font-size: clamp(2rem, 8vw, 3.5rem);
-    letter-spacing: 5px;
-    color: var(--white);
-    text-shadow: 0 0 30px rgba(27,95,204,0.5);
-    text-align: center;
-  }
-  .gate-logo span { color: var(--blue-bright); }
-  .gate-sub {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    color: var(--dim);
-  }
-  .gate-form {
-    width: 100%;
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  .gate-input {
-    width: 100%;
-    background: var(--navy-mid);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 1rem 1.25rem;
-    color: var(--white);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 1.1rem;
-    letter-spacing: 4px;
-    text-align: center;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .gate-input:focus { border-color: var(--blue-bright); }
-  .gate-input.error { border-color: var(--red); animation: shake 0.3s ease; }
-  @keyframes shake { 0%,100%{transform:translateX(0)} 25%,75%{transform:translateX(-8px)} 50%{transform:translateX(8px)} }
-  .gate-btn {
-    width: 100%;
-    background: var(--blue);
-    border: none;
-    border-radius: 6px;
-    padding: 1rem;
-    color: var(--white);
-    font-family: 'Bangers', cursive;
-    font-size: 1.3rem;
-    letter-spacing: 3px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .gate-btn:hover { background: var(--blue-bright); }
-  .gate-error { font-size: 0.75rem; color: var(--red); text-align: center; display: none; }
+#gate {
+  position: fixed; inset: 0; z-index: 2000;
+  background: var(--navy);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 1.5rem; padding: 2rem;
+}
+.gate-logo { font-family: 'Bangers', cursive; font-size: 3rem; letter-spacing: 6px; text-shadow: 0 0 30px rgba(27,95,204,0.5); }
+.gate-logo span { color: var(--blue2); }
+.gate-sub { font-family: 'Barlow Condensed', sans-serif; font-size: 0.8rem; letter-spacing: 4px; text-transform: uppercase; color: var(--dim); }
+.gate-form { width: 100%; max-width: 300px; display: flex; flex-direction: column; gap: 1rem; }
+.gate-input { width: 100%; background: var(--navy2); border: 2px solid var(--border); border-radius: 12px; padding: 1.1rem 1.25rem; color: var(--white); font-family: 'Barlow', sans-serif; font-size: 1.1rem; letter-spacing: 6px; text-align: center; outline: none; transition: border-color 0.2s; -webkit-appearance: none; }
+.gate-input:focus { border-color: var(--blue2); }
+.gate-input.error { border-color: var(--red); animation: shake 0.3s; }
+@keyframes shake { 0%,100%{transform:translateX(0)} 25%,75%{transform:translateX(-8px)} 50%{transform:translateX(8px)} }
+.gate-btn { width: 100%; background: var(--blue); border: none; border-radius: 12px; padding: 1.1rem; color: var(--white); font-family: 'Bangers', cursive; font-size: 1.5rem; letter-spacing: 4px; cursor: pointer; }
+.gate-err { font-size: 0.8rem; color: var(--red); text-align: center; display: none; }
 
-  /* ── APP ── */
-  #app { display: none; }
+#app { display: none; height: 100%; flex-direction: column; }
 
-  /* ── TOPBAR ── */
-  .topbar {
-    position: sticky; top: 0; z-index: 100;
-    background: rgba(7,12,24,0.97);
-    backdrop-filter: blur(8px);
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.85rem 1.5rem;
-    gap: 1rem;
-  }
-  .topbar-brand {
-    font-family: 'Bangers', cursive;
-    font-size: 1.3rem;
-    letter-spacing: 3px;
-    white-space: nowrap;
-  }
-  .topbar-brand span { color: var(--blue-bright); }
-  .topbar-right { display: flex; align-items: center; gap: 1rem; }
-  .live-link {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.7rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--blue-bright);
-    text-decoration: none;
-    border: 1px solid rgba(75,150,255,0.3);
-    padding: 0.4rem 0.9rem;
-    border-radius: 4px;
-    white-space: nowrap;
-    transition: all 0.2s;
-  }
-  .live-link:hover { background: rgba(75,150,255,0.1); }
-  .save-status {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--dim);
-    white-space: nowrap;
-  }
-  .save-status.saved { color: var(--green); }
-  .save-status.saving { color: var(--orange); }
+.topbar { flex-shrink: 0; background: rgba(7,12,24,0.98); border-bottom: 1px solid var(--border); padding: 0.85rem 1.25rem; display: flex; align-items: center; justify-content: space-between; padding-top: calc(0.85rem + env(safe-area-inset-top, 0px)); }
+.topbar-brand { font-family: 'Bangers', cursive; font-size: 1.4rem; letter-spacing: 3px; }
+.topbar-brand span { color: var(--blue2); }
+.topbar-right { display: flex; align-items: center; gap: 0.75rem; }
+.save-pill { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: 20px; background: rgba(0,201,107,0.12); color: var(--green); border: 1px solid rgba(0,201,107,0.3); }
+.save-pill.saving { background: rgba(224,112,16,0.12); color: var(--orange); border-color: rgba(224,112,16,0.3); }
+.live-btn { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; padding: 0.3rem 0.75rem; border-radius: 20px; background: rgba(27,95,204,0.12); color: var(--blue2); border: 1px solid rgba(27,95,204,0.3); text-decoration: none; }
 
-  /* ── TAB NAV ── */
-  .tab-nav {
-    display: flex;
-    overflow-x: auto;
-    border-bottom: 1px solid var(--border);
-    background: var(--navy-mid);
-    scrollbar-width: none;
-  }
-  .tab-nav::-webkit-scrollbar { display: none; }
-  .tab-btn {
-    flex-shrink: 0;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 0.75rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 1rem 1.5rem;
-    background: none;
-    border: none;
-    border-bottom: 2px solid transparent;
-    color: var(--dim);
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .tab-btn:hover { color: var(--white); }
-  .tab-btn.active { color: var(--blue-bright); border-bottom-color: var(--blue-bright); }
-  .tab-icon { font-size: 1rem; }
+.scroll-area { flex: 1; overflow-y: auto; overflow-x: hidden; padding-bottom: calc(var(--tab-h) + var(--safe-bottom) + 1rem); -webkit-overflow-scrolling: touch; }
 
-  /* ── TAB PANELS ── */
-  .tab-panel { display: none; padding: 2rem 1.5rem; max-width: 900px; margin: 0 auto; }
-  .tab-panel.active { display: block; }
+.tab-panel { display: none; padding: 1.25rem; }
+.tab-panel.active { display: block; }
 
-  /* ── SECTION TITLE ── */
-  .panel-title {
-    font-family: 'Bangers', cursive;
-    font-size: 1.8rem;
-    letter-spacing: 3px;
-    margin-bottom: 0.4rem;
-  }
-  .panel-desc {
-    font-size: 0.82rem;
-    color: var(--dim);
-    line-height: 1.6;
-    margin-bottom: 2rem;
-  }
+.tabbar { position: fixed; bottom: 0; left: 0; right: 0; height: calc(var(--tab-h) + var(--safe-bottom)); background: rgba(7,12,24,0.98); border-top: 1px solid var(--border); display: flex; padding-bottom: var(--safe-bottom); z-index: 100; }
+.tab-btn { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.2rem; background: none; border: none; color: var(--dim); cursor: pointer; transition: color 0.15s; padding: 0.5rem 0.25rem; }
+.tab-btn.active { color: var(--blue2); }
+.tab-icon { font-size: 1.5rem; line-height: 1; }
+.tab-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.6rem; letter-spacing: 1.5px; text-transform: uppercase; }
 
-  /* ── CARDS / ROWS ── */
-  .card {
-    background: var(--navy-mid);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 1.25rem 1.5rem;
-    margin-bottom: 0.75rem;
-    transition: border-color 0.2s;
-  }
-  .card:focus-within { border-color: var(--blue); }
-  .card.today-card { border-color: rgba(0,204,102,0.3); }
-  .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-  }
-  .card-day {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 0.7rem;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--blue-bright);
-  }
-  .today-chip {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.6rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--green);
-    background: var(--green-dim);
-    border: 1px solid rgba(0,204,102,0.3);
-    padding: 0.15rem 0.6rem;
-    border-radius: 20px;
-  }
-  .sold-out-chip {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.6rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--red);
-    background: var(--red-dim);
-    border: 1px solid rgba(204,34,0,0.3);
-    padding: 0.15rem 0.6rem;
-    border-radius: 20px;
-  }
+.section-title { font-family: 'Bangers', cursive; font-size: 2rem; letter-spacing: 3px; margin-bottom: 0.25rem; line-height: 1; }
+.section-desc { font-size: 0.88rem; color: var(--dim); line-height: 1.5; margin-bottom: 1.5rem; }
 
-  /* ── FORM ELEMENTS ── */
-  .field { margin-bottom: 0.75rem; }
-  .field label {
-    display: block;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--dim);
-    margin-bottom: 0.35rem;
-  }
-  .field input, .field textarea, .field select {
-    width: 100%;
-    background: var(--navy);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 6px;
-    padding: 0.75rem 1rem;
-    color: var(--white);
-    font-family: 'Barlow', sans-serif;
-    font-size: 0.9rem;
-    outline: none;
-    transition: border-color 0.2s;
-  }
-  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--blue-bright); }
-  .field textarea { resize: vertical; min-height: 80px; }
-  .field select { cursor: pointer; }
-  .field select option { background: var(--navy-mid); }
+.card { background: var(--navy2); border: 1px solid var(--border); border-radius: 16px; padding: 1.25rem; margin-bottom: 1rem; }
+.card.today-card { border-color: rgba(0,201,107,0.4); }
+.card-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+.card-day-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-size: 1rem; letter-spacing: 3px; text-transform: uppercase; color: var(--blue2); }
+.today-pill { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; background: rgba(0,201,107,0.15); color: var(--green); border: 1px solid rgba(0,201,107,0.4); padding: 0.2rem 0.6rem; border-radius: 20px; }
+.sold-pill { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 2px; text-transform: uppercase; background: rgba(224,32,32,0.12); color: var(--red); border: 1px solid rgba(224,32,32,0.3); padding: 0.2rem 0.6rem; border-radius: 20px; }
 
-  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-  @media(max-width:480px){ .field-row { grid-template-columns: 1fr; } }
+.field { margin-bottom: 1rem; }
+.field label { display: block; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase; color: var(--dim); margin-bottom: 0.4rem; }
+.field input, .field textarea, .field select { width: 100%; background: var(--navy); border: 2px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 0.9rem 1rem; color: var(--white); font-family: 'Barlow', sans-serif; font-size: 1rem; outline: none; transition: border-color 0.2s; -webkit-appearance: none; }
+.field input:focus, .field textarea:focus, .field select:focus { border-color: var(--blue2); }
+.field textarea { resize: none; min-height: 90px; line-height: 1.5; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 
-  /* ── TOGGLE ── */
-  .toggle-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.75rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-  }
-  .toggle-row:last-child { border: none; }
-  .toggle-label {
-    font-size: 0.88rem;
-    font-weight: 500;
-  }
-  .toggle-sub {
-    font-size: 0.75rem;
-    color: var(--dim);
-    margin-top: 0.1rem;
-  }
-  .toggle {
-    position: relative;
-    width: 46px; height: 24px;
-    flex-shrink: 0;
-  }
-  .toggle input { opacity: 0; width: 0; height: 0; }
-  .toggle-track {
-    position: absolute; inset: 0;
-    background: rgba(255,255,255,0.1);
-    border-radius: 24px;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-  .toggle-track::before {
-    content: '';
-    position: absolute;
-    left: 3px; top: 3px;
-    width: 18px; height: 18px;
-    background: white;
-    border-radius: 50%;
-    transition: transform 0.2s;
-  }
-  .toggle input:checked + .toggle-track { background: var(--blue); }
-  .toggle input:checked + .toggle-track::before { transform: translateX(22px); }
-  .toggle input.green-toggle:checked + .toggle-track { background: var(--red); }
+.toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.toggle-row:last-child { border: none; }
+.toggle-info strong { display: block; font-size: 1rem; font-weight: 600; }
+.toggle-info span { font-size: 0.82rem; color: var(--dim); }
+.toggle { position: relative; width: 52px; height: 28px; flex-shrink: 0; }
+.toggle input { opacity: 0; width: 0; height: 0; }
+.toggle-track { position: absolute; inset: 0; background: rgba(255,255,255,0.12); border-radius: 28px; cursor: pointer; transition: background 0.2s; }
+.toggle-track::before { content: ''; position: absolute; left: 3px; top: 3px; width: 22px; height: 22px; background: white; border-radius: 50%; transition: transform 0.2s; box-shadow: 0 1px 4px rgba(0,0,0,0.3); }
+.toggle input:checked + .toggle-track { background: var(--blue); }
+.toggle input:checked + .toggle-track::before { transform: translateX(24px); }
+.toggle input.red-toggle:checked + .toggle-track { background: var(--red); }
 
-  /* ── BUTTONS ── */
-  .btn {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 0.82rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    padding: 0.75rem 1.75rem;
-    border-radius: 6px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .btn-primary { background: var(--blue); color: white; }
-  .btn-primary:hover { background: var(--blue-bright); transform: translateY(-1px); }
-  .btn-primary:active { transform: translateY(0); }
-  .btn-danger { background: var(--red-dim); color: var(--red); border: 1px solid rgba(204,34,0,0.3); }
-  .btn-danger:hover { background: rgba(204,34,0,0.2); }
-  .btn-ghost { background: transparent; color: var(--dim); border: 1px solid var(--border); }
-  .btn-ghost:hover { color: var(--white); border-color: rgba(255,255,255,0.2); }
-  .btn-full { width: 100%; justify-content: center; }
-  .btn-sm { padding: 0.45rem 1rem; font-size: 0.72rem; }
+.btn { font-family: 'Bangers', cursive; letter-spacing: 3px; font-size: 1.1rem; padding: 1rem 1.5rem; border-radius: 12px; border: none; cursor: pointer; transition: transform 0.1s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; text-decoration: none; -webkit-tap-highlight-color: transparent; }
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--blue); color: white; }
+.btn-green { background: var(--green); color: #001a0d; }
+.btn-red { background: rgba(224,32,32,0.15); color: var(--red); border: 2px solid rgba(224,32,32,0.4); }
+.btn-ghost { background: transparent; color: var(--dim); border: 2px solid var(--border); }
+.btn-orange { background: rgba(224,112,16,0.15); color: var(--orange); border: 2px solid rgba(224,112,16,0.4); }
+.btn-sm { font-size: 0.85rem; padding: 0.55rem 0.9rem; border-radius: 8px; width: auto; letter-spacing: 2px; }
+.btn-row { display: flex; gap: 0.75rem; }
+.btn-row .btn { flex: 1; }
 
-  /* ── LOCATION MAP ── */
-  .map-placeholder {
-    background: var(--navy);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    height: 160px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .map-placeholder::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: repeating-linear-gradient(0deg, transparent, transparent 19px, rgba(27,95,204,0.04) 20px),
-                repeating-linear-gradient(90deg, transparent, transparent 19px, rgba(27,95,204,0.04) 20px);
-  }
-  .map-pin-anim { animation: pin-bob 2s ease-in-out infinite; filter: drop-shadow(0 0 8px rgba(27,95,204,0.5)); }
-  @keyframes pin-bob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+.chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1rem; }
+.chip { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.85rem; letter-spacing: 1px; padding: 0.55rem 1.1rem; border-radius: 20px; border: 2px solid var(--border); background: var(--navy2); color: var(--dim); cursor: pointer; transition: all 0.15s; }
+.chip.selected { background: var(--blue); color: white; border-color: var(--blue); }
+.chip.red-chip.selected { background: var(--red); border-color: var(--red); color: white; }
 
-  /* ── ANNOUNCEMENT BANNER PREVIEW ── */
-  .announcement-preview {
-    background: rgba(27,95,204,0.1);
-    border: 1px solid rgba(27,95,204,0.3);
-    border-radius: 6px;
-    padding: 0.85rem 1.25rem;
-    font-size: 0.88rem;
-    line-height: 1.5;
-    margin-bottom: 1rem;
-    position: relative;
-  }
-  .announcement-preview::before {
-    content: 'PREVIEW';
-    position: absolute;
-    top: -8px; left: 12px;
-    background: var(--navy-mid);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.55rem;
-    letter-spacing: 2px;
-    color: var(--dim);
-    padding: 0 6px;
-  }
+.menu-group { margin-bottom: 1rem; }
+.menu-group-header { display: flex; align-items: center; justify-content: space-between; background: var(--navy3); border-radius: 12px; padding: 1rem 1.1rem; cursor: pointer; border: 1px solid var(--border); }
+.menu-group-title { font-family: 'Bangers', cursive; font-size: 1.4rem; letter-spacing: 2px; color: var(--blue2); }
+.menu-group-status { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 2px; text-transform: uppercase; }
+.all-good { color: var(--green); }
+.some-out { color: var(--orange); }
+.all-out { color: var(--red); }
+.menu-group-body { display: none; padding-top: 0.5rem; }
+.menu-group-body.open { display: block; }
+.menu-item-row { display: flex; align-items: center; justify-content: space-between; padding: 0.9rem 1rem; background: var(--navy2); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 0.4rem; gap: 0.75rem; }
+.menu-item-row.is-86d { opacity: 0.45; border-color: rgba(224,32,32,0.3); }
+.menu-item-name { font-size: 1rem; font-weight: 600; flex: 1; }
+.badge-86 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.65rem; letter-spacing: 1px; text-transform: uppercase; background: rgba(224,32,32,0.12); color: var(--red); border: 1px solid rgba(224,32,32,0.3); padding: 0.15rem 0.5rem; border-radius: 4px; }
+.badge-feat { font-size: 0.9rem; }
 
-  /* ── MENU ITEMS ── */
-  .menu-item-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.85rem 1rem;
-    background: var(--navy-mid);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    margin-bottom: 0.5rem;
-    gap: 1rem;
-    transition: border-color 0.2s;
-  }
-  .menu-item-row.is-86d {
-    opacity: 0.5;
-    border-color: rgba(204,34,0,0.2);
-    background: rgba(204,34,0,0.04);
-  }
-  .menu-item-name {
-    font-weight: 600;
-    font-size: 0.9rem;
-    flex: 1;
-  }
-  .menu-item-badges { display: flex; gap: 0.4rem; align-items: center; }
-  .badge {
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.6rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    padding: 0.15rem 0.5rem;
-    border-radius: 3px;
-  }
-  .badge-86 { background: var(--red-dim); color: var(--red); border: 1px solid rgba(204,34,0,0.3); }
-  .badge-featured { background: rgba(224,112,16,0.12); color: var(--orange); border: 1px solid rgba(224,112,16,0.3); }
-  .item-actions { display: flex; gap: 0.4rem; }
+.upload-zone { border: 2px dashed rgba(75,150,255,0.3); border-radius: 12px; padding: 2rem 1.5rem; text-align: center; cursor: pointer; position: relative; background: rgba(27,95,204,0.04); }
+.upload-zone input { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+.upload-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+.upload-txt { font-family: 'Bangers', cursive; font-size: 1.2rem; letter-spacing: 2px; color: var(--dim); }
+.upload-sub { font-size: 0.78rem; color: rgba(240,244,255,0.3); margin-top: 0.25rem; }
+.photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem; }
+.photo-thumb { aspect-ratio: 1; border-radius: 8px; overflow: hidden; position: relative; background: var(--navy2); border: 1px solid var(--border); }
+.photo-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.photo-del { position: absolute; top: 4px; right: 4px; background: rgba(0,0,0,0.75); border: none; border-radius: 50%; width: 24px; height: 24px; color: white; font-size: 0.7rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
 
-  /* ── PHOTO UPLOAD ── */
-  .upload-zone {
-    border: 2px dashed rgba(27,95,204,0.3);
-    border-radius: 8px;
-    padding: 2.5rem 1.5rem;
-    text-align: center;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-  }
-  .upload-zone:hover, .upload-zone.drag-over {
-    border-color: var(--blue-bright);
-    background: rgba(27,95,204,0.06);
-  }
-  .upload-zone input[type="file"] {
-    position: absolute; inset: 0;
-    opacity: 0; cursor: pointer;
-    width: 100%; height: 100%;
-  }
-  .upload-icon { font-size: 2.5rem; margin-bottom: 0.75rem; }
-  .upload-text { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; color: var(--dim); }
-  .upload-sub { font-size: 0.75rem; color: rgba(240,244,255,0.3); margin-top: 0.25rem; }
-  .photo-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    gap: 0.75rem;
-    margin-top: 1.5rem;
-  }
-  .photo-thumb {
-    aspect-ratio: 1;
-    border-radius: 6px;
-    overflow: hidden;
-    position: relative;
-    background: var(--navy-mid);
-    border: 1px solid var(--border);
-  }
-  .photo-thumb img { width: 100%; height: 100%; object-fit: cover; }
-  .photo-thumb-del {
-    position: absolute; top: 4px; right: 4px;
-    background: rgba(0,0,0,0.7);
-    border: none; border-radius: 50%;
-    width: 22px; height: 22px;
-    color: white; font-size: 0.7rem;
-    cursor: pointer; display: flex;
-    align-items: center; justify-content: center;
-  }
+.social-row { display: flex; align-items: flex-end; gap: 0.75rem; margin-bottom: 0.75rem; }
+.platform-tag { flex-shrink: 0; width: 90px; height: 48px; background: var(--navy2); border: 1px solid var(--border); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 1px; color: var(--dim); }
 
-  /* ── SOCIAL ── */
-  .social-row {
-    display: grid;
-    grid-template-columns: 100px 1fr 1fr;
-    gap: 0.75rem;
-    align-items: end;
-    margin-bottom: 0.75rem;
-  }
-  @media(max-width:480px){ .social-row { grid-template-columns: 1fr; } }
-  .platform-badge {
-    height: 46px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--navy-mid);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-weight: 700;
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    color: var(--dim);
-  }
+.map-wrap { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); height: 220px; margin-bottom: 1rem; position: relative; }
+.map-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+.map-searching { display: none; position: absolute; inset: 0; background: rgba(7,12,24,0.85); align-items: center; justify-content: center; font-family: 'Barlow Condensed', sans-serif; font-size: 0.85rem; letter-spacing: 3px; color: var(--blue2); text-transform: uppercase; }
 
-  /* ── TOAST ── */
-  .toast {
-    position: fixed;
-    bottom: 1.5rem; left: 50%;
-    transform: translateX(-50%) translateY(80px);
-    background: var(--navy-mid);
-    border: 1px solid var(--green);
-    border-radius: 6px;
-    padding: 0.75rem 1.5rem;
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 0.8rem;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: var(--green);
-    opacity: 0;
-    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
-    z-index: 9999;
-    white-space: nowrap;
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
-  .toast.error { border-color: var(--red); color: var(--red); }
+.ann-preview { background: rgba(27,95,204,0.1); border: 1px solid rgba(27,95,204,0.3); border-radius: 10px; padding: 1rem; margin-bottom: 1rem; font-size: 0.9rem; line-height: 1.5; color: var(--white); min-height: 48px; }
+.char-count { font-size: 0.72rem; color: var(--dim); text-align: right; margin-top: 0.25rem; }
 
-  /* ── LOADING ── */
-  .loading-overlay {
-    position: fixed; inset: 0;
-    background: rgba(7,12,24,0.8);
-    z-index: 500;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    display: none;
-  }
-  .spinner {
-    width: 40px; height: 40px;
-    border: 3px solid rgba(27,95,204,0.2);
-    border-top-color: var(--blue-bright);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-  @keyframes spin { to { transform: rotate(360deg); } }
+.divider { height: 1px; background: rgba(75,150,255,0.15); margin: 1.25rem 0; }
+.section-label { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.72rem; letter-spacing: 3px; text-transform: uppercase; color: var(--blue2); margin-bottom: 0.5rem; display: block; }
+
+.toast { position: fixed; bottom: calc(var(--tab-h) + var(--safe-bottom) + 1rem); left: 1rem; right: 1rem; background: var(--navy2); border: 1px solid var(--green); border-radius: 12px; padding: 1rem 1.25rem; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; color: var(--green); text-align: center; transform: translateY(20px); opacity: 0; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); z-index: 9999; pointer-events: none; }
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.err { border-color: var(--red); color: var(--red); }
+
+.loader { position: fixed; inset: 0; background: rgba(7,12,24,0.8); z-index: 500; display: none; align-items: center; justify-content: center; }
+.spinner { width: 44px; height: 44px; border: 3px solid rgba(27,95,204,0.2); border-top-color: var(--blue2); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
 
-<!-- GATE -->
 <div id="gate">
   <div class="gate-logo">SMASH <span>N</span> SMOKE</div>
   <p class="gate-sub">Owner Portal</p>
   <div class="gate-form">
     <input type="password" class="gate-input" id="pwInput" placeholder="Password" autocomplete="off" autofocus/>
-    <p class="gate-error" id="gateError">Wrong password. Try again.</p>
+    <p class="gate-err" id="gateErr">Wrong password. Try again.</p>
     <button class="gate-btn" onclick="checkPw()">Enter</button>
   </div>
 </div>
 
-<!-- LOADING -->
-<div class="loading-overlay" id="loadingOverlay"><div class="spinner"></div></div>
+<div class="loader" id="loader"><div class="spinner"></div></div>
 
-<!-- APP -->
 <div id="app">
   <div class="topbar">
     <div class="topbar-brand">SMASH <span>N</span> SMOKE</div>
     <div class="topbar-right">
-      <span class="save-status" id="saveStatus">All saved</span>
-      <a href="index.html" target="_blank" class="live-link">View Live Site →</a>
+      <span class="save-pill" id="savePill">Ready</span>
+      <a href="index.html" target="_blank" class="live-btn">Live Site</a>
     </div>
   </div>
 
-  <div class="tab-nav">
-    <button class="tab-btn active" onclick="switchTab('specials',this)"><span class="tab-icon">🔥</span>Specials</button>
-    <button class="tab-btn" onclick="switchTab('location',this)"><span class="tab-icon">📍</span>Location</button>
-    <button class="tab-btn" onclick="switchTab('announce',this)"><span class="tab-icon">📢</span>Announce</button>
-    <button class="tab-btn" onclick="switchTab('menu',this)"><span class="tab-icon">🍔</span>Menu</button>
-    <button class="tab-btn" onclick="switchTab('photos',this)"><span class="tab-icon">📸</span>Photos</button>
-    <button class="tab-btn" onclick="switchTab('social',this)"><span class="tab-icon">📱</span>Social</button>
-  </div>
+  <div class="scroll-area">
 
-  <!-- ── SPECIALS ── -->
-  <div class="tab-panel active" id="tab-specials">
-    <h2 class="panel-title">Daily Specials</h2>
-    <p class="panel-desc">Set the special for each day of the week. Today's special shows automatically on the site.</p>
-    <div id="specialsGrid"></div>
-    <button class="btn btn-primary btn-full" onclick="saveSpecials()" style="margin-top:1rem;">Save All Specials</button>
-  </div>
-
-  <!-- ── LOCATION ── -->
-  <div class="tab-panel" id="tab-location">
-    <h2 class="panel-title">Today's Location</h2>
-    <p class="panel-desc">Update where the truck is today. This shows on the site's Find Us section.</p>
-    <!-- LIVE MAP PREVIEW -->
-    <div style="border-radius:8px;overflow:hidden;border:1px solid var(--border);margin-bottom:1rem;position:relative;height:220px;">
-      <iframe id="adminMapFrame"
-        src="https://www.openstreetmap.org/export/embed.html?bbox=-89.0%2C30.3%2C-88.8%2C30.5&layer=mapnik&marker=30.4%2C-88.9"
-        style="width:100%;height:100%;border:none;"
-        loading="lazy" title="Location Preview">
-      </iframe>
-      <div id="mapSearching" style="display:none;position:absolute;inset:0;background:rgba(7,12,24,0.8);align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:2px;color:var(--blue-bright);">
-        Searching...
-      </div>
+    <div class="tab-panel active" id="tab-specials">
+      <h2 class="section-title">Daily Specials</h2>
+      <p class="section-desc">Tap any day to edit. Today is highlighted in green. Toggle sold out if you run out.</p>
+      <div id="specialsGrid"></div>
+      <button class="btn btn-primary" onclick="saveSpecials()">Save All Specials</button>
     </div>
 
-    <!-- GPS + SEARCH BUTTONS -->
-    <div style="display:flex;gap:0.75rem;margin-bottom:1rem;flex-wrap:wrap;">
-      <button class="btn btn-green" onclick="useMyLocation()" style="flex:1;min-width:140px;">
-        📍 Use My Location
-      </button>
-      <button class="btn btn-ghost" onclick="searchAddress()" style="flex:1;min-width:140px;">
-        🔍 Search Address
-      </button>
-    </div>
-
-    <div class="card">
-      <div class="field">
-        <label>Street Address / Location Name</label>
-        <input type="text" id="loc-address" placeholder="e.g. 123 Main St, Biloxi MS"
-          onkeydown="if(event.key==='Enter'){searchAddress();}"/>
-        <p style="font-size:0.65rem;color:var(--dim);margin-top:0.3rem;letter-spacing:1px;">Type address and hit Search, or tap Use My Location</p>
+    <div class="tab-panel" id="tab-location">
+      <h2 class="section-title">Today's Location</h2>
+      <p class="section-desc">Tap Use My Location for instant GPS. Or type and search. Map updates live.</p>
+      <div class="map-wrap">
+        <iframe id="adminMapFrame"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCYoFohV3Fi7-U3OOlKjxta0u_Y8fKkbdY&q=The+Butcher+on+Tucker,Ocean+Springs,MS&zoom=15"
+          allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+        <div class="map-searching" id="mapSearching">Finding location...</div>
       </div>
-      <div class="field" style="display:none;">
-        <label>Maps URL (auto-filled)</label>
-        <input type="url" id="loc-maps" placeholder="Auto-filled when you search or use GPS"/>
+      <div class="btn-row" style="margin-bottom:1rem;">
+        <button class="btn btn-green" onclick="useMyLocation()">📍 Use My Location</button>
+        <button class="btn btn-ghost" onclick="searchAddress()">🔍 Search</button>
       </div>
-      <div style="display:flex;gap:1rem;">
-        <input type="hidden" id="loc-lat"/>
-        <input type="hidden" id="loc-lng"/>
-      </div>
-      <div class="field-row">
+      <div class="card">
         <div class="field">
-          <label>Opening Time</label>
-          <input type="time" id="loc-open"/>
+          <label>Address</label>
+          <input type="text" id="loc-address" placeholder="Type address or use GPS above"/>
+          <input type="hidden" id="loc-lat"/>
+          <input type="hidden" id="loc-lng"/>
+          <input type="hidden" id="loc-maps"/>
+        </div>
+        <span class="section-label">Hours Today</span>
+        <div class="chips" id="hoursChips">
+          <div class="chip" onclick="selectHours(this,'11:00','20:00')">11am - 8pm</div>
+          <div class="chip" onclick="selectHours(this,'11:00','18:00')">11am - 6pm</div>
+          <div class="chip" onclick="selectHours(this,'11:00','15:00')">Lunch Only</div>
+          <div class="chip" onclick="selectHours(this,'17:00','21:00')">Dinner Only</div>
+          <div class="chip" onclick="selectHours(this,'10:00','14:00')">Brunch</div>
+          <div class="chip custom-chip" onclick="toggleCustomHours()">Custom</div>
+        </div>
+        <div id="customHoursRow" style="display:none;">
+          <div class="field-row">
+            <div class="field"><label>Open</label><input type="time" id="loc-open"/></div>
+            <div class="field"><label>Close</label><input type="time" id="loc-close"/></div>
+          </div>
+        </div>
+        <div class="divider"></div>
+        <div class="toggle-row">
+          <div class="toggle-info"><strong>Closed Today</strong><span>Shows closed message on site</span></div>
+          <label class="toggle"><input type="checkbox" id="loc-closed" class="red-toggle" onchange="toggleClosedUI()"/><span class="toggle-track"></span></label>
+        </div>
+        <div id="closedSection" style="display:none;padding-top:0.75rem;">
+          <span class="section-label">Reason</span>
+          <div class="chips" id="closedChips">
+            <div class="chip red-chip" onclick="selectClosedReason(this,'Off today')">Off Today</div>
+            <div class="chip red-chip" onclick="selectClosedReason(this,'Private event')">Private Event</div>
+            <div class="chip red-chip" onclick="selectClosedReason(this,'Weather')">Weather</div>
+            <div class="chip red-chip" onclick="selectClosedReason(this,'Back tomorrow!')">Back Tomorrow</div>
+            <div class="chip red-chip custom-closed-chip" onclick="selectClosedReason(this,'')">Custom</div>
+          </div>
+          <div class="field" id="customReasonField" style="display:none;">
+            <input type="text" id="loc-reason" placeholder="Type your reason..."/>
+          </div>
+          <div style="margin-top:1rem;padding:1rem;background:var(--navy);border-radius:10px;border:1px solid var(--border);">
+            <span class="section-label">Social Post Generator</span>
+            <div class="ann-preview" id="socialPostPreview">Select a reason above to generate a post.</div>
+            <button class="btn btn-ghost" style="margin-top:0.5rem;font-size:0.9rem;" onclick="copySocialPost()">Copy Post</button>
+          </div>
+        </div>
+      </div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="saveLocation()">Save Location</button>
+        <button class="btn btn-red" onclick="goHome()">🏠 Go Home</button>
+      </div>
+    </div>
+
+    <div class="tab-panel" id="tab-announce">
+      <h2 class="section-title">Announcements</h2>
+      <p class="section-desc">Post a banner at the top of the site. Tap a template to get started fast.</p>
+      <span class="section-label">Quick Templates</span>
+      <div class="chips" style="margin-bottom:1rem;">
+        <div class="chip" onclick="setTemplate('We\'ll be at {EVENT} this {DAY} - come find us!')">Event</div>
+        <div class="chip" onclick="setTemplate('Now booking catering for events! DM us to reserve your date.')">Catering</div>
+        <div class="chip" onclick="setTemplate('Special menu drop this weekend - follow us so you don\'t miss it!')">Weekend Drop</div>
+        <div class="chip" onclick="setTemplate('Grand opening week - come show us some love on the Gulf Coast!')">Grand Opening</div>
+      </div>
+      <div class="card">
+        <div class="field">
+          <label>Message</label>
+          <textarea id="ann-msg" placeholder="Write your announcement..." maxlength="200" oninput="updateAnnPreview()"></textarea>
+          <p class="char-count"><span id="annCount">0</span>/200</p>
+        </div>
+        <span class="section-label">Preview</span>
+        <div class="ann-preview" id="annPreview">Your message will appear here as a banner on the site.</div>
+        <div class="divider"></div>
+        <div class="toggle-row">
+          <div class="toggle-info"><strong>Show on Site</strong><span>Turn off to hide without deleting</span></div>
+          <label class="toggle"><input type="checkbox" id="ann-active" checked/><span class="toggle-track"></span></label>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="saveAnn()" style="margin-bottom:1.5rem;">Post Announcement</button>
+      <span class="section-label">History</span>
+      <div id="annHistory"></div>
+    </div>
+
+    <div class="tab-panel" id="tab-menu">
+      <h2 class="section-title">Menu Control</h2>
+      <p class="section-desc">Tap a category to expand. 86 items you run out of. Use "86 All" to mark a whole category at once.</p>
+      <div id="menuGrid"></div>
+    </div>
+
+    <div class="tab-panel" id="tab-photos">
+      <h2 class="section-title">Photos</h2>
+      <p class="section-desc">Upload a photo and it shows on the site right away. Pick today's special for the hero image.</p>
+      <div class="card">
+        <div class="field">
+          <label>What is this photo of?</label>
+          <select id="photo-item">
+            <option value="">Select item...</option>
+            <option>Today's Special</option>
+            <option>Wing Wednesday</option>
+            <option>Brisket Tuesday</option>
+            <option>Rib Thursday</option>
+            <option>Pulled Pork Friday</option>
+            <option>LOKE Burger</option>
+            <option>Owens Stacker</option>
+            <option>Classic Smash</option>
+            <option>Double Smash</option>
+            <option>The Truck</option>
+          </select>
         </div>
         <div class="field">
-          <label>Closing Time</label>
-          <input type="time" id="loc-close"/>
+          <label>Caption (optional)</label>
+          <input type="text" id="photo-caption" placeholder="e.g. Fresh off the grill!"/>
+        </div>
+        <div class="upload-zone">
+          <input type="file" id="photoFile" accept="image/*" capture="environment" onchange="handlePhotoUpload(event)"/>
+          <div class="upload-icon">📷</div>
+          <div class="upload-txt">Tap to Take Photo</div>
+          <div class="upload-sub">Opens your camera directly</div>
         </div>
       </div>
-      <div class="toggle-row">
-        <div>
-          <div class="toggle-label">Closed Today</div>
-          <div class="toggle-sub">Hides the location and shows a closed message</div>
-        </div>
-        <label class="toggle">
-          <input type="checkbox" id="loc-closed" class="green-toggle"/>
-          <span class="toggle-track"></span>
-        </label>
-      </div>
-      <div class="field" id="closedReasonField" style="margin-top:0.75rem;display:none;">
-        <label>Reason (optional)</label>
-        <input type="text" id="loc-reason" placeholder="e.g. Taking a well-deserved day off"/>
-      </div>
+      <span class="section-label">Uploaded Photos</span>
+      <div class="photo-grid" id="photoGrid"></div>
     </div>
-    <button class="btn btn-primary btn-full" onclick="saveLocation()">Save Location</button>
-  </div>
 
-  <!-- ── ANNOUNCEMENTS ── -->
-  <div class="tab-panel" id="tab-announce">
-    <h2 class="panel-title">Announcements</h2>
-    <p class="panel-desc">Post a banner message that appears at the top of the site. Great for events, holidays, or big news.</p>
-    <div class="card">
-      <div class="field">
-        <label>Announcement Message</label>
-        <textarea id="announce-msg" placeholder="e.g. We'll be at the Biloxi Crawfish Festival this Saturday - come find us!" oninput="updateAnnouncementPreview()"></textarea>
-      </div>
-      <div class="announcement-preview" id="announcementPreview">Your message will appear here as a banner on the site.</div>
-      <div class="toggle-row">
-        <div>
-          <div class="toggle-label">Show on Site</div>
-          <div class="toggle-sub">Turn off to hide without deleting</div>
-        </div>
-        <label class="toggle">
-          <input type="checkbox" id="announce-active" checked/>
-          <span class="toggle-track"></span>
-        </label>
-      </div>
+    <div class="tab-panel" id="tab-social">
+      <h2 class="section-title">Social Links</h2>
+      <p class="section-desc">Update once and it changes everywhere on the site automatically.</p>
+      <div class="card" id="socialForm"></div>
+      <button class="btn btn-primary" onclick="saveSocial()">Save Social Links</button>
     </div>
-    <button class="btn btn-primary btn-full" onclick="saveAnnouncement()">Post Announcement</button>
 
-    <h3 style="font-family:'Bangers',cursive;font-size:1.3rem;letter-spacing:2px;margin:2rem 0 1rem;">Past Announcements</h3>
-    <div id="announceHistory"></div>
   </div>
 
-  <!-- ── MENU ── -->
-  <div class="tab-panel" id="tab-menu">
-    <h2 class="panel-title">Menu Control</h2>
-    <p class="panel-desc">Mark items as sold out (86'd) or feature them to highlight on the menu.</p>
-    <div id="menuGrid"></div>
-    <button class="btn btn-primary btn-full" onclick="saveMenu()" style="margin-top:1rem;">Save Menu</button>
-  </div>
-
-  <!-- ── PHOTOS ── -->
-  <div class="tab-panel" id="tab-photos">
-    <h2 class="panel-title">Photos</h2>
-    <p class="panel-desc">Upload photos of today's special or menu items. They'll appear on the site with a "See It" link.</p>
-    <div class="card">
-      <div class="field">
-        <label>What's this a photo of?</label>
-        <select id="photo-item">
-          <option value="">Select item...</option>
-          <option>Today's Special</option>
-          <option>Wing Wednesday</option>
-          <option>Brisket Tuesday</option>
-          <option>LOKÉ Burger</option>
-          <option>Owens Stacker</option>
-          <option>Classic Smash</option>
-          <option>Double Smash</option>
-          <option>The Truck</option>
-          <option>Other</option>
-        </select>
-      </div>
-      <div class="field">
-        <label>Caption (optional)</label>
-        <input type="text" id="photo-caption" placeholder="e.g. Fresh off the griddle - Wing Wednesday is LIVE"/>
-      </div>
-      <div class="upload-zone" id="uploadZone">
-        <input type="file" id="photoFile" accept="image/*" onchange="handlePhotoUpload(event)"/>
-        <div class="upload-icon">📷</div>
-        <div class="upload-text">Tap to upload a photo</div>
-        <div class="upload-sub">JPG, PNG — best from your phone camera</div>
-      </div>
-    </div>
-    <div class="photo-grid" id="photoGrid"></div>
-  </div>
-
-  <!-- ── SOCIAL ── -->
-  <div class="tab-panel" id="tab-social">
-    <h2 class="panel-title">Social Links</h2>
-    <p class="panel-desc">Update your social media handles. These link up everywhere on the site at once.</p>
-    <div class="card" id="socialForm"></div>
-    <button class="btn btn-primary btn-full" onclick="saveSocial()" style="margin-top:1rem;">Save Social Links</button>
+  <div class="tabbar">
+    <button class="tab-btn active" onclick="switchTab('specials',this)"><span class="tab-icon">🔥</span><span class="tab-label">Specials</span></button>
+    <button class="tab-btn" onclick="switchTab('location',this)"><span class="tab-icon">📍</span><span class="tab-label">Location</span></button>
+    <button class="tab-btn" onclick="switchTab('announce',this)"><span class="tab-icon">📢</span><span class="tab-label">Announce</span></button>
+    <button class="tab-btn" onclick="switchTab('menu',this)"><span class="tab-icon">🍔</span><span class="tab-label">Menu</span></button>
+    <button class="tab-btn" onclick="switchTab('photos',this)"><span class="tab-icon">📸</span><span class="tab-label">Photos</span></button>
+    <button class="tab-btn" onclick="switchTab('social',this)"><span class="tab-icon">📱</span><span class="tab-label">Social</span></button>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-// ── CONFIG ──
-const SUPABASE_URL = 'https://iywvdvuawflyxlumemqy.supabase.co';
-const SUPABASE_KEY = 'sb_publishable_qy06iCwzteu3WNio_VOIUg_sG3iPgr2';
-const ADMIN_PASSWORD = 'tracey';
-
+const SB = 'https://iywvdvuawflyxlumemqy.supabase.co';
+const KEY = 'sb_publishable_qy06iCwzteu3WNio_VOIUg_sG3iPgr2';
+const MAPS_KEY = 'AIzaSyCYoFohV3Fi7-U3OOlKjxta0u_Y8fKkbdY';
+const PW = 'tracey';
 const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
 const TODAY = DAYS[new Date().getDay()];
+let menuData = [], socialData = [], specialsData = [];
+let selectedHours = null, selectedClosedReason = '';
 
-// ── SUPABASE HELPER ──
-async function sb(table, method='GET', body=null, filter='') {
-  const url = `${SUPABASE_URL}/rest/v1/${table}${filter}`;
-  const headers = {
-    'apikey': SUPABASE_KEY,
-    'Authorization': `Bearer ${SUPABASE_KEY}`,
-    'Content-Type': 'application/json',
-    'Prefer': method === 'POST' ? 'return=representation' : 'return=representation',
-  };
-  const opts = { method, headers };
-  if (body) opts.body = JSON.stringify(body);
-  const res = await fetch(url, opts);
-  if (!res.ok) {
-    const err = await res.text();
-    throw new Error(err);
-  }
-  const text = await res.text();
-  return text ? JSON.parse(text) : [];
+async function sbGet(t, f='') {
+  const r = await fetch(`${SB}/rest/v1/${t}${f}`, { headers: { apikey: KEY, Authorization: `Bearer ${KEY}` } });
+  return r.ok ? r.json() : [];
+}
+async function sbPost(t, b) {
+  const r = await fetch(`${SB}/rest/v1/${t}`, { method:'POST', headers:{ apikey:KEY, Authorization:`Bearer ${KEY}`, 'Content-Type':'application/json', Prefer:'return=representation' }, body:JSON.stringify(b) });
+  return r.ok ? r.json() : null;
+}
+async function sbPatch(t, b, f) {
+  const r = await fetch(`${SB}/rest/v1/${t}${f}`, { method:'PATCH', headers:{ apikey:KEY, Authorization:`Bearer ${KEY}`, 'Content-Type':'application/json', Prefer:'return=representation' }, body:JSON.stringify(b) });
+  return r.ok ? r.json() : null;
+}
+async function sbDel(t, f) {
+  await fetch(`${SB}/rest/v1/${t}${f}`, { method:'DELETE', headers:{ apikey:KEY, Authorization:`Bearer ${KEY}` } });
 }
 
-async function sbGet(table, filter='') { return sb(table,'GET',null,filter); }
-async function sbPatch(table, body, filter) { return sb(table,'PATCH',body,filter); }
-async function sbPost(table, body) { return sb(table,'POST',body); }
-async function sbDelete(table, filter) { return sb(table,'DELETE',null,filter); }
-
-// ── GATE ──
 function checkPw() {
-  const val = document.getElementById('pwInput').value;
-  if (val.toLowerCase() === ADMIN_PASSWORD) {
-    const gate = document.getElementById('gate');
-    gate.style.opacity = '0';
-    gate.style.transition = 'opacity 0.4s';
-    setTimeout(() => {
-      gate.style.display = 'none';
-      document.getElementById('app').style.display = 'block';
-      loadAll();
-    }, 400);
+  if (document.getElementById('pwInput').value.toLowerCase() === PW) {
+    const g = document.getElementById('gate');
+    g.style.transition = 'opacity 0.4s'; g.style.opacity = '0';
+    setTimeout(() => { g.style.display='none'; document.getElementById('app').style.display='flex'; loadAll(); }, 400);
   } else {
-    const inp = document.getElementById('pwInput');
-    inp.classList.add('error');
-    document.getElementById('gateError').style.display = 'block';
-    setTimeout(() => { inp.classList.remove('error'); inp.value = ''; }, 800);
+    const i = document.getElementById('pwInput');
+    i.classList.add('error'); document.getElementById('gateErr').style.display='block';
+    setTimeout(() => { i.classList.remove('error'); i.value=''; }, 800);
   }
 }
-document.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && document.getElementById('gate').style.display !== 'none') checkPw();
-});
+document.addEventListener('keydown', e => { if (e.key==='Enter') checkPw(); });
 
-// ── TABS ──
 function switchTab(id, btn) {
   document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
   btn.classList.add('active');
+  document.querySelector('.scroll-area').scrollTop = 0;
 }
 
-// ── LOAD ALL ──
 async function loadAll() {
-  showLoading(true);
-  try {
-    await Promise.all([loadSpecials(), loadLocation(), loadAnnouncements(), loadMenu(), loadPhotos(), loadSocial()]);
-  } catch(e) { showToast('Error loading data', true); }
-  showLoading(false);
+  showLoader(true);
+  try { await Promise.all([loadSpecials(),loadLocation(),loadAnn(),loadMenu(),loadPhotos(),loadSocial()]); }
+  catch(e) { toast('Error loading data',true); }
+  showLoader(false);
 }
 
-// ── SPECIALS ──
-let specialsData = [];
+// SPECIALS
 async function loadSpecials() {
-  const data = await sbGet('specials', '?order=id');
+  const data = await sbGet('specials','?order=id');
   specialsData = data;
-  renderSpecials(data);
-}
-
-function renderSpecials(data) {
   const grid = document.getElementById('specialsGrid');
   grid.innerHTML = '';
   DAYS.forEach(day => {
-    const spec = data.find(s => s.day === day) || { name: '', description: '', is_sold_out: false };
-    const isToday = day === TODAY;
-    grid.innerHTML += `
-      <div class="card ${isToday ? 'today-card' : ''}">
-        <div class="card-header">
-          <span class="card-day">${day}</span>
-          <div style="display:flex;gap:0.5rem;align-items:center;">
-            ${isToday ? '<span class="today-chip">Today</span>' : ''}
-            ${spec.is_sold_out ? '<span class="sold-out-chip">Sold Out</span>' : ''}
-          </div>
+    const s = data.find(d => d.day===day) || {name:'',description:'',is_sold_out:false};
+    const isToday = day===TODAY;
+    const div = document.createElement('div');
+    div.className = `card${isToday?' today-card':''}`;
+    div.innerHTML = `
+      <div class="card-head">
+        <span class="card-day-label">${day}</span>
+        <div style="display:flex;gap:0.4rem;">
+          ${isToday?'<span class="today-pill">Today</span>':''}
+          ${s.is_sold_out?'<span class="sold-pill">Sold Out</span>':''}
         </div>
-        <div class="field-row">
-          <div class="field">
-            <label>Special Name</label>
-            <input type="text" id="spec-name-${day}" value="${spec.name}" placeholder="e.g. Wing Wednesday"/>
-          </div>
-          <div class="field">
-            <label>Description</label>
-            <input type="text" id="spec-desc-${day}" value="${spec.description}" placeholder="One line description"/>
-          </div>
-        </div>
-        <div class="toggle-row">
-          <div>
-            <div class="toggle-label">Mark as Sold Out</div>
-            <div class="toggle-sub">Shows a sold out tag on this day</div>
-          </div>
-          <label class="toggle">
-            <input type="checkbox" id="spec-sold-${day}" class="green-toggle" ${spec.is_sold_out ? 'checked' : ''}/>
-            <span class="toggle-track"></span>
-          </label>
-        </div>
+      </div>
+      <div class="field"><label>Special Name</label><input type="text" id="sname-${day}" value="${s.name}" placeholder="e.g. Wing Wednesday"/></div>
+      <div class="field"><label>Description</label><input type="text" id="sdesc-${day}" value="${s.description}" placeholder="Short description"/></div>
+      <div class="toggle-row">
+        <div class="toggle-info"><strong>Sold Out</strong><span>Marks this special as unavailable</span></div>
+        <label class="toggle"><input type="checkbox" id="ssold-${day}" class="red-toggle" ${s.is_sold_out?'checked':''}/><span class="toggle-track"></span></label>
       </div>`;
+    grid.appendChild(div);
   });
 }
 
 async function saveSpecials() {
-  setSaveStatus('saving');
+  setSave('saving');
   try {
     for (const day of DAYS) {
-      const name = document.getElementById(`spec-name-${day}`).value;
-      const description = document.getElementById(`spec-desc-${day}`).value;
-      const is_sold_out = document.getElementById(`spec-sold-${day}`).checked;
-      const existing = specialsData.find(s => s.day === day);
-      if (existing) {
-        await sbPatch('specials', { name, description, is_sold_out, updated_at: new Date().toISOString() }, `?day=eq.${day}`);
-      } else {
-        await sbPost('specials', { day, name, description, is_sold_out });
-      }
+      const name = document.getElementById(`sname-${day}`).value;
+      const description = document.getElementById(`sdesc-${day}`).value;
+      const is_sold_out = document.getElementById(`ssold-${day}`).checked;
+      const existing = specialsData.find(s => s.day===day);
+      if (existing) await sbPatch('specials',{name,description,is_sold_out,updated_at:new Date().toISOString()},`?day=eq.${day}`);
+      else await sbPost('specials',{day,name,description,is_sold_out});
     }
-    setSaveStatus('saved');
-    showToast('Specials saved!');
-    await loadSpecials();
-  } catch(e) { setSaveStatus(''); showToast('Error saving specials', true); }
+    setSave('saved'); toast('Specials saved!'); await loadSpecials();
+  } catch(e) { setSave(''); toast('Error saving',true); }
 }
 
+// LOCATION
+async function loadLocation() {
+  const today = new Date().toISOString().slice(0,10);
+  const data = await sbGet('location',`?date=eq.${today}&order=updated_at.desc&limit=1`);
+  if (!data.length) return;
+  const loc = data[0];
+  document.getElementById('loc-address').value = loc.address||'';
+  document.getElementById('loc-lat').value = loc.lat||'';
+  document.getElementById('loc-lng').value = loc.lng||'';
+  document.getElementById('loc-maps').value = loc.maps_url||'';
+  document.getElementById('loc-closed').checked = loc.is_closed||false;
+  if (loc.is_closed) document.getElementById('closedSection').style.display = 'block';
+  if (loc.lat && loc.lng) updateAdminMap(loc.lat,loc.lng);
+  else if (loc.address) geocodeAddress(loc.address);
+}
 
-// ── LOCATION GPS & SEARCH ──
+function toggleClosedUI() {
+  document.getElementById('closedSection').style.display = document.getElementById('loc-closed').checked ? 'block' : 'none';
+}
+
+function selectHours(el, open, close) {
+  document.querySelectorAll('#hoursChips .chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  if(document.getElementById('loc-open')) document.getElementById('loc-open').value = open;
+  if(document.getElementById('loc-close')) document.getElementById('loc-close').value = close;
+  selectedHours = `${open} - ${close}`;
+  document.getElementById('customHoursRow').style.display = 'none';
+}
+
+function toggleCustomHours() {
+  const row = document.getElementById('customHoursRow');
+  const showing = row.style.display !== 'none';
+  row.style.display = showing ? 'none' : 'grid';
+  document.querySelectorAll('#hoursChips .chip').forEach(c => c.classList.remove('selected'));
+  if (!showing) document.querySelector('.custom-chip').classList.add('selected');
+}
+
+function selectClosedReason(el, reason) {
+  document.querySelectorAll('#closedChips .chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedClosedReason = reason;
+  document.getElementById('customReasonField').style.display = reason==='' ? 'block' : 'none';
+  if (reason) {
+    const posts = {
+      'Off today': "Smash N Smoke is taking today off - we will be back firing soon! Follow us for updates.",
+      'Private event': "Smash N Smoke is at a private event today - can not wait to see everyone at our next public stop!",
+      'Weather': "Staying safe today due to weather - Smash N Smoke will be back as soon as conditions clear!",
+      'Back tomorrow!': "Smash N Smoke is closed today but we will be back tomorrow with that bold flavor you love!",
+    };
+    document.getElementById('socialPostPreview').textContent = posts[reason] || `Smash N Smoke is closed today. ${reason}`;
+  }
+}
+
+function copySocialPost() {
+  const txt = document.getElementById('socialPostPreview').textContent;
+  navigator.clipboard.writeText(txt).then(() => toast('Post copied!')).catch(() => toast('Copy failed',true));
+}
+
 function showMapSearching(show) {
-  const el = document.getElementById('mapSearching');
-  if (el) el.style.display = show ? 'flex' : 'none';
+  document.getElementById('mapSearching').style.display = show ? 'flex' : 'none';
 }
 
 function updateAdminMap(lat, lng) {
-  const frame = document.getElementById('adminMapFrame');
-  if (!frame) return;
-  const delta = 0.008;
-  frame.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lng-delta}%2C${lat-delta}%2C${parseFloat(lng)+delta}%2C${parseFloat(lat)+delta}&layer=mapnik&marker=${lat}%2C${lng}`;
+  document.getElementById('adminMapFrame').src = `https://www.google.com/maps/embed/v1/place?key=${MAPS_KEY}&q=${lat},${lng}&zoom=16`;
   document.getElementById('loc-lat').value = lat;
   document.getElementById('loc-lng').value = lng;
-  // Build OSM directions link as maps URL
-  document.getElementById('loc-maps').value = `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lng}#map=16/${lat}/${lng}`;
+  document.getElementById('loc-maps').value = `https://maps.google.com/?q=${lat},${lng}`;
+}
+
+async function geocodeAddress(address) {
+  try {
+    const q = /ms|mississippi/i.test(address) ? address : address+', Mississippi';
+    const r = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(q)}&key=${MAPS_KEY}`);
+    const d = await r.json();
+    if (d.results && d.results.length) {
+      const {lat,lng} = d.results[0].geometry.location;
+      updateAdminMap(lat,lng);
+    }
+  } catch(e) {}
 }
 
 async function useMyLocation() {
-  if (!navigator.geolocation) { showToast('GPS not available on this device', true); return; }
+  if (!navigator.geolocation) { toast('GPS not available',true); return; }
   showMapSearching(true);
-  navigator.geolocation.getCurrentPosition(async (pos) => {
-    const { latitude: lat, longitude: lng } = pos.coords;
+  navigator.geolocation.getCurrentPosition(async pos => {
+    const {latitude:lat,longitude:lng} = pos.coords;
     try {
-      // Reverse geocode with Nominatim
-      const res = await fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lng}&format=json`, {
-        headers: { 'Accept-Language': 'en', 'User-Agent': 'SmashnSmoke-Admin/1.0' }
-      });
-      const data = await res.json();
-      if (data.display_name) {
-        // Clean up address - just street + city
-        const parts = data.address;
-        const street = [parts.house_number, parts.road].filter(Boolean).join(' ');
-        const city = parts.city || parts.town || parts.village || parts.county || '';
-        const state = parts.state_abbreviation || parts.state || '';
-        const friendly = [street, city, state].filter(Boolean).join(', ');
-        document.getElementById('loc-address').value = friendly || data.display_name.split(',').slice(0,3).join(',');
-      }
-    } catch(e) {
-      document.getElementById('loc-address').value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
-    }
-    updateAdminMap(lat, lng);
+      const r = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${MAPS_KEY}`);
+      const d = await r.json();
+      if (d.results && d.results.length) document.getElementById('loc-address').value = d.results[0].formatted_address;
+      else document.getElementById('loc-address').value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`;
+    } catch(e) { document.getElementById('loc-address').value = `${lat.toFixed(5)}, ${lng.toFixed(5)}`; }
+    updateAdminMap(lat,lng);
     showMapSearching(false);
-    showToast('Location found!');
-  }, (err) => {
-    showMapSearching(false);
-    showToast('Could not get location - check permissions', true);
-  }, { enableHighAccuracy: true, timeout: 10000 });
+    toast('Location found!');
+  }, () => { showMapSearching(false); toast('Could not get location - check permissions',true); }, {enableHighAccuracy:true,timeout:10000});
 }
 
 async function searchAddress() {
   const addr = document.getElementById('loc-address').value.trim();
-  if (!addr) { showToast('Enter an address first', true); return; }
+  if (!addr) { toast('Enter an address first',true); return; }
   showMapSearching(true);
   try {
-    const query = addr.toLowerCase().includes('ms') || addr.toLowerCase().includes('mississippi')
-      ? addr : addr + ', Mississippi';
-    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(query)}&format=json&limit=1`, {
-      headers: { 'Accept-Language': 'en', 'User-Agent': 'SmashnSmoke-Admin/1.0' }
-    });
-    const data = await res.json();
-    if (data.length) {
-      const { lat, lon, display_name } = data[0];
-      updateAdminMap(parseFloat(lat), parseFloat(lon));
-      // Clean up display name
-      const clean = display_name.split(',').slice(0,4).join(',');
-      document.getElementById('loc-address').value = clean;
-      showToast('Address found!');
-    } else {
-      showToast('Address not found - try being more specific', true);
-    }
-  } catch(e) {
-    showToast('Search failed', true);
-  }
+    const q = /ms|mississippi/i.test(addr) ? addr : addr+', Mississippi';
+    const r = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(q)}&key=${MAPS_KEY}`);
+    const d = await r.json();
+    if (d.results && d.results.length) {
+      document.getElementById('loc-address').value = d.results[0].formatted_address;
+      const {lat,lng} = d.results[0].geometry.location;
+      updateAdminMap(lat,lng);
+      toast('Address found!');
+    } else { toast('Address not found - try being more specific',true); }
+  } catch(e) { toast('Search failed',true); }
   showMapSearching(false);
 }
 
-// ── LOCATION ──
-async function loadLocation() {
-  const today = new Date().toISOString().slice(0,10);
-  const data = await sbGet('location', `?date=eq.${today}&order=updated_at.desc&limit=1`);
-  if (data.length > 0) {
-    const loc = data[0];
-    document.getElementById('loc-address').value = loc.address || '';
-    document.getElementById('loc-maps').value = loc.maps_url || '';
-    if (loc.hours) {
-      const [open, close] = (loc.hours || '').split('-');
-      document.getElementById('loc-open').value = open?.trim() || '';
-      document.getElementById('loc-close').value = close?.trim() || '';
-    }
-    document.getElementById('loc-closed').checked = loc.is_closed || false;
-    document.getElementById('loc-reason').value = loc.closed_reason || '';
-    if (loc.is_closed) document.getElementById('closedReasonField').style.display = 'block';
-  }
-}
-
-document.addEventListener('change', e => {
-  if (e.target.id === 'loc-closed') {
-    document.getElementById('closedReasonField').style.display = e.target.checked ? 'block' : 'none';
-  }
-});
-
 async function saveLocation() {
-  setSaveStatus('saving');
+  setSave('saving');
   try {
     const today = new Date().toISOString().slice(0,10);
-    const open = document.getElementById('loc-open').value;
-    const close = document.getElementById('loc-close').value;
-    const hours = open && close ? `${open} - ${close}` : (open || close || null);
-    const lat = document.getElementById('loc-lat').value;
-    const lng = document.getElementById('loc-lng').value;
+    const open = document.getElementById('loc-open')?.value;
+    const close = document.getElementById('loc-close')?.value;
+    const hours = selectedHours || (open&&close ? `${open} - ${close}` : null);
+    const closedReason = document.getElementById('loc-reason')?.value || selectedClosedReason;
     const payload = {
       date: today,
       address: document.getElementById('loc-address').value,
       maps_url: document.getElementById('loc-maps').value,
-      lat: lat ? parseFloat(lat) : null,
-      lng: lng ? parseFloat(lng) : null,
-      hours,
-      is_closed: document.getElementById('loc-closed').checked,
-      closed_reason: document.getElementById('loc-reason').value,
-      updated_at: new Date().toISOString()
+      lat: document.getElementById('loc-lat').value ? parseFloat(document.getElementById('loc-lat').value) : null,
+      lng: document.getElementById('loc-lng').value ? parseFloat(document.getElementById('loc-lng').value) : null,
+      hours, is_closed: document.getElementById('loc-closed').checked,
+      closed_reason: closedReason, updated_at: new Date().toISOString()
     };
-    // Delete today's existing entry and insert fresh
-    await sbDelete('location', `?date=eq.${today}`);
-    await sbPost('location', payload);
-    setSaveStatus('saved');
-    showToast('Location updated!');
-  } catch(e) { setSaveStatus(''); showToast('Error saving location', true); }
+    await sbDel('location',`?date=eq.${today}`);
+    await sbPost('location',payload);
+    setSave('saved'); toast('Location saved!');
+  } catch(e) { setSave(''); toast('Error saving location',true); }
 }
 
-// ── ANNOUNCEMENTS ──
-async function loadAnnouncements() {
-  const data = await sbGet('announcements', '?order=created_at.desc&limit=10');
-  const active = data.find(a => a.is_active);
-  if (active) {
-    document.getElementById('announce-msg').value = active.message;
-    document.getElementById('announce-active').checked = true;
-    updateAnnouncementPreview();
-  }
-  renderAnnounceHistory(data);
+async function goHome() {
+  const today = new Date().toISOString().slice(0,10);
+  try {
+    await sbDel('location',`?date=eq.${today}`);
+    document.getElementById('loc-address').value='';
+    document.getElementById('loc-lat').value='';
+    document.getElementById('loc-lng').value='';
+    document.getElementById('loc-maps').value='';
+    document.getElementById('loc-closed').checked=false;
+    document.getElementById('closedSection').style.display='none';
+    document.querySelectorAll('#hoursChips .chip').forEach(c=>c.classList.remove('selected'));
+    selectedHours=null;
+    document.getElementById('adminMapFrame').src=`https://www.google.com/maps/embed/v1/place?key=${MAPS_KEY}&q=The+Butcher+on+Tucker,Ocean+Springs,MS&zoom=15`;
+    toast('Headed home! Map reset to Butcher on Tucker.');
+  } catch(e) { toast('Error',true); }
 }
 
-function updateAnnouncementPreview() {
-  const msg = document.getElementById('announce-msg').value;
-  document.getElementById('announcementPreview').textContent = msg || 'Your message will appear here as a banner on the site.';
-}
-
-function renderAnnounceHistory(data) {
-  const el = document.getElementById('announceHistory');
-  if (!data.length) { el.innerHTML = '<p style="color:var(--dim);font-size:0.82rem;">No announcements yet.</p>'; return; }
-  el.innerHTML = data.map(a => `
-    <div class="card" style="opacity:${a.is_active?1:0.5}">
-      <div class="card-header">
-        <span style="font-size:0.75rem;color:var(--dim);">${new Date(a.created_at).toLocaleDateString()}</span>
-        <div style="display:flex;gap:0.5rem;">
-          ${a.is_active ? '<span class="today-chip">Active</span>' : ''}
-          <button class="btn btn-danger btn-sm" onclick="deleteAnnouncement(${a.id})">Delete</button>
+// ANNOUNCEMENTS
+async function loadAnn() {
+  const data = await sbGet('announcements','?order=created_at.desc&limit=10');
+  const active = data.find(a=>a.is_active);
+  if (active) { document.getElementById('ann-msg').value=active.message; updateAnnPreview(); }
+  const el = document.getElementById('annHistory');
+  if (!data.length) { el.innerHTML='<p style="color:var(--dim);font-size:0.88rem;">No announcements yet.</p>'; return; }
+  el.innerHTML = data.map(a=>`
+    <div class="card" style="opacity:${a.is_active?1:0.5};margin-bottom:0.75rem;">
+      <div class="card-head">
+        <span style="font-size:0.8rem;color:var(--dim);">${new Date(a.created_at).toLocaleDateString()}</span>
+        <div style="display:flex;gap:0.5rem;align-items:center;">
+          ${a.is_active?'<span class="today-pill">Active</span>':''}
+          <button class="btn btn-red btn-sm" onclick="deleteAnn(${a.id})">Delete</button>
         </div>
       </div>
-      <p style="font-size:0.88rem;line-height:1.5;">${a.message}</p>
+      <p style="font-size:0.9rem;line-height:1.5;">${a.message}</p>
     </div>`).join('');
 }
 
-async function saveAnnouncement() {
-  const msg = document.getElementById('announce-msg').value.trim();
-  if (!msg) { showToast('Write a message first', true); return; }
-  setSaveStatus('saving');
-  try {
-    // Deactivate all existing
-    await sbPatch('announcements', { is_active: false }, '?is_active=eq.true');
-    if (document.getElementById('announce-active').checked) {
-      await sbPost('announcements', { message: msg, is_active: true });
-    }
-    setSaveStatus('saved');
-    showToast('Announcement posted!');
-    await loadAnnouncements();
-  } catch(e) { setSaveStatus(''); showToast('Error posting', true); }
+function updateAnnPreview() {
+  const msg = document.getElementById('ann-msg').value;
+  document.getElementById('annPreview').textContent = msg||'Your message will appear here.';
+  document.getElementById('annCount').textContent = msg.length;
 }
 
-async function deleteAnnouncement(id) {
-  try {
-    await sbDelete('announcements', `?id=eq.${id}`);
-    showToast('Deleted');
-    await loadAnnouncements();
-  } catch(e) { showToast('Error', true); }
+function setTemplate(tpl) {
+  document.getElementById('ann-msg').value = tpl;
+  updateAnnPreview();
 }
 
-// ── MENU ──
-let menuData = [];
+async function saveAnn() {
+  const msg = document.getElementById('ann-msg').value.trim();
+  if (!msg) { toast('Write a message first',true); return; }
+  setSave('saving');
+  try {
+    await sbPatch('announcements',{is_active:false},'?is_active=eq.true');
+    if (document.getElementById('ann-active').checked) await sbPost('announcements',{message:msg,is_active:true});
+    setSave('saved'); toast('Announcement posted!'); await loadAnn();
+  } catch(e) { setSave(''); toast('Error',true); }
+}
+
+async function deleteAnn(id) {
+  try { await sbDel('announcements',`?id=eq.${id}`); toast('Deleted'); await loadAnn(); }
+  catch(e) { toast('Error',true); }
+}
+
+// MENU
+const MENU_GROUPS = [
+  {label:'Wings', items:['6 PC Wings','10 PC Wings','15 PC Wings','20 PC Wings']},
+  {label:'Smashburgers', items:['Classic Smash','Double Smash','LOKE Burger','Owens Stacker']},
+  {label:'Combos', items:['Smash Combo','10 PC Wing Combo','15 PC Wing Combo','Double Combo']},
+  {label:'Sides', items:['Fries','Loaded Fries','Onion Rings','Mac N Cheese']},
+  {label:'Drinks', items:['Soda','Water','Sweet Tea']},
+];
+
 async function loadMenu() {
-  const data = await sbGet('menu_overrides', '?order=id');
+  const data = await sbGet('menu_overrides','?order=id');
   menuData = data;
-  renderMenu(data);
-}
-
-function renderMenu(data) {
   const grid = document.getElementById('menuGrid');
-  grid.innerHTML = data.map(item => `
-    <div class="menu-item-row ${item.is_86d ? 'is-86d' : ''}" id="menu-row-${item.id}">
-      <span class="menu-item-name">${item.item_name}</span>
-      <div class="menu-item-badges">
-        ${item.is_86d ? '<span class="badge badge-86">86\'d</span>' : ''}
-        ${item.is_featured ? '<span class="badge badge-featured">Featured</span>' : ''}
+  grid.innerHTML = '';
+  MENU_GROUPS.forEach(group => {
+    const items = group.items.map(name => data.find(d=>d.item_name===name)||{item_name:name,is_86d:false,is_featured:false});
+    const allOut = items.every(i=>i.is_86d);
+    const someOut = items.some(i=>i.is_86d);
+    const statusClass = allOut?'all-out':someOut?'some-out':'all-good';
+    const statusText = allOut?'ALL OUT':someOut?'SOME OUT':'ALL GOOD';
+    const div = document.createElement('div');
+    div.className = 'menu-group';
+    div.innerHTML = `
+      <div class="menu-group-header" onclick="toggleGroup('grp-${group.label}')">
+        <span class="menu-group-title">${group.label}</span>
+        <span class="menu-group-status ${statusClass}">${statusText}</span>
       </div>
-      <div class="item-actions">
-        <button class="btn btn-sm ${item.is_86d ? 'btn-primary' : 'btn-danger'}" onclick="toggle86(${item.id},${item.is_86d})">
-          ${item.is_86d ? 'Bring Back' : "86 It"}
-        </button>
-        <button class="btn btn-sm btn-ghost" onclick="toggleFeatured(${item.id},${item.is_featured})">
-          ${item.is_featured ? 'Unfeature' : 'Feature'}
-        </button>
-      </div>
-    </div>`).join('');
+      <div class="menu-group-body" id="grp-${group.label}">
+        <div class="btn-row" style="margin-bottom:0.5rem;">
+          <button class="btn btn-red btn-sm" onclick="bulk86('${group.label}',true,event)">86 All ${group.label}</button>
+          <button class="btn btn-ghost btn-sm" onclick="bulk86('${group.label}',false,event)">Restore All</button>
+        </div>
+        ${items.map(item=>`
+          <div class="menu-item-row ${item.is_86d?'is-86d':''}">
+            <span class="menu-item-name">${item.item_name}</span>
+            <div style="display:flex;gap:0.4rem;align-items:center;">
+              ${item.is_86d?'<span class="badge-86">86\'d</span>':''}
+              ${item.is_featured?'<span class="badge-feat">⭐</span>':''}
+              <div style="display:flex;gap:0.4rem;">
+                <button class="btn btn-sm ${item.is_86d?'btn-green':'btn-red'}" onclick="toggle86('${item.item_name}',${item.is_86d})">${item.is_86d?'Back':'86'}</button>
+                <button class="btn btn-sm btn-ghost" onclick="toggleFeat('${item.item_name}',${item.is_featured})">${item.is_featured?'★':'☆'}</button>
+              </div>
+            </div>
+          </div>`).join('')}
+      </div>`;
+    grid.appendChild(div);
+  });
 }
 
-async function toggle86(id, current) {
+function toggleGroup(id) { document.getElementById(id).classList.toggle('open'); }
+
+async function bulk86(groupLabel, is86, e) {
+  e.stopPropagation();
+  const group = MENU_GROUPS.find(g=>g.label===groupLabel);
+  if (!group) return;
+  showLoader(true);
   try {
-    await sbPatch('menu_overrides', { is_86d: !current, updated_at: new Date().toISOString() }, `?id=eq.${id}`);
-    showToast(current ? 'Item restored!' : "Item 86'd");
+    for (const name of group.items) {
+      const existing = menuData.find(d=>d.item_name===name);
+      if (existing) await sbPatch('menu_overrides',{is_86d:is86,updated_at:new Date().toISOString()},`?id=eq.${existing.id}`);
+      else if (is86) await sbPost('menu_overrides',{item_name:name,is_86d:true,is_featured:false});
+    }
+    toast(is86?`All ${groupLabel} 86'd`:`All ${groupLabel} restored`);
     await loadMenu();
-  } catch(e) { showToast('Error', true); }
+  } catch(err) { toast('Error',true); }
+  showLoader(false);
 }
 
-async function toggleFeatured(id, current) {
+async function toggle86(name, current) {
   try {
-    await sbPatch('menu_overrides', { is_featured: !current, updated_at: new Date().toISOString() }, `?id=eq.${id}`);
-    showToast(current ? 'Unfeatured' : 'Now featured!');
+    const existing = menuData.find(d=>d.item_name===name);
+    if (existing) await sbPatch('menu_overrides',{is_86d:!current,updated_at:new Date().toISOString()},`?id=eq.${existing.id}`);
+    else await sbPost('menu_overrides',{item_name:name,is_86d:true,is_featured:false});
+    toast(current?`${name} restored`:`${name} 86'd`);
     await loadMenu();
-  } catch(e) { showToast('Error', true); }
+  } catch(e) { toast('Error',true); }
 }
 
-async function saveMenu() { showToast('Menu saved!'); }
+async function toggleFeat(name, current) {
+  try {
+    const existing = menuData.find(d=>d.item_name===name);
+    if (existing) await sbPatch('menu_overrides',{is_featured:!current,updated_at:new Date().toISOString()},`?id=eq.${existing.id}`);
+    else await sbPost('menu_overrides',{item_name:name,is_86d:false,is_featured:true});
+    toast(current?'Unfeatured':'Now featured!');
+    await loadMenu();
+  } catch(e) { toast('Error',true); }
+}
 
-// ── PHOTOS ──
+// PHOTOS
 async function loadPhotos() {
-  const data = await sbGet('photos', '?order=created_at.desc&limit=20');
-  renderPhotos(data);
-}
-
-function renderPhotos(data) {
+  const data = await sbGet('photos','?order=created_at.desc&limit=20');
   const grid = document.getElementById('photoGrid');
-  if (!data.length) { grid.innerHTML = ''; return; }
-  grid.innerHTML = data.map(p => `
+  if (!data.length) { grid.innerHTML=''; return; }
+  grid.innerHTML = data.map(p=>`
     <div class="photo-thumb">
       <img src="${p.url}" alt="${p.item_name}" onerror="this.style.display='none'"/>
-      <button class="photo-thumb-del" onclick="deletePhoto(${p.id})">✕</button>
+      <button class="photo-del" onclick="deletePhoto(${p.id})">x</button>
     </div>`).join('');
 }
 
-async function handlePhotoUpload(event) {
-  const file = event.target.files[0];
+async function handlePhotoUpload(e) {
+  const file = e.target.files[0];
   if (!file) return;
   const item = document.getElementById('photo-item').value;
   const caption = document.getElementById('photo-caption').value;
-  if (!item) { showToast('Select what this photo is of', true); return; }
-
-  showLoading(true);
+  if (!item) { toast('Select what this photo is of',true); return; }
+  showLoader(true);
   try {
-    // Use a consistent filename per item so Supabase always has ONE live photo per item
-    // Dropbox gets a dated filename (handled by Make) so archive builds up there
-    const safeName = item.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+    const safeName = item.replace(/[^a-z0-9]/gi,'_').toLowerCase();
     const fileName = `${safeName}_current.jpg`;
-
-    // Upload to Supabase Storage (overwrites previous for this item)
-    const uploadRes = await fetch(`${SUPABASE_URL}/storage/v1/object/photos/${fileName}`, {
-      method: 'POST',
-      headers: {
-        'apikey': SUPABASE_KEY,
-        'Authorization': `Bearer ${SUPABASE_KEY}`,
-        'Content-Type': file.type,
-        'x-upsert': 'true'
-      },
+    const uploadRes = await fetch(`${SB}/storage/v1/object/photos/${fileName}`, {
+      method:'POST',
+      headers:{ apikey:KEY, Authorization:`Bearer ${KEY}`, 'Content-Type':file.type, 'x-upsert':'true' },
       body: file
     });
     if (!uploadRes.ok) throw new Error('Upload failed');
-
-    // Add cache-buster so browser doesn't show old cached photo
-    const publicUrl = `${SUPABASE_URL}/storage/v1/object/public/photos/${fileName}?t=${Date.now()}`;
-
-    // Deactivate old photo record for this item, insert new one
-    await sbPatch('photos', { is_active: false }, `?item_name=eq.${encodeURIComponent(item)}`);
-    await sbPost('photos', { item_name: item, url: publicUrl, caption, is_active: true });
-
-    showToast('Photo uploaded and live!');
+    const publicUrl = `${SB}/storage/v1/object/public/photos/${fileName}?t=${Date.now()}`;
+    await sbPatch('photos',{is_active:false},`?item_name=eq.${encodeURIComponent(item)}`);
+    await sbPost('photos',{item_name:item,url:publicUrl,caption,is_active:true});
+    toast('Photo uploaded and live!');
     await loadPhotos();
-    event.target.value = '';
-    document.getElementById('photo-caption').value = '';
-  } catch(e) {
-    console.error(e);
-    showToast('Upload failed - check Supabase storage bucket is public', true);
-  }
-  showLoading(false);
+    e.target.value='';
+    document.getElementById('photo-caption').value='';
+  } catch(err) { toast('Upload failed - check storage bucket',true); }
+  showLoader(false);
 }
 
 async function deletePhoto(id) {
-  try {
-    await sbDelete('photos', `?id=eq.${id}`);
-    showToast('Photo deleted');
-    await loadPhotos();
-  } catch(e) { showToast('Error', true); }
+  try { await sbDel('photos',`?id=eq.${id}`); toast('Deleted'); await loadPhotos(); }
+  catch(e) { toast('Error',true); }
 }
 
-// ── SOCIAL ──
-let socialData = [];
+// SOCIAL
 async function loadSocial() {
-  const data = await sbGet('social_links', '?order=id');
+  const data = await sbGet('social_links','?order=id');
   socialData = data;
-  renderSocial(data);
-}
-
-function renderSocial(data) {
-  const form = document.getElementById('socialForm');
-  form.innerHTML = `<div style="display:flex;flex-direction:column;gap:0.75rem;">` +
-    data.map(s => `
-      <div class="social-row">
-        <div class="platform-badge">${s.platform}</div>
-        <div class="field" style="margin:0;">
-          <label>Handle</label>
-          <input type="text" id="social-handle-${s.id}" value="${s.handle||''}" placeholder="@SmashnSmoke"/>
-        </div>
-        <div class="field" style="margin:0;">
-          <label>Full URL</label>
-          <input type="url" id="social-url-${s.id}" value="${s.url==='#'?'':s.url||''}" placeholder="https://facebook.com/..."/>
-        </div>
-      </div>`).join('') + `</div>`;
+  document.getElementById('socialForm').innerHTML = data.map(s=>`
+    <div class="social-row">
+      <div class="platform-tag">${s.platform}</div>
+      <div class="field" style="flex:1;margin:0;"><label>Handle</label><input type="text" id="sh-${s.id}" value="${s.handle||''}" placeholder="@SmashnSmoke"/></div>
+    </div>
+    <div class="field" style="margin-bottom:1rem;"><label>Full URL</label><input type="url" id="su-${s.id}" value="${s.url==='#'?'':s.url||''}" placeholder="https://facebook.com/..."/></div>`).join('');
 }
 
 async function saveSocial() {
-  setSaveStatus('saving');
+  setSave('saving');
   try {
     for (const s of socialData) {
-      const handle = document.getElementById(`social-handle-${s.id}`).value;
-      const url = document.getElementById(`social-url-${s.id}`).value || '#';
-      await sbPatch('social_links', { handle, url, updated_at: new Date().toISOString() }, `?id=eq.${s.id}`);
+      await sbPatch('social_links',{handle:document.getElementById(`sh-${s.id}`).value,url:document.getElementById(`su-${s.id}`).value||'#',updated_at:new Date().toISOString()},`?id=eq.${s.id}`);
     }
-    setSaveStatus('saved');
-    showToast('Social links saved!');
-  } catch(e) { setSaveStatus(''); showToast('Error saving', true); }
+    setSave('saved'); toast('Social links saved!');
+  } catch(e) { setSave(''); toast('Error',true); }
 }
 
-// ── UI HELPERS ──
-function showToast(msg, isError=false) {
+// MAPS
+function initMaps() {
+  const input = document.getElementById('loc-address');
+  if (!input || typeof google === 'undefined') return;
+  const ac = new google.maps.places.Autocomplete(input,{
+    componentRestrictions:{country:'us'}, fields:['formatted_address','geometry']
+  });
+  ac.addListener('place_changed',()=>{
+    const place = ac.getPlace();
+    if (!place.geometry) return;
+    document.getElementById('loc-address').value = place.formatted_address;
+    updateAdminMap(place.geometry.location.lat(), place.geometry.location.lng());
+  });
+}
+
+// UI
+function toast(msg, err=false) {
   const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.className = 'toast show' + (isError ? ' error' : '');
-  setTimeout(() => t.className = 'toast', 3000);
+  t.textContent = msg; t.className = `toast show${err?' err':''}`;
+  setTimeout(()=>t.className='toast',3000);
 }
-
-function setSaveStatus(state) {
-  const el = document.getElementById('saveStatus');
-  if (state === 'saving') { el.textContent = 'Saving...'; el.className = 'save-status saving'; }
-  else if (state === 'saved') { el.textContent = 'All saved ✓'; el.className = 'save-status saved'; setTimeout(()=>{ el.textContent='All saved'; el.className='save-status saved'; }, 3000); }
-  else { el.textContent = ''; el.className = 'save-status'; }
+function setSave(state) {
+  const el = document.getElementById('savePill');
+  if (state==='saving') { el.textContent='Saving...'; el.className='save-pill saving'; }
+  else if (state==='saved') { el.textContent='Saved ✓'; el.className='save-pill'; }
 }
-
-function showLoading(show) {
-  document.getElementById('loadingOverlay').style.display = show ? 'flex' : 'none';
-}
+function showLoader(show) { document.getElementById('loader').style.display=show?'flex':'none'; }
 </script>
 </body>
 </html>

@@ -614,11 +614,64 @@
 
 /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
+    /* NAV */
+    nav { padding: 0.85rem 1.25rem; }
     nav ul { display: none; }
-    .find-inner { grid-template-columns: 1fr; gap: 3rem; }
-    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+    /* HERO */
+    #hero { padding: 5rem 1.25rem 3rem; }
+    .hero-logo { width: min(320px, 90vw); }
+    .hero-tagline { font-size: 0.7rem; letter-spacing: 3px; }
+    .hero-special-badge { padding: 1rem 1.25rem; gap: 0.75rem; width: 100%; max-width: 340px; }
+    .special-text { font-size: 1.4rem; }
+    .hero-cta { flex-direction: column; width: 100%; max-width: 280px; }
+    .btn-primary, .btn-outline { width: 100%; text-align: center; padding: 1rem; font-size: 0.85rem; }
+    .special-photo { width: 100%; max-width: 280px; height: 200px; }
+    .special-photo-placeholder { width: 100%; max-width: 280px; }
+
+    /* SECTIONS */
+    section { padding: 3.5rem 1.25rem; }
+    .section-title { font-size: 2.2rem; }
+
+    /* SPECIALS */
+    .specials-grid { grid-template-columns: 1fr; }
+
+    /* MENU BOARD */
+    .menu-board { border-radius: 10px; }
+    .menu-panels { grid-template-columns: 1fr !important; }
+    .menu-panel { border-right: none !important; border-bottom: 1px solid rgba(75,150,255,0.15); }
+    .menu-panel:last-child { border-bottom: none; }
+    .menu-board-header { padding: 1.5rem 1.25rem 1rem; flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .daily-special-box { width: 100%; }
+
+    /* FIND US */
+    .find-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .find-map { aspect-ratio: 4/3; min-height: 220px; }
+
+    /* PARTNER */
+    #partner > div > div[style*="flex"] { flex-direction: column !important; padding: 1.5rem !important; }
+
+    /* ABOUT */
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
     .about-logo-wrap { display: none; }
-    section { padding: 4rem 1.5rem; }
+
+    /* FOOTER */
+    .footer-links { flex-wrap: wrap; gap: 1.25rem; justify-content: center; }
+    footer { padding: 2rem 1.25rem; }
+
+    /* SOCIAL BUTTONS */
+    .social-links { flex-wrap: wrap; }
+    .social-btn { flex: 1; min-width: 120px; text-align: center; }
+
+    /* ANNOUNCEMENT BANNER */
+    #announcementBanner { font-size: 0.8rem; padding: 0.6rem 1rem; }
+  }
+
+  @media (max-width: 480px) {
+    .section-title { font-size: 1.9rem; }
+    .hero-ring { display: none; }
+    .specials-grid { gap: 1px; }
+    nav .nav-logo { font-size: 1.3rem; }
   }
 
   /* ── UPDATED HIGH-CONVERSION MENU BOARD ── */
@@ -1378,22 +1431,18 @@
       </div>
     </div>
     <div class="reveal">
-      <div class="find-map" id="siteMapWrap" style="position:relative;cursor:pointer;" onclick="if(window._mapLink)window.open(window._mapLink,'_blank')">
-        <!-- Static tile map — no iframe, no CORS issues -->
-        <img id="siteMapImg"
-          src="https://staticmap.openstreetmap.de/staticmap.php?center=30.4,-88.9&zoom=13&size=600x400&markers=30.4,-88.9,red-pushpin"
-          alt="Truck Location Map"
-          style="width:100%;height:100%;object-fit:cover;min-height:280px;display:block;"
-          onerror="this.style.display='none';document.getElementById('mapFallback').style.display='flex';"
-        />
-        <div id="mapFallback" style="display:none;position:absolute;inset:0;background:var(--navy-mid);flex-direction:column;align-items:center;justify-content:center;gap:0.75rem;color:rgba(240,244,255,0.3);font-family:'Barlow Condensed',sans-serif;font-size:0.75rem;letter-spacing:2px;text-transform:uppercase;">
-          <span style="font-size:2.5rem;filter:drop-shadow(0 0 12px rgba(27,95,204,0.5))">📍</span>
-          <span id="mapFallbackAddr">Gulf Coast, MS</span>
-          <span style="font-size:0.6rem;opacity:0.5;">Tap to open in maps</span>
-        </div>
-        <div style="position:absolute;bottom:10px;right:10px;background:rgba(7,12,24,0.8);border:1px solid rgba(27,95,204,0.4);border-radius:4px;padding:0.3rem 0.75rem;font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:2px;color:var(--blue-bright);text-transform:uppercase;">
-          Tap for Directions
-        </div>
+      <div class="find-map" id="siteMapWrap" style="position:relative;min-height:280px;">
+        <iframe id="siteMapFrame"
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCYoFohV3Fi7-U3OOlKjxta0u_Y8fKkbdY&q=The+Butcher+on+Tucker,+Ocean+Springs,+MS&zoom=15"
+          style="width:100%;height:100%;min-height:280px;border:none;display:block;"
+          allowfullscreen loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Smash N Smoke Location">
+        </iframe>
+        <a id="mapDirectionsBtn" href="https://maps.google.com/?q=The+Butcher+on+Tucker,+Ocean+Springs,+MS" target="_blank"
+          style="position:absolute;bottom:10px;right:10px;background:rgba(7,12,24,0.85);border:1px solid rgba(27,95,204,0.4);border-radius:4px;padding:0.35rem 0.85rem;font-family:'Barlow Condensed',sans-serif;font-size:0.65rem;letter-spacing:2px;color:var(--blue-bright);text-transform:uppercase;text-decoration:none;">
+          Get Directions
+        </a>
       </div>
     </div>
   </div>
@@ -1545,30 +1594,19 @@ setTimeout(loadSitePhotos, 800);
 
 
 // ── OSM MAP UPDATE ──
-async function updateSiteMap(address, lat, lng) {
-  const img = document.getElementById('siteMapImg');
-  if (!img) return;
-
-  function setMapPin(la, lo) {
-    img.src = `https://staticmap.openstreetmap.de/staticmap.php?center=${la},${lo}&zoom=15&size=600x400&markers=${la},${lo},red-pushpin`;
-    window._mapLink = `https://www.openstreetmap.org/?mlat=${la}&mlon=${lo}#map=16/${la}/${lo}`;
-    const fb = document.getElementById('mapFallbackAddr');
-    if (fb) fb.textContent = address || 'View on Map';
-    img.style.display = 'block';
+function updateSiteMap(address, lat, lng) {
+  const frame = document.getElementById('siteMapFrame');
+  const btn = document.getElementById('mapDirectionsBtn');
+  if (!frame) return;
+  const MAPS_KEY = 'AIzaSyCYoFohV3Fi7-U3OOlKjxta0u_Y8fKkbdY';
+  if (lat && lng) {
+    frame.src = `https://www.google.com/maps/embed/v1/place?key=${MAPS_KEY}&q=${lat},${lng}&zoom=16`;
+    if (btn) { btn.href = `https://maps.google.com/?q=${lat},${lng}`; }
+  } else if (address) {
+    const q = encodeURIComponent(address);
+    frame.src = `https://www.google.com/maps/embed/v1/place?key=${MAPS_KEY}&q=${q}&zoom=15`;
+    if (btn) { btn.href = `https://maps.google.com/?q=${q}`; }
   }
-
-  if (lat && lng) { setMapPin(lat, lng); return; }
-  if (!address) return;
-  try {
-    const q = /ms|mississippi/i.test(address) ? address : address + ', Mississippi';
-    const res = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(q)}&format=json&limit=1`, {
-      headers: { 'Accept-Language': 'en', 'User-Agent': 'SmashnSmoke/1.0' }
-    });
-    const data = await res.json();
-    if (data && data.length) {
-      setMapPin(parseFloat(data[0].lat), parseFloat(data[0].lon));
-    }
-  } catch(e) { console.log('Map geocode failed:', e); }
 }
 // ── SUPABASE LIVE DATA ──
 const SITE_SB_URL = 'https://iywvdvuawflyxlumemqy.supabase.co';
@@ -1626,6 +1664,16 @@ async function loadLiveData() {
   }
 
   // 2. UPDATE LOCATION
+  const btn = document.getElementById('mapDirectionsBtn');
+  if (!location.length) {
+    // No location today - default to Butcher on Tucker
+    const addrEl = document.getElementById('locAddressLabel');
+    const addrText = document.getElementById('locAddressText');
+    if (addrEl) {
+      addrEl.innerHTML = '<a href="https://www.thebutcherontucker.com/" target="_blank" style="color:var(--blue-bright);text-decoration:none;">The Butcher on Tucker</a>';
+    }
+    if (addrText) addrText.textContent = 'Our home base in Ocean Springs, MS. Follow us on social for today\'s spot.';
+  }
   if (location.length) {
     const loc = location[0];
     const addrEl = document.getElementById('locAddressLabel');
@@ -1661,8 +1709,7 @@ async function loadLiveData() {
         }
       }
     }
-  }
-
+  } // end location.length check
   // 3. ANNOUNCEMENT BANNER
   if (announcements.length) {
     const ann = announcements[0];
