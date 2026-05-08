@@ -466,6 +466,46 @@ html, body { height: 100%; background: var(--navy); color: var(--white); font-fa
       <div class="photo-grid" id="photoGrid"></div>
     </div>
 
+    <div class="tab-panel" id="tab-sauce">
+      <h2 class="section-title">Sauce of the Week</h2>
+      <p class="section-desc">Set the featured sauce. When it's gone, mark it 86'd. Updates the hero banner on the site instantly.</p>
+
+      <div class="card">
+        <p class="section-label">Pick This Week's Sauce</p>
+        <div class="chips" id="sauceChips">
+          <div class="chip" onclick="selectSauce(this,"Loké's Ground Zero","The original. While supplies last!")">Loké's Ground Zero</div>
+          <div class="chip" onclick="selectSauce(this,'The Inferno','Not for the faint of heart. While supplies last!')">The Inferno</div>
+          <div class="chip" onclick="selectSauce(this,'Smoke & Honey','BBQ sweet heat. While supplies last!')">Smoke &amp; Honey</div>
+          <div class="chip" onclick="selectSauce(this,'The Dragon','Asian-style sweet heat. While supplies last!')">The Dragon</div>
+        </div>
+
+        <div class="field">
+          <label>Sauce Name</label>
+          <input type="text" id="sauce-name" placeholder="e.g. Loké's Ground Zero"/>
+        </div>
+        <div class="field">
+          <label>Tagline</label>
+          <input type="text" id="sauce-tagline" placeholder="e.g. The original. While supplies last!"/>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <strong>86'd - Sold Out</strong>
+            <span>Updates banner to show sold out</span>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="sauce-86d" class="red-toggle"/>
+            <span class="toggle-track"></span>
+          </label>
+        </div>
+      </div>
+
+      <button class="btn btn-primary" onclick="saveSauce()" style="margin-bottom:1rem;">Save Sauce of the Week</button>
+    </div>
+
+
     <div class="tab-panel" id="tab-social">
       <h2 class="section-title">Social Links</h2>
       <p class="section-desc">Update once and it changes everywhere on the site automatically.</p>
@@ -481,6 +521,7 @@ html, body { height: 100%; background: var(--navy); color: var(--white); font-fa
     <button class="tab-btn" onclick="switchTab('announce',this)"><span class="tab-icon">📢</span><span class="tab-label">Announce</span></button>
     <button class="tab-btn" onclick="switchTab('menu',this)"><span class="tab-icon">🍔</span><span class="tab-label">Menu</span></button>
     <button class="tab-btn" onclick="switchTab('photos',this)"><span class="tab-icon">📸</span><span class="tab-label">Photos</span></button>
+    <button class="tab-btn" onclick="switchTab('sauce',this)"><span class="tab-icon">🔥</span><span class="tab-label">Sauce</span></button>
     <button class="tab-btn" onclick="switchTab('social',this)"><span class="tab-icon">📱</span><span class="tab-label">Social</span></button>
   </div>
 </div>
@@ -536,7 +577,7 @@ function switchTab(id, btn) {
 
 async function loadAll() {
   showLoader(true);
-  try { await Promise.all([loadSpecials(),loadLocation(),loadAnn(),loadMenu(),loadPhotos(),loadSocial()]); }
+  try { await Promise.all([loadSpecials(),loadLocation(),loadAnn(),loadMenu(),loadPhotos(),loadSocial(),loadSauce()]); }
   catch(e) { toast('Error loading data',true); }
   showLoader(false);
 }

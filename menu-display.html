@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Smash N Smoke — Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --navy: #060B16;
+  --navy2: #0A1224;
+  --blue: #1B5FCC;
+  --blue2: #4B96FF;
+  --orange: #E07010;
+  --orange2: #FF8C20;
+  --red: #CC1800;
+  --white: #F0F4FF;
+  --dim: rgba(240,244,255,0.5);
+  --border: rgba(75,150,255,0.15);
+  --green: #00C96B;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  height: 100%; background: var(--navy);
+  color: var(--white); font-family: 'Barlow Condensed', sans-serif;
+  overflow: hidden;
+}
+
+/* ── TOP BAR ── */
+.tv-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1.2rem 3rem;
+  background: var(--navy2);
+  border-bottom: 2px solid var(--blue);
+  flex-shrink: 0;
+}
+.tv-logo {
+  font-family: 'Bangers', cursive;
+  font-size: 2.2rem; letter-spacing: 5px; color: var(--white);
+}
+.tv-logo span { color: var(--blue2); }
+.tv-tagline {
+  font-size: 0.75rem; letter-spacing: 4px; text-transform: uppercase;
+  color: var(--dim);
+}
+.tv-special-wrap {
+  text-align: right;
+}
+.tv-special-label {
+  font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--blue2); margin-bottom: 0.2rem;
+}
+.tv-special-name {
+  font-family: 'Bangers', cursive; font-size: 1.6rem; letter-spacing: 2px;
+  color: var(--white);
+}
+.tv-sauce-label {
+  font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--orange); margin-top: 0.35rem; margin-bottom: 0.15rem;
+}
+.tv-sauce-name {
+  font-family: 'Bangers', cursive; font-size: 1.2rem; letter-spacing: 2px;
+  color: var(--orange2);
+}
+
+/* ── MAIN GRID ── */
+.tv-body {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 0.9fr;
+  height: calc(100vh - 90px);
+  overflow: hidden;
+}
+.tv-col {
+  padding: 1.5rem 2rem;
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+}
+.tv-col:last-child { border-right: none; }
+
+/* ── COLUMN HEADERS ── */
+.col-title {
+  font-family: 'Bangers', cursive;
+  font-size: 2rem; letter-spacing: 3px;
+  color: var(--blue2);
+  border-bottom: 2px solid rgba(75,150,255,0.25);
+  padding-bottom: 0.6rem; margin-bottom: 1rem;
+  display: flex; align-items: baseline; justify-content: space-between;
+}
+.col-title span {
+  font-size: 0.7rem; letter-spacing: 2px; font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; color: var(--dim); text-transform: uppercase;
+}
+
+/* ── MENU ITEMS ── */
+.tv-item {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  gap: 1rem;
+}
+.tv-item:last-child { border: none; }
+.tv-item.is-86d { opacity: 0.3; text-decoration: line-through; }
+.tv-item.featured { background: rgba(224,112,16,0.06); margin: 0 -0.5rem; padding: 0.65rem 0.5rem; border-radius: 4px; border-bottom: none; }
+.item-left { flex: 1; }
+.item-name {
+  font-weight: 700; font-size: 1.1rem; letter-spacing: 0.5px;
+  color: var(--white);
+}
+.item-sub {
+  font-size: 0.75rem; color: var(--dim); margin-top: 0.1rem;
+  font-style: italic;
+}
+.item-price {
+  font-family: 'Bangers', cursive; font-size: 1.4rem; letter-spacing: 1px;
+  color: var(--blue2); flex-shrink: 0;
+}
+.featured .item-price { color: var(--orange2); }
+
+/* ── UPSELL ROWS ── */
+.upsell-row {
+  display: flex; align-items: center; gap: 0.5rem;
+  padding: 0.5rem 0.75rem; margin: 0.5rem 0;
+  background: rgba(192,69,0,0.08);
+  border-left: 2px solid var(--orange);
+  border-radius: 0 4px 4px 0;
+}
+.upsell-row span {
+  font-weight: 700; font-size: 0.9rem;
+  color: var(--orange2);
+}
+.upsell-row small { font-size: 0.75rem; color: var(--dim); }
+
+/* ── SAUCE SECTION ── */
+.sauce-header {
+  font-family: 'Bangers', cursive; font-size: 1.5rem; letter-spacing: 2px;
+  color: var(--orange); margin: 1.25rem 0 0.75rem;
+  border-top: 1px solid rgba(192,69,0,0.2); padding-top: 1rem;
+}
+.sauce-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+}
+.sauce-item:last-child { border: none; }
+.sauce-item-name { font-weight: 700; font-size: 0.95rem; }
+.sauce-item-desc { font-size: 0.72rem; color: var(--dim); }
+.heat-dots { display: flex; gap: 3px; align-items: center; }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: rgba(255,255,255,0.1); }
+.dot.on { background: var(--orange); }
+.dot.hot { background: var(--red); }
+
+/* ── BOTTOM TICKER ── */
+.tv-ticker {
+  position: fixed; bottom: 0; left: 0; right: 0;
+  background: var(--blue); padding: 0.5rem 2rem;
+  font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,0.85); text-align: center;
+  font-weight: 700;
+}
+.tv-ticker span { color: var(--white); }
+
+/* ── 86'D BADGE ── */
+.badge-86 {
+  font-size: 0.6rem; letter-spacing: 1px; text-transform: uppercase;
+  background: rgba(204,24,0,0.15); color: var(--red);
+  border: 1px solid rgba(204,24,0,0.3); padding: 0.1rem 0.4rem;
+  border-radius: 3px; margin-left: 0.4rem; vertical-align: middle;
+}
+.feat-star { color: var(--orange2); margin-left: 0.3rem; font-size: 0.9rem; }
+
+/* ── CLOCK ── */
+.tv-clock {
+  font-family: 'Bangers', cursive; font-size: 1.4rem; letter-spacing: 3px;
+  color: rgba(240,244,255,0.6);
+}
+</style>
+</head>
+<body>
+
+<div class="tv-header">
+  <div>
+    <div class="tv-logo">SMASH <span>N</span> SMOKE</div>
+    <div class="tv-tagline">Bold Flavor · Family Made · Done Right</div>
+  </div>
+  <div style="text-align:center;">
+    <div class="tv-special-wrap">
+      <div class="tv-special-label">Today's Special</div>
+      <div class="tv-special-name" id="tvSpecial">Wing Wednesday</div>
+      <div class="tv-sauce-label">Sauce of the Week</div>
+      <div class="tv-sauce-name" id="tvSauce">Loké's Ground Zero</div>
+    </div>
+  </div>
+  <div class="tv-clock" id="tvClock">--:-- --</div>
+</div>
+
+<div class="tv-body">
+
+  <!-- COL 1: WINGS -->
+  <div class="tv-col">
+    <div class="col-title">Wings <span>Nashville Hot</span></div>
+
+    <div id="wingsItems">
+      <div class="tv-item"><div class="item-left"><div class="item-name">6 PC</div><div class="item-sub">Bone-in wings</div></div><div class="item-price">$10</div></div>
+      <div class="tv-item featured"><div class="item-left"><div class="item-name">10 PC ⭐</div><div class="item-sub">Most popular</div></div><div class="item-price">$15</div></div>
+      <div class="tv-item"><div class="item-left"><div class="item-name">15 PC</div><div class="item-sub">Shareable order</div></div><div class="item-price">$21</div></div>
+      <div class="tv-item"><div class="item-left"><div class="item-name">20 PC</div><div class="item-sub">Big crew order</div></div><div class="item-price">$27</div></div>
+      <div class="tv-item"><div class="item-left"><div class="item-name">10 PC Combo</div><div class="item-sub">Fries + Drink</div></div><div class="item-price">$19</div></div>
+      <div class="tv-item"><div class="item-left"><div class="item-name">15 PC Combo</div><div class="item-sub">Fries + Drink</div></div><div class="item-price">$24</div></div>
+    </div>
+
+    <div class="upsell-row"><span>+$2</span><small>Tossed Nashville Hot</small></div>
+    <div class="upsell-row"><span>+$3</span><small>Loaded - Extra Sauce + Topping</small></div>
+
+    <!-- SAUCES -->
+    <div class="sauce-header">Our Sauces</div>
+    <div class="sauce-item">
+      <div><div class="sauce-item-name">Loké's Ground Zero</div><div class="sauce-item-desc">The original. Family recipe.</div></div>
+      <div class="heat-dots"><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>
+    <div class="sauce-item">
+      <div><div class="sauce-item-name">The Inferno</div><div class="sauce-item-desc">All the way up.</div></div>
+      <div class="heat-dots"><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div><div class="dot hot"></div></div>
+    </div>
+    <div class="sauce-item">
+      <div><div class="sauce-item-name">Smoke &amp; Honey</div><div class="sauce-item-desc">BBQ sweet heat.</div></div>
+      <div class="heat-dots"><div class="dot on"></div><div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
+    </div>
+    <div class="sauce-item">
+      <div><div class="sauce-item-name">The Dragon</div><div class="sauce-item-desc">Asian-style. Sweet bite.</div></div>
+      <div class="heat-dots"><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div></div>
+    </div>
+    <p style="font-size:0.72rem;color:var(--dim);margin-top:0.75rem;font-style:italic;">+ Side of any sauce with any item · $1</p>
+  </div>
+
+  <!-- COL 2: BURGERS -->
+  <div class="tv-col">
+    <div class="col-title">Smashburgers <span>Simple · Smashed · Done Right</span></div>
+
+    <div id="burgersItems">
+      <div class="tv-item"><div class="item-left"><div class="item-name">Classic Smash</div><div class="item-sub">Beef, cheese, pickles, onions, smash sauce</div></div><div class="item-price">$11</div></div>
+      <div class="tv-item featured"><div class="item-left"><div class="item-name">Double Smash ⭐</div><div class="item-sub">Best value</div></div><div class="item-price">$13</div></div>
+      <div class="tv-item"><div class="item-left"><div class="item-name">LOKÉ Burger*</div><div class="item-sub">Bacon, lettuce, onions, LOKÉ sauce</div></div><div class="item-price">$15</div></div>
+      <div class="tv-item"><div class="item-left"><div class="item-name">Owens Stacker</div><div class="item-sub">Double smash, bacon, onion ring, BBQ + smash sauce</div></div><div class="item-price">$17</div></div>
+    </div>
+
+    <div class="upsell-row"><span>+$2</span><small>Nashville Hot on any burger</small></div>
+    <div class="upsell-row"><span>+$2</span><small>Extra patty on any burger</small></div>
+
+    <div style="margin-top:1.5rem;">
+      <div class="col-title" style="font-size:1.5rem;">Combos <span>Includes Fries + Drink</span></div>
+      <div class="tv-item"><div class="item-left"><div class="item-name">Smash Combo</div><div class="item-sub">Any classic smashburger</div></div><div class="item-price">$16</div></div>
+      <div class="tv-item featured"><div class="item-left"><div class="item-name">10 PC Wing Combo ⭐</div><div class="item-sub">10 wings tossed in sauce</div></div><div class="item-price">$19</div></div>
+      <div class="tv-item"><div class="item-left"><div class="item-name">15 PC Wing Combo</div><div class="item-sub">15 wings tossed in sauce</div></div><div class="item-price">$24</div></div>
+      <div class="tv-item"><div class="item-left"><div class="item-name">Double Combo</div><div class="item-sub">Double smash + fries + drink</div></div><div class="item-price">$19</div></div>
+    </div>
+  </div>
+
+  <!-- COL 3: SIDES + DAILY SPECIAL -->
+  <div class="tv-col">
+    <div class="col-title">Sides <span></span></div>
+
+    <div id="sidesItems">
+      <div class="tv-item"><div class="item-left"><div class="item-name">Fries</div></div><div class="item-price">$5</div></div>
+      <div class="tv-item featured"><div class="item-left"><div class="item-name">Loaded Fries ⭐</div></div><div class="item-price">$9</div></div>
+      <div class="tv-item"><div class="item-left"><div class="item-name">Onion Rings</div></div><div class="item-price">$7</div></div>
+      <div class="tv-item"><div class="item-left"><div class="item-name">Mac N Cheese</div></div><div class="item-price">Special</div></div>
+    </div>
+
+    <div style="margin-top:1.25rem;">
+      <div class="col-title" style="font-size:1.5rem;">Drinks</div>
+      <div class="tv-item"><div class="item-left"><div class="item-name">Soda</div></div><div class="item-price">$3</div></div>
+      <div class="tv-item"><div class="item-left"><div class="item-name">Water</div></div><div class="item-price">$2</div></div>
+      <div class="tv-item"><div class="item-left"><div class="item-name">Sweet Tea</div></div><div class="item-price">$4</div></div>
+    </div>
+
+    <!-- DAILY SPECIAL BOX -->
+    <div style="margin-top:1.5rem;padding:1.25rem;background:rgba(27,95,204,0.1);border:1px solid rgba(27,95,204,0.3);border-radius:6px;">
+      <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--blue2);margin-bottom:0.35rem;font-weight:700;">Today's Special</div>
+      <div style="font-family:'Bangers',cursive;font-size:1.8rem;letter-spacing:2px;color:var(--white);" id="tvSpecialBox">Wing Wednesday</div>
+      <div style="font-size:0.8rem;color:var(--dim);margin-top:0.2rem;" id="tvSpecialDescBox">Nashville Hot - bone-in or boneless</div>
+    </div>
+
+    <!-- SAUCE OF WEEK BOX -->
+    <div style="margin-top:0.75rem;padding:1.25rem;background:rgba(192,69,0,0.08);border:1px solid rgba(192,69,0,0.3);border-radius:6px;">
+      <div style="font-size:0.65rem;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:0.35rem;font-weight:700;">Sauce of the Week</div>
+      <div style="font-family:'Bangers',cursive;font-size:1.5rem;letter-spacing:2px;color:var(--orange2);" id="tvSauceBox">Loké's Ground Zero</div>
+      <div style="font-size:0.75rem;color:var(--dim);margin-top:0.2rem;" id="tvSauceTagBox">While supplies last!</div>
+    </div>
+
+    <p style="font-size:0.7rem;color:rgba(240,244,255,0.25);margin-top:1.25rem;font-style:italic;">* LOKÉ Burger - ask us about the name</p>
+  </div>
+
+</div>
+
+<!-- TICKER -->
+<div class="tv-ticker">
+  <span>Smash N Smoke</span> · Gulf Coast, MS · Follow us on social @SmashnSmoke · Bold Flavor. Family Made. Done Right.
+</div>
+
+<script>
+const SB = 'https://iywvdvuawflyxlumemqy.supabase.co';
+const KEY = 'sb_publishable_qy06iCwzteu3WNio_VOIUg_sG3iPgr2';
+const DAYS = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+
+// Clock
+function updateClock() {
+  const now = new Date();
+  let h = now.getHours(), m = now.getMinutes();
+  const ampm = h >= 12 ? 'PM' : 'AM';
+  h = h % 12 || 12;
+  document.getElementById('tvClock').textContent = `${h}:${String(m).padStart(2,'0')} ${ampm}`;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+async function sbGet(t, f='') {
+  try {
+    const r = await fetch(`${SB}/rest/v1/${t}${f}`, { headers: { apikey: KEY, Authorization: `Bearer ${KEY}` } });
+    return r.ok ? r.json() : [];
+  } catch(e) { return []; }
+}
+
+async function loadTVData() {
+  const today = DAYS[new Date().getDay()];
+  const todayDate = new Date().toISOString().slice(0,10);
+
+  const [specials, menuOverrides, sauceWeek] = await Promise.all([
+    sbGet('specials', '?order=id'),
+    sbGet('menu_overrides', '?order=id'),
+    sbGet('sauce_of_week', '?is_active=eq.true&order=updated_at.desc&limit=1'),
+  ]);
+
+  // Today's special
+  if (specials.length) {
+    const spec = specials.find(s => s.day === today);
+    if (spec) {
+      const name = spec.is_sold_out ? spec.name + ' (Sold Out)' : spec.name;
+      document.getElementById('tvSpecial').textContent = name;
+      document.getElementById('tvSpecialBox').textContent = name;
+      document.getElementById('tvSpecialDescBox').textContent = spec.description;
+    }
+  }
+
+  // Sauce of the week
+  if (sauceWeek.length) {
+    const s = sauceWeek[0];
+    const sauceName = s.is_86d ? s.name + ' (Sold Out)' : s.name;
+    document.getElementById('tvSauce').textContent = sauceName;
+    document.getElementById('tvSauceBox').textContent = sauceName;
+    document.getElementById('tvSauceTagBox').textContent = s.tagline || 'While supplies last!';
+  }
+
+  // Menu 86'd items
+  if (menuOverrides.length) {
+    const allCols = document.querySelectorAll('.tv-item');
+    allCols.forEach(item => {
+      const nameEl = item.querySelector('.item-name');
+      if (!nameEl) return;
+      const itemText = nameEl.textContent.replace(/[⭐*]/g,'').trim().toLowerCase();
+      const override = menuOverrides.find(m =>
+        m.item_name.toLowerCase().replace(/loke/,'loké').includes(itemText.split(' ')[0]) && itemText.length > 2
+      );
+      if (override && override.is_86d) {
+        item.classList.add('is-86d');
+        nameEl.innerHTML += '<span class="badge-86">86\'d</span>';
+      }
+      if (override && override.is_featured && !item.classList.contains('featured')) {
+        nameEl.innerHTML += '<span class="feat-star">⭐</span>';
+      }
+    });
+  }
+}
+
+loadTVData();
+// Refresh every 2 minutes
+setInterval(loadTVData, 120000);
+</script>
+</body>
+</html>

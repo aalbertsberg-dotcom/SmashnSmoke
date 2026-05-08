@@ -576,33 +576,6 @@
   }
   .footer-copy a { color: rgba(75,150,255,0.5); text-decoration: none; }
 
-
-  /* ── A³ FOOTER LOGO ── */
-  .footer-logo {
-    margin-bottom: 0.75rem;
-  }
-
-  .footer-logo a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-  }
-
-  .footer-logo img {
-    height: 42px;
-    width: auto;
-    opacity: 0.9;
-    filter: drop-shadow(0 0 12px rgba(75,150,255,0.35));
-    transition: all 0.25s ease;
-  }
-
-  .footer-logo img:hover {
-    opacity: 1;
-    transform: translateY(-2px) scale(1.03);
-    filter: drop-shadow(0 0 18px rgba(75,150,255,0.55));
-  }
-
   /* ── SCROLL REVEALS ── */
   .reveal {
     opacity: 0;
@@ -638,49 +611,6 @@
   color: rgba(75,150,255,0.9);
   font-weight: 600;
 }
-
-
-  /* ── FOOTER BUILDER CREDIT LOGO ── */
-  .footer-logo {
-    font-family: 'Bangers', cursive;
-    font-size: 1.4rem;
-    letter-spacing: 3px;
-    color: var(--white);
-    margin-bottom: 0.5rem;
-  }
-
-  .footer-logo span {
-    color: var(--blue-bright);
-  }
-
-  .footer-credit {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.35rem;
-    flex-wrap: wrap;
-  }
-
-  .builder-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    color: rgba(75,150,255,0.65);
-    text-decoration: none;
-  }
-
-  .builder-logo {
-    height: 18px;
-    width: auto;
-    opacity: 0.85;
-    filter: drop-shadow(0 0 6px rgba(75,150,255,0.35));
-    transition: opacity 0.2s, transform 0.2s;
-  }
-
-  .builder-link:hover .builder-logo {
-    opacity: 1;
-    transform: translateY(-1px);
-  }
 
 /* ── RESPONSIVE ── */
   @media (max-width: 768px) {
@@ -1129,6 +1059,129 @@
     transition: background 0.2s;
   }
   .lightbox-close:hover { background: var(--blue); }
+
+  /* ── TODAY'S BOARD (Special + Sauce) ── */
+  .todays-board {
+    position: relative; z-index: 2;
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fade-up 1s 0.6s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  .board-badge {
+    display: inline-flex; align-items: center; gap: 0.85rem;
+    background: rgba(27,95,204,0.12);
+    border: 1px solid rgba(27,95,204,0.35);
+    border-radius: 4px;
+    padding: 1rem 1.75rem;
+    min-width: 220px;
+  }
+  .board-badge.sauce-badge {
+    background: rgba(192,69,0,0.1);
+    border-color: rgba(192,69,0,0.35);
+  }
+  .board-divider { width:1px; height:32px; background:rgba(27,95,204,0.3); }
+  .sauce-divider { background:rgba(192,69,0,0.3); }
+  .board-label {
+    font-family:'Barlow Condensed',sans-serif; font-weight:700;
+    font-size:0.65rem; letter-spacing:3px; text-transform:uppercase;
+    color: var(--blue-bright);
+  }
+  .board-badge.sauce-badge .board-label { color: var(--orange-bright); }
+  .board-text {
+    font-family:'Bangers',cursive; font-size:1.6rem; letter-spacing:2px; color:var(--white);
+  }
+  .board-text em { color:var(--blue-bright); font-style:normal; }
+  .board-badge.sauce-badge .board-text em { color:var(--orange-bright); }
+  .board-sub {
+    font-family:'Barlow Condensed',sans-serif; font-size:0.65rem;
+    letter-spacing:2px; color:rgba(245,245,245,0.4); margin-top:0.15rem;
+    text-transform:uppercase;
+  }
+  @media(max-width:600px) {
+    .board-badge { width:100%; max-width:340px; }
+  }
+
+  /* ── SAUCE MENU SECTION ── */
+  .sauce-section {
+    margin-top: 1.5rem;
+    padding: 1.25rem 1.5rem;
+    background: rgba(192,69,0,0.06);
+    border: 1px solid rgba(192,69,0,0.2);
+    border-radius: 4px;
+  }
+  .sauce-section-title {
+    font-family:'Bangers',cursive; font-size:1.3rem; letter-spacing:2px;
+    color:var(--orange-bright); margin-bottom:0.75rem;
+  }
+  .sauce-row {
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0.55rem 0; border-bottom:1px solid rgba(255,255,255,0.05);
+  }
+  .sauce-row:last-child { border:none; }
+  .sauce-name { font-weight:600; font-size:0.9rem; }
+  .sauce-desc { font-size:0.75rem; color:rgba(245,245,245,0.5); margin-top:0.1rem; }
+  .heat-bar {
+    display:flex; gap:3px; align-items:center; flex-shrink:0;
+  }
+  .heat-pip {
+    width:10px; height:10px; border-radius:50%;
+    background:rgba(255,255,255,0.12);
+  }
+  .heat-pip.on { background:var(--orange); }
+  .heat-pip.hot { background:#CC1100; }
+  .sauce-side-note {
+    font-family:'Barlow Condensed',sans-serif; font-size:0.72rem;
+    letter-spacing:1px; color:rgba(245,245,245,0.35); margin-top:0.75rem;
+    font-style:italic;
+  }
+
+  /* ── RATE + FEEDBACK ── */
+  .feedback-section {
+    max-width: 1100px; margin: 0 auto;
+  }
+  .feedback-grid {
+    display:grid; grid-template-columns:1fr 1fr; gap:2px;
+    background:rgba(27,95,204,0.15); border:1px solid rgba(27,95,204,0.2);
+    border-radius:4px; overflow:hidden;
+  }
+  @media(max-width:768px){ .feedback-grid { grid-template-columns:1fr; } }
+  .feedback-card { background:var(--navy-mid); padding:2rem 2rem; }
+  .feedback-card h3 {
+    font-family:'Bangers',cursive; font-size:1.6rem; letter-spacing:2px;
+    color:var(--white); margin-bottom:0.5rem;
+  }
+  .feedback-card p { font-size:0.85rem; color:rgba(245,245,245,0.55); line-height:1.7; margin-bottom:1.25rem; }
+  .review-btns { display:flex; gap:0.75rem; flex-wrap:wrap; }
+  .review-btn {
+    font-family:'Barlow Condensed',sans-serif; font-weight:700;
+    font-size:0.8rem; letter-spacing:2px; text-transform:uppercase;
+    padding:0.75rem 1.5rem; border-radius:3px; text-decoration:none;
+    border:1px solid rgba(27,95,204,0.4); color:var(--blue-bright);
+    background:rgba(27,95,204,0.08); transition:all 0.2s;
+  }
+  .review-btn:hover { background:rgba(27,95,204,0.2); transform:translateY(-2px); }
+  .feedback-form input, .feedback-form textarea {
+    width:100%; background:var(--navy);
+    border:1px solid rgba(255,255,255,0.08); border-radius:3px;
+    padding:0.75rem 1rem; color:var(--white);
+    font-family:'Barlow',sans-serif; font-size:0.9rem;
+    outline:none; margin-bottom:0.75rem;
+    transition:border-color 0.2s;
+  }
+  .feedback-form input:focus, .feedback-form textarea:focus { border-color:var(--blue-bright); }
+  .feedback-form textarea { min-height:100px; resize:vertical; }
+  .feedback-submit {
+    font-family:'Barlow Condensed',sans-serif; font-weight:700;
+    font-size:0.82rem; letter-spacing:2px; text-transform:uppercase;
+    padding:0.75rem 2rem; background:var(--blue); color:white;
+    border:none; border-radius:3px; cursor:pointer;
+    transition:background 0.2s;
+  }
+  .feedback-submit:hover { background:var(--blue-bright); }
+
 </style>
 </head>
 <body>
@@ -1161,10 +1214,23 @@
     <span>Gulf Coast</span> &nbsp;·&nbsp; Wings &nbsp;·&nbsp; Smash Burgers &nbsp;·&nbsp; And Things
   </p>
 
-  <div class="hero-special-badge">
-    <span class="special-label">Today's Special</span>
-    <div class="special-divider"></div>
-    <span class="special-text"><em>Wing Wednesday</em> - Nashville Hot</span>
+  <div class="todays-board">
+    <!-- TODAY'S SPECIAL -->
+    <div class="board-badge">
+      <div>
+        <div class="board-label">Today's Special</div>
+        <div class="board-text"><em id="specialName">Wing Wednesday</em></div>
+        <div class="board-sub" id="specialDesc">Nashville Hot - bone-in or boneless</div>
+      </div>
+    </div>
+    <!-- SAUCE OF THE WEEK -->
+    <div class="board-badge sauce-badge">
+      <div>
+        <div class="board-label">Sauce of the Week</div>
+        <div class="board-text"><em id="sauceWeekName">Loké's Ground Zero</em></div>
+        <div class="board-sub" id="sauceWeekSub">While supplies last!</div>
+      </div>
+    </div>
   </div>
 
   <!-- TODAY'S SPECIAL PHOTO -->
@@ -1281,6 +1347,27 @@
             <span>Nashville Hot · Bold Flavor</span>
           </div>
           <p style="font-family:'Barlow Condensed',sans-serif;font-size:0.78rem;letter-spacing:1px;color:rgba(245,245,245,0.5);margin-bottom:0.75rem;">Medium heat by default &nbsp;·&nbsp; <span style="color:var(--orange-bright);font-weight:700;">+$2 Extra Hot</span> &nbsp;·&nbsp; Ask for Mild</p>
+          <!-- SAUCE MENU -->
+          <div class="sauce-section">
+            <p class="sauce-section-title">Our Sauces</p>
+            <div class="sauce-row">
+              <div><div class="sauce-name">Loké's Ground Zero</div><div class="sauce-desc">The original. Family recipe, Gulf Coast heat.</div></div>
+              <div class="heat-bar"><div class="heat-pip on"></div><div class="heat-pip on"></div><div class="heat-pip on"></div><div class="heat-pip"></div><div class="heat-pip"></div></div>
+            </div>
+            <div class="sauce-row">
+              <div><div class="sauce-name">The Inferno</div><div class="sauce-desc">Ground Zero turned all the way up.</div></div>
+              <div class="heat-bar"><div class="heat-pip hot"></div><div class="heat-pip hot"></div><div class="heat-pip hot"></div><div class="heat-pip hot"></div><div class="heat-pip hot"></div></div>
+            </div>
+            <div class="sauce-row">
+              <div><div class="sauce-name">Smoke &amp; Honey</div><div class="sauce-desc">BBQ base with a slow Gulf Coast burn.</div></div>
+              <div class="heat-bar"><div class="heat-pip on"></div><div class="heat-pip on"></div><div class="heat-pip"></div><div class="heat-pip"></div><div class="heat-pip"></div></div>
+            </div>
+            <div class="sauce-row">
+              <div><div class="sauce-name">The Dragon</div><div class="sauce-desc">Asian-style. Sweet heat with a bite.</div></div>
+              <div class="heat-bar"><div class="heat-pip on"></div><div class="heat-pip on"></div><div class="heat-pip on"></div><div class="heat-pip on"></div><div class="heat-pip"></div></div>
+            </div>
+            <p class="sauce-side-note">+ Any sauce available as a side with any item · $1</p>
+          </div>
           <ul class="board-items">
             <li><div><strong>6 PC</strong><small>Bone-in wings</small></div><b>$10</b></li>
             <li class="featured"><div><strong>10 PC</strong><small>Most popular</small></div><b>$15</b></li>
@@ -1304,6 +1391,7 @@
             <li><div><strong>LOK&Eacute; Burger*</strong><small>Bacon, lettuce, onions, LOK&Eacute; sauce</small></div><b>$15</b></li>
             <li><div><strong>Owens Stacker</strong><small>Double smash, bacon, onion ring, BBQ + smash sauce</small></div><b>$17</b></li>
             <li style="background:rgba(192,69,0,0.08);border-left:2px solid var(--orange);padding-left:0.75rem;"><div><strong style="color:var(--orange-bright);">+ $2 Nashville Hot</strong><small>Add Nashville hot sauce to any burger</small></div></li>
+            <li style="background:rgba(107,56,238,0.06);border-left:2px solid var(--purple);padding-left:0.75rem;"><div><strong style="color:#9B7EFF;">+ $2 Extra Patty</strong><small>Add an extra smash patty to any burger</small></div></li>
           </ul>
           <p style="font-family:'Barlow Condensed',sans-serif;font-size:0.72rem;letter-spacing:1px;color:rgba(245,245,245,0.35);margin-top:1rem;font-style:italic;">* The LOK&Eacute; Burger is named for the ones who made it worth building - Lucca, Keely, and Emilia Owens.</p>
         </article>
@@ -1543,29 +1631,64 @@
 </section>
 
 <!-- FOOTER -->
+
+<!-- RATE US + FEEDBACK -->
+<section style="padding:5rem 2rem;background:var(--navy-mid);">
+  <div class="feedback-section reveal">
+    <p class="section-label" style="text-align:center;">Your Voice Matters</p>
+    <h2 class="section-title reveal" style="text-align:center;margin-bottom:0.5rem;">Tell Us What You Think</h2>
+    <div class="section-rule reveal" style="margin:0 auto 2.5rem;"></div>
+    <div class="feedback-grid">
+      <!-- RATE US -->
+      <div class="feedback-card">
+        <h3>Rate Us</h3>
+        <p>Loved it? Let the Gulf Coast know. Reviews help us grow and help other people find us.</p>
+        <div class="review-btns">
+          <a href="#" class="review-btn" id="googleReviewBtn">⭐ Google Review</a>
+          <a href="#" class="review-btn" id="facebookReviewBtn">👍 Facebook Review</a>
+        </div>
+      </div>
+      <!-- WHAT WOULD YOU DO -->
+      <div class="feedback-card">
+        <h3>What Would You Do?</h3>
+        <p>You're the expert. Got an idea for a sauce, a special, a combo? We want to hear it. The best ideas might just show up on the menu.</p>
+        <form class="feedback-form" action="https://formspree.io/f/PLACEHOLDER" method="POST">
+          <input type="text" name="name" placeholder="Your name (optional)"/>
+          <input type="hidden" name="_subject" value="Smash N Smoke - Customer Idea"/>
+          <textarea name="idea" placeholder="Here's what I'd do..." required></textarea>
+          <button type="submit" class="feedback-submit">Submit Your Idea →</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
 <footer>
-  <div class="footer-logo">
-    SMASH <span>N</span> SMOKE
-  </div>
-
-  <div class="footer-tagline">
-    WINGS · SMASH BURGERS · DONE RIGHT
-  </div>
-
+  <p class="footer-logo">SMASH <span>N</span> SMOKE</p>
+  <p class="footer-tagline">Bold Flavor · Family Made · Done Right</p>
   <div class="footer-links">
     <a href="#specials">Specials</a>
     <a href="#menu">Menu</a>
     <a href="#find">Find Us</a>
     <a href="#about">Our Story</a>
   </div>
-
-  <div class="footer-copy footer-credit">
-    © Smash N Smoke · Built by
-    <a href="https://aalbertsberg.us" target="_blank" rel="noopener" class="builder-link">
-      <img src="logo.png" alt="A³ Logo" class="builder-logo">
-      <span>A³</span>
+  <div style="display:flex;align-items:center;justify-content:center;gap:0.6rem;margin-bottom:0.75rem;opacity:0.6;transition:opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.6">
+    <a href="https://aalbertsberg.us" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:0.6rem;text-decoration:none;color:rgba(240,244,255,0.7);">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="28" height="28" style="vertical-align:middle;border-radius:8px;" role="img" aria-label="A cubed mark">
+  <defs>
+    <linearGradient id="a3g" x1="82" y1="72" x2="430" y2="438" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#0284c7"/>
+    </linearGradient>
+  </defs>
+  <rect x="46" y="46" width="420" height="420" rx="116" fill="#081026" stroke="rgba(34,211,238,0.78)" stroke-width="18"/>
+  <path d="M145 355 239 122h45l94 233h-50l-18-49H213l-18 49h-50Zm84-91h65l-32-87-33 87Z" fill="url(#a3g)"/>
+  <text x="342" y="196" font-family="Outfit, Arial, sans-serif" font-size="94" font-weight="800" fill="#e8edf4">3</text>
+</svg>
+      <span style="font-family:'Barlow Condensed',sans-serif;font-size:0.8rem;letter-spacing:2px;text-transform:uppercase;">Built by A<sup style="font-size:0.55rem;vertical-align:super;">3</sup> Solutions</span>
     </a>
   </div>
+  <p class="footer-copy">© 2026 Smash N Smoke · Gulf Coast, MS</p>
 </footer>
 
 <script>
@@ -1603,7 +1726,11 @@ const specialMap = {
 };
 const todaySpecial = specialMap[today];
 if (todaySpecial) {
-  document.querySelector('.special-text').innerHTML = `<em>${todaySpecial[0]}</em> - ${todaySpecial[1]}`;
+  const nameEl = document.getElementById('specialName');
+  const descEl = document.getElementById('specialDesc');
+  if (nameEl) nameEl.textContent = todaySpecial[0];
+  if (descEl) descEl.textContent = todaySpecial[1];
+  window._todaySpecialName = todaySpecial[0];
   window._todaySpecialName = todaySpecial[0];
 }
 
@@ -1706,12 +1833,13 @@ async function sbFetch(table, filter='') {
 
 async function loadLiveData() {
   // Run all in parallel
-  const [specials, location, announcements, menuOverrides, socialLinks] = await Promise.all([
+  const [specials, location, announcements, menuOverrides, socialLinks, sauceWeek] = await Promise.all([
     sbFetch('specials', '?order=id'),
     sbFetch('location', `?date=eq.${new Date().toISOString().slice(0,10)}&order=updated_at.desc&limit=1`),
     sbFetch('announcements', '?is_active=eq.true&order=created_at.desc&limit=1'),
     sbFetch('menu_overrides', '?order=id'),
     sbFetch('social_links', '?order=id'),
+    sbFetch('sauce_of_week', '?is_active=eq.true&order=updated_at.desc&limit=1'),
   ]);
 
   // 1. UPDATE SPECIALS
@@ -1832,6 +1960,15 @@ async function loadLiveData() {
         nameEl.appendChild(tag);
       }
     });
+  }
+
+  // 5.5 SAUCE OF THE WEEK
+  if (sauceWeek && sauceWeek.length) {
+    const s = sauceWeek[0];
+    const nameEl = document.getElementById('sauceWeekName');
+    const subEl = document.getElementById('sauceWeekSub');
+    if (nameEl) nameEl.textContent = s.name;
+    if (subEl) subEl.textContent = s.is_86d ? 'Sold out - back soon!' : (s.tagline || 'While supplies last!');
   }
 
   // 5. SOCIAL LINKS
