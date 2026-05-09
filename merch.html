@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Loké's Sauce Co. — Merch</title>
-<meta name="description" content="Loké's Sauce Co. is Smash N Smoke's messy little side hustle. Sauce merch concepts, shirts, koozies, slogans, and messy flavor."/>
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23040810'/%3E%3Cpath d='M13 38c6-17 22-25 38-16-8 2-9 8-5 15-13-5-19 5-33 1z' fill='%23E07010'/%3E%3Ccircle cx='20' cy='20' r='4' fill='%23CC1800'/%3E%3Ccircle cx='47' cy='43' r='3' fill='%23FF6B00'/%3E%3C/svg%3E"/>
+<title>Loké's Sauce Co. — Smash N Smoke Merch</title>
+<meta name="description" content="Loké's Sauce Co. is Smash N Smoke's messy little side hustle. Concept merch drops, shirts, koozies, hats, stickers, and sauce attitude."/>
+<link rel="icon" href="favicon.ico"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;700&display=swap" rel="stylesheet"/>
@@ -17,13 +17,11 @@
   --panel:#0D1630;
   --cream:#F5ECD8;
   --white:#F0F4FF;
-  --dim:rgba(245,236,216,0.58);
-  --muted:rgba(245,236,216,0.32);
+  --dim:rgba(245,236,216,.62);
+  --muted:rgba(245,236,216,.34);
   --sauce:#E07010;
   --fire:#CC1800;
-  --hot:#FF2B00;
   --amber:#FF8C20;
-  --deep:#4D0800;
   --blue:#1B5FCC;
   --blue2:#4B96FF;
 }
@@ -37,16 +35,24 @@ body{
 }
 body::before{
   content:'';
-  position:fixed;inset:0;
+  position:fixed;
+  inset:0;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
-  opacity:.42;pointer-events:none;z-index:1000;
+  opacity:.42;
+  pointer-events:none;
+  z-index:1000;
 }
 a{color:inherit}
+img{max-width:100%;display:block}
 
-/* TOP */
 .topbar{
-  position:fixed;top:0;left:0;right:0;z-index:200;
-  display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:200;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
   padding:1rem 2rem;
   background:linear-gradient(to bottom,rgba(3,6,8,.98),rgba(3,6,8,.72),transparent);
   backdrop-filter:blur(4px);
@@ -83,8 +89,185 @@ a{color:inherit}
 }
 .back-btn:hover{background:rgba(27,95,204,.3)}
 
-/* SHARED */
-.section-head{text-align:center;position:relative;z-index:2;max-width:780px;margin:0 auto 3rem}
+.hero{
+  min-height:70vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:7rem 2rem 3.75rem;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse 68% 58% at 50% 40%,rgba(204,24,0,.16),transparent 68%),
+    radial-gradient(ellipse 38% 30% at 20% 80%,rgba(224,112,16,.10),transparent 62%),
+    radial-gradient(ellipse 38% 30% at 80% 20%,rgba(27,95,204,.08),transparent 62%),
+    var(--navy);
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:auto 0 0 0;
+  height:3px;
+  background:linear-gradient(to right,transparent,var(--fire),var(--sauce),var(--amber),transparent);
+  opacity:.65;
+}
+.hero-content{
+  position:relative;
+  z-index:3;
+  max-width:1180px;
+  width:100%;
+}
+.hero-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(300px,.65fr);
+  gap:2.25rem;
+  align-items:center;
+}
+.hero-copy{text-align:left}
+.hero-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:.75rem;
+  font-family:'Barlow Condensed',sans-serif;
+  color:var(--sauce);
+  letter-spacing:4px;
+  text-transform:uppercase;
+  font-weight:900;
+  font-size:.72rem;
+  margin-bottom:1rem;
+  padding:.55rem 1.1rem;
+  background:rgba(204,24,0,.12);
+  border:1px solid rgba(224,112,16,.28);
+}
+.hero-title{
+  font-family:'Bangers',cursive;
+  font-size:clamp(3.4rem,12vw,8.8rem);
+  line-height:.86;
+  letter-spacing:6px;
+  color:var(--cream);
+  text-shadow:5px 5px 0 rgba(204,24,0,.48),10px 10px 0 rgba(204,24,0,.14);
+}
+.hero-title span{color:var(--sauce)}
+.hero-sub{
+  font-family:'Permanent Marker',cursive;
+  font-size:clamp(1.25rem,4vw,2.2rem);
+  color:var(--cream);
+  margin-top:1.2rem;
+  text-shadow:2px 2px 0 rgba(204,24,0,.45);
+}
+.hero-desc{
+  max-width:600px;
+  margin:1.2rem 0 0;
+  color:var(--dim);
+  line-height:1.75;
+  font-size:.98rem;
+}
+.hero-actions{
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin-top:2rem;
+}
+.btn{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  font-size:.85rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:.9rem 1.6rem;
+  border-radius:4px;
+  text-decoration:none;
+}
+.btn-hot{background:var(--fire);border:1px solid rgba(255,140,32,.42);color:var(--cream)}
+.btn-blue{background:rgba(27,95,204,.12);border:1px solid rgba(75,150,255,.36);color:var(--blue2)}
+.btn:hover{transform:translateY(-2px)}
+
+.featured-drop{
+  background:linear-gradient(180deg,rgba(13,22,48,.96),rgba(5,8,16,.98));
+  border:1px solid rgba(224,112,16,.32);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 26px 70px rgba(0,0,0,.28),0 0 40px rgba(204,24,0,.08);
+  position:relative;
+}
+.featured-drop::before{
+  content:'FIRST DROP FAVORITE';
+  position:absolute;
+  top:14px;
+  left:14px;
+  z-index:8;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.62rem;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#140600;
+  background:var(--amber);
+  padding:.35rem .55rem;
+  border-radius:999px;
+  box-shadow:0 0 16px rgba(255,140,32,.26);
+}
+.featured-stage{
+  aspect-ratio:1/1;
+  min-height:315px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(224,112,16,.18),transparent 43%),
+    linear-gradient(135deg,#070c18 0%,#050914 62%,#020406 100%);
+}
+.featured-stage img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.featured-info{padding:1rem 1.1rem 1.15rem}
+.featured-info-top{
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  align-items:flex-start;
+}
+.featured-name{
+  font-family:'Bangers',cursive;
+  font-size:1.55rem;
+  letter-spacing:2px;
+}
+.featured-price{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  color:var(--amber);
+  letter-spacing:1px;
+  padding-top:.2rem;
+}
+.featured-saying{color:var(--sauce);font-style:italic;font-size:.84rem;margin-top:.4rem}
+
+.quick-strip{
+  position:relative;
+  z-index:5;
+  background:#030608;
+  border-top:1px solid rgba(224,112,16,.28);
+  border-bottom:1px solid rgba(224,112,16,.18);
+  text-align:center;
+  padding:1rem;
+}
+.quick-strip a{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--sauce);
+  text-decoration:none;
+  font-size:.85rem;
+}
+
+.section-head{
+  text-align:center;
+  position:relative;
+  z-index:2;
+  max-width:780px;
+  margin:0 auto 3rem;
+}
 .eyebrow{
   font-family:'Barlow Condensed',sans-serif;
   font-size:.72rem;
@@ -104,97 +287,6 @@ a{color:inherit}
 }
 .section-sub{margin-top:.8rem;color:var(--dim);line-height:1.7}
 
-/* SPLATTERS */
-.splatter-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden}
-.bg-splat{
-  position:absolute;
-  width:220px;
-  height:160px;
-  opacity:.28;
-  transform:rotate(var(--rot));
-  filter:drop-shadow(0 12px 22px rgba(0,0,0,.35));
-}
-.bg-splat svg{width:100%;height:100%;overflow:visible;display:block}
-.slogan-float{
-  position:absolute;
-  z-index:1;
-  pointer-events:none;
-  width:250px;height:180px;
-  display:flex;align-items:center;justify-content:center;
-  transform:rotate(var(--rot));
-  opacity:.85;
-}
-.slogan-float svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 12px 24px rgba(0,0,0,.42))}
-.slogan-float span{
-  position:relative;z-index:2;
-  font-family:'Permanent Marker',cursive;
-  color:var(--cream);
-  text-align:center;
-  line-height:1.05;
-  font-size:1.15rem;
-  text-shadow:2px 2px 5px rgba(0,0,0,.7);
-  padding:1rem;
-}
-.slogan-float.dark span{color:#140600;text-shadow:1px 1px 0 rgba(255,255,255,.15)}
-
-/* HERO */
-.hero{
-  min-height:76vh;
-  position:relative;
-  display:flex;align-items:center;justify-content:center;text-align:center;
-  padding:7.5rem 2rem 4rem;
-  overflow:hidden;
-  background:
-    radial-gradient(ellipse 68% 58% at 50% 40%,rgba(204,24,0,.16),transparent 68%),
-    radial-gradient(ellipse 38% 30% at 20% 80%,rgba(224,112,16,.10),transparent 62%),
-    radial-gradient(ellipse 38% 30% at 80% 20%,rgba(27,95,204,.08),transparent 62%),
-    var(--navy);
-}
-.hero::after{content:'';position:absolute;inset:auto 0 0 0;height:3px;background:linear-gradient(to right,transparent,var(--fire),var(--sauce),var(--amber),transparent);opacity:.65}
-.hero-content{position:relative;z-index:3;max-width:920px}
-.hero-kicker{
-  display:inline-flex;align-items:center;gap:.75rem;
-  font-family:'Barlow Condensed',sans-serif;
-  color:var(--sauce);letter-spacing:4px;text-transform:uppercase;font-weight:900;font-size:.72rem;
-  margin-bottom:1rem;padding:.55rem 1.1rem;
-  background:rgba(204,24,0,.12);border:1px solid rgba(224,112,16,.28)
-}
-.hero-title{
-  font-family:'Bangers',cursive;
-  font-size:clamp(3.4rem,12vw,8.8rem);
-  line-height:.86;letter-spacing:6px;
-  color:var(--cream);
-  text-shadow:5px 5px 0 rgba(204,24,0,.48),10px 10px 0 rgba(204,24,0,.14);
-}
-.hero-title span{color:var(--sauce)}
-.hero-sub{
-  font-family:'Permanent Marker',cursive;
-  font-size:clamp(1.25rem,4vw,2.2rem);
-  color:var(--cream);
-  margin-top:1.2rem;
-  text-shadow:2px 2px 0 rgba(204,24,0,.45)
-}
-.hero-desc{max-width:580px;margin:1.2rem auto 0;color:var(--dim);line-height:1.75;font-size:.98rem}
-.hero-actions{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:2rem}
-.btn{
-  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;
-  padding:.9rem 1.6rem;border-radius:4px;text-decoration:none
-}
-.btn-hot{background:var(--fire);border:1px solid rgba(255,140,32,.42);color:var(--cream)}
-.btn-blue{background:rgba(27,95,204,.12);border:1px solid rgba(75,150,255,.36);color:var(--blue2)}
-
-/* QUICK STRIP */
-.quick-strip{
-  position:relative;z-index:5;
-  background:#030608;border-top:1px solid rgba(224,112,16,.28);border-bottom:1px solid rgba(224,112,16,.18);
-  text-align:center;padding:1rem
-}
-.quick-strip a{
-  font-family:'Barlow Condensed',sans-serif;font-weight:900;letter-spacing:3px;text-transform:uppercase;
-  color:var(--sauce);text-decoration:none;font-size:.85rem
-}
-
-/* MERCH */
 .merch{
   position:relative;
   padding:5rem 2rem 6rem;
@@ -203,143 +295,49 @@ a{color:inherit}
     radial-gradient(ellipse 45% 35% at 75% 15%,rgba(204,24,0,.09),transparent 70%),
     var(--navy);
 }
-.merch::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--fire),var(--sauce),var(--amber),transparent)}
+.merch::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(to right,transparent,var(--fire),var(--sauce),var(--amber),transparent);
+}
+.how-it-works{
+  max-width:760px;
+  margin:-1.15rem auto 2.6rem;
+  position:relative;
+  z-index:5;
+  background:rgba(3,6,8,.48);
+  border:1px solid rgba(224,112,16,.18);
+  border-left:3px solid var(--sauce);
+  border-radius:8px;
+  padding:.95rem 1.15rem;
+  color:rgba(245,236,216,.68);
+  font-size:.92rem;
+  line-height:1.55;
+  text-align:center;
+}
+.how-it-works strong{color:var(--amber)}
 .drop-grid{
-  position:relative;z-index:5;
+  position:relative;
+  z-index:5;
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(265px,1fr));
-  gap:1.4rem;
-  max-width:1160px;margin:0 auto
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1.5rem;
+  max-width:1180px;
+  margin:0 auto;
 }
 .drop-card{
   background:linear-gradient(180deg,rgba(13,22,48,.96),rgba(5,8,16,.98));
   border:1px solid rgba(224,112,16,.18);
-  border-radius:10px;overflow:hidden;
-  box-shadow:0 20px 50px rgba(0,0,0,.22)
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 20px 50px rgba(0,0,0,.22);
+  position:relative;
 }
 .drop-card:hover{transform:translateY(-4px);border-color:rgba(224,112,16,.48)}
-.product-stage{
-  min-height:330px;
-  display:flex;align-items:center;justify-content:center;
-  padding:2rem;
-  background:radial-gradient(circle at center,rgba(224,112,16,.08),transparent 55%),#050914;
-  position:relative
-}
-.product-stage::before{content:'';position:absolute;inset:22px;border:1px solid rgba(245,236,216,.04);border-radius:8px}
-.product-svg{position:relative;z-index:2;width:min(100%,245px);height:auto;filter:drop-shadow(0 16px 24px rgba(0,0,0,.42))}
-.product-info{padding:1.25rem 1.35rem 1.4rem}
-.product-row{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}
-.product-name{
-  font-family:'Bangers',cursive;
-  font-size:1.55rem;letter-spacing:2px;color:var(--cream)
-}
-.product-price{
-  font-family:'Barlow Condensed',sans-serif;font-weight:900;color:var(--amber);letter-spacing:1px;white-space:nowrap;padding-top:.18rem
-}
-.product-price.soon{color:rgba(245,236,216,.42)}
-.product-saying{color:var(--sauce);font-style:italic;font-size:.84rem;margin:.45rem 0 .9rem;line-height:1.45}
-.slogan-select-wrap{margin:.85rem 0 1rem}
-.slogan-select-label{
-  display:block;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;
-  color:rgba(245,236,216,.38);margin-bottom:.35rem
-}
-.slogan-select{
-  width:100%;
-  background:#050914;color:var(--cream);
-  border:1px solid rgba(224,112,16,.28);
-  border-radius:4px;padding:.65rem .75rem;
-  font-family:'Barlow Condensed',sans-serif;font-size:.9rem;letter-spacing:.5px;outline:none
-}
-.product-meta{display:flex;gap:.5rem;flex-wrap:wrap;font-family:'Barlow Condensed',sans-serif;font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
-.pill{border:1px solid rgba(224,112,16,.22);background:rgba(224,112,16,.06);padding:.28rem .65rem;border-radius:999px}
-
-/* DISCLAIMER */
-.disclaimer{
-  position:relative;
-  padding:5rem 2rem;
-  background:var(--black);
-  overflow:hidden;
-  text-align:center
-}
-.disclaimer-box{
-  position:relative;z-index:4;
-  max-width:850px;margin:0 auto;
-  border:1px solid rgba(224,112,16,.25);
-  background:linear-gradient(135deg,rgba(204,24,0,.12),rgba(224,112,16,.06));
-  padding:2.2rem;border-radius:10px
-}
-.disclaimer-title{
-  font-family:'Bangers',cursive;font-size:clamp(2rem,6vw,4rem);letter-spacing:4px;color:var(--cream);text-shadow:3px 3px 0 rgba(204,24,0,.28)
-}
-.disclaimer-text{
-  font-family:'Permanent Marker',cursive;font-size:clamp(1rem,3vw,1.65rem);color:var(--sauce);margin-top:.75rem;line-height:1.35
-}
-
-/* NOTIFY */
-.notify{
-  position:relative;padding:5.5rem 2rem;background:var(--navy);text-align:center;overflow:hidden
-}
-.notify-card{position:relative;z-index:4;max-width:620px;margin:0 auto}
-.notify h2{font-family:'Bangers',cursive;font-size:clamp(2.2rem,7vw,4.5rem);letter-spacing:4px;color:var(--cream)}
-.notify p{color:var(--dim);line-height:1.7;margin:.75rem 0 1.6rem}
-.fake-form{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
-.fake-input{min-width:220px;flex:1;max-width:360px;background:#050914;border:1px solid rgba(224,112,16,.25);color:var(--dim);padding:.95rem 1rem;border-radius:4px;text-align:left}
-.fake-button{font-family:'Bangers',cursive;letter-spacing:3px;background:var(--fire);color:var(--cream);padding:.95rem 1.4rem;border-radius:4px;border:1px solid rgba(255,140,32,.42)}
-
-/* FOOTERS */
-.back-footer{
-  display:block;text-decoration:none;text-align:center;padding:3rem 2rem;
-  background:linear-gradient(135deg,#050810,#0A1428);border-top:2px solid rgba(27,95,204,.3)
-}
-.bf-label{font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:4px;text-transform:uppercase;color:rgba(75,150,255,.52)}
-.bf-name{margin-top:.35rem;font-family:'Bangers',cursive;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:5px;color:var(--white);text-shadow:0 0 28px rgba(27,95,204,.28)}
-.bf-name span{color:var(--blue2)}
-.bf-arrow{margin-top:.55rem;font-family:'Barlow Condensed',sans-serif;font-size:.82rem;letter-spacing:3px;text-transform:uppercase;color:rgba(75,150,255,.62)}
-.page-footer{
-  background:#020406;
-  padding:1.5rem 2rem;
-  text-align:center;
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(245,236,216,.18)
-}
-.page-footer-logo{display:inline-flex;align-items:center;justify-content:center;margin-bottom:.9rem}
-.page-footer-logo img{height:46px;width:auto;border-radius:6px;opacity:.92;filter:drop-shadow(0 0 12px rgba(75,150,255,.35))}
-.page-footer a{color:rgba(75,150,255,.55);text-decoration:none}
-
-/* CLICK SPLAT */
-.click-splat{
-  position:fixed;z-index:9998;pointer-events:none;width:90px;height:90px;transform:translate(-50%,-50%) scale(.15);opacity:.85;animation:pop .75s ease forwards
-}
-@keyframes pop{
-  0%{opacity:.9;transform:translate(-50%,-50%) scale(.15) rotate(0deg)}
-  80%{opacity:.7;transform:translate(-50%,-50%) scale(1) rotate(20deg)}
-  100%{opacity:0;transform:translate(-50%,-50%) scale(1.18) rotate(28deg)}
-}
-
-@media(max-width:900px){
-  .slogan-float{opacity:.2;width:170px!important;height:125px!important}
-  .slogan-float span{display:none}
-}
-@media(max-width:640px){
-  .topbar{padding:.85rem 1rem}
-  .brand-sub{display:none}
-  .back-btn{font-size:.68rem;padding:.58rem .8rem}
-  .hero{min-height:70vh;padding:7rem 1.2rem 4rem}
-  .hero-title{letter-spacing:4px}
-  .hero-actions{flex-direction:column;max-width:280px;margin-left:auto;margin-right:auto}
-  .btn{width:100%}
-  .merch,.disclaimer,.notify{padding-left:1.1rem;padding-right:1.1rem}
-}
-
-/* ── V5 REALER MERCH MOCKUPS ── */
-.drop-grid {
-  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-}
-.drop-card {
-  position: relative;
-}
-.drop-card::after {
-  content: 'CONCEPT MOCKUP';
+.drop-card::after{
+  content:'CONCEPT MOCKUP';
   position:absolute;
   top:14px;
   right:14px;
@@ -347,202 +345,261 @@ a{color:inherit}
   font-family:'Barlow Condensed',sans-serif;
   font-size:.58rem;
   letter-spacing:2px;
-  color:rgba(245,236,216,.38);
-  border:1px solid rgba(245,236,216,.08);
-  background:rgba(3,6,8,.5);
+  color:rgba(245,236,216,.45);
+  border:1px solid rgba(245,236,216,.10);
+  background:rgba(3,6,8,.58);
   padding:.22rem .45rem;
   border-radius:999px;
 }
-.product-stage {
-  min-height: 370px;
+.drop-card.featured-card{
+  border-color:rgba(255,140,32,.35);
+}
+.drop-card.featured-card::after{
+  content:'FIRST DROP FAVORITE';
+  background:var(--amber);
+  color:#140600;
+  border-color:rgba(255,140,32,.65);
+  font-weight:900;
+}
+.product-stage{
+  aspect-ratio:1/1;
   background:
-    radial-gradient(circle at 50% 42%, rgba(224,112,16,.16), transparent 42%),
-    linear-gradient(135deg, #070c18 0%, #050914 58%, #020406 100%);
+    radial-gradient(circle at 50% 42%,rgba(224,112,16,.12),transparent 43%),
+    linear-gradient(135deg,#070c18 0%,#050914 62%,#020406 100%);
+  position:relative;
+  overflow:hidden;
 }
-.product-stage::before {
-  inset: 18px;
-  border-color: rgba(75,150,255,.08);
+.product-stage::before{
+  content:'';
+  position:absolute;
+  inset:18px;
+  border:1px solid rgba(75,150,255,.08);
+  border-radius:10px;
+  z-index:2;
+  pointer-events:none;
 }
-.product-svg {
-  width: min(100%, 285px);
+.product-stage img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .25s ease, filter .25s ease;
 }
-.mock-shadow {
-  filter: drop-shadow(0 26px 26px rgba(0,0,0,.62));
+.drop-card:hover .product-stage img{transform:scale(1.035);filter:brightness(1.08)}
+.product-info{padding:1.25rem 1.35rem 1.4rem}
+.product-row{
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  align-items:flex-start;
 }
-.print-text {
+.product-name{
+  font-family:'Bangers',cursive;
+  font-size:1.55rem;
+  letter-spacing:2px;
+  color:var(--cream);
+}
+.product-price{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  color:var(--amber);
+  letter-spacing:1px;
+  white-space:nowrap;
+  padding-top:.18rem;
+}
+.product-price.soon{color:rgba(245,236,216,.42)}
+.product-saying{
+  color:var(--sauce);
+  font-style:italic;
+  font-size:.84rem;
+  margin:.45rem 0 .9rem;
+  line-height:1.45;
+}
+.slogan-select-wrap{margin:.85rem 0 1rem}
+.slogan-select-label{
+  display:block;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.68rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:rgba(245,236,216,.38);
+  margin-bottom:.35rem;
+}
+.slogan-select{
+  width:100%;
+  background:#050914;
+  color:var(--cream);
+  border:1px solid rgba(224,112,16,.28);
+  border-radius:4px;
+  padding:.65rem .75rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.9rem;
+  letter-spacing:.5px;
+  outline:none;
+}
+.product-meta{
+  display:flex;
+  gap:.5rem;
+  flex-wrap:wrap;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.66rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.pill{
+  border:1px solid rgba(224,112,16,.22);
+  background:rgba(224,112,16,.06);
+  padding:.28rem .65rem;
+  border-radius:999px;
+}
+
+.disclaimer{
+  position:relative;
+  padding:5rem 2rem;
+  background:var(--black);
+  overflow:hidden;
+  text-align:center;
+}
+.disclaimer-box{
+  position:relative;
+  z-index:4;
+  max-width:850px;
+  margin:0 auto;
+  border:1px solid rgba(224,112,16,.25);
+  background:linear-gradient(135deg,rgba(204,24,0,.12),rgba(224,112,16,.06));
+  padding:2.2rem;
+  border-radius:10px;
+}
+.disclaimer-title{
+  font-family:'Bangers',cursive;
+  font-size:clamp(2rem,6vw,4rem);
+  letter-spacing:4px;
+  color:var(--cream);
+  text-shadow:3px 3px 0 rgba(204,24,0,.28);
+}
+.disclaimer-text{
   font-family:'Permanent Marker',cursive;
-  text-anchor:middle;
-  dominant-baseline:middle;
+  font-size:clamp(1rem,3vw,1.65rem);
+  color:var(--sauce);
+  margin-top:.75rem;
+  line-height:1.35;
 }
+.notify{
+  position:relative;
+  padding:5.5rem 2rem;
+  background:var(--navy);
+  text-align:center;
+  overflow:hidden;
+}
+.notify-card{
+  position:relative;
+  z-index:4;
+  max-width:620px;
+  margin:0 auto;
+}
+.notify h2{
+  font-family:'Bangers',cursive;
+  font-size:clamp(2.2rem,7vw,4.5rem);
+  letter-spacing:4px;
+  color:var(--cream);
+}
+.notify p{color:var(--dim);line-height:1.7;margin:.75rem 0 1.6rem}
+.fake-form{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+.fake-input{
+  min-width:220px;
+  flex:1;
+  max-width:360px;
+  background:#050914;
+  border:1px solid rgba(224,112,16,.25);
+  color:var(--dim);
+  padding:.95rem 1rem;
+  border-radius:4px;
+  text-align:left;
+}
+.fake-button{
+  font-family:'Bangers',cursive;
+  letter-spacing:3px;
+  background:var(--fire);
+  color:var(--cream);
+  padding:.95rem 1.4rem;
+  border-radius:4px;
+  border:1px solid rgba(255,140,32,.42);
+}
+.back-footer{
+  display:block;
+  text-decoration:none;
+  text-align:center;
+  padding:3rem 2rem;
+  background:linear-gradient(135deg,#050810,#0A1428);
+  border-top:2px solid rgba(27,95,204,.3);
+}
+.bf-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.68rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:rgba(75,150,255,.52);
+}
+.bf-name{
+  margin-top:.35rem;
+  font-family:'Bangers',cursive;
+  font-size:clamp(2rem,5vw,3.5rem);
+  letter-spacing:5px;
+  color:var(--white);
+  text-shadow:0 0 28px rgba(27,95,204,.28);
+}
+.bf-name span{color:var(--blue2)}
+.bf-arrow{
+  margin-top:.55rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.82rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:rgba(75,150,255,.62);
+}
+.page-footer{
+  background:#020406;
+  padding:1.5rem 2rem;
+  text-align:center;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.7rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:rgba(245,236,216,.18);
+}
+.page-footer-logo{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  margin-bottom:.9rem;
+}
+.page-footer-logo img{
+  height:46px;
+  width:auto;
+  border-radius:6px;
+  opacity:.92;
+  filter:drop-shadow(0 0 12px rgba(75,150,255,.35));
+}
+.page-footer a{color:rgba(75,150,255,.55);text-decoration:none}
 
-
-/* ── V6 POLISH: TIGHTER HERO + FEATURED DROP + CLEANER MOCKUP UX ── */
-.hero {
-  min-height: 68vh !important;
-  padding: 7rem 2rem 3.25rem !important;
+@media(max-width:980px){
+  .hero-layout{grid-template-columns:1fr}
+  .hero-copy{text-align:center}
+  .hero-desc{margin-left:auto;margin-right:auto}
+  .hero-actions{justify-content:center}
+  .featured-drop{max-width:420px;margin:0 auto}
 }
-.hero-content {
-  max-width: 1180px !important;
-  width: 100%;
+@media(max-width:640px){
+  .topbar{padding:.85rem 1rem}
+  .brand-sub{display:none}
+  .back-btn{font-size:.68rem;padding:.58rem .8rem}
+  .hero{min-height:auto;padding:6.5rem 1.1rem 2.5rem}
+  .hero-title{letter-spacing:4px}
+  .hero-actions{flex-direction:column;max-width:280px;margin-left:auto;margin-right:auto}
+  .btn{width:100%}
+  .merch,.disclaimer,.notify{padding-left:1.1rem;padding-right:1.1rem}
+  .drop-grid{grid-template-columns:1fr}
 }
-.hero-layout {
-  position: relative;
-  z-index: 3;
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.62fr);
-  gap: 2rem;
-  align-items: center;
-}
-.hero-copy {
-  text-align: left;
-}
-.hero-copy .hero-actions {
-  justify-content: flex-start;
-}
-.featured-drop {
-  background: linear-gradient(180deg, rgba(13,22,48,.96), rgba(5,8,16,.98));
-  border: 1px solid rgba(224,112,16,.28);
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 26px 70px rgba(0,0,0,.28), 0 0 40px rgba(204,24,0,.08);
-  position: relative;
-}
-.featured-drop::before {
-  content: 'FIRST DROP FAVORITE';
-  position: absolute;
-  top: 14px;
-  left: 14px;
-  z-index: 8;
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: .62rem;
-  font-weight: 900;
-  letter-spacing: 2px;
-  color: #140600;
-  background: var(--amber);
-  padding: .35rem .55rem;
-  border-radius: 999px;
-  box-shadow: 0 0 16px rgba(255,140,32,.26);
-}
-.featured-stage {
-  min-height: 315px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background:
-    radial-gradient(circle at 50% 42%, rgba(224,112,16,.18), transparent 43%),
-    linear-gradient(135deg, #070c18 0%, #050914 62%, #020406 100%);
-  padding: 1.4rem;
-}
-.featured-stage .product-svg {
-  width: min(100%, 245px);
-}
-.featured-info {
-  padding: 1rem 1.1rem 1.15rem;
-}
-.featured-info-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  align-items: flex-start;
-}
-.featured-name {
-  font-family: 'Bangers', cursive;
-  font-size: 1.55rem;
-  letter-spacing: 2px;
-  color: var(--cream);
-}
-.featured-price {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900;
-  color: var(--amber);
-  letter-spacing: 1px;
-  padding-top: .2rem;
-}
-.featured-saying {
-  color: var(--sauce);
-  font-style: italic;
-  font-size: .84rem;
-  margin-top: .4rem;
-}
-.how-it-works {
-  max-width: 760px;
-  margin: -1.15rem auto 2.6rem;
-  position: relative;
-  z-index: 5;
-  background: rgba(3,6,8,.48);
-  border: 1px solid rgba(224,112,16,.18);
-  border-left: 3px solid var(--sauce);
-  border-radius: 8px;
-  padding: .95rem 1.15rem;
-  color: rgba(245,236,216,.68);
-  font-size: .92rem;
-  line-height: 1.55;
-  text-align: center;
-}
-.how-it-works strong {
-  color: var(--amber);
-}
-.slogan-select-label::after {
-  content: ' concept';
-}
-.drop-card.featured-card::after {
-  content: 'FIRST DROP FAVORITE';
-  background: var(--amber);
-  color: #140600;
-  border-color: rgba(255,140,32,.65);
-  font-weight: 900;
-}
-.slogan-float {
-  opacity: .62 !important;
-}
-.slogan-float.hero-a,
-.slogan-float.hero-b,
-.slogan-float.merch-c {
-  display: none;
-}
-.slogan-float.merch-a {
-  left: 1.5% !important;
-  top: 19% !important;
-  opacity: .18 !important;
-}
-.slogan-float.merch-b {
-  right: 2% !important;
-  top: 63% !important;
-  opacity: .20 !important;
-}
-.drop-card:nth-child(1) { border-color: rgba(255,140,32,.35); }
-@media(max-width: 980px) {
-  .hero-layout {
-    grid-template-columns: 1fr;
-  }
-  .hero-copy {
-    text-align: center;
-  }
-  .hero-copy .hero-actions {
-    justify-content: center;
-  }
-  .featured-drop {
-    max-width: 360px;
-    margin: 0 auto;
-  }
-}
-@media(max-width:640px) {
-  .hero {
-    min-height: auto !important;
-    padding: 6.5rem 1.1rem 2.5rem !important;
-  }
-  .featured-stage {
-    min-height: 260px;
-  }
-  .featured-stage .product-svg {
-    width: min(100%, 210px);
-  }
-  .how-it-works {
-    margin: -0.5rem 1.1rem 2rem;
-    text-align: left;
-  }
-}
-
 </style>
 </head>
 <body>
@@ -556,24 +613,13 @@ a{color:inherit}
 </nav>
 
 <section class="hero">
-  <div class="splatter-layer" id="heroSplatters"></div>
-
-  <div class="slogan-float hero-a" style="left:4%;top:21%;--rot:-11deg">
-    <svg class="generated-splat" data-seed="808" data-color="#CC1800" data-dots="#FF8C20" data-spikes="34"></svg>
-    <span>MY SAUCE.<br>YOUR FACE.</span>
-  </div>
-  <div class="slogan-float hero-b dark" style="right:5%;top:55%;--rot:8deg">
-    <svg class="generated-splat" data-seed="809" data-color="#E07010" data-dots="#FF8C20" data-spikes="30"></svg>
-    <span>SAUCE<br>HAPPENS.</span>
-  </div>
-
   <div class="hero-content">
     <div class="hero-layout">
       <div class="hero-copy">
         <div class="hero-kicker">Merch Concept Drop</div>
         <h1 class="hero-title">LOKÉ'S<br><span>SAUCE</span> CO.</h1>
         <div class="hero-sub">Smash N Smoke’s messy little side hustle.</div>
-        <p class="hero-desc">Same bold truck. Different kind of trouble. Sauce jokes, koozies, shirts, and loud little ideas that people remember.</p>
+        <p class="hero-desc">Same bold truck. Different kind of trouble. Sauce jokes, koozies, shirts, hats, stickers, and loud little ideas that people remember.</p>
         <div class="hero-actions">
           <a class="btn btn-hot" href="#drops">See the Merch</a>
           <a class="btn btn-blue" href="index.html">Back to Smash N Smoke</a>
@@ -582,31 +628,7 @@ a{color:inherit}
 
       <aside class="featured-drop" aria-label="Featured merch concept">
         <div class="featured-stage">
-          <svg class="product-svg mock-shadow" viewBox="0 0 420 460" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="teeBlackV5" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0" stop-color="#252525"/><stop offset=".38" stop-color="#0e0e0e"/><stop offset=".72" stop-color="#161616"/><stop offset="1" stop-color="#050505"/>
-    </linearGradient>
-    <radialGradient id="printGlow1" cx=".5" cy=".45" r=".55">
-      <stop offset="0" stop-color="#E07010" stop-opacity=".95"/><stop offset="1" stop-color="#7A1000" stop-opacity=".95"/>
-    </radialGradient>
-    <filter id="softShadowTee" x="-30%" y="-30%" width="160%" height="160%">
-      <feDropShadow dx="0" dy="20" stdDeviation="16" flood-color="#000" flood-opacity=".55"/>
-    </filter>
-  </defs>
-  <ellipse cx="210" cy="420" rx="132" ry="18" fill="#000" opacity=".45"/>
-  <path filter="url(#softShadowTee)" d="M126 42 Q160 18 210 18 Q260 18 294 42 L374 111 L323 152 L302 118 L302 388 Q302 414 276 414 L144 414 Q118 414 118 388 L118 118 L97 152 L46 111 Z" fill="url(#teeBlackV5)"/>
-  <path d="M158 43 Q180 68 210 70 Q240 68 262 43" fill="none" stroke="#2e2e2e" stroke-width="7"/>
-  <path d="M126 50 Q160 74 210 76 Q260 74 294 50" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="3"/>
-  <path d="M118 118 L97 152 L46 111" fill="rgba(255,255,255,.04)"/>
-  <path d="M302 118 L323 152 L374 111" fill="rgba(255,255,255,.04)"/>
-  <path d="M128 122 Q206 96 282 124 Q326 160 293 218 Q315 278 232 278 Q198 318 130 284 Q78 252 104 198 Q72 155 128 122Z" fill="url(#printGlow1)"/>
-  <circle cx="95" cy="145" r="9" fill="#CC1800"/><circle cx="312" cy="130" r="7" fill="#FF8C20"/><circle cx="301" cy="259" r="10" fill="#E07010"/><circle cx="110" cy="295" r="6" fill="#CC1800"/>
-  <text class="mockup-line-1 print-text" x="210" y="174" font-size="28" fill="#F5ECD8">MY SAUCE.</text>
-  <text class="mockup-line-2 print-text" x="210" y="211" font-size="28" fill="#FF8C20">YOUR FACE.</text>
-  <text class="mockup-line-3 print-text" x="210" y="246" font-size="18" fill="#F5ECD8"></text>
-  <text x="210" y="326" text-anchor="middle" font-family="Bangers, cursive" font-size="22" letter-spacing="3" fill="rgba(245,236,216,.72)">LOKÉ'S SAUCE CO.</text>
-</svg>
+          <img src="images/merch/face-sauce-tee-black.png" alt="Black Face Sauce Tee concept">
         </div>
         <div class="featured-info">
           <div class="featured-info-top">
@@ -621,29 +643,14 @@ a{color:inherit}
 </section>
 
 <section class="quick-strip">
-  <a href="#drops">↓ Jump to Merch Placeholders ↓</a>
+  <a href="#drops">↓ View the Concept Drops ↓</a>
 </section>
 
 <section class="merch" id="drops">
-  <div class="splatter-layer" id="merchSplatters"></div>
-
-  <div class="slogan-float" style="left:3%;top:8%;--rot:10deg">
-    <svg class="generated-splat" data-seed="810" data-color="#8B1400" data-dots="#CC1800" data-spikes="32"></svg>
-    <span>GET MY<br>SAUCE ON<br>YOUR FACE</span>
-  </div>
-  <div class="slogan-float dark" style="right:4%;top:39%;--rot:-7deg">
-    <svg class="generated-splat" data-seed="811" data-color="#FF6B00" data-dots="#E07010" data-spikes="36"></svg>
-    <span>BOLD FLAVOR.<br>MESSY FACE.</span>
-  </div>
-  <div class="slogan-float" style="left:43%;bottom:1%;--rot:5deg;opacity:.45">
-    <svg class="generated-splat" data-seed="812" data-color="#6B0A00" data-dots="#CC1800" data-spikes="28"></svg>
-    <span>ASK ME<br>ABOUT MY<br>SAUCE.</span>
-  </div>
-
   <div class="section-head">
     <div class="eyebrow">Product Drops</div>
     <h2 class="section-title">Wear The Sauce</h2>
-    <p class="section-sub">Placeholder concepts with more realistic merch staging. Choose a slogan per item below.</p>
+    <p class="section-sub">Realistic concept mockups for the first merch run. These can later be replaced with Printify, Printful, Shopify, Square, or real product photos.</p>
   </div>
 
   <div class="how-it-works"><strong>How this works:</strong> Pick the item. Pick the saying. We’ll print the mess later. These are concept placeholders, not live checkout yet.</div>
@@ -652,39 +659,17 @@ a{color:inherit}
 
     <article class="drop-card featured-card">
       <div class="product-stage">
-<svg class="product-svg mock-shadow" viewBox="0 0 420 460" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="teeBlackV5" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0" stop-color="#252525"/><stop offset=".38" stop-color="#0e0e0e"/><stop offset=".72" stop-color="#161616"/><stop offset="1" stop-color="#050505"/>
-    </linearGradient>
-    <radialGradient id="printGlow1" cx=".5" cy=".45" r=".55">
-      <stop offset="0" stop-color="#E07010" stop-opacity=".95"/><stop offset="1" stop-color="#7A1000" stop-opacity=".95"/>
-    </radialGradient>
-    <filter id="softShadowTee" x="-30%" y="-30%" width="160%" height="160%">
-      <feDropShadow dx="0" dy="20" stdDeviation="16" flood-color="#000" flood-opacity=".55"/>
-    </filter>
-  </defs>
-  <ellipse cx="210" cy="420" rx="132" ry="18" fill="#000" opacity=".45"/>
-  <path filter="url(#softShadowTee)" d="M126 42 Q160 18 210 18 Q260 18 294 42 L374 111 L323 152 L302 118 L302 388 Q302 414 276 414 L144 414 Q118 414 118 388 L118 118 L97 152 L46 111 Z" fill="url(#teeBlackV5)"/>
-  <path d="M158 43 Q180 68 210 70 Q240 68 262 43" fill="none" stroke="#2e2e2e" stroke-width="7"/>
-  <path d="M126 50 Q160 74 210 76 Q260 74 294 50" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="3"/>
-  <path d="M118 118 L97 152 L46 111" fill="rgba(255,255,255,.04)"/>
-  <path d="M302 118 L323 152 L374 111" fill="rgba(255,255,255,.04)"/>
-  <path d="M128 122 Q206 96 282 124 Q326 160 293 218 Q315 278 232 278 Q198 318 130 284 Q78 252 104 198 Q72 155 128 122Z" fill="url(#printGlow1)"/>
-  <circle cx="95" cy="145" r="9" fill="#CC1800"/><circle cx="312" cy="130" r="7" fill="#FF8C20"/><circle cx="301" cy="259" r="10" fill="#E07010"/><circle cx="110" cy="295" r="6" fill="#CC1800"/>
-  <text class="mockup-line-1 print-text" x="210" y="174" font-size="28" fill="#F5ECD8">MY SAUCE.</text>
-  <text class="mockup-line-2 print-text" x="210" y="211" font-size="28" fill="#FF8C20">YOUR FACE.</text>
-  <text class="mockup-line-3 print-text" x="210" y="246" font-size="18" fill="#F5ECD8"></text>
-  <text x="210" y="326" text-anchor="middle" font-family="Bangers, cursive" font-size="22" letter-spacing="3" fill="rgba(245,236,216,.72)">LOKÉ'S SAUCE CO.</text>
-</svg>
-</div>
+        <img src="images/merch/face-sauce-tee-black.png" alt="Black graphic tee with My sauce Your face design">
+      </div>
       <div class="product-info">
-        <div class="product-row"><div class="product-name">Face Sauce Tee</div><div class="product-price">$28</div></div>
+        <div class="product-row">
+          <div class="product-name">Face Sauce Tee</div>
+          <div class="product-price">$28</div>
+        </div>
         <div class="product-saying">“My sauce. Your face.”</div>
         <div class="slogan-select-wrap">
-          <label class="slogan-select-label">Choose slogan</label>
+          <label class="slogan-select-label">Choose slogan concept</label>
           <select class="slogan-select">
-            <option>My sauce. Your face.</option>
             <option>My sauce. Your face.</option>
             <option>Everyone loves my sauce on their face.</option>
             <option>Get my sauce on your face.</option>
@@ -698,41 +683,47 @@ a{color:inherit}
       </div>
     </article>
 
+    <article class="drop-card">
+      <div class="product-stage">
+        <img src="images/merch/sauce-impact-tee-cream.png" alt="Cream tee with Get my sauce on your face design">
+      </div>
+      <div class="product-info">
+        <div class="product-row">
+          <div class="product-name">Sauce Impact Tee</div>
+          <div class="product-price soon">Coming Soon</div>
+        </div>
+        <div class="product-saying">“Get my sauce on your face.”</div>
+        <div class="slogan-select-wrap">
+          <label class="slogan-select-label">Choose slogan concept</label>
+          <select class="slogan-select">
+            <option>Get my sauce on your face.</option>
+            <option>My sauce. Your face.</option>
+            <option>Everyone loves my sauce on their face.</option>
+            <option>Bold flavor. Messy face.</option>
+            <option>Sauce happens.</option>
+            <option>Face first. Sauce second.</option>
+            <option>Ask me about my sauce.</option>
+          </select>
+        </div>
+        <div class="product-meta"><span class="pill">Cream Tee</span><span class="pill">Sauce Splat</span><span class="pill">Drop Later</span></div>
+      </div>
+    </article>
 
     <article class="drop-card">
       <div class="product-stage">
-<svg class="product-svg mock-shadow" viewBox="0 0 360 460" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="koozieBlkV5" x1="0" x2="1">
-      <stop offset="0" stop-color="#040404"/><stop offset=".18" stop-color="#222"/><stop offset=".55" stop-color="#090909"/><stop offset="1" stop-color="#010101"/>
-    </linearGradient>
-    <radialGradient id="kooziePrintV5" cx=".5" cy=".5" r=".6">
-      <stop offset="0" stop-color="#FF8C20"/><stop offset="1" stop-color="#CC1800"/>
-    </radialGradient>
-  </defs>
-  <ellipse cx="180" cy="416" rx="98" ry="18" fill="#000" opacity=".55"/>
-  <ellipse cx="180" cy="64" rx="96" ry="28" fill="#272727"/>
-  <rect x="84" y="64" width="192" height="300" rx="22" fill="url(#koozieBlkV5)"/>
-  <ellipse cx="180" cy="364" rx="96" ry="28" fill="#040404"/>
-  <path d="M96 99 C139 77 221 81 264 104" stroke="rgba(255,255,255,.11)" stroke-width="7" fill="none"/>
-  <rect x="100" y="100" width="160" height="220" rx="14" fill="rgba(255,255,255,.03)"/>
-  <path d="M122 142 C160 111 226 121 241 165 C276 194 244 255 189 239 C160 277 103 248 124 198 C93 180 91 155 122 142Z" fill="url(#kooziePrintV5)"/>
-  <circle cx="105" cy="136" r="7" fill="#CC1800"/><circle cx="256" cy="139" r="6" fill="#FF8C20"/><circle cx="249" cy="255" r="8" fill="#E07010"/>
-  <text class="mockup-line-1 print-text" x="180" y="174" font-size="22" fill="#160600">EVERYONE</text>
-  <text class="mockup-line-2 print-text" x="180" y="205" font-size="22" fill="#160600">LOVES MY</text>
-  <text class="mockup-line-3 print-text" x="180" y="236" font-size="22" fill="#160600">SAUCE</text>
-  <text x="180" y="305" text-anchor="middle" font-family="Bangers, cursive" font-size="19" letter-spacing="2" fill="#E07010">LOKÉ'S SAUCE CO.</text>
-</svg>
-</div>
+        <img src="images/merch/messy-face-koozie-black.png" alt="Black koozie with Everyone loves my sauce design">
+      </div>
       <div class="product-info">
-        <div class="product-row"><div class="product-name">Messy Face Koozie</div><div class="product-price">$8</div></div>
+        <div class="product-row">
+          <div class="product-name">Messy Face Koozie</div>
+          <div class="product-price">$8</div>
+        </div>
         <div class="product-saying">“Everyone loves my sauce on their face.”</div>
         <div class="slogan-select-wrap">
-          <label class="slogan-select-label">Choose slogan</label>
+          <label class="slogan-select-label">Choose slogan concept</label>
           <select class="slogan-select">
             <option>Everyone loves my sauce on their face.</option>
             <option>My sauce. Your face.</option>
-            <option>Everyone loves my sauce on their face.</option>
             <option>Get my sauce on your face.</option>
             <option>Bold flavor. Messy face.</option>
             <option>Sauce happens.</option>
@@ -744,116 +735,44 @@ a{color:inherit}
       </div>
     </article>
 
-
     <article class="drop-card">
       <div class="product-stage">
-<svg class="product-svg mock-shadow" viewBox="0 0 420 460" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="teeCreamV5" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0" stop-color="#fff4dd"/><stop offset=".5" stop-color="#f0dfbd"/><stop offset="1" stop-color="#d7c09a"/>
-    </linearGradient>
-    <filter id="softShadowCream" x="-30%" y="-30%" width="160%" height="160%">
-      <feDropShadow dx="0" dy="20" stdDeviation="16" flood-color="#000" flood-opacity=".55"/>
-    </filter>
-  </defs>
-  <ellipse cx="210" cy="420" rx="132" ry="18" fill="#000" opacity=".45"/>
-  <path filter="url(#softShadowCream)" d="M126 42 Q160 18 210 18 Q260 18 294 42 L374 111 L323 152 L302 118 L302 388 Q302 414 276 414 L144 414 Q118 414 118 388 L118 118 L97 152 L46 111 Z" fill="url(#teeCreamV5)"/>
-  <path d="M158 43 Q180 68 210 70 Q240 68 262 43" fill="none" stroke="#ccb68f" stroke-width="7"/>
-  <path d="M128 122 Q206 96 282 124 Q326 160 293 218 Q315 278 232 278 Q198 318 130 284 Q78 252 104 198 Q72 155 128 122Z" fill="#CC1800"/>
-  <circle cx="95" cy="145" r="9" fill="#E07010"/><circle cx="312" cy="130" r="7" fill="#FF8C20"/><circle cx="301" cy="259" r="10" fill="#E07010"/><circle cx="110" cy="295" r="6" fill="#CC1800"/>
-  <text class="mockup-line-1 print-text" x="210" y="164" font-size="24" fill="#F5ECD8">GET MY</text>
-  <text class="mockup-line-2 print-text" x="210" y="200" font-size="24" fill="#F5ECD8">SAUCE ON</text>
-  <text class="mockup-line-3 print-text" x="210" y="236" font-size="24" fill="#F5ECD8">YOUR FACE</text>
-  <text x="210" y="326" text-anchor="middle" font-family="Bangers, cursive" font-size="22" letter-spacing="3" fill="#CC1800">SMASH N SMOKE</text>
-</svg>
-</div>
-      <div class="product-info">
-        <div class="product-row"><div class="product-name">Sauce Impact Tee</div><div class="product-price soon">Coming Soon</div></div>
-        <div class="product-saying">“Get my sauce on your face.”</div>
-        <div class="slogan-select-wrap">
-          <label class="slogan-select-label">Choose slogan</label>
-          <select class="slogan-select">
-            <option>Get my sauce on your face.</option>
-            <option>My sauce. Your face.</option>
-            <option>Everyone loves my sauce on their face.</option>
-            <option>Get my sauce on your face.</option>
-            <option>Bold flavor. Messy face.</option>
-            <option>Sauce happens.</option>
-            <option>Face first. Sauce second.</option>
-            <option>Ask me about my sauce.</option>
-          </select>
-        </div>
-        <div class="product-meta"><span class="pill">Cream Tee</span><span class="pill">Sauce Splat</span><span class="pill">Drop Later</span></div>
+        <img src="images/merch/sauce-happens-koozie-orange.png" alt="Orange koozie with Sauce happens design">
       </div>
-    </article>
-
-
-    <article class="drop-card">
-      <div class="product-stage">
-<svg class="product-svg mock-shadow" viewBox="0 0 360 460" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="koozieRedV5" x1="0" x2="1">
-      <stop offset="0" stop-color="#5b0800"/><stop offset=".22" stop-color="#b01700"/><stop offset=".6" stop-color="#7b1400"/><stop offset="1" stop-color="#300500"/>
-    </linearGradient>
-  </defs>
-  <ellipse cx="180" cy="416" rx="98" ry="18" fill="#000" opacity=".55"/>
-  <ellipse cx="180" cy="64" rx="96" ry="28" fill="#3b0800"/>
-  <rect x="84" y="64" width="192" height="300" rx="22" fill="url(#koozieRedV5)"/>
-  <ellipse cx="180" cy="364" rx="96" ry="28" fill="#3B0800"/>
-  <path d="M96 99 C139 77 221 81 264 104" stroke="rgba(255,255,255,.10)" stroke-width="7" fill="none"/>
-  <path d="M122 142 C160 111 226 121 241 165 C276 194 244 255 189 239 C160 277 103 248 124 198 C93 180 91 155 122 142Z" fill="#030608"/>
-  <circle cx="105" cy="136" r="7" fill="#030608"/><circle cx="256" cy="139" r="6" fill="#030608"/><circle cx="249" cy="255" r="8" fill="#030608"/>
-  <text class="mockup-line-1 print-text" x="180" y="184" font-size="24" fill="#F5ECD8">SAUCE</text>
-  <text class="mockup-line-2 print-text" x="180" y="220" font-size="24" fill="#F5ECD8">HAPPENS.</text>
-  <text class="mockup-line-3 print-text" x="180" y="252" font-size="17" fill="#FF8C20"></text>
-  <text x="180" y="305" text-anchor="middle" font-family="Bangers, cursive" font-size="20" letter-spacing="3" fill="#FF8C20">LOKÉ'S</text>
-</svg>
-</div>
       <div class="product-info">
-        <div class="product-row"><div class="product-name">Sauce Happens Koozie</div><div class="product-price">$8</div></div>
+        <div class="product-row">
+          <div class="product-name">Sauce Happens Koozie</div>
+          <div class="product-price">$8</div>
+        </div>
         <div class="product-saying">“Sauce happens.”</div>
         <div class="slogan-select-wrap">
-          <label class="slogan-select-label">Choose slogan</label>
+          <label class="slogan-select-label">Choose slogan concept</label>
           <select class="slogan-select">
             <option>Sauce happens.</option>
             <option>My sauce. Your face.</option>
             <option>Everyone loves my sauce on their face.</option>
             <option>Get my sauce on your face.</option>
             <option>Bold flavor. Messy face.</option>
-            <option>Sauce happens.</option>
             <option>Face first. Sauce second.</option>
             <option>Ask me about my sauce.</option>
           </select>
         </div>
-        <div class="product-meta"><span class="pill">Red Koozie</span><span class="pill">Counter Display</span><span class="pill">Concept Price</span></div>
+        <div class="product-meta"><span class="pill">Orange Koozie</span><span class="pill">Counter Display</span><span class="pill">Concept Price</span></div>
       </div>
     </article>
 
-
     <article class="drop-card">
       <div class="product-stage">
-<svg class="product-svg mock-shadow" viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="hatGrad" x1="0" x2="1">
-      <stop offset="0" stop-color="#101010"/><stop offset=".55" stop-color="#202020"/><stop offset="1" stop-color="#070707"/>
-    </linearGradient>
-  </defs>
-  <ellipse cx="210" cy="315" rx="150" ry="18" fill="#000" opacity=".5"/>
-  <path d="M92 205 C104 94 163 52 210 52 C257 52 316 94 328 205 Q210 238 92 205Z" fill="url(#hatGrad)"/>
-  <path d="M210 52 L210 222" stroke="rgba(255,255,255,.06)" stroke-width="4"/>
-  <path d="M93 205 Q210 240 327 205 Q354 217 383 254 Q279 285 190 270 Q116 257 38 273 Q53 231 93 205Z" fill="#111"/>
-  <path d="M112 139 C146 102 213 106 242 142 C278 174 242 226 190 211 C160 232 105 204 127 166 C103 158 98 146 112 139Z" fill="#CC1800"/>
-  <text class="mockup-line-1 print-text" x="178" y="157" font-size="17" fill="#F5ECD8">ASK ME</text>
-  <text class="mockup-line-2 print-text" x="178" y="184" font-size="17" fill="#F5ECD8">ABOUT MY</text>
-  <text class="mockup-line-3 print-text" x="178" y="211" font-size="17" fill="#F5ECD8">SAUCE</text>
-  <circle cx="210" cy="69" r="7" fill="#333"/>
-</svg>
-</div>
+        <img src="images/merch/ask-me-sauce-hat.png" alt="Black hat with Ask me about my sauce design">
+      </div>
       <div class="product-info">
-        <div class="product-row"><div class="product-name">Ask Me Sauce Hat</div><div class="product-price soon">Coming Soon</div></div>
+        <div class="product-row">
+          <div class="product-name">Ask Me Sauce Hat</div>
+          <div class="product-price soon">Coming Soon</div>
+        </div>
         <div class="product-saying">“Ask me about my sauce.”</div>
         <div class="slogan-select-wrap">
-          <label class="slogan-select-label">Choose slogan</label>
+          <label class="slogan-select-label">Choose slogan concept</label>
           <select class="slogan-select">
             <option>Ask me about my sauce.</option>
             <option>My sauce. Your face.</option>
@@ -862,48 +781,29 @@ a{color:inherit}
             <option>Bold flavor. Messy face.</option>
             <option>Sauce happens.</option>
             <option>Face first. Sauce second.</option>
-            <option>Ask me about my sauce.</option>
           </select>
         </div>
         <div class="product-meta"><span class="pill">Hat</span><span class="pill">Patch Concept</span><span class="pill">Drop Later</span></div>
       </div>
     </article>
 
-
     <article class="drop-card">
       <div class="product-stage">
-<svg class="product-svg mock-shadow" viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <filter id="stickShadow" x="-40%" y="-40%" width="180%" height="180%">
-      <feDropShadow dx="0" dy="15" stdDeviation="12" flood-color="#000" flood-opacity=".55"/>
-    </filter>
-  </defs>
-  <ellipse cx="210" cy="315" rx="145" ry="18" fill="#000" opacity=".45"/>
-  <g filter="url(#stickShadow)">
-    <path d="M92 122 C130 75 219 86 251 126 C303 142 292 223 222 224 C185 263 111 237 128 183 C86 171 73 145 92 122Z" fill="#F5ECD8"/>
-    <path d="M108 134 C142 96 218 103 240 136 C282 153 269 210 215 209 C182 241 126 219 140 179 C105 166 96 148 108 134Z" fill="#CC1800"/>
-    <text class="mockup-line-1 print-text" x="190" y="154" font-size="21" fill="#F5ECD8">BOLD FLAVOR.</text>
-    <text class="mockup-line-2 print-text" x="190" y="190" font-size="21" fill="#F5ECD8">MESSY FACE.</text>
-    <text class="mockup-line-3 print-text" x="190" y="222" font-size="15" fill="#FF8C20"></text>
-  </g>
-  <g transform="translate(245 95) rotate(9)" opacity=".98">
-    <path d="M30 40 C50 10 105 20 114 54 C152 75 125 125 82 111 C54 139 12 110 28 78 C1 63 4 44 30 40Z" fill="#E07010"/>
-    <text x="70" y="72" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="14" fill="#140600">SAUCE</text>
-    <text x="70" y="92" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="14" fill="#140600">HAPPENS.</text>
-  </g>
-</svg>
-</div>
+        <img src="images/merch/messy-little-sticker-pack.png" alt="Sticker pack with Loké's Sauce Co designs">
+      </div>
       <div class="product-info">
-        <div class="product-row"><div class="product-name">Messy Little Sticker Pack</div><div class="product-price">$5</div></div>
+        <div class="product-row">
+          <div class="product-name">Messy Little Sticker Pack</div>
+          <div class="product-price">$5</div>
+        </div>
         <div class="product-saying">“Bold flavor. Messy face.”</div>
         <div class="slogan-select-wrap">
-          <label class="slogan-select-label">Choose slogan</label>
+          <label class="slogan-select-label">Choose slogan concept</label>
           <select class="slogan-select">
             <option>Bold flavor. Messy face.</option>
             <option>My sauce. Your face.</option>
             <option>Everyone loves my sauce on their face.</option>
             <option>Get my sauce on your face.</option>
-            <option>Bold flavor. Messy face.</option>
             <option>Sauce happens.</option>
             <option>Face first. Sauce second.</option>
             <option>Ask me about my sauce.</option>
@@ -917,16 +817,6 @@ a{color:inherit}
 </section>
 
 <section class="disclaimer">
-  <div class="splatter-layer" id="disclaimerSplatters"></div>
-  <div class="slogan-float" style="left:6%;top:14%;--rot:-8deg;opacity:.6">
-    <svg class="generated-splat" data-seed="813" data-color="#A01600" data-dots="#FF2B00" data-spikes="30"></svg>
-    <span>FACE FIRST.<br>SAUCE SECOND.</span>
-  </div>
-  <div class="slogan-float dark" style="right:7%;bottom:9%;--rot:9deg;opacity:.65">
-    <svg class="generated-splat" data-seed="814" data-color="#E07010" data-dots="#FF8C20" data-spikes="34"></svg>
-    <span>REPEAT<br>CRAVINGS.</span>
-  </div>
-
   <div class="disclaimer-box">
     <div class="eyebrow">Fine Print</div>
     <h2 class="disclaimer-title">No Apologies</h2>
@@ -935,11 +825,10 @@ a{color:inherit}
 </section>
 
 <section class="notify">
-  <div class="splatter-layer" id="notifySplatters"></div>
   <div class="notify-card">
     <div class="eyebrow">Placeholder Store</div>
     <h2>Merch Drops Soon</h2>
-    <p>This is a concept page for now. Swap this section later with a Printify, Printful, Shopify, Square, or order-form link.</p>
+    <p>This is a concept page for now. Once the store is real, replace this section with a Printify, Printful, Shopify, Square, or order-form link.</p>
     <div class="fake-form">
       <div class="fake-input">email@example.com</div>
       <div class="fake-button">Notify Me</div>
@@ -961,164 +850,14 @@ a{color:inherit}
 </footer>
 
 <script>
-function mulberry32(seed){
-  return function(){
-    let t = seed += 0x6D2B79F5;
-    t = Math.imul(t ^ t >>> 15, t | 1);
-    t ^= t + Math.imul(t ^ t >>> 7, t | 61);
-    return ((t ^ t >>> 14) >>> 0) / 4294967296;
-  }
-}
-
-function impactPath(seed, spikes){
-  const rand = mulberry32(seed);
-  const pts = [];
-  const count = spikes || 32;
-  for(let i=0;i<count;i++){
-    const a = (Math.PI*2*i)/count;
-    const isSpike = rand() > 0.50;
-    const base = isSpike ? 72 + rand()*48 : 45 + rand()*20;
-    const squashX = 1.22 + (rand()-.5)*.18;
-    const squashY = .86 + (rand()-.5)*.18;
-    pts.push([Math.cos(a)*base*squashX, Math.sin(a)*base*squashY]);
-  }
-  let d = `M ${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)} `;
-  for(let i=1;i<pts.length;i++){
-    const p = pts[i];
-    d += `L ${p[0].toFixed(1)} ${p[1].toFixed(1)} `;
-  }
-  return d + 'Z';
-}
-
-function drawSplat(svg){
-  if(!svg) return;
-  const seed = Number(svg.dataset.seed || 1);
-  const color = svg.dataset.color || '#CC1800';
-  const dots = svg.dataset.dots || '#E07010';
-  const spikes = Number(svg.dataset.spikes || 32);
-  const rand = mulberry32(seed + 900);
-
-  svg.setAttribute('viewBox','-180 -145 360 290');
-  svg.setAttribute('preserveAspectRatio','xMidYMid meet');
-
-  let out = `<path d="${impactPath(seed, spikes)}" fill="${color}" opacity="0.94"/>`;
-  out += `<path d="${impactPath(seed+3, spikes)}" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2" opacity=".5"/>`;
-
-  for(let i=0;i<12;i++){
-    const a = rand()*Math.PI*2;
-    const len = 75 + rand()*85;
-    const start = 65 + rand()*24;
-    const x1 = Math.cos(a)*start, y1 = Math.sin(a)*start;
-    const x2 = Math.cos(a)*len, y2 = Math.sin(a)*len;
-    out += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${color}" stroke-width="${(1+rand()*2.5).toFixed(1)}" stroke-linecap="round" opacity="${(.32+rand()*.3).toFixed(2)}"/>`;
-  }
-
-  for(let i=0;i<34;i++){
-    const a = rand()*Math.PI*2;
-    const dist = 70 + rand()*95;
-    const rx = 2 + rand()*8;
-    const ry = 2 + rand()*10;
-    const x = Math.cos(a)*dist, y = Math.sin(a)*dist;
-    out += `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${rx.toFixed(1)}" ry="${ry.toFixed(1)}" fill="${i%3===0?dots:color}" opacity="${(.45+rand()*.42).toFixed(2)}" transform="rotate(${(rand()*180).toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})"/>`;
-  }
-
-  for(let i=0;i<5;i++){
-    const x = -80 + rand()*160;
-    const y = 64 + rand()*20;
-    const h = 24 + rand()*48;
-    out += `<path d="M ${x.toFixed(1)} ${y.toFixed(1)} Q ${(x-3+rand()*6).toFixed(1)} ${(y+h/2).toFixed(1)} ${x.toFixed(1)} ${(y+h).toFixed(1)}" stroke="${color}" stroke-width="${(3+rand()*4).toFixed(1)}" stroke-linecap="round" fill="none" opacity=".72"/>`;
-    out += `<ellipse cx="${x.toFixed(1)}" cy="${(y+h+5).toFixed(1)}" rx="${(3+rand()*4).toFixed(1)}" ry="${(5+rand()*5).toFixed(1)}" fill="${color}" opacity=".64"/>`;
-  }
-
-  svg.innerHTML = out;
-}
-
-document.querySelectorAll('.generated-splat').forEach(drawSplat);
-
-function addBgSplat(layerId, seed, x, y, w, color, opacity=.22){
-  const layer = document.getElementById(layerId);
-  if(!layer) return;
-  const div = document.createElement('div');
-  div.className = 'bg-splat';
-  div.style.left = x;
-  div.style.top = y;
-  div.style.width = w;
-  div.style.height = `calc(${w} * .72)`;
-  div.style.opacity = opacity;
-  div.style.setProperty('--rot', `${(seed%47)-23}deg`);
-  div.innerHTML = `<svg class="generated-splat" data-seed="${seed}" data-color="${color}" data-dots="#FF8C20" data-spikes="${26 + (seed%13)}"></svg>`;
-  layer.appendChild(div);
-  drawSplat(div.querySelector('svg'));
-}
-
-[
-  ['heroSplatters',11,'18%','14%','230px','#CC1800',.22],
-  ['heroSplatters',12,'75%','18%','190px','#E07010',.16],
-  
-  
-  
-  ['merchSplatters',42,'82%','12%','190px','#E07010',.15],
-  
-  ['disclaimerSplatters',51,'8%','24%','210px','#CC1800',.12],
-  ['disclaimerSplatters',52,'78%','18%','180px','#E07010',.12],
-  
-  ['notifySplatters',62,'78%','30%','180px','#CC1800',.10]
-].forEach(args=>addBgSplat(...args));
-
-
-function fitMockupText(card, value){
-  const v = value.toLowerCase();
-  let lines;
-  if(v.includes('everyone')){
-    lines = ['EVERYONE','LOVES MY','SAUCE'];
-  } else if(v.includes('get my')){
-    lines = ['GET MY','SAUCE ON','YOUR FACE'];
-  } else if(v.includes('bold')){
-    lines = ['BOLD FLAVOR.','MESSY FACE.',''];
-  } else if(v.includes('sauce happens')){
-    lines = ['SAUCE','HAPPENS.',''];
-  } else if(v.includes('face first')){
-    lines = ['FACE FIRST.','SAUCE SECOND.',''];
-  } else if(v.includes('ask me')){
-    lines = ['ASK ME','ABOUT MY','SAUCE'];
-  } else {
-    lines = ['MY SAUCE.','YOUR FACE.',''];
-  }
-
-  const textNodes = [
-    card.querySelector('.mockup-line-1'),
-    card.querySelector('.mockup-line-2'),
-    card.querySelector('.mockup-line-3')
-  ].filter(Boolean);
-
-  textNodes.forEach((node, index) => {
-    node.textContent = lines[index] || '';
-  });
-}
-
 document.querySelectorAll('.drop-card').forEach(card => {
   const select = card.querySelector('.slogan-select');
   const saying = card.querySelector('.product-saying');
   if(select && saying){
-    fitMockupText(card, select.value);
     select.addEventListener('change', () => {
       saying.textContent = '“' + select.value + '”';
-      fitMockupText(card, select.value);
     });
   }
-});
-
-
-document.addEventListener('click', e=>{
-  if(e.target.closest('a, select, option')) return;
-  const splat = document.createElement('div');
-  splat.className = 'click-splat';
-  splat.style.left = e.clientX + 'px';
-  splat.style.top = e.clientY + 'px';
-  splat.innerHTML = `<svg class="generated-splat" data-seed="${Math.floor(Math.random()*9999)}" data-color="#CC1800" data-dots="#FF8C20" data-spikes="27"></svg>`;
-  document.body.appendChild(splat);
-  drawSplat(splat.querySelector('svg'));
-  setTimeout(()=>splat.remove(),800);
 });
 </script>
 </body>
