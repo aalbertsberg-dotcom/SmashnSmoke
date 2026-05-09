@@ -330,6 +330,51 @@ a{color:inherit}
   .btn{width:100%}
   .merch,.disclaimer,.notify{padding-left:1.1rem;padding-right:1.1rem}
 }
+
+/* ── V5 REALER MERCH MOCKUPS ── */
+.drop-grid {
+  grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+}
+.drop-card {
+  position: relative;
+}
+.drop-card::after {
+  content: 'CONCEPT MOCKUP';
+  position:absolute;
+  top:14px;
+  right:14px;
+  z-index:10;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.58rem;
+  letter-spacing:2px;
+  color:rgba(245,236,216,.38);
+  border:1px solid rgba(245,236,216,.08);
+  background:rgba(3,6,8,.5);
+  padding:.22rem .45rem;
+  border-radius:999px;
+}
+.product-stage {
+  min-height: 370px;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(224,112,16,.16), transparent 42%),
+    linear-gradient(135deg, #070c18 0%, #050914 58%, #020406 100%);
+}
+.product-stage::before {
+  inset: 18px;
+  border-color: rgba(75,150,255,.08);
+}
+.product-svg {
+  width: min(100%, 285px);
+}
+.mock-shadow {
+  filter: drop-shadow(0 26px 26px rgba(0,0,0,.62));
+}
+.print-text {
+  font-family:'Permanent Marker',cursive;
+  text-anchor:middle;
+  dominant-baseline:middle;
+}
+
 </style>
 </head>
 <body>
@@ -396,32 +441,39 @@ a{color:inherit}
 
     <article class="drop-card">
       <div class="product-stage">
-        <svg class="product-svg" viewBox="0 0 360 420" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="shirtBlack" x1="0" x2="1">
-              <stop offset="0" stop-color="#080808"/><stop offset="0.55" stop-color="#151515"/><stop offset="1" stop-color="#050505"/>
-            </linearGradient>
-            <filter id="shadow1" x="-20%" y="-20%" width="140%" height="140%">
-              <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#000" flood-opacity=".55"/>
-            </filter>
-          </defs>
-          <path filter="url(#shadow1)" d="M112 42 Q138 22 180 22 Q222 22 248 42 L315 100 L274 132 L256 106 L256 374 Q256 394 236 394 L124 394 Q104 394 104 374 L104 106 L86 132 L45 100 Z" fill="url(#shirtBlack)"/>
-          <path d="M135 43 Q155 62 180 62 Q205 62 225 43" fill="none" stroke="#2b2b2b" stroke-width="5"/>
-          <g transform="translate(180 180)">
-            <path d="M-78 -30 C-72 -72 -24 -76 4 -56 C38 -76 92 -48 76 4 C96 36 50 72 8 58 C-22 82 -78 56 -65 16 C-94 3 -100 -16 -78 -30Z" fill="#CC1800" opacity=".94"/>
-            <circle cx="-86" cy="-56" r="8" fill="#E07010"/><circle cx="91" cy="-24" r="5" fill="#FF8C20"/><circle cx="78" cy="58" r="7" fill="#E07010"/>
-          </g>
-          <text class="mockup-line-1" x="180" y="166" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="22" fill="#F5ECD8">MY SAUCE.</text>
-          <text class="mockup-line-2" x="180" y="197" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="22" fill="#FF8C20">YOUR FACE.</text>
-          <text x="180" y="252" text-anchor="middle" font-family="Bangers, cursive" font-size="18" letter-spacing="2" fill="rgba(245,236,216,.6)">LOKÉ'S SAUCE CO.</text>
-        </svg>
-      </div>
+<svg class="product-svg mock-shadow" viewBox="0 0 420 460" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="teeBlackV5" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#252525"/><stop offset=".38" stop-color="#0e0e0e"/><stop offset=".72" stop-color="#161616"/><stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <radialGradient id="printGlow1" cx=".5" cy=".45" r=".55">
+      <stop offset="0" stop-color="#E07010" stop-opacity=".95"/><stop offset="1" stop-color="#7A1000" stop-opacity=".95"/>
+    </radialGradient>
+    <filter id="softShadowTee" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="20" stdDeviation="16" flood-color="#000" flood-opacity=".55"/>
+    </filter>
+  </defs>
+  <ellipse cx="210" cy="420" rx="132" ry="18" fill="#000" opacity=".45"/>
+  <path filter="url(#softShadowTee)" d="M126 42 Q160 18 210 18 Q260 18 294 42 L374 111 L323 152 L302 118 L302 388 Q302 414 276 414 L144 414 Q118 414 118 388 L118 118 L97 152 L46 111 Z" fill="url(#teeBlackV5)"/>
+  <path d="M158 43 Q180 68 210 70 Q240 68 262 43" fill="none" stroke="#2e2e2e" stroke-width="7"/>
+  <path d="M126 50 Q160 74 210 76 Q260 74 294 50" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="3"/>
+  <path d="M118 118 L97 152 L46 111" fill="rgba(255,255,255,.04)"/>
+  <path d="M302 118 L323 152 L374 111" fill="rgba(255,255,255,.04)"/>
+  <path d="M128 122 Q206 96 282 124 Q326 160 293 218 Q315 278 232 278 Q198 318 130 284 Q78 252 104 198 Q72 155 128 122Z" fill="url(#printGlow1)"/>
+  <circle cx="95" cy="145" r="9" fill="#CC1800"/><circle cx="312" cy="130" r="7" fill="#FF8C20"/><circle cx="301" cy="259" r="10" fill="#E07010"/><circle cx="110" cy="295" r="6" fill="#CC1800"/>
+  <text class="mockup-line-1 print-text" x="210" y="174" font-size="28" fill="#F5ECD8">MY SAUCE.</text>
+  <text class="mockup-line-2 print-text" x="210" y="211" font-size="28" fill="#FF8C20">YOUR FACE.</text>
+  <text class="mockup-line-3 print-text" x="210" y="246" font-size="18" fill="#F5ECD8"></text>
+  <text x="210" y="326" text-anchor="middle" font-family="Bangers, cursive" font-size="22" letter-spacing="3" fill="rgba(245,236,216,.72)">LOKÉ'S SAUCE CO.</text>
+</svg>
+</div>
       <div class="product-info">
         <div class="product-row"><div class="product-name">Face Sauce Tee</div><div class="product-price">$28</div></div>
         <div class="product-saying">“My sauce. Your face.”</div>
         <div class="slogan-select-wrap">
           <label class="slogan-select-label">Choose slogan</label>
           <select class="slogan-select">
+            <option>My sauce. Your face.</option>
             <option>My sauce. Your face.</option>
             <option>Everyone loves my sauce on their face.</option>
             <option>Get my sauce on your face.</option>
@@ -431,28 +483,36 @@ a{color:inherit}
             <option>Ask me about my sauce.</option>
           </select>
         </div>
-        <div class="product-meta"><span class="pill">Black Tee</span><span class="pill">Concept Price</span></div>
+        <div class="product-meta"><span class="pill">Black Tee</span><span class="pill">Front Print</span><span class="pill">Concept Price</span></div>
       </div>
     </article>
 
+
     <article class="drop-card">
       <div class="product-stage">
-        <svg class="product-svg" viewBox="0 0 300 420" xmlns="http://www.w3.org/2000/svg">
-          <defs><linearGradient id="koozie1" x1="0" x2="1"><stop offset="0" stop-color="#050505"/><stop offset=".45" stop-color="#17110E"/><stop offset="1" stop-color="#050505"/></linearGradient></defs>
-          <ellipse cx="150" cy="65" rx="82" ry="24" fill="#232323"/>
-          <rect x="68" y="65" width="164" height="270" rx="18" fill="url(#koozie1)"/>
-          <ellipse cx="150" cy="335" rx="82" ry="24" fill="#070707"/>
-          <path d="M76 92 C118 72 188 78 224 96" stroke="rgba(255,255,255,.08)" stroke-width="6" fill="none"/>
-          <g transform="translate(150 190)">
-            <path d="M-58 -42 C-40 -76 16 -72 32 -38 C78 -28 70 40 18 46 C-8 76 -70 44 -48 6 C-82 -2 -86 -28 -58 -42Z" fill="#E07010"/>
-            <circle cx="-76" cy="-28" r="7" fill="#CC1800"/><circle cx="68" cy="14" r="6" fill="#FF8C20"/><circle cx="-44" cy="60" r="5" fill="#CC1800"/>
-          </g>
-          <text class="mockup-line-1" x="150" y="170" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="18" fill="#160600">EVERYONE</text>
-          <text class="mockup-line-2" x="150" y="195" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="18" fill="#160600">LOVES MY</text>
-          <text class="mockup-line-3" x="150" y="220" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="18" fill="#160600">SAUCE</text>
-          <text x="150" y="280" text-anchor="middle" font-family="Bangers, cursive" font-size="16" letter-spacing="2" fill="#E07010">LOKÉ'S SAUCE CO.</text>
-        </svg>
-      </div>
+<svg class="product-svg mock-shadow" viewBox="0 0 360 460" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="koozieBlkV5" x1="0" x2="1">
+      <stop offset="0" stop-color="#040404"/><stop offset=".18" stop-color="#222"/><stop offset=".55" stop-color="#090909"/><stop offset="1" stop-color="#010101"/>
+    </linearGradient>
+    <radialGradient id="kooziePrintV5" cx=".5" cy=".5" r=".6">
+      <stop offset="0" stop-color="#FF8C20"/><stop offset="1" stop-color="#CC1800"/>
+    </radialGradient>
+  </defs>
+  <ellipse cx="180" cy="416" rx="98" ry="18" fill="#000" opacity=".55"/>
+  <ellipse cx="180" cy="64" rx="96" ry="28" fill="#272727"/>
+  <rect x="84" y="64" width="192" height="300" rx="22" fill="url(#koozieBlkV5)"/>
+  <ellipse cx="180" cy="364" rx="96" ry="28" fill="#040404"/>
+  <path d="M96 99 C139 77 221 81 264 104" stroke="rgba(255,255,255,.11)" stroke-width="7" fill="none"/>
+  <rect x="100" y="100" width="160" height="220" rx="14" fill="rgba(255,255,255,.03)"/>
+  <path d="M122 142 C160 111 226 121 241 165 C276 194 244 255 189 239 C160 277 103 248 124 198 C93 180 91 155 122 142Z" fill="url(#kooziePrintV5)"/>
+  <circle cx="105" cy="136" r="7" fill="#CC1800"/><circle cx="256" cy="139" r="6" fill="#FF8C20"/><circle cx="249" cy="255" r="8" fill="#E07010"/>
+  <text class="mockup-line-1 print-text" x="180" y="174" font-size="22" fill="#160600">EVERYONE</text>
+  <text class="mockup-line-2 print-text" x="180" y="205" font-size="22" fill="#160600">LOVES MY</text>
+  <text class="mockup-line-3 print-text" x="180" y="236" font-size="22" fill="#160600">SAUCE</text>
+  <text x="180" y="305" text-anchor="middle" font-family="Bangers, cursive" font-size="19" letter-spacing="2" fill="#E07010">LOKÉ'S SAUCE CO.</text>
+</svg>
+</div>
       <div class="product-info">
         <div class="product-row"><div class="product-name">Messy Face Koozie</div><div class="product-price">$8</div></div>
         <div class="product-saying">“Everyone loves my sauce on their face.”</div>
@@ -461,6 +521,7 @@ a{color:inherit}
           <select class="slogan-select">
             <option>Everyone loves my sauce on their face.</option>
             <option>My sauce. Your face.</option>
+            <option>Everyone loves my sauce on their face.</option>
             <option>Get my sauce on your face.</option>
             <option>Bold flavor. Messy face.</option>
             <option>Sauce happens.</option>
@@ -468,23 +529,33 @@ a{color:inherit}
             <option>Ask me about my sauce.</option>
           </select>
         </div>
-        <div class="product-meta"><span class="pill">Koozie</span><span class="pill">Concept Price</span></div>
+        <div class="product-meta"><span class="pill">Koozie</span><span class="pill">Tailgate Drop</span><span class="pill">Concept Price</span></div>
       </div>
     </article>
 
+
     <article class="drop-card">
       <div class="product-stage">
-        <svg class="product-svg" viewBox="0 0 360 420" xmlns="http://www.w3.org/2000/svg">
-          <path d="M112 42 Q138 22 180 22 Q222 22 248 42 L315 100 L274 132 L256 106 L256 374 Q256 394 236 394 L124 394 Q104 394 104 374 L104 106 L86 132 L45 100 Z" fill="#F5ECD8"/>
-          <path d="M135 43 Q155 62 180 62 Q205 62 225 43" fill="none" stroke="#D8CCB6" stroke-width="5"/>
-          <path d="M120 100 C165 75 223 92 240 126 C282 158 260 238 193 230 C151 272 86 231 111 179 C68 151 76 111 120 100Z" fill="#CC1800"/>
-          <circle cx="92" cy="126" r="9" fill="#E07010"/><circle cx="258" cy="104" r="6" fill="#FF8C20"/><circle cx="258" cy="246" r="11" fill="#CC1800"/><circle cx="97" cy="247" r="6" fill="#E07010"/>
-          <text class="mockup-line-1" x="180" y="155" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="21" fill="#F5ECD8">GET MY</text>
-          <text class="mockup-line-2" x="180" y="188" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="21" fill="#F5ECD8">SAUCE ON</text>
-          <text class="mockup-line-3" x="180" y="221" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="21" fill="#F5ECD8">YOUR FACE</text>
-          <text x="180" y="292" text-anchor="middle" font-family="Bangers, cursive" font-size="19" letter-spacing="3" fill="#CC1800">SMASH N SMOKE</text>
-        </svg>
-      </div>
+<svg class="product-svg mock-shadow" viewBox="0 0 420 460" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="teeCreamV5" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fff4dd"/><stop offset=".5" stop-color="#f0dfbd"/><stop offset="1" stop-color="#d7c09a"/>
+    </linearGradient>
+    <filter id="softShadowCream" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="20" stdDeviation="16" flood-color="#000" flood-opacity=".55"/>
+    </filter>
+  </defs>
+  <ellipse cx="210" cy="420" rx="132" ry="18" fill="#000" opacity=".45"/>
+  <path filter="url(#softShadowCream)" d="M126 42 Q160 18 210 18 Q260 18 294 42 L374 111 L323 152 L302 118 L302 388 Q302 414 276 414 L144 414 Q118 414 118 388 L118 118 L97 152 L46 111 Z" fill="url(#teeCreamV5)"/>
+  <path d="M158 43 Q180 68 210 70 Q240 68 262 43" fill="none" stroke="#ccb68f" stroke-width="7"/>
+  <path d="M128 122 Q206 96 282 124 Q326 160 293 218 Q315 278 232 278 Q198 318 130 284 Q78 252 104 198 Q72 155 128 122Z" fill="#CC1800"/>
+  <circle cx="95" cy="145" r="9" fill="#E07010"/><circle cx="312" cy="130" r="7" fill="#FF8C20"/><circle cx="301" cy="259" r="10" fill="#E07010"/><circle cx="110" cy="295" r="6" fill="#CC1800"/>
+  <text class="mockup-line-1 print-text" x="210" y="164" font-size="24" fill="#F5ECD8">GET MY</text>
+  <text class="mockup-line-2 print-text" x="210" y="200" font-size="24" fill="#F5ECD8">SAUCE ON</text>
+  <text class="mockup-line-3 print-text" x="210" y="236" font-size="24" fill="#F5ECD8">YOUR FACE</text>
+  <text x="210" y="326" text-anchor="middle" font-family="Bangers, cursive" font-size="22" letter-spacing="3" fill="#CC1800">SMASH N SMOKE</text>
+</svg>
+</div>
       <div class="product-info">
         <div class="product-row"><div class="product-name">Sauce Impact Tee</div><div class="product-price soon">Coming Soon</div></div>
         <div class="product-saying">“Get my sauce on your face.”</div>
@@ -494,31 +565,41 @@ a{color:inherit}
             <option>Get my sauce on your face.</option>
             <option>My sauce. Your face.</option>
             <option>Everyone loves my sauce on their face.</option>
+            <option>Get my sauce on your face.</option>
             <option>Bold flavor. Messy face.</option>
             <option>Sauce happens.</option>
             <option>Face first. Sauce second.</option>
             <option>Ask me about my sauce.</option>
           </select>
         </div>
-        <div class="product-meta"><span class="pill">Cream Tee</span><span class="pill">Drop Later</span></div>
+        <div class="product-meta"><span class="pill">Cream Tee</span><span class="pill">Sauce Splat</span><span class="pill">Drop Later</span></div>
       </div>
     </article>
 
+
     <article class="drop-card">
       <div class="product-stage">
-        <svg class="product-svg" viewBox="0 0 300 420" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="150" cy="65" rx="82" ry="24" fill="#1C0B05"/>
-          <rect x="68" y="65" width="164" height="270" rx="18" fill="#7B1400"/>
-          <ellipse cx="150" cy="335" rx="82" ry="24" fill="#3B0800"/>
-          <path d="M82 116 C122 96 174 103 207 126 C238 148 226 214 171 205 C141 240 87 214 100 171 C67 154 60 130 82 116Z" fill="#030608"/>
-          <circle cx="216" cy="105" r="8" fill="#030608"/><circle cx="74" cy="203" r="6" fill="#030608"/><circle cx="222" cy="232" r="5" fill="#030608"/>
-          <text class="mockup-line-1" x="150" y="160" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="20" fill="#F5ECD8">SAUCE</text>
-          <text class="mockup-line-2" x="150" y="190" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="20" fill="#F5ECD8">HAPPENS.</text>
-          <text x="150" y="265" text-anchor="middle" font-family="Bangers, cursive" font-size="18" letter-spacing="3" fill="#FF8C20">LOKÉ'S</text>
-        </svg>
-      </div>
+<svg class="product-svg mock-shadow" viewBox="0 0 360 460" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="koozieRedV5" x1="0" x2="1">
+      <stop offset="0" stop-color="#5b0800"/><stop offset=".22" stop-color="#b01700"/><stop offset=".6" stop-color="#7b1400"/><stop offset="1" stop-color="#300500"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="180" cy="416" rx="98" ry="18" fill="#000" opacity=".55"/>
+  <ellipse cx="180" cy="64" rx="96" ry="28" fill="#3b0800"/>
+  <rect x="84" y="64" width="192" height="300" rx="22" fill="url(#koozieRedV5)"/>
+  <ellipse cx="180" cy="364" rx="96" ry="28" fill="#3B0800"/>
+  <path d="M96 99 C139 77 221 81 264 104" stroke="rgba(255,255,255,.10)" stroke-width="7" fill="none"/>
+  <path d="M122 142 C160 111 226 121 241 165 C276 194 244 255 189 239 C160 277 103 248 124 198 C93 180 91 155 122 142Z" fill="#030608"/>
+  <circle cx="105" cy="136" r="7" fill="#030608"/><circle cx="256" cy="139" r="6" fill="#030608"/><circle cx="249" cy="255" r="8" fill="#030608"/>
+  <text class="mockup-line-1 print-text" x="180" y="184" font-size="24" fill="#F5ECD8">SAUCE</text>
+  <text class="mockup-line-2 print-text" x="180" y="220" font-size="24" fill="#F5ECD8">HAPPENS.</text>
+  <text class="mockup-line-3 print-text" x="180" y="252" font-size="17" fill="#FF8C20"></text>
+  <text x="180" y="305" text-anchor="middle" font-family="Bangers, cursive" font-size="20" letter-spacing="3" fill="#FF8C20">LOKÉ'S</text>
+</svg>
+</div>
       <div class="product-info">
-        <div class="product-row"><div class="product-name">Sauce Happens Koozie</div><div class="product-price soon">Coming Soon</div></div>
+        <div class="product-row"><div class="product-name">Sauce Happens Koozie</div><div class="product-price">$8</div></div>
         <div class="product-saying">“Sauce happens.”</div>
         <div class="slogan-select-wrap">
           <label class="slogan-select-label">Choose slogan</label>
@@ -528,11 +609,96 @@ a{color:inherit}
             <option>Everyone loves my sauce on their face.</option>
             <option>Get my sauce on your face.</option>
             <option>Bold flavor. Messy face.</option>
+            <option>Sauce happens.</option>
             <option>Face first. Sauce second.</option>
             <option>Ask me about my sauce.</option>
           </select>
         </div>
-        <div class="product-meta"><span class="pill">Red Koozie</span><span class="pill">Concept</span></div>
+        <div class="product-meta"><span class="pill">Red Koozie</span><span class="pill">Counter Display</span><span class="pill">Concept Price</span></div>
+      </div>
+    </article>
+
+
+    <article class="drop-card">
+      <div class="product-stage">
+<svg class="product-svg mock-shadow" viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="hatGrad" x1="0" x2="1">
+      <stop offset="0" stop-color="#101010"/><stop offset=".55" stop-color="#202020"/><stop offset="1" stop-color="#070707"/>
+    </linearGradient>
+  </defs>
+  <ellipse cx="210" cy="315" rx="150" ry="18" fill="#000" opacity=".5"/>
+  <path d="M92 205 C104 94 163 52 210 52 C257 52 316 94 328 205 Q210 238 92 205Z" fill="url(#hatGrad)"/>
+  <path d="M210 52 L210 222" stroke="rgba(255,255,255,.06)" stroke-width="4"/>
+  <path d="M93 205 Q210 240 327 205 Q354 217 383 254 Q279 285 190 270 Q116 257 38 273 Q53 231 93 205Z" fill="#111"/>
+  <path d="M112 139 C146 102 213 106 242 142 C278 174 242 226 190 211 C160 232 105 204 127 166 C103 158 98 146 112 139Z" fill="#CC1800"/>
+  <text class="mockup-line-1 print-text" x="178" y="157" font-size="17" fill="#F5ECD8">ASK ME</text>
+  <text class="mockup-line-2 print-text" x="178" y="184" font-size="17" fill="#F5ECD8">ABOUT MY</text>
+  <text class="mockup-line-3 print-text" x="178" y="211" font-size="17" fill="#F5ECD8">SAUCE</text>
+  <circle cx="210" cy="69" r="7" fill="#333"/>
+</svg>
+</div>
+      <div class="product-info">
+        <div class="product-row"><div class="product-name">Sauce Co. Hat</div><div class="product-price soon">Coming Soon</div></div>
+        <div class="product-saying">“Ask me about my sauce.”</div>
+        <div class="slogan-select-wrap">
+          <label class="slogan-select-label">Choose slogan</label>
+          <select class="slogan-select">
+            <option>Ask me about my sauce.</option>
+            <option>My sauce. Your face.</option>
+            <option>Everyone loves my sauce on their face.</option>
+            <option>Get my sauce on your face.</option>
+            <option>Bold flavor. Messy face.</option>
+            <option>Sauce happens.</option>
+            <option>Face first. Sauce second.</option>
+            <option>Ask me about my sauce.</option>
+          </select>
+        </div>
+        <div class="product-meta"><span class="pill">Hat</span><span class="pill">Patch Concept</span><span class="pill">Drop Later</span></div>
+      </div>
+    </article>
+
+
+    <article class="drop-card">
+      <div class="product-stage">
+<svg class="product-svg mock-shadow" viewBox="0 0 420 360" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="stickShadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="15" stdDeviation="12" flood-color="#000" flood-opacity=".55"/>
+    </filter>
+  </defs>
+  <ellipse cx="210" cy="315" rx="145" ry="18" fill="#000" opacity=".45"/>
+  <g filter="url(#stickShadow)">
+    <path d="M92 122 C130 75 219 86 251 126 C303 142 292 223 222 224 C185 263 111 237 128 183 C86 171 73 145 92 122Z" fill="#F5ECD8"/>
+    <path d="M108 134 C142 96 218 103 240 136 C282 153 269 210 215 209 C182 241 126 219 140 179 C105 166 96 148 108 134Z" fill="#CC1800"/>
+    <text class="mockup-line-1 print-text" x="190" y="154" font-size="21" fill="#F5ECD8">BOLD FLAVOR.</text>
+    <text class="mockup-line-2 print-text" x="190" y="190" font-size="21" fill="#F5ECD8">MESSY FACE.</text>
+    <text class="mockup-line-3 print-text" x="190" y="222" font-size="15" fill="#FF8C20"></text>
+  </g>
+  <g transform="translate(245 95) rotate(9)" opacity=".98">
+    <path d="M30 40 C50 10 105 20 114 54 C152 75 125 125 82 111 C54 139 12 110 28 78 C1 63 4 44 30 40Z" fill="#E07010"/>
+    <text x="70" y="72" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="14" fill="#140600">SAUCE</text>
+    <text x="70" y="92" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="14" fill="#140600">HAPPENS.</text>
+  </g>
+</svg>
+</div>
+      <div class="product-info">
+        <div class="product-row"><div class="product-name">Splat Sticker Pack</div><div class="product-price">$5</div></div>
+        <div class="product-saying">“Bold flavor. Messy face.”</div>
+        <div class="slogan-select-wrap">
+          <label class="slogan-select-label">Choose slogan</label>
+          <select class="slogan-select">
+            <option>Bold flavor. Messy face.</option>
+            <option>My sauce. Your face.</option>
+            <option>Everyone loves my sauce on their face.</option>
+            <option>Get my sauce on your face.</option>
+            <option>Bold flavor. Messy face.</option>
+            <option>Sauce happens.</option>
+            <option>Face first. Sauce second.</option>
+            <option>Ask me about my sauce.</option>
+          </select>
+        </div>
+        <div class="product-meta"><span class="pill">Sticker Pack</span><span class="pill">3 Pack</span><span class="pill">Easy Add-On</span></div>
       </div>
     </article>
 
@@ -688,23 +854,24 @@ function addBgSplat(layerId, seed, x, y, w, color, opacity=.22){
   ['notifySplatters',62,'78%','30%','180px','#CC1800',.10]
 ].forEach(args=>addBgSplat(...args));
 
+
 function fitMockupText(card, value){
-  const words = value.replace(/[.]/g,'').split(/\s+/);
-  const lines = [];
-  if(value.length <= 16){
-    lines.push(value.toUpperCase());
-  } else if(value.toLowerCase().includes('everyone')){
-    lines.push('EVERYONE','LOVES MY','SAUCE');
-  } else if(value.toLowerCase().includes('get my')){
-    lines.push('GET MY','SAUCE ON','YOUR FACE');
-  } else if(value.toLowerCase().includes('bold')){
-    lines.push('BOLD FLAVOR','MESSY FACE');
-  } else if(value.toLowerCase().includes('face first')){
-    lines.push('FACE FIRST','SAUCE SECOND');
-  } else if(value.toLowerCase().includes('ask me')){
-    lines.push('ASK ME','ABOUT MY','SAUCE');
+  const v = value.toLowerCase();
+  let lines;
+  if(v.includes('everyone')){
+    lines = ['EVERYONE','LOVES MY','SAUCE'];
+  } else if(v.includes('get my')){
+    lines = ['GET MY','SAUCE ON','YOUR FACE'];
+  } else if(v.includes('bold')){
+    lines = ['BOLD FLAVOR.','MESSY FACE.',''];
+  } else if(v.includes('sauce happens')){
+    lines = ['SAUCE','HAPPENS.',''];
+  } else if(v.includes('face first')){
+    lines = ['FACE FIRST.','SAUCE SECOND.',''];
+  } else if(v.includes('ask me')){
+    lines = ['ASK ME','ABOUT MY','SAUCE'];
   } else {
-    lines.push(words.slice(0,2).join(' ').toUpperCase(), words.slice(2).join(' ').toUpperCase());
+    lines = ['MY SAUCE.','YOUR FACE.',''];
   }
 
   const textNodes = [
@@ -722,12 +889,14 @@ document.querySelectorAll('.drop-card').forEach(card => {
   const select = card.querySelector('.slogan-select');
   const saying = card.querySelector('.product-saying');
   if(select && saying){
+    fitMockupText(card, select.value);
     select.addEventListener('change', () => {
       saying.textContent = '“' + select.value + '”';
       fitMockupText(card, select.value);
     });
   }
 });
+
 
 document.addEventListener('click', e=>{
   if(e.target.closest('a, select, option')) return;
