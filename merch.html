@@ -375,6 +375,174 @@ a{color:inherit}
   dominant-baseline:middle;
 }
 
+
+/* ── V6 POLISH: TIGHTER HERO + FEATURED DROP + CLEANER MOCKUP UX ── */
+.hero {
+  min-height: 68vh !important;
+  padding: 7rem 2rem 3.25rem !important;
+}
+.hero-content {
+  max-width: 1180px !important;
+  width: 100%;
+}
+.hero-layout {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(280px, 0.62fr);
+  gap: 2rem;
+  align-items: center;
+}
+.hero-copy {
+  text-align: left;
+}
+.hero-copy .hero-actions {
+  justify-content: flex-start;
+}
+.featured-drop {
+  background: linear-gradient(180deg, rgba(13,22,48,.96), rgba(5,8,16,.98));
+  border: 1px solid rgba(224,112,16,.28);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 26px 70px rgba(0,0,0,.28), 0 0 40px rgba(204,24,0,.08);
+  position: relative;
+}
+.featured-drop::before {
+  content: 'FIRST DROP FAVORITE';
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  z-index: 8;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: .62rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #140600;
+  background: var(--amber);
+  padding: .35rem .55rem;
+  border-radius: 999px;
+  box-shadow: 0 0 16px rgba(255,140,32,.26);
+}
+.featured-stage {
+  min-height: 315px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 50% 42%, rgba(224,112,16,.18), transparent 43%),
+    linear-gradient(135deg, #070c18 0%, #050914 62%, #020406 100%);
+  padding: 1.4rem;
+}
+.featured-stage .product-svg {
+  width: min(100%, 245px);
+}
+.featured-info {
+  padding: 1rem 1.1rem 1.15rem;
+}
+.featured-info-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.featured-name {
+  font-family: 'Bangers', cursive;
+  font-size: 1.55rem;
+  letter-spacing: 2px;
+  color: var(--cream);
+}
+.featured-price {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  color: var(--amber);
+  letter-spacing: 1px;
+  padding-top: .2rem;
+}
+.featured-saying {
+  color: var(--sauce);
+  font-style: italic;
+  font-size: .84rem;
+  margin-top: .4rem;
+}
+.how-it-works {
+  max-width: 760px;
+  margin: -1.15rem auto 2.6rem;
+  position: relative;
+  z-index: 5;
+  background: rgba(3,6,8,.48);
+  border: 1px solid rgba(224,112,16,.18);
+  border-left: 3px solid var(--sauce);
+  border-radius: 8px;
+  padding: .95rem 1.15rem;
+  color: rgba(245,236,216,.68);
+  font-size: .92rem;
+  line-height: 1.55;
+  text-align: center;
+}
+.how-it-works strong {
+  color: var(--amber);
+}
+.slogan-select-label::after {
+  content: ' concept';
+}
+.drop-card.featured-card::after {
+  content: 'FIRST DROP FAVORITE';
+  background: var(--amber);
+  color: #140600;
+  border-color: rgba(255,140,32,.65);
+  font-weight: 900;
+}
+.slogan-float {
+  opacity: .62 !important;
+}
+.slogan-float.hero-a,
+.slogan-float.hero-b,
+.slogan-float.merch-c {
+  display: none;
+}
+.slogan-float.merch-a {
+  left: 1.5% !important;
+  top: 19% !important;
+  opacity: .18 !important;
+}
+.slogan-float.merch-b {
+  right: 2% !important;
+  top: 63% !important;
+  opacity: .20 !important;
+}
+.drop-card:nth-child(1) { border-color: rgba(255,140,32,.35); }
+@media(max-width: 980px) {
+  .hero-layout {
+    grid-template-columns: 1fr;
+  }
+  .hero-copy {
+    text-align: center;
+  }
+  .hero-copy .hero-actions {
+    justify-content: center;
+  }
+  .featured-drop {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+@media(max-width:640px) {
+  .hero {
+    min-height: auto !important;
+    padding: 6.5rem 1.1rem 2.5rem !important;
+  }
+  .featured-stage {
+    min-height: 260px;
+  }
+  .featured-stage .product-svg {
+    width: min(100%, 210px);
+  }
+  .how-it-works {
+    margin: -0.5rem 1.1rem 2rem;
+    text-align: left;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -390,23 +558,64 @@ a{color:inherit}
 <section class="hero">
   <div class="splatter-layer" id="heroSplatters"></div>
 
-  <div class="slogan-float" style="left:4%;top:21%;--rot:-11deg">
+  <div class="slogan-float hero-a" style="left:4%;top:21%;--rot:-11deg">
     <svg class="generated-splat" data-seed="808" data-color="#CC1800" data-dots="#FF8C20" data-spikes="34"></svg>
     <span>MY SAUCE.<br>YOUR FACE.</span>
   </div>
-  <div class="slogan-float dark" style="right:5%;top:55%;--rot:8deg">
+  <div class="slogan-float hero-b dark" style="right:5%;top:55%;--rot:8deg">
     <svg class="generated-splat" data-seed="809" data-color="#E07010" data-dots="#FF8C20" data-spikes="30"></svg>
     <span>SAUCE<br>HAPPENS.</span>
   </div>
 
   <div class="hero-content">
-    <div class="hero-kicker">Merch Concept Drop</div>
-    <h1 class="hero-title">LOKÉ'S<br><span>SAUCE</span> CO.</h1>
-    <div class="hero-sub">Smash N Smoke’s messy little side hustle.</div>
-    <p class="hero-desc">Same bold truck. Different kind of trouble. Sauce jokes, koozies, shirts, and loud little ideas that people remember.</p>
-    <div class="hero-actions">
-      <a class="btn btn-hot" href="#drops">See the Merch Placeholders</a>
-      <a class="btn btn-blue" href="index.html">Back to Smash N Smoke</a>
+    <div class="hero-layout">
+      <div class="hero-copy">
+        <div class="hero-kicker">Merch Concept Drop</div>
+        <h1 class="hero-title">LOKÉ'S<br><span>SAUCE</span> CO.</h1>
+        <div class="hero-sub">Smash N Smoke’s messy little side hustle.</div>
+        <p class="hero-desc">Same bold truck. Different kind of trouble. Sauce jokes, koozies, shirts, and loud little ideas that people remember.</p>
+        <div class="hero-actions">
+          <a class="btn btn-hot" href="#drops">See the Merch</a>
+          <a class="btn btn-blue" href="index.html">Back to Smash N Smoke</a>
+        </div>
+      </div>
+
+      <aside class="featured-drop" aria-label="Featured merch concept">
+        <div class="featured-stage">
+          <svg class="product-svg mock-shadow" viewBox="0 0 420 460" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="teeBlackV5" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#252525"/><stop offset=".38" stop-color="#0e0e0e"/><stop offset=".72" stop-color="#161616"/><stop offset="1" stop-color="#050505"/>
+    </linearGradient>
+    <radialGradient id="printGlow1" cx=".5" cy=".45" r=".55">
+      <stop offset="0" stop-color="#E07010" stop-opacity=".95"/><stop offset="1" stop-color="#7A1000" stop-opacity=".95"/>
+    </radialGradient>
+    <filter id="softShadowTee" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="20" stdDeviation="16" flood-color="#000" flood-opacity=".55"/>
+    </filter>
+  </defs>
+  <ellipse cx="210" cy="420" rx="132" ry="18" fill="#000" opacity=".45"/>
+  <path filter="url(#softShadowTee)" d="M126 42 Q160 18 210 18 Q260 18 294 42 L374 111 L323 152 L302 118 L302 388 Q302 414 276 414 L144 414 Q118 414 118 388 L118 118 L97 152 L46 111 Z" fill="url(#teeBlackV5)"/>
+  <path d="M158 43 Q180 68 210 70 Q240 68 262 43" fill="none" stroke="#2e2e2e" stroke-width="7"/>
+  <path d="M126 50 Q160 74 210 76 Q260 74 294 50" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="3"/>
+  <path d="M118 118 L97 152 L46 111" fill="rgba(255,255,255,.04)"/>
+  <path d="M302 118 L323 152 L374 111" fill="rgba(255,255,255,.04)"/>
+  <path d="M128 122 Q206 96 282 124 Q326 160 293 218 Q315 278 232 278 Q198 318 130 284 Q78 252 104 198 Q72 155 128 122Z" fill="url(#printGlow1)"/>
+  <circle cx="95" cy="145" r="9" fill="#CC1800"/><circle cx="312" cy="130" r="7" fill="#FF8C20"/><circle cx="301" cy="259" r="10" fill="#E07010"/><circle cx="110" cy="295" r="6" fill="#CC1800"/>
+  <text class="mockup-line-1 print-text" x="210" y="174" font-size="28" fill="#F5ECD8">MY SAUCE.</text>
+  <text class="mockup-line-2 print-text" x="210" y="211" font-size="28" fill="#FF8C20">YOUR FACE.</text>
+  <text class="mockup-line-3 print-text" x="210" y="246" font-size="18" fill="#F5ECD8"></text>
+  <text x="210" y="326" text-anchor="middle" font-family="Bangers, cursive" font-size="22" letter-spacing="3" fill="rgba(245,236,216,.72)">LOKÉ'S SAUCE CO.</text>
+</svg>
+        </div>
+        <div class="featured-info">
+          <div class="featured-info-top">
+            <div class="featured-name">Face Sauce Tee</div>
+            <div class="featured-price">$28</div>
+          </div>
+          <div class="featured-saying">“My sauce. Your face.”</div>
+        </div>
+      </aside>
     </div>
   </div>
 </section>
@@ -437,9 +646,11 @@ a{color:inherit}
     <p class="section-sub">Placeholder concepts with more realistic merch staging. Choose a slogan per item below.</p>
   </div>
 
+  <div class="how-it-works"><strong>How this works:</strong> Pick the item. Pick the saying. We’ll print the mess later. These are concept placeholders, not live checkout yet.</div>
+
   <div class="drop-grid">
 
-    <article class="drop-card">
+    <article class="drop-card featured-card">
       <div class="product-stage">
 <svg class="product-svg mock-shadow" viewBox="0 0 420 460" xmlns="http://www.w3.org/2000/svg">
   <defs>
@@ -639,7 +850,7 @@ a{color:inherit}
 </svg>
 </div>
       <div class="product-info">
-        <div class="product-row"><div class="product-name">Sauce Co. Hat</div><div class="product-price soon">Coming Soon</div></div>
+        <div class="product-row"><div class="product-name">Ask Me Sauce Hat</div><div class="product-price soon">Coming Soon</div></div>
         <div class="product-saying">“Ask me about my sauce.”</div>
         <div class="slogan-select-wrap">
           <label class="slogan-select-label">Choose slogan</label>
@@ -683,7 +894,7 @@ a{color:inherit}
 </svg>
 </div>
       <div class="product-info">
-        <div class="product-row"><div class="product-name">Splat Sticker Pack</div><div class="product-price">$5</div></div>
+        <div class="product-row"><div class="product-name">Messy Little Sticker Pack</div><div class="product-price">$5</div></div>
         <div class="product-saying">“Bold flavor. Messy face.”</div>
         <div class="slogan-select-wrap">
           <label class="slogan-select-label">Choose slogan</label>
@@ -843,14 +1054,14 @@ function addBgSplat(layerId, seed, x, y, w, color, opacity=.22){
 [
   ['heroSplatters',11,'18%','14%','230px','#CC1800',.22],
   ['heroSplatters',12,'75%','18%','190px','#E07010',.16],
-  ['heroSplatters',13,'12%','68%','150px','#FF6B00',.10],
-  ['heroSplatters',14,'62%','62%','240px','#8B1400',.12],
-  ['merchSplatters',41,'7%','12%','165px','#CC1800',.10],
+  
+  
+  
   ['merchSplatters',42,'82%','12%','190px','#E07010',.15],
-  ['merchSplatters',43,'76%','74%','170px','#8B1400',.10],
+  
   ['disclaimerSplatters',51,'8%','24%','210px','#CC1800',.12],
   ['disclaimerSplatters',52,'78%','18%','180px','#E07010',.12],
-  ['notifySplatters',61,'12%','28%','150px','#8B1400',.10],
+  
   ['notifySplatters',62,'78%','30%','180px','#CC1800',.10]
 ].forEach(args=>addBgSplat(...args));
 
