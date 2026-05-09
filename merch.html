@@ -1,138 +1,424 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Loké's Sauce Co. — Smash N Smoke Merch</title>
-<meta name="description" content="Loké's Sauce Co. is Smash N Smoke's messy little side hustle. Sauce merch, koozies, shirts, and bold flavor with no apologies." />
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23040810'/%3E%3Cpath d='M13 38c6-17 22-25 38-16-8 2-9 8-5 15-13-5-19 5-33 1z' fill='%23E07010'/%3E%3Ccircle cx='20' cy='20' r='4' fill='%23CC1800'/%3E%3Ccircle cx='47' cy='43' r='3' fill='%23FF6B00'/%3E%3C/svg%3E" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;700&display=swap" rel="stylesheet" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Loké's Sauce Co. — Merch</title>
+<meta name="description" content="Loké's Sauce Co. is Smash N Smoke's messy little side hustle. Sauce merch concepts, shirts, koozies, slogans, and messy flavor."/>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23040810'/%3E%3Cpath d='M13 38c6-17 22-25 38-16-8 2-9 8-5 15-13-5-19 5-33 1z' fill='%23E07010'/%3E%3Ccircle cx='20' cy='20' r='4' fill='%23CC1800'/%3E%3Ccircle cx='47' cy='43' r='3' fill='%23FF6B00'/%3E%3C/svg%3E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;700&display=swap" rel="stylesheet"/>
 <style>
-:root{--black:#030608;--navy:#070C18;--navy2:#0A1020;--panel:#0D1630;--cream:#F5ECD8;--white:#F0F4FF;--dim:rgba(245,236,216,.58);--muted:rgba(245,236,216,.32);--sauce:#E07010;--fire:#CC1800;--hot:#FF2B00;--amber:#FF8C20;--deep:#4D0800;--blue:#1B5FCC;--blue2:#4B96FF}*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}body{background:var(--navy);color:var(--cream);font-family:'Barlow',sans-serif;overflow-x:hidden}body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");opacity:.42;pointer-events:none;z-index:999}a{color:inherit}.topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 2rem;background:linear-gradient(to bottom,rgba(3,6,8,.96),rgba(3,6,8,.62),transparent);backdrop-filter:blur(5px)}.brand-lockup{line-height:1}.brand-mark{font-family:'Bangers',cursive;font-size:clamp(1.2rem,3vw,1.6rem);letter-spacing:4px;color:var(--cream);text-shadow:2px 2px 0 rgba(204,24,0,.42)}.brand-mark span{color:var(--sauce)}.brand-sub{margin-top:.18rem;font-family:'Barlow Condensed',sans-serif;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}.back-btn{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;padding:.65rem 1.15rem;border:1px solid rgba(75,150,255,.4);background:rgba(27,95,204,.14);color:var(--blue2);text-decoration:none;border-radius:4px;transition:.2s;white-space:nowrap}.back-btn:hover{background:rgba(27,95,204,.3);transform:translateX(-2px)}.splatter-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden}.bg-splat{position:absolute;opacity:.16;filter:blur(.2px);transform:rotate(var(--r))}.bg-splat svg{width:100%;height:100%;display:block}.bg-splat.strong{opacity:.28}.bg-splat.faint{opacity:.08}.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;overflow:hidden;background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(204,24,0,.16),transparent 68%),radial-gradient(ellipse 38% 30% at 20% 80%,rgba(224,112,16,.10),transparent 62%),radial-gradient(ellipse 38% 30% at 80% 20%,rgba(27,95,204,.08),transparent 62%),var(--navy)}.hero::after{content:'';position:absolute;inset:auto 0 0;height:3px;background:linear-gradient(to right,transparent,var(--fire),var(--sauce),var(--amber),transparent);opacity:.65}.hero-content{position:relative;z-index:2;max-width:920px}.hero-kicker{display:inline-flex;align-items:center;gap:.75rem;font-family:'Barlow Condensed',sans-serif;color:var(--sauce);letter-spacing:4px;text-transform:uppercase;font-weight:900;font-size:.72rem;margin-bottom:1rem;padding:.55rem 1.1rem;background:rgba(204,24,0,.12);border:1px solid rgba(224,112,16,.28)}.hero-kicker::before,.hero-kicker::after{content:'';width:18px;height:1px;background:rgba(224,112,16,.48)}.hero-title{font-family:'Bangers',cursive;font-size:clamp(3.4rem,13vw,9.2rem);line-height:.86;letter-spacing:6px;color:var(--cream);text-shadow:5px 5px 0 rgba(204,24,0,.48),10px 10px 0 rgba(204,24,0,.14)}.hero-title span{color:var(--sauce)}.hero-sub{font-family:'Permanent Marker',cursive;font-size:clamp(1.25rem,4vw,2.2rem);color:var(--cream);margin-top:1.2rem;text-shadow:2px 2px 0 rgba(204,24,0,.45)}.hero-desc{max-width:560px;margin:1.2rem auto 0;color:var(--dim);line-height:1.75;font-size:.98rem}.hero-actions{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:2rem}.btn{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;padding:.9rem 1.6rem;border-radius:4px;text-decoration:none;transition:.2s}.btn-hot{background:var(--fire);border:1px solid rgba(255,140,32,.42);color:var(--cream)}.btn-hot:hover{background:var(--sauce);transform:translateY(-2px)}.btn-blue{background:rgba(27,95,204,.12);border:1px solid rgba(75,150,255,.36);color:var(--blue2)}.btn-blue:hover{background:rgba(27,95,204,.28);transform:translateY(-2px)}.impact{position:relative;overflow:hidden;padding:5rem 2rem 6rem;background:var(--black)}.section-head{text-align:center;position:relative;z-index:2;max-width:760px;margin:0 auto 3rem}.eyebrow{font-family:'Barlow Condensed',sans-serif;font-size:.72rem;letter-spacing:4px;text-transform:uppercase;color:var(--sauce);font-weight:900;margin-bottom:.5rem}.section-title{font-family:'Bangers',cursive;font-size:clamp(2.4rem,7vw,5rem);letter-spacing:4px;line-height:.95;color:var(--cream);text-shadow:3px 3px 0 rgba(204,24,0,.28)}.section-sub{margin-top:.8rem;color:var(--dim);line-height:1.7}.slogan-grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(12,1fr);gap:1.2rem;max-width:1120px;margin:0 auto}.slogan-card{position:relative;min-height:230px;display:flex;align-items:center;justify-content:center;padding:2rem;overflow:visible}.slogan-card.large{grid-column:span 7;min-height:330px}.slogan-card.tall{grid-column:span 5;min-height:330px}.slogan-card.mid{grid-column:span 4}.slogan-card.wide{grid-column:span 8}.slogan-card.small{grid-column:span 4}.slogan-card svg{position:absolute;inset:-38px;width:calc(100% + 76px);height:calc(100% + 76px);overflow:visible;filter:drop-shadow(0 14px 28px rgba(0,0,0,.35))}.slogan-text{position:relative;z-index:2;text-align:center;font-family:'Permanent Marker',cursive;line-height:1.12;text-shadow:2px 2px 5px rgba(0,0,0,.45);transform:rotate(var(--tilt))}.slogan-text.dark{color:#160600;text-shadow:1px 1px 1px rgba(255,255,255,.12)}.slogan-text.light{color:var(--cream)}.slogan-text.xl{font-size:clamp(1.6rem,4.6vw,3.2rem)}.slogan-text.lg{font-size:clamp(1.35rem,3.6vw,2.2rem)}.slogan-text.md{font-size:clamp(1.05rem,2.6vw,1.6rem)}.merch{position:relative;padding:6rem 2rem;overflow:hidden;background:radial-gradient(ellipse 45% 35% at 75% 15%,rgba(204,24,0,.09),transparent 70%),var(--navy)}.merch::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--fire),var(--sauce),var(--amber),transparent)}.drop-grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.4rem;max-width:1160px;margin:0 auto}.drop-card{background:linear-gradient(180deg,rgba(13,22,48,.96),rgba(5,8,16,.98));border:1px solid rgba(224,112,16,.18);border-radius:10px;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.2);transition:.22s}.drop-card:hover{transform:translateY(-6px);border-color:rgba(224,112,16,.48);box-shadow:0 24px 65px rgba(204,24,0,.16)}.product-stage{min-height:330px;display:flex;align-items:center;justify-content:center;padding:2rem;background:radial-gradient(circle at center,rgba(224,112,16,.08),transparent 55%),#050914;position:relative}.product-stage::before{content:'';position:absolute;inset:22px;border:1px solid rgba(245,236,216,.04);border-radius:8px}.product-svg{position:relative;z-index:2;width:min(100%,245px);height:auto;filter:drop-shadow(0 16px 24px rgba(0,0,0,.42))}.product-info{padding:1.25rem 1.35rem 1.4rem}.product-row{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}.product-name{font-family:'Bangers',cursive;font-size:1.55rem;letter-spacing:2px;color:var(--cream)}.product-price{font-family:'Barlow Condensed',sans-serif;font-weight:900;color:var(--amber);letter-spacing:1px;white-space:nowrap;padding-top:.18rem}.product-price.soon{color:rgba(245,236,216,.42)}.product-saying{color:var(--sauce);font-style:italic;font-size:.84rem;margin:.45rem 0 .9rem;line-height:1.45}.product-meta{display:flex;gap:.5rem;flex-wrap:wrap;font-family:'Barlow Condensed',sans-serif;font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}.pill{border:1px solid rgba(224,112,16,.22);background:rgba(224,112,16,.06);padding:.28rem .65rem;border-radius:999px}.disclaimer{position:relative;padding:5rem 2rem;background:var(--black);overflow:hidden;text-align:center}.disclaimer-box{position:relative;z-index:2;max-width:850px;margin:0 auto;border:1px solid rgba(224,112,16,.25);background:linear-gradient(135deg,rgba(204,24,0,.12),rgba(224,112,16,.06));padding:2.2rem;border-radius:10px}.disclaimer-title{font-family:'Bangers',cursive;font-size:clamp(2rem,6vw,4rem);letter-spacing:4px;color:var(--cream);text-shadow:3px 3px 0 rgba(204,24,0,.28)}.disclaimer-text{font-family:'Permanent Marker',cursive;font-size:clamp(1rem,3vw,1.65rem);color:var(--sauce);margin-top:.75rem;line-height:1.35}.notify{position:relative;padding:5.5rem 2rem;background:var(--navy);text-align:center;overflow:hidden}.notify-card{position:relative;z-index:2;max-width:620px;margin:0 auto}.notify h2{font-family:'Bangers',cursive;font-size:clamp(2.2rem,7vw,4.5rem);letter-spacing:4px;color:var(--cream)}.notify p{color:var(--dim);line-height:1.7;margin:.75rem 0 1.6rem}.fake-form{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}.fake-input{min-width:220px;flex:1;max-width:360px;background:#050914;border:1px solid rgba(224,112,16,.25);color:var(--dim);padding:.95rem 1rem;border-radius:4px;text-align:left}.fake-button{font-family:'Bangers',cursive;letter-spacing:3px;background:var(--fire);color:var(--cream);padding:.95rem 1.4rem;border-radius:4px;border:1px solid rgba(255,140,32,.42)}.back-footer{display:block;text-decoration:none;text-align:center;padding:3rem 2rem;background:linear-gradient(135deg,#050810,#0A1428);border-top:2px solid rgba(27,95,204,.3);transition:.25s}.back-footer:hover{background:linear-gradient(135deg,#061020,#0D1D3F)}.bf-label{font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:4px;text-transform:uppercase;color:rgba(75,150,255,.52)}.bf-name{margin-top:.35rem;font-family:'Bangers',cursive;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:5px;color:var(--white);text-shadow:0 0 28px rgba(27,95,204,.28)}.bf-name span{color:var(--blue2)}.bf-arrow{margin-top:.55rem;font-family:'Barlow Condensed',sans-serif;font-size:.82rem;letter-spacing:3px;text-transform:uppercase;color:rgba(75,150,255,.62)}.page-footer{background:#020406;padding:1.35rem 2rem;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(245,236,216,.18)}.page-footer a{color:rgba(75,150,255,.48);text-decoration:none}.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:none}.click-splat{position:fixed;z-index:9998;pointer-events:none;width:90px;height:90px;transform:translate(-50%,-50%) scale(.15);opacity:.85;animation:pop .75s ease forwards}@keyframes pop{0%{opacity:.9;transform:translate(-50%,-50%) scale(.15) rotate(0deg)}80%{opacity:.7;transform:translate(-50%,-50%) scale(1) rotate(20deg)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.18) rotate(28deg)}}@media(max-width:900px){.slogan-grid{grid-template-columns:1fr;gap:.7rem}.slogan-card,.slogan-card.large,.slogan-card.tall,.slogan-card.mid,.slogan-card.wide,.slogan-card.small{grid-column:span 1;min-height:230px}}@media(max-width:640px){.topbar{padding:.85rem 1rem}.brand-sub{display:none}.back-btn{font-size:.68rem;padding:.58rem .8rem}.hero{padding:7rem 1.2rem 4rem}.hero-title{letter-spacing:4px}.hero-actions{flex-direction:column;max-width:280px;margin-left:auto;margin-right:auto}.btn{width:100%}.impact,.merch,.disclaimer,.notify{padding-left:1.1rem;padding-right:1.1rem}.product-stage{min-height:285px}}
+:root{
+  --black:#030608;
+  --navy:#070C18;
+  --navy2:#0A1020;
+  --panel:#0D1630;
+  --cream:#F5ECD8;
+  --white:#F0F4FF;
+  --dim:rgba(245,236,216,0.58);
+  --muted:rgba(245,236,216,0.32);
+  --sauce:#E07010;
+  --fire:#CC1800;
+  --hot:#FF2B00;
+  --amber:#FF8C20;
+  --deep:#4D0800;
+  --blue:#1B5FCC;
+  --blue2:#4B96FF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:var(--navy);
+  color:var(--cream);
+  font-family:'Barlow',sans-serif;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+  opacity:.42;pointer-events:none;z-index:1000;
+}
+a{color:inherit}
 
-/* ── SCATTERED SLOGAN SPLATS ── */
-.slogan-float {
+/* TOP */
+.topbar{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;justify-content:space-between;align-items:center;gap:1rem;
+  padding:1rem 2rem;
+  background:linear-gradient(to bottom,rgba(3,6,8,.98),rgba(3,6,8,.72),transparent);
+  backdrop-filter:blur(4px);
+}
+.brand-mark{
+  font-family:'Bangers',cursive;
+  font-size:clamp(1.25rem,3vw,1.65rem);
+  letter-spacing:4px;
+  color:var(--cream);
+  text-shadow:2px 2px 0 rgba(204,24,0,.42);
+}
+.brand-mark span{color:var(--sauce)}
+.brand-sub{
+  margin-top:.15rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.62rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.back-btn{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  font-size:.75rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:.65rem 1.15rem;
+  border:1px solid rgba(75,150,255,.4);
+  background:rgba(27,95,204,.14);
+  color:var(--blue2);
+  text-decoration:none;
+  border-radius:4px;
+  white-space:nowrap;
+}
+.back-btn:hover{background:rgba(27,95,204,.3)}
+
+/* SHARED */
+.section-head{text-align:center;position:relative;z-index:2;max-width:780px;margin:0 auto 3rem}
+.eyebrow{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.72rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--sauce);
+  font-weight:900;
+  margin-bottom:.5rem;
+}
+.section-title{
+  font-family:'Bangers',cursive;
+  font-size:clamp(2.4rem,7vw,5rem);
+  letter-spacing:4px;
+  line-height:.95;
+  color:var(--cream);
+  text-shadow:3px 3px 0 rgba(204,24,0,.28);
+}
+.section-sub{margin-top:.8rem;color:var(--dim);line-height:1.7}
+
+/* SPLATTERS */
+.splatter-layer{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.bg-splat{
+  position:absolute;
+  width:220px;
+  height:160px;
+  opacity:.28;
+  transform:rotate(var(--rot));
+  filter:drop-shadow(0 12px 22px rgba(0,0,0,.35));
+}
+.bg-splat svg{width:100%;height:100%;overflow:visible;display:block}
+.slogan-float{
   position:absolute;
   z-index:1;
   pointer-events:none;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  width:260px;
-  height:190px;
+  width:250px;height:180px;
+  display:flex;align-items:center;justify-content:center;
   transform:rotate(var(--rot));
-  opacity:.92;
+  opacity:.85;
 }
-.slogan-float svg {
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  overflow:visible;
-  filter:drop-shadow(0 12px 24px rgba(0,0,0,.38));
-}
-.slogan-float span {
-  position:relative;
-  z-index:2;
+.slogan-float svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible;filter:drop-shadow(0 12px 24px rgba(0,0,0,.42))}
+.slogan-float span{
+  position:relative;z-index:2;
   font-family:'Permanent Marker',cursive;
   color:var(--cream);
   text-align:center;
-  line-height:1.08;
-  font-size:clamp(.92rem,2vw,1.25rem);
-  text-shadow:2px 2px 4px rgba(0,0,0,.58);
+  line-height:1.05;
+  font-size:1.15rem;
+  text-shadow:2px 2px 5px rgba(0,0,0,.7);
   padding:1rem;
 }
-.slogan-float.dark span { color:#150600; text-shadow:1px 1px 0 rgba(255,255,255,.12); }
-.slogan-float.hero-a { left:4%; top:18%; width:220px; height:160px; --rot:-11deg; }
-.slogan-float.hero-b { right:5%; top:62%; width:240px; height:170px; --rot:8deg; }
-.slogan-float.merch-a { left:3%; top:7%; width:210px; height:155px; --rot:10deg; }
-.slogan-float.merch-b { right:4%; top:44%; width:250px; height:180px; --rot:-7deg; }
-.slogan-float.merch-c { left:42%; bottom:3%; width:230px; height:165px; --rot:5deg; opacity:.55; }
-.slogan-float.disc-a { left:6%; top:16%; width:210px; height:150px; --rot:-8deg; opacity:.65; }
-.slogan-float.disc-b { right:7%; bottom:12%; width:230px; height:160px; --rot:9deg; opacity:.7; }
+.slogan-float.dark span{color:#140600;text-shadow:1px 1px 0 rgba(255,255,255,.15)}
 
-.slogan-select-wrap {
-  margin-top:.9rem;
+/* HERO */
+.hero{
+  min-height:76vh;
+  position:relative;
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  padding:7.5rem 2rem 4rem;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse 68% 58% at 50% 40%,rgba(204,24,0,.16),transparent 68%),
+    radial-gradient(ellipse 38% 30% at 20% 80%,rgba(224,112,16,.10),transparent 62%),
+    radial-gradient(ellipse 38% 30% at 80% 20%,rgba(27,95,204,.08),transparent 62%),
+    var(--navy);
 }
-.slogan-select-label {
-  display:block;
+.hero::after{content:'';position:absolute;inset:auto 0 0 0;height:3px;background:linear-gradient(to right,transparent,var(--fire),var(--sauce),var(--amber),transparent);opacity:.65}
+.hero-content{position:relative;z-index:3;max-width:920px}
+.hero-kicker{
+  display:inline-flex;align-items:center;gap:.75rem;
   font-family:'Barlow Condensed',sans-serif;
-  font-size:.68rem;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:rgba(245,236,216,.38);
-  margin-bottom:.35rem;
+  color:var(--sauce);letter-spacing:4px;text-transform:uppercase;font-weight:900;font-size:.72rem;
+  margin-bottom:1rem;padding:.55rem 1.1rem;
+  background:rgba(204,24,0,.12);border:1px solid rgba(224,112,16,.28)
 }
-.slogan-select {
-  width:100%;
-  background:#050914;
+.hero-title{
+  font-family:'Bangers',cursive;
+  font-size:clamp(3.4rem,12vw,8.8rem);
+  line-height:.86;letter-spacing:6px;
   color:var(--cream);
-  border:1px solid rgba(224,112,16,.28);
-  border-radius:4px;
-  padding:.65rem .75rem;
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:.85rem;
-  letter-spacing:.5px;
-  outline:none;
+  text-shadow:5px 5px 0 rgba(204,24,0,.48),10px 10px 0 rgba(204,24,0,.14);
 }
-.slogan-select:focus { border-color:var(--sauce); }
+.hero-title span{color:var(--sauce)}
+.hero-sub{
+  font-family:'Permanent Marker',cursive;
+  font-size:clamp(1.25rem,4vw,2.2rem);
+  color:var(--cream);
+  margin-top:1.2rem;
+  text-shadow:2px 2px 0 rgba(204,24,0,.45)
+}
+.hero-desc{max-width:580px;margin:1.2rem auto 0;color:var(--dim);line-height:1.75;font-size:.98rem}
+.hero-actions{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+.btn{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;
+  padding:.9rem 1.6rem;border-radius:4px;text-decoration:none
+}
+.btn-hot{background:var(--fire);border:1px solid rgba(255,140,32,.42);color:var(--cream)}
+.btn-blue{background:rgba(27,95,204,.12);border:1px solid rgba(75,150,255,.36);color:var(--blue2)}
 
-.page-footer-logo {
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:.9rem;
+/* QUICK STRIP */
+.quick-strip{
+  position:relative;z-index:5;
+  background:#030608;border-top:1px solid rgba(224,112,16,.28);border-bottom:1px solid rgba(224,112,16,.18);
+  text-align:center;padding:1rem
 }
-.page-footer-logo img {
-  height:46px;
-  width:auto;
-  border-radius:6px;
-  opacity:.9;
-  filter:drop-shadow(0 0 12px rgba(75,150,255,.35));
-  transition:opacity .2s, transform .2s, filter .2s;
+.quick-strip a{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;letter-spacing:3px;text-transform:uppercase;
+  color:var(--sauce);text-decoration:none;font-size:.85rem
 }
-.page-footer-logo img:hover {
-  opacity:1;
-  transform:translateY(-2px) scale(1.03);
-  filter:drop-shadow(0 0 18px rgba(75,150,255,.55));
+
+/* MERCH */
+.merch{
+  position:relative;
+  padding:5rem 2rem 6rem;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse 45% 35% at 75% 15%,rgba(204,24,0,.09),transparent 70%),
+    var(--navy);
+}
+.merch::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--fire),var(--sauce),var(--amber),transparent)}
+.drop-grid{
+  position:relative;z-index:5;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(265px,1fr));
+  gap:1.4rem;
+  max-width:1160px;margin:0 auto
+}
+.drop-card{
+  background:linear-gradient(180deg,rgba(13,22,48,.96),rgba(5,8,16,.98));
+  border:1px solid rgba(224,112,16,.18);
+  border-radius:10px;overflow:hidden;
+  box-shadow:0 20px 50px rgba(0,0,0,.22)
+}
+.drop-card:hover{transform:translateY(-4px);border-color:rgba(224,112,16,.48)}
+.product-stage{
+  min-height:330px;
+  display:flex;align-items:center;justify-content:center;
+  padding:2rem;
+  background:radial-gradient(circle at center,rgba(224,112,16,.08),transparent 55%),#050914;
+  position:relative
+}
+.product-stage::before{content:'';position:absolute;inset:22px;border:1px solid rgba(245,236,216,.04);border-radius:8px}
+.product-svg{position:relative;z-index:2;width:min(100%,245px);height:auto;filter:drop-shadow(0 16px 24px rgba(0,0,0,.42))}
+.product-info{padding:1.25rem 1.35rem 1.4rem}
+.product-row{display:flex;justify-content:space-between;gap:1rem;align-items:flex-start}
+.product-name{
+  font-family:'Bangers',cursive;
+  font-size:1.55rem;letter-spacing:2px;color:var(--cream)
+}
+.product-price{
+  font-family:'Barlow Condensed',sans-serif;font-weight:900;color:var(--amber);letter-spacing:1px;white-space:nowrap;padding-top:.18rem
+}
+.product-price.soon{color:rgba(245,236,216,.42)}
+.product-saying{color:var(--sauce);font-style:italic;font-size:.84rem;margin:.45rem 0 .9rem;line-height:1.45}
+.slogan-select-wrap{margin:.85rem 0 1rem}
+.slogan-select-label{
+  display:block;font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(245,236,216,.38);margin-bottom:.35rem
+}
+.slogan-select{
+  width:100%;
+  background:#050914;color:var(--cream);
+  border:1px solid rgba(224,112,16,.28);
+  border-radius:4px;padding:.65rem .75rem;
+  font-family:'Barlow Condensed',sans-serif;font-size:.9rem;letter-spacing:.5px;outline:none
+}
+.product-meta{display:flex;gap:.5rem;flex-wrap:wrap;font-family:'Barlow Condensed',sans-serif;font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.pill{border:1px solid rgba(224,112,16,.22);background:rgba(224,112,16,.06);padding:.28rem .65rem;border-radius:999px}
+
+/* DISCLAIMER */
+.disclaimer{
+  position:relative;
+  padding:5rem 2rem;
+  background:var(--black);
+  overflow:hidden;
+  text-align:center
+}
+.disclaimer-box{
+  position:relative;z-index:4;
+  max-width:850px;margin:0 auto;
+  border:1px solid rgba(224,112,16,.25);
+  background:linear-gradient(135deg,rgba(204,24,0,.12),rgba(224,112,16,.06));
+  padding:2.2rem;border-radius:10px
+}
+.disclaimer-title{
+  font-family:'Bangers',cursive;font-size:clamp(2rem,6vw,4rem);letter-spacing:4px;color:var(--cream);text-shadow:3px 3px 0 rgba(204,24,0,.28)
+}
+.disclaimer-text{
+  font-family:'Permanent Marker',cursive;font-size:clamp(1rem,3vw,1.65rem);color:var(--sauce);margin-top:.75rem;line-height:1.35
+}
+
+/* NOTIFY */
+.notify{
+  position:relative;padding:5.5rem 2rem;background:var(--navy);text-align:center;overflow:hidden
+}
+.notify-card{position:relative;z-index:4;max-width:620px;margin:0 auto}
+.notify h2{font-family:'Bangers',cursive;font-size:clamp(2.2rem,7vw,4.5rem);letter-spacing:4px;color:var(--cream)}
+.notify p{color:var(--dim);line-height:1.7;margin:.75rem 0 1.6rem}
+.fake-form{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+.fake-input{min-width:220px;flex:1;max-width:360px;background:#050914;border:1px solid rgba(224,112,16,.25);color:var(--dim);padding:.95rem 1rem;border-radius:4px;text-align:left}
+.fake-button{font-family:'Bangers',cursive;letter-spacing:3px;background:var(--fire);color:var(--cream);padding:.95rem 1.4rem;border-radius:4px;border:1px solid rgba(255,140,32,.42)}
+
+/* FOOTERS */
+.back-footer{
+  display:block;text-decoration:none;text-align:center;padding:3rem 2rem;
+  background:linear-gradient(135deg,#050810,#0A1428);border-top:2px solid rgba(27,95,204,.3)
+}
+.bf-label{font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:4px;text-transform:uppercase;color:rgba(75,150,255,.52)}
+.bf-name{margin-top:.35rem;font-family:'Bangers',cursive;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:5px;color:var(--white);text-shadow:0 0 28px rgba(27,95,204,.28)}
+.bf-name span{color:var(--blue2)}
+.bf-arrow{margin-top:.55rem;font-family:'Barlow Condensed',sans-serif;font-size:.82rem;letter-spacing:3px;text-transform:uppercase;color:rgba(75,150,255,.62)}
+.page-footer{
+  background:#020406;
+  padding:1.5rem 2rem;
+  text-align:center;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(245,236,216,.18)
+}
+.page-footer-logo{display:inline-flex;align-items:center;justify-content:center;margin-bottom:.9rem}
+.page-footer-logo img{height:46px;width:auto;border-radius:6px;opacity:.92;filter:drop-shadow(0 0 12px rgba(75,150,255,.35))}
+.page-footer a{color:rgba(75,150,255,.55);text-decoration:none}
+
+/* CLICK SPLAT */
+.click-splat{
+  position:fixed;z-index:9998;pointer-events:none;width:90px;height:90px;transform:translate(-50%,-50%) scale(.15);opacity:.85;animation:pop .75s ease forwards
+}
+@keyframes pop{
+  0%{opacity:.9;transform:translate(-50%,-50%) scale(.15) rotate(0deg)}
+  80%{opacity:.7;transform:translate(-50%,-50%) scale(1) rotate(20deg)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.18) rotate(28deg)}
 }
 
 @media(max-width:900px){
-  .slogan-float { opacity:.22; width:180px!important; height:130px!important; }
-  .slogan-float span { display:none; }
+  .slogan-float{opacity:.2;width:170px!important;height:125px!important}
+  .slogan-float span{display:none}
 }
-
+@media(max-width:640px){
+  .topbar{padding:.85rem 1rem}
+  .brand-sub{display:none}
+  .back-btn{font-size:.68rem;padding:.58rem .8rem}
+  .hero{min-height:70vh;padding:7rem 1.2rem 4rem}
+  .hero-title{letter-spacing:4px}
+  .hero-actions{flex-direction:column;max-width:280px;margin-left:auto;margin-right:auto}
+  .btn{width:100%}
+  .merch,.disclaimer,.notify{padding-left:1.1rem;padding-right:1.1rem}
+}
 </style>
 </head>
 <body>
-<nav class="topbar"><div class="brand-lockup"><div class="brand-mark">LOKÉ'S <span>SAUCE</span> CO.</div><div class="brand-sub">An Extension of Smash N Smoke</div></div><a href="index.html" class="back-btn">← Back to the Truck</a></nav>
-<section class="hero"><div class="splatter-layer" id="heroSplatters"></div>
-  <div class="slogan-float hero-a">
+
+<nav class="topbar">
+  <div>
+    <div class="brand-mark">LOKÉ'S <span>SAUCE</span> CO.</div>
+    <div class="brand-sub">An Extension of Smash N Smoke</div>
+  </div>
+  <a href="index.html" class="back-btn">← Back to the Truck</a>
+</nav>
+
+<section class="hero">
+  <div class="splatter-layer" id="heroSplatters"></div>
+
+  <div class="slogan-float" style="left:4%;top:21%;--rot:-11deg">
     <svg class="generated-splat" data-seed="808" data-color="#CC1800" data-dots="#FF8C20" data-spikes="34"></svg>
-    <span>MY SAUCE.<br/>YOUR FACE.</span>
+    <span>MY SAUCE.<br>YOUR FACE.</span>
   </div>
-  <div class="slogan-float hero-b dark">
+  <div class="slogan-float dark" style="right:5%;top:55%;--rot:8deg">
     <svg class="generated-splat" data-seed="809" data-color="#E07010" data-dots="#FF8C20" data-spikes="30"></svg>
-    <span>SAUCE<br/>HAPPENS.</span>
+    <span>SAUCE<br>HAPPENS.</span>
   </div>
-<div class="hero-content"><div class="hero-kicker">Merch Concept Drop</div><h1 class="hero-title">LOKÉ'S<br><span>SAUCE</span> CO.</h1><div class="hero-sub">Smash N Smoke’s messy little side hustle.</div><p class="hero-desc">Same bold truck. Different kind of trouble. Sauce jokes, koozies, shirts, and loud little ideas that people remember.</p><div class="hero-actions"><a class="btn btn-hot" href="#drops">See the Drops</a><a class="btn btn-blue" href="index.html">Back to Smash N Smoke</a></div></div></section>
-<section class="merch" id="drops"><div class="splatter-layer" id="merchSplatters"></div>
-  <div class="slogan-float merch-a">
+
+  <div class="hero-content">
+    <div class="hero-kicker">Merch Concept Drop</div>
+    <h1 class="hero-title">LOKÉ'S<br><span>SAUCE</span> CO.</h1>
+    <div class="hero-sub">Smash N Smoke’s messy little side hustle.</div>
+    <p class="hero-desc">Same bold truck. Different kind of trouble. Sauce jokes, koozies, shirts, and loud little ideas that people remember.</p>
+    <div class="hero-actions">
+      <a class="btn btn-hot" href="#drops">See the Merch Placeholders</a>
+      <a class="btn btn-blue" href="index.html">Back to Smash N Smoke</a>
+    </div>
+  </div>
+</section>
+
+<section class="quick-strip">
+  <a href="#drops">↓ Jump to Merch Placeholders ↓</a>
+</section>
+
+<section class="merch" id="drops">
+  <div class="splatter-layer" id="merchSplatters"></div>
+
+  <div class="slogan-float" style="left:3%;top:8%;--rot:10deg">
     <svg class="generated-splat" data-seed="810" data-color="#8B1400" data-dots="#CC1800" data-spikes="32"></svg>
-    <span>GET MY<br/>SAUCE ON<br/>YOUR FACE</span>
+    <span>GET MY<br>SAUCE ON<br>YOUR FACE</span>
   </div>
-  <div class="slogan-float merch-b dark">
+  <div class="slogan-float dark" style="right:4%;top:39%;--rot:-7deg">
     <svg class="generated-splat" data-seed="811" data-color="#FF6B00" data-dots="#E07010" data-spikes="36"></svg>
-    <span>BOLD FLAVOR.<br/>MESSY FACE.</span>
+    <span>BOLD FLAVOR.<br>MESSY FACE.</span>
   </div>
-  <div class="slogan-float merch-c">
+  <div class="slogan-float" style="left:43%;bottom:1%;--rot:5deg;opacity:.45">
     <svg class="generated-splat" data-seed="812" data-color="#6B0A00" data-dots="#CC1800" data-spikes="28"></svg>
-    <span>ASK ME<br/>ABOUT MY<br/>SAUCE.</span>
+    <span>ASK ME<br>ABOUT MY<br>SAUCE.</span>
   </div>
-<div class="section-head reveal"><div class="eyebrow">Product Drops</div><h2 class="section-title">Wear The Sauce</h2><p class="section-sub">Placeholder concepts with more realistic merch staging. Swap these later with real Printify, Printful, Shopify, Square, or order-form links.</p></div><div class="drop-grid">
-<article class="drop-card reveal"><div class="product-stage"><svg class="product-svg" viewBox="0 0 360 420" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="shirtBlack" x1="0" x2="1"><stop offset="0" stop-color="#080808"/><stop offset=".55" stop-color="#151515"/><stop offset="1" stop-color="#050505"/></linearGradient><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#000" flood-opacity=".55"/></filter></defs><path filter="url(#shadow)" d="M112 42 Q138 22 180 22 Q222 22 248 42 L315 100 L274 132 L256 106 L256 374 Q256 394 236 394 L124 394 Q104 394 104 374 L104 106 L86 132 L45 100 Z" fill="url(#shirtBlack)"/><path d="M135 43 Q155 62 180 62 Q205 62 225 43" fill="none" stroke="#2b2b2b" stroke-width="5"/><g transform="translate(180 180)"><path d="M-78 -30 C-72 -72 -24 -76 4 -56 C38 -76 92 -48 76 4 C96 36 50 72 8 58 C-22 82 -78 56 -65 16 C-94 3 -100 -16 -78 -30Z" fill="#CC1800" opacity=".94"/><circle cx="-86" cy="-56" r="8" fill="#E07010"/><circle cx="91" cy="-24" r="5" fill="#FF8C20"/><circle cx="78" cy="58" r="7" fill="#E07010"/></g><text x="180" y="166" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="22" fill="#F5ECD8">MY SAUCE.</text><text x="180" y="197" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="22" fill="#FF8C20">YOUR FACE.</text><text x="180" y="252" text-anchor="middle" font-family="Bangers, cursive" font-size="18" letter-spacing="2" fill="rgba(245,236,216,.6)">LOKÉ'S SAUCE CO.</text></svg></div><div class="product-info"><div class="product-row"><div class="product-name">Face Sauce Tee</div><div class="product-price">$28</div></div><div class="product-saying">“My sauce. Your face.”</div>
+
+  <div class="section-head">
+    <div class="eyebrow">Product Drops</div>
+    <h2 class="section-title">Wear The Sauce</h2>
+    <p class="section-sub">Placeholder concepts with more realistic merch staging. Choose a slogan per item below.</p>
+  </div>
+
+  <div class="drop-grid">
+
+    <article class="drop-card">
+      <div class="product-stage">
+        <svg class="product-svg" viewBox="0 0 360 420" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="shirtBlack" x1="0" x2="1">
+              <stop offset="0" stop-color="#080808"/><stop offset="0.55" stop-color="#151515"/><stop offset="1" stop-color="#050505"/>
+            </linearGradient>
+            <filter id="shadow1" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="14" stdDeviation="12" flood-color="#000" flood-opacity=".55"/>
+            </filter>
+          </defs>
+          <path filter="url(#shadow1)" d="M112 42 Q138 22 180 22 Q222 22 248 42 L315 100 L274 132 L256 106 L256 374 Q256 394 236 394 L124 394 Q104 394 104 374 L104 106 L86 132 L45 100 Z" fill="url(#shirtBlack)"/>
+          <path d="M135 43 Q155 62 180 62 Q205 62 225 43" fill="none" stroke="#2b2b2b" stroke-width="5"/>
+          <g transform="translate(180 180)">
+            <path d="M-78 -30 C-72 -72 -24 -76 4 -56 C38 -76 92 -48 76 4 C96 36 50 72 8 58 C-22 82 -78 56 -65 16 C-94 3 -100 -16 -78 -30Z" fill="#CC1800" opacity=".94"/>
+            <circle cx="-86" cy="-56" r="8" fill="#E07010"/><circle cx="91" cy="-24" r="5" fill="#FF8C20"/><circle cx="78" cy="58" r="7" fill="#E07010"/>
+          </g>
+          <text class="mockup-line-1" x="180" y="166" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="22" fill="#F5ECD8">MY SAUCE.</text>
+          <text class="mockup-line-2" x="180" y="197" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="22" fill="#FF8C20">YOUR FACE.</text>
+          <text x="180" y="252" text-anchor="middle" font-family="Bangers, cursive" font-size="18" letter-spacing="2" fill="rgba(245,236,216,.6)">LOKÉ'S SAUCE CO.</text>
+        </svg>
+      </div>
+      <div class="product-info">
+        <div class="product-row"><div class="product-name">Face Sauce Tee</div><div class="product-price">$28</div></div>
+        <div class="product-saying">“My sauce. Your face.”</div>
         <div class="slogan-select-wrap">
           <label class="slogan-select-label">Choose slogan</label>
           <select class="slogan-select">
@@ -145,13 +431,36 @@
             <option>Ask me about my sauce.</option>
           </select>
         </div>
-        <div class="product-meta"><span class="pill">Black Tee</span><span class="pill">Concept Price</span></div></div></article>
-<article class="drop-card reveal"><div class="product-stage"><svg class="product-svg" viewBox="0 0 300 420" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="koozie1" x1="0" x2="1"><stop offset="0" stop-color="#050505"/><stop offset=".45" stop-color="#17110E"/><stop offset="1" stop-color="#050505"/></linearGradient></defs><ellipse cx="150" cy="65" rx="82" ry="24" fill="#232323"/><rect x="68" y="65" width="164" height="270" rx="18" fill="url(#koozie1)"/><ellipse cx="150" cy="335" rx="82" ry="24" fill="#070707"/><path d="M76 92 C118 72 188 78 224 96" stroke="rgba(255,255,255,.08)" stroke-width="6" fill="none"/><g transform="translate(150 190)"><path d="M-58 -42 C-40 -76 16 -72 32 -38 C78 -28 70 40 18 46 C-8 76 -70 44 -48 6 C-82 -2 -86 -28 -58 -42Z" fill="#E07010"/><circle cx="-76" cy="-28" r="7" fill="#CC1800"/><circle cx="68" cy="14" r="6" fill="#FF8C20"/><circle cx="-44" cy="60" r="5" fill="#CC1800"/></g><text x="150" y="170" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="18" fill="#160600">EVERYONE</text><text x="150" y="195" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="18" fill="#160600">LOVES MY</text><text x="150" y="220" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="18" fill="#160600">SAUCE</text><text x="150" y="280" text-anchor="middle" font-family="Bangers, cursive" font-size="16" letter-spacing="2" fill="#E07010">LOKÉ'S SAUCE CO.</text></svg></div><div class="product-info"><div class="product-row"><div class="product-name">Messy Face Koozie</div><div class="product-price">$8</div></div><div class="product-saying">“Everyone loves my sauce on their face.”</div>
+        <div class="product-meta"><span class="pill">Black Tee</span><span class="pill">Concept Price</span></div>
+      </div>
+    </article>
+
+    <article class="drop-card">
+      <div class="product-stage">
+        <svg class="product-svg" viewBox="0 0 300 420" xmlns="http://www.w3.org/2000/svg">
+          <defs><linearGradient id="koozie1" x1="0" x2="1"><stop offset="0" stop-color="#050505"/><stop offset=".45" stop-color="#17110E"/><stop offset="1" stop-color="#050505"/></linearGradient></defs>
+          <ellipse cx="150" cy="65" rx="82" ry="24" fill="#232323"/>
+          <rect x="68" y="65" width="164" height="270" rx="18" fill="url(#koozie1)"/>
+          <ellipse cx="150" cy="335" rx="82" ry="24" fill="#070707"/>
+          <path d="M76 92 C118 72 188 78 224 96" stroke="rgba(255,255,255,.08)" stroke-width="6" fill="none"/>
+          <g transform="translate(150 190)">
+            <path d="M-58 -42 C-40 -76 16 -72 32 -38 C78 -28 70 40 18 46 C-8 76 -70 44 -48 6 C-82 -2 -86 -28 -58 -42Z" fill="#E07010"/>
+            <circle cx="-76" cy="-28" r="7" fill="#CC1800"/><circle cx="68" cy="14" r="6" fill="#FF8C20"/><circle cx="-44" cy="60" r="5" fill="#CC1800"/>
+          </g>
+          <text class="mockup-line-1" x="150" y="170" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="18" fill="#160600">EVERYONE</text>
+          <text class="mockup-line-2" x="150" y="195" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="18" fill="#160600">LOVES MY</text>
+          <text class="mockup-line-3" x="150" y="220" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="18" fill="#160600">SAUCE</text>
+          <text x="150" y="280" text-anchor="middle" font-family="Bangers, cursive" font-size="16" letter-spacing="2" fill="#E07010">LOKÉ'S SAUCE CO.</text>
+        </svg>
+      </div>
+      <div class="product-info">
+        <div class="product-row"><div class="product-name">Messy Face Koozie</div><div class="product-price">$8</div></div>
+        <div class="product-saying">“Everyone loves my sauce on their face.”</div>
         <div class="slogan-select-wrap">
           <label class="slogan-select-label">Choose slogan</label>
           <select class="slogan-select">
-            <option>My sauce. Your face.</option>
             <option>Everyone loves my sauce on their face.</option>
+            <option>My sauce. Your face.</option>
             <option>Get my sauce on your face.</option>
             <option>Bold flavor. Messy face.</option>
             <option>Sauce happens.</option>
@@ -159,64 +468,278 @@
             <option>Ask me about my sauce.</option>
           </select>
         </div>
-        <div class="product-meta"><span class="pill">Koozie</span><span class="pill">Concept Price</span></div></div></article>
-<article class="drop-card reveal"><div class="product-stage"><svg class="product-svg" viewBox="0 0 360 420" xmlns="http://www.w3.org/2000/svg"><path d="M112 42 Q138 22 180 22 Q222 22 248 42 L315 100 L274 132 L256 106 L256 374 Q256 394 236 394 L124 394 Q104 394 104 374 L104 106 L86 132 L45 100 Z" fill="#F5ECD8"/><path d="M135 43 Q155 62 180 62 Q205 62 225 43" fill="none" stroke="#D8CCB6" stroke-width="5"/><path d="M120 100 C165 75 223 92 240 126 C282 158 260 238 193 230 C151 272 86 231 111 179 C68 151 76 111 120 100Z" fill="#CC1800"/><circle cx="92" cy="126" r="9" fill="#E07010"/><circle cx="258" cy="104" r="6" fill="#FF8C20"/><circle cx="258" cy="246" r="11" fill="#CC1800"/><circle cx="97" cy="247" r="6" fill="#E07010"/><text x="180" y="155" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="21" fill="#F5ECD8">GET MY</text><text x="180" y="188" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="21" fill="#F5ECD8">SAUCE ON</text><text x="180" y="221" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="21" fill="#F5ECD8">YOUR FACE</text><text x="180" y="292" text-anchor="middle" font-family="Bangers, cursive" font-size="19" letter-spacing="3" fill="#CC1800">SMASH N SMOKE</text></svg></div><div class="product-info"><div class="product-row"><div class="product-name">Sauce Impact Tee</div><div class="product-price soon">Coming Soon</div></div><div class="product-saying">“Get my sauce on your face.”</div>
+        <div class="product-meta"><span class="pill">Koozie</span><span class="pill">Concept Price</span></div>
+      </div>
+    </article>
+
+    <article class="drop-card">
+      <div class="product-stage">
+        <svg class="product-svg" viewBox="0 0 360 420" xmlns="http://www.w3.org/2000/svg">
+          <path d="M112 42 Q138 22 180 22 Q222 22 248 42 L315 100 L274 132 L256 106 L256 374 Q256 394 236 394 L124 394 Q104 394 104 374 L104 106 L86 132 L45 100 Z" fill="#F5ECD8"/>
+          <path d="M135 43 Q155 62 180 62 Q205 62 225 43" fill="none" stroke="#D8CCB6" stroke-width="5"/>
+          <path d="M120 100 C165 75 223 92 240 126 C282 158 260 238 193 230 C151 272 86 231 111 179 C68 151 76 111 120 100Z" fill="#CC1800"/>
+          <circle cx="92" cy="126" r="9" fill="#E07010"/><circle cx="258" cy="104" r="6" fill="#FF8C20"/><circle cx="258" cy="246" r="11" fill="#CC1800"/><circle cx="97" cy="247" r="6" fill="#E07010"/>
+          <text class="mockup-line-1" x="180" y="155" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="21" fill="#F5ECD8">GET MY</text>
+          <text class="mockup-line-2" x="180" y="188" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="21" fill="#F5ECD8">SAUCE ON</text>
+          <text class="mockup-line-3" x="180" y="221" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="21" fill="#F5ECD8">YOUR FACE</text>
+          <text x="180" y="292" text-anchor="middle" font-family="Bangers, cursive" font-size="19" letter-spacing="3" fill="#CC1800">SMASH N SMOKE</text>
+        </svg>
+      </div>
+      <div class="product-info">
+        <div class="product-row"><div class="product-name">Sauce Impact Tee</div><div class="product-price soon">Coming Soon</div></div>
+        <div class="product-saying">“Get my sauce on your face.”</div>
         <div class="slogan-select-wrap">
           <label class="slogan-select-label">Choose slogan</label>
           <select class="slogan-select">
+            <option>Get my sauce on your face.</option>
             <option>My sauce. Your face.</option>
             <option>Everyone loves my sauce on their face.</option>
-            <option>Get my sauce on your face.</option>
             <option>Bold flavor. Messy face.</option>
             <option>Sauce happens.</option>
             <option>Face first. Sauce second.</option>
             <option>Ask me about my sauce.</option>
           </select>
         </div>
-        <div class="product-meta"><span class="pill">Cream Tee</span><span class="pill">Drop Later</span></div></div></article>
-<article class="drop-card reveal"><div class="product-stage"><svg class="product-svg" viewBox="0 0 300 420" xmlns="http://www.w3.org/2000/svg"><ellipse cx="150" cy="65" rx="82" ry="24" fill="#1C0B05"/><rect x="68" y="65" width="164" height="270" rx="18" fill="#7B1400"/><ellipse cx="150" cy="335" rx="82" ry="24" fill="#3B0800"/><path d="M82 116 C122 96 174 103 207 126 C238 148 226 214 171 205 C141 240 87 214 100 171 C67 154 60 130 82 116Z" fill="#030608"/><circle cx="216" cy="105" r="8" fill="#030608"/><circle cx="74" cy="203" r="6" fill="#030608"/><circle cx="222" cy="232" r="5" fill="#030608"/><text x="150" y="160" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="20" fill="#F5ECD8">SAUCE</text><text x="150" y="190" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="20" fill="#F5ECD8">HAPPENS.</text><text x="150" y="265" text-anchor="middle" font-family="Bangers, cursive" font-size="18" letter-spacing="3" fill="#FF8C20">LOKÉ'S</text></svg></div><div class="product-info"><div class="product-row"><div class="product-name">Sauce Happens Koozie</div><div class="product-price soon">Coming Soon</div></div><div class="product-saying">“Sauce happens.”</div>
+        <div class="product-meta"><span class="pill">Cream Tee</span><span class="pill">Drop Later</span></div>
+      </div>
+    </article>
+
+    <article class="drop-card">
+      <div class="product-stage">
+        <svg class="product-svg" viewBox="0 0 300 420" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="150" cy="65" rx="82" ry="24" fill="#1C0B05"/>
+          <rect x="68" y="65" width="164" height="270" rx="18" fill="#7B1400"/>
+          <ellipse cx="150" cy="335" rx="82" ry="24" fill="#3B0800"/>
+          <path d="M82 116 C122 96 174 103 207 126 C238 148 226 214 171 205 C141 240 87 214 100 171 C67 154 60 130 82 116Z" fill="#030608"/>
+          <circle cx="216" cy="105" r="8" fill="#030608"/><circle cx="74" cy="203" r="6" fill="#030608"/><circle cx="222" cy="232" r="5" fill="#030608"/>
+          <text class="mockup-line-1" x="150" y="160" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="20" fill="#F5ECD8">SAUCE</text>
+          <text class="mockup-line-2" x="150" y="190" text-anchor="middle" font-family="Permanent Marker, cursive" font-size="20" fill="#F5ECD8">HAPPENS.</text>
+          <text x="150" y="265" text-anchor="middle" font-family="Bangers, cursive" font-size="18" letter-spacing="3" fill="#FF8C20">LOKÉ'S</text>
+        </svg>
+      </div>
+      <div class="product-info">
+        <div class="product-row"><div class="product-name">Sauce Happens Koozie</div><div class="product-price soon">Coming Soon</div></div>
+        <div class="product-saying">“Sauce happens.”</div>
         <div class="slogan-select-wrap">
           <label class="slogan-select-label">Choose slogan</label>
           <select class="slogan-select">
+            <option>Sauce happens.</option>
             <option>My sauce. Your face.</option>
             <option>Everyone loves my sauce on their face.</option>
             <option>Get my sauce on your face.</option>
             <option>Bold flavor. Messy face.</option>
-            <option>Sauce happens.</option>
             <option>Face first. Sauce second.</option>
             <option>Ask me about my sauce.</option>
           </select>
         </div>
-        <div class="product-meta"><span class="pill">Red Koozie</span><span class="pill">Concept</span></div></div></article>
-</div></section>
-<section class="disclaimer"><div class="splatter-layer" id="disclaimerSplatters"></div>
-  <div class="slogan-float disc-a">
+        <div class="product-meta"><span class="pill">Red Koozie</span><span class="pill">Concept</span></div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="disclaimer">
+  <div class="splatter-layer" id="disclaimerSplatters"></div>
+  <div class="slogan-float" style="left:6%;top:14%;--rot:-8deg;opacity:.6">
     <svg class="generated-splat" data-seed="813" data-color="#A01600" data-dots="#FF2B00" data-spikes="30"></svg>
-    <span>FACE FIRST.<br/>SAUCE SECOND.</span>
+    <span>FACE FIRST.<br>SAUCE SECOND.</span>
   </div>
-  <div class="slogan-float disc-b dark">
+  <div class="slogan-float dark" style="right:7%;bottom:9%;--rot:9deg;opacity:.65">
     <svg class="generated-splat" data-seed="814" data-color="#E07010" data-dots="#FF8C20" data-spikes="34"></svg>
-    <span>REPEAT<br/>CRAVINGS.</span>
+    <span>REPEAT<br>CRAVINGS.</span>
   </div>
-<div class="disclaimer-box reveal"><div class="eyebrow">Fine Print</div><h2 class="disclaimer-title">No Apologies</h2><div class="disclaimer-text">Not responsible for stained shirts, messy faces, or repeat cravings.</div></div></section>
-<section class="notify"><div class="splatter-layer" id="notifySplatters"></div><div class="notify-card reveal"><div class="eyebrow">Placeholder Store</div><h2>Merch Drops Soon</h2><p>This is a concept page for now. Swap this section later with a Printify, Printful, Shopify, Square, or order-form link.</p><div class="fake-form"><div class="fake-input">email@example.com</div><div class="fake-button">Notify Me</div></div></div></section>
-<a class="back-footer" href="index.html"><div class="bf-label">Back to the main truck</div><div class="bf-name">SMASH <span>N</span> SMOKE</div><div class="bf-arrow">Go Home →</div></a><footer class="page-footer">
+
+  <div class="disclaimer-box">
+    <div class="eyebrow">Fine Print</div>
+    <h2 class="disclaimer-title">No Apologies</h2>
+    <div class="disclaimer-text">Not responsible for stained shirts, messy faces, or repeat cravings.</div>
+  </div>
+</section>
+
+<section class="notify">
+  <div class="splatter-layer" id="notifySplatters"></div>
+  <div class="notify-card">
+    <div class="eyebrow">Placeholder Store</div>
+    <h2>Merch Drops Soon</h2>
+    <p>This is a concept page for now. Swap this section later with a Printify, Printful, Shopify, Square, or order-form link.</p>
+    <div class="fake-form">
+      <div class="fake-input">email@example.com</div>
+      <div class="fake-button">Notify Me</div>
+    </div>
+  </div>
+</section>
+
+<a class="back-footer" href="index.html">
+  <div class="bf-label">Back to the main truck</div>
+  <div class="bf-name">SMASH <span>N</span> SMOKE</div>
+  <div class="bf-arrow">Go Home →</div>
+</a>
+
+<footer class="page-footer">
   <a class="page-footer-logo" href="https://aalbertsberg.us" target="_blank" rel="noopener">
     <img src="logo.png" alt="A³ Logo">
   </a>
-  <div>
-    © Loké's Sauce Co. · A Smash N Smoke merch concept · Built by
-    <a href="https://aalbertsberg.us" target="_blank" rel="noopener">A³</a>
-  </div>
+  <div>© Loké's Sauce Co. · A Smash N Smoke merch concept · Built by <a href="https://aalbertsberg.us" target="_blank" rel="noopener">A³</a></div>
 </footer>
+
 <script>
-function mulberry32(seed){return function(){let t=seed+=0x6D2B79F5;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
-function impactPath(seed,spikes){const rand=mulberry32(seed),pts=[],count=spikes||32;for(let i=0;i<count;i++){const a=Math.PI*2*i/count,isSpike=rand()>.55,base=isSpike?72+rand()*42:48+rand()*18,sx=1.22+(rand()-.5)*.18,sy=.86+(rand()-.5)*.18;pts.push([Math.cos(a)*base*sx,Math.sin(a)*base*sy])}let d=`M ${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)} `;for(let i=1;i<pts.length;i++)d+=`L ${pts[i][0].toFixed(1)} ${pts[i][1].toFixed(1)} `;return d+'Z'}
-function drawSplat(svg){const seed=Number(svg.dataset.seed||1),color=svg.dataset.color||'#CC1800',dots=svg.dataset.dots||'#E07010',spikes=Number(svg.dataset.spikes||32),rand=mulberry32(seed+900);svg.setAttribute('viewBox','-180 -145 360 290');svg.setAttribute('preserveAspectRatio','xMidYMid meet');let out=`<path d="${impactPath(seed,spikes)}" fill="${color}" opacity="0.94"/>`+`<path d="${impactPath(seed+3,spikes)}" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2" opacity=".5"/>`;for(let i=0;i<12;i++){const a=rand()*Math.PI*2,len=75+rand()*85,start=65+rand()*24,x1=Math.cos(a)*start,y1=Math.sin(a)*start,x2=Math.cos(a)*len,y2=Math.sin(a)*len;out+=`<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${color}" stroke-width="${(1+rand()*2.5).toFixed(1)}" stroke-linecap="round" opacity="${(.32+rand()*.3).toFixed(2)}"/>`}for(let i=0;i<34;i++){const a=rand()*Math.PI*2,dist=70+rand()*95,rx=2+rand()*8,ry=2+rand()*10,x=Math.cos(a)*dist,y=Math.sin(a)*dist;out+=`<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${rx.toFixed(1)}" ry="${ry.toFixed(1)}" fill="${i%3===0?dots:color}" opacity="${(.45+rand()*.42).toFixed(2)}" transform="rotate(${(rand()*180).toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})"/>`}for(let i=0;i<5;i++){const x=-80+rand()*160,y=64+rand()*20,h=24+rand()*48;out+=`<path d="M ${x.toFixed(1)} ${y.toFixed(1)} Q ${(x-3+rand()*6).toFixed(1)} ${(y+h/2).toFixed(1)} ${x.toFixed(1)} ${(y+h).toFixed(1)}" stroke="${color}" stroke-width="${(3+rand()*4).toFixed(1)}" stroke-linecap="round" fill="none" opacity=".72"/>`+`<ellipse cx="${x.toFixed(1)}" cy="${(y+h+5).toFixed(1)}" rx="${(3+rand()*4).toFixed(1)}" ry="${(5+rand()*5).toFixed(1)}" fill="${color}" opacity=".64"/>`}svg.innerHTML=out}
+function mulberry32(seed){
+  return function(){
+    let t = seed += 0x6D2B79F5;
+    t = Math.imul(t ^ t >>> 15, t | 1);
+    t ^= t + Math.imul(t ^ t >>> 7, t | 61);
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  }
+}
+
+function impactPath(seed, spikes){
+  const rand = mulberry32(seed);
+  const pts = [];
+  const count = spikes || 32;
+  for(let i=0;i<count;i++){
+    const a = (Math.PI*2*i)/count;
+    const isSpike = rand() > 0.50;
+    const base = isSpike ? 72 + rand()*48 : 45 + rand()*20;
+    const squashX = 1.22 + (rand()-.5)*.18;
+    const squashY = .86 + (rand()-.5)*.18;
+    pts.push([Math.cos(a)*base*squashX, Math.sin(a)*base*squashY]);
+  }
+  let d = `M ${pts[0][0].toFixed(1)} ${pts[0][1].toFixed(1)} `;
+  for(let i=1;i<pts.length;i++){
+    const p = pts[i];
+    d += `L ${p[0].toFixed(1)} ${p[1].toFixed(1)} `;
+  }
+  return d + 'Z';
+}
+
+function drawSplat(svg){
+  if(!svg) return;
+  const seed = Number(svg.dataset.seed || 1);
+  const color = svg.dataset.color || '#CC1800';
+  const dots = svg.dataset.dots || '#E07010';
+  const spikes = Number(svg.dataset.spikes || 32);
+  const rand = mulberry32(seed + 900);
+
+  svg.setAttribute('viewBox','-180 -145 360 290');
+  svg.setAttribute('preserveAspectRatio','xMidYMid meet');
+
+  let out = `<path d="${impactPath(seed, spikes)}" fill="${color}" opacity="0.94"/>`;
+  out += `<path d="${impactPath(seed+3, spikes)}" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="2" opacity=".5"/>`;
+
+  for(let i=0;i<12;i++){
+    const a = rand()*Math.PI*2;
+    const len = 75 + rand()*85;
+    const start = 65 + rand()*24;
+    const x1 = Math.cos(a)*start, y1 = Math.sin(a)*start;
+    const x2 = Math.cos(a)*len, y2 = Math.sin(a)*len;
+    out += `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${color}" stroke-width="${(1+rand()*2.5).toFixed(1)}" stroke-linecap="round" opacity="${(.32+rand()*.3).toFixed(2)}"/>`;
+  }
+
+  for(let i=0;i<34;i++){
+    const a = rand()*Math.PI*2;
+    const dist = 70 + rand()*95;
+    const rx = 2 + rand()*8;
+    const ry = 2 + rand()*10;
+    const x = Math.cos(a)*dist, y = Math.sin(a)*dist;
+    out += `<ellipse cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" rx="${rx.toFixed(1)}" ry="${ry.toFixed(1)}" fill="${i%3===0?dots:color}" opacity="${(.45+rand()*.42).toFixed(2)}" transform="rotate(${(rand()*180).toFixed(1)} ${x.toFixed(1)} ${y.toFixed(1)})"/>`;
+  }
+
+  for(let i=0;i<5;i++){
+    const x = -80 + rand()*160;
+    const y = 64 + rand()*20;
+    const h = 24 + rand()*48;
+    out += `<path d="M ${x.toFixed(1)} ${y.toFixed(1)} Q ${(x-3+rand()*6).toFixed(1)} ${(y+h/2).toFixed(1)} ${x.toFixed(1)} ${(y+h).toFixed(1)}" stroke="${color}" stroke-width="${(3+rand()*4).toFixed(1)}" stroke-linecap="round" fill="none" opacity=".72"/>`;
+    out += `<ellipse cx="${x.toFixed(1)}" cy="${(y+h+5).toFixed(1)}" rx="${(3+rand()*4).toFixed(1)}" ry="${(5+rand()*5).toFixed(1)}" fill="${color}" opacity=".64"/>`;
+  }
+
+  svg.innerHTML = out;
+}
+
 document.querySelectorAll('.generated-splat').forEach(drawSplat);
-function addBgSplat(layer,seed,x,y,w,color,cls=''){const div=document.createElement('div');div.className=`bg-splat ${cls}`;div.style.left=x;div.style.top=y;div.style.width=w;div.style.height=`calc(${w} * .72)`;div.style.setProperty('--r',`${seed%47-23}deg`);div.innerHTML=`<svg class="generated-splat" data-seed="${seed}" data-color="${color}" data-dots="#FF8C20" data-spikes="${26+seed%13}"></svg>`;layer.appendChild(div);drawSplat(div.querySelector('svg'))}
-[[11,'5%','18%','220px','#CC1800','strong'],[12,'76%','12%','180px','#E07010',''],[13,'14%','70%','150px','#FF6B00','faint'],[14,'65%','66%','240px','#8B1400',''],[15,'42%','8%','120px','#CC1800','faint']].forEach(s=>addBgSplat(document.getElementById('heroSplatters'),...s));[[31,'-5%','6%','220px','#8B1400','faint'],[32,'80%','12%','250px','#CC1800',''],[33,'4%','72%','190px','#E07010','faint'],[34,'70%','70%','180px','#FF6B00','faint']].forEach(s=>addBgSplat(document.getElementById('impactSplatters'),...s));[[41,'6%','12%','160px','#CC1800','faint'],[42,'83%','10%','190px','#E07010',''],[43,'76%','73%','170px','#8B1400','faint']].forEach(s=>addBgSplat(document.getElementById('merchSplatters'),...s));[[51,'5%','18%','210px','#CC1800','faint'],[52,'78%','20%','180px','#E07010','faint']].forEach(s=>addBgSplat(document.getElementById('disclaimerSplatters'),...s));[[61,'12%','25%','150px','#8B1400','faint'],[62,'78%','30%','180px','#CC1800','faint']].forEach(s=>addBgSplat(document.getElementById('notifySplatters'),...s));
-const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.12});document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));document.addEventListener('click',e=>{if(e.target.closest('a'))return;const splat=document.createElement('div');splat.className='click-splat';splat.style.left=e.clientX+'px';splat.style.top=e.clientY+'px';splat.innerHTML=`<svg class="generated-splat" data-seed="${Math.floor(Math.random()*9999)}" data-color="#CC1800" data-dots="#FF8C20" data-spikes="27"></svg>`;document.body.appendChild(splat);drawSplat(splat.querySelector('svg'));setTimeout(()=>splat.remove(),800)});
+
+function addBgSplat(layerId, seed, x, y, w, color, opacity=.22){
+  const layer = document.getElementById(layerId);
+  if(!layer) return;
+  const div = document.createElement('div');
+  div.className = 'bg-splat';
+  div.style.left = x;
+  div.style.top = y;
+  div.style.width = w;
+  div.style.height = `calc(${w} * .72)`;
+  div.style.opacity = opacity;
+  div.style.setProperty('--rot', `${(seed%47)-23}deg`);
+  div.innerHTML = `<svg class="generated-splat" data-seed="${seed}" data-color="${color}" data-dots="#FF8C20" data-spikes="${26 + (seed%13)}"></svg>`;
+  layer.appendChild(div);
+  drawSplat(div.querySelector('svg'));
+}
+
+[
+  ['heroSplatters',11,'18%','14%','230px','#CC1800',.22],
+  ['heroSplatters',12,'75%','18%','190px','#E07010',.16],
+  ['heroSplatters',13,'12%','68%','150px','#FF6B00',.10],
+  ['heroSplatters',14,'62%','62%','240px','#8B1400',.12],
+  ['merchSplatters',41,'7%','12%','165px','#CC1800',.10],
+  ['merchSplatters',42,'82%','12%','190px','#E07010',.15],
+  ['merchSplatters',43,'76%','74%','170px','#8B1400',.10],
+  ['disclaimerSplatters',51,'8%','24%','210px','#CC1800',.12],
+  ['disclaimerSplatters',52,'78%','18%','180px','#E07010',.12],
+  ['notifySplatters',61,'12%','28%','150px','#8B1400',.10],
+  ['notifySplatters',62,'78%','30%','180px','#CC1800',.10]
+].forEach(args=>addBgSplat(...args));
+
+function fitMockupText(card, value){
+  const words = value.replace(/[.]/g,'').split(/\s+/);
+  const lines = [];
+  if(value.length <= 16){
+    lines.push(value.toUpperCase());
+  } else if(value.toLowerCase().includes('everyone')){
+    lines.push('EVERYONE','LOVES MY','SAUCE');
+  } else if(value.toLowerCase().includes('get my')){
+    lines.push('GET MY','SAUCE ON','YOUR FACE');
+  } else if(value.toLowerCase().includes('bold')){
+    lines.push('BOLD FLAVOR','MESSY FACE');
+  } else if(value.toLowerCase().includes('face first')){
+    lines.push('FACE FIRST','SAUCE SECOND');
+  } else if(value.toLowerCase().includes('ask me')){
+    lines.push('ASK ME','ABOUT MY','SAUCE');
+  } else {
+    lines.push(words.slice(0,2).join(' ').toUpperCase(), words.slice(2).join(' ').toUpperCase());
+  }
+
+  const textNodes = [
+    card.querySelector('.mockup-line-1'),
+    card.querySelector('.mockup-line-2'),
+    card.querySelector('.mockup-line-3')
+  ].filter(Boolean);
+
+  textNodes.forEach((node, index) => {
+    node.textContent = lines[index] || '';
+  });
+}
+
+document.querySelectorAll('.drop-card').forEach(card => {
+  const select = card.querySelector('.slogan-select');
+  const saying = card.querySelector('.product-saying');
+  if(select && saying){
+    select.addEventListener('change', () => {
+      saying.textContent = '“' + select.value + '”';
+      fitMockupText(card, select.value);
+    });
+  }
+});
+
+document.addEventListener('click', e=>{
+  if(e.target.closest('a, select, option')) return;
+  const splat = document.createElement('div');
+  splat.className = 'click-splat';
+  splat.style.left = e.clientX + 'px';
+  splat.style.top = e.clientY + 'px';
+  splat.innerHTML = `<svg class="generated-splat" data-seed="${Math.floor(Math.random()*9999)}" data-color="#CC1800" data-dots="#FF8C20" data-spikes="27"></svg>`;
+  document.body.appendChild(splat);
+  drawSplat(splat.querySelector('svg'));
+  setTimeout(()=>splat.remove(),800);
+});
 </script>
 </body>
 </html>
