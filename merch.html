@@ -3,267 +3,890 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Loké's Sauce Co. — Merch</title>
-<meta name="description" content="Loké's Sauce Co. merch configurator for Smash N Smoke."/>
+<title>Loké's Sauce Co. — Smash N Smoke Merch</title>
+<meta name="description" content="Loké's Sauce Co. is Smash N Smoke's messy little side hustle. Concept merch drops, shirts, koozies, hats, stickers, and sauce attitude."/>
 <link rel="icon" href="favicon.ico"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Permanent+Marker&family=Barlow+Condensed:wght@400;600;700;900&family=Barlow:wght@400;500;700&display=swap" rel="stylesheet"/>
 <style>
 :root{
-  --black:#030608;--navy:#070C18;--navy2:#0A1020;--cream:#F5ECD8;--dim:rgba(245,236,216,.62);
-  --muted:rgba(245,236,216,.34);--sauce:#E07010;--fire:#CC1800;--amber:#FF8C20;--blue2:#4B96FF;
+  --black:#030608;
+  --navy:#070C18;
+  --navy2:#0A1020;
+  --panel:#0D1630;
+  --cream:#F5ECD8;
+  --white:#F0F4FF;
+  --dim:rgba(245,236,216,.62);
+  --muted:rgba(245,236,216,.34);
+  --sauce:#E07010;
+  --fire:#CC1800;
+  --amber:#FF8C20;
+  --blue:#1B5FCC;
+  --blue2:#4B96FF;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--navy);color:var(--cream);font-family:'Barlow',sans-serif;overflow-x:hidden}
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");opacity:.42;pointer-events:none;z-index:1000}
-a{color:inherit} img{max-width:100%;display:block}
-.topbar{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 2rem;background:linear-gradient(to bottom,rgba(3,6,8,.98),rgba(3,6,8,.72),transparent);backdrop-filter:blur(4px)}
-.brand-mark{font-family:'Bangers',cursive;font-size:clamp(1.25rem,3vw,1.65rem);letter-spacing:4px;color:var(--cream);text-shadow:2px 2px 0 rgba(204,24,0,.42)}
+body{
+  background:var(--navy);
+  color:var(--cream);
+  font-family:'Barlow',sans-serif;
+  overflow-x:hidden;
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+  opacity:.42;
+  pointer-events:none;
+  z-index:1000;
+}
+a{color:inherit}
+img{max-width:100%;display:block}
+
+.topbar{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:200;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+  padding:1rem 2rem;
+  background:linear-gradient(to bottom,rgba(3,6,8,.98),rgba(3,6,8,.72),transparent);
+  backdrop-filter:blur(4px);
+}
+.brand-mark{
+  font-family:'Bangers',cursive;
+  font-size:clamp(1.25rem,3vw,1.65rem);
+  letter-spacing:4px;
+  color:var(--cream);
+  text-shadow:2px 2px 0 rgba(204,24,0,.42);
+}
 .brand-mark span{color:var(--sauce)}
-.brand-sub{margin-top:.15rem;font-family:'Barlow Condensed',sans-serif;font-size:.62rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
-.back-btn{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:.75rem;letter-spacing:2px;text-transform:uppercase;padding:.65rem 1.15rem;border:1px solid rgba(75,150,255,.4);background:rgba(27,95,204,.14);color:var(--blue2);text-decoration:none;border-radius:4px;white-space:nowrap}
-.hero{min-height:58vh;display:flex;align-items:center;justify-content:center;padding:7rem 2rem 3rem;background:radial-gradient(ellipse 68% 58% at 50% 40%,rgba(204,24,0,.16),transparent 68%),radial-gradient(ellipse 38% 30% at 80% 20%,rgba(27,95,204,.08),transparent 62%),var(--navy);position:relative;text-align:center}
-.hero::after{content:'';position:absolute;inset:auto 0 0 0;height:3px;background:linear-gradient(to right,transparent,var(--fire),var(--sauce),var(--amber),transparent);opacity:.65}
-.hero-content{max-width:950px;position:relative;z-index:2}
-.hero-kicker{display:inline-flex;font-family:'Barlow Condensed',sans-serif;color:var(--sauce);letter-spacing:4px;text-transform:uppercase;font-weight:900;font-size:.72rem;margin-bottom:1rem;padding:.55rem 1.1rem;background:rgba(204,24,0,.12);border:1px solid rgba(224,112,16,.28)}
-.hero-title{font-family:'Bangers',cursive;font-size:clamp(3.4rem,12vw,8.8rem);line-height:.86;letter-spacing:6px;text-shadow:5px 5px 0 rgba(204,24,0,.48),10px 10px 0 rgba(204,24,0,.14)}
+.brand-sub{
+  margin-top:.15rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.62rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.back-btn{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  font-size:.75rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:.65rem 1.15rem;
+  border:1px solid rgba(75,150,255,.4);
+  background:rgba(27,95,204,.14);
+  color:var(--blue2);
+  text-decoration:none;
+  border-radius:4px;
+  white-space:nowrap;
+}
+.back-btn:hover{background:rgba(27,95,204,.3)}
+
+.hero{
+  min-height:70vh;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:7rem 2rem 3.75rem;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse 68% 58% at 50% 40%,rgba(204,24,0,.16),transparent 68%),
+    radial-gradient(ellipse 38% 30% at 20% 80%,rgba(224,112,16,.10),transparent 62%),
+    radial-gradient(ellipse 38% 30% at 80% 20%,rgba(27,95,204,.08),transparent 62%),
+    var(--navy);
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  inset:auto 0 0 0;
+  height:3px;
+  background:linear-gradient(to right,transparent,var(--fire),var(--sauce),var(--amber),transparent);
+  opacity:.65;
+}
+.hero-content{
+  position:relative;
+  z-index:3;
+  max-width:1180px;
+  width:100%;
+}
+.hero-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1.05fr) minmax(300px,.65fr);
+  gap:2.25rem;
+  align-items:center;
+}
+.hero-copy{text-align:left}
+.hero-kicker{
+  display:inline-flex;
+  align-items:center;
+  gap:.75rem;
+  font-family:'Barlow Condensed',sans-serif;
+  color:var(--sauce);
+  letter-spacing:4px;
+  text-transform:uppercase;
+  font-weight:900;
+  font-size:.72rem;
+  margin-bottom:1rem;
+  padding:.55rem 1.1rem;
+  background:rgba(204,24,0,.12);
+  border:1px solid rgba(224,112,16,.28);
+}
+.hero-title{
+  font-family:'Bangers',cursive;
+  font-size:clamp(3.4rem,12vw,8.8rem);
+  line-height:.86;
+  letter-spacing:6px;
+  color:var(--cream);
+  text-shadow:5px 5px 0 rgba(204,24,0,.48),10px 10px 0 rgba(204,24,0,.14);
+}
 .hero-title span{color:var(--sauce)}
-.hero-sub{font-family:'Permanent Marker',cursive;font-size:clamp(1.25rem,4vw,2.2rem);margin-top:1.2rem;text-shadow:2px 2px 0 rgba(204,24,0,.45)}
-.hero-desc{max-width:640px;margin:1.2rem auto 0;color:var(--dim);line-height:1.75}
-.btn{display:inline-flex;margin-top:2rem;font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:.85rem;letter-spacing:2px;text-transform:uppercase;padding:.9rem 1.6rem;border-radius:4px;text-decoration:none;background:var(--fire);border:1px solid rgba(255,140,32,.42);color:var(--cream)}
-.configurator{padding:5rem 2rem 6rem;background:radial-gradient(ellipse 45% 35% at 75% 15%,rgba(204,24,0,.09),transparent 70%),var(--navy);position:relative}
-.configurator::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--fire),var(--sauce),var(--amber),transparent)}
-.config-grid{display:grid;grid-template-columns:minmax(320px,.9fr) minmax(360px,1.15fr);gap:2rem;max-width:1180px;margin:0 auto;align-items:start}
-.panel{background:linear-gradient(180deg,rgba(13,22,48,.96),rgba(5,8,16,.98));border:1px solid rgba(224,112,16,.18);border-radius:14px;box-shadow:0 20px 50px rgba(0,0,0,.22);position:relative;z-index:2}
-.controls{padding:1.5rem}
-.panel-title{font-family:'Bangers',cursive;font-size:2rem;letter-spacing:3px;margin-bottom:.4rem}
-.panel-copy{color:var(--dim);line-height:1.55;margin-bottom:1.3rem}
-.field{margin-bottom:1rem}
-.field label{display:block;font-family:'Barlow Condensed',sans-serif;font-size:.72rem;letter-spacing:3px;text-transform:uppercase;color:rgba(245,236,216,.45);font-weight:900;margin-bottom:.4rem}
-select{width:100%;background:#050914;color:var(--cream);border:1px solid rgba(224,112,16,.28);border-radius:4px;padding:.75rem .8rem;font-family:'Barlow Condensed',sans-serif;font-size:.95rem;letter-spacing:.6px;outline:none}
-.price-box{margin-top:1.3rem;padding:1rem;border:1px solid rgba(224,112,16,.22);background:rgba(224,112,16,.06);border-radius:8px}
-.price-row{display:flex;justify-content:space-between;gap:1rem;font-family:'Barlow Condensed',sans-serif;text-transform:uppercase;letter-spacing:1.5px;color:var(--dim);padding:.25rem 0}
-.price-row.total{font-family:'Bangers',cursive;color:var(--cream);font-size:1.7rem;letter-spacing:2px;border-top:1px solid rgba(245,236,216,.1);margin-top:.4rem;padding-top:.7rem}
-.preview-panel{overflow:hidden}
-.preview-stage{min-height:620px;display:flex;align-items:center;justify-content:center;position:relative;background:radial-gradient(circle at center,rgba(224,112,16,.14),transparent 43%),linear-gradient(135deg,#070c18 0%,#050914 62%,#020406 100%);padding:2rem}
-.preview-wrap{position:relative;width:min(100%,560px);aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
-#productImage{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 28px 28px rgba(0,0,0,.62))}
-.print-layer{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:45%;min-height:18%;display:flex;align-items:center;justify-content:center;text-align:center;pointer-events:none}
-.print-layer span{font-family:'Permanent Marker',cursive;font-size:clamp(1rem,2.7vw,2rem);line-height:1.05;color:var(--printColor,#F5ECD8);text-shadow:2px 2px 5px rgba(0,0,0,.58);white-space:pre-line}
-.product-tee .print-layer{top:47%;width:43%}
-.product-koozie .print-layer{top:45%;width:35%}
-.product-hat .print-layer{top:42%;width:36%}
-.product-apron .print-layer{top:45%;width:34%}
-.product-sticker .print-layer{display:none}
-.special-sauce .print-layer::before{content:'';position:absolute;inset:-28px -40px;background:radial-gradient(ellipse at center,var(--fire),var(--sauce));clip-path:polygon(14% 35%,4% 12%,27% 18%,40% 3%,54% 19%,82% 7%,77% 35%,96% 53%,76% 68%,85% 94%,55% 80%,36% 95%,25% 72%,2% 74%,17% 52%);z-index:-1;opacity:.92}
-.special-premium .print-layer::before{content:'';position:absolute;inset:-20px -34px;border:3px solid var(--amber);border-radius:999px;box-shadow:0 0 22px rgba(255,140,32,.35);z-index:-1}
-.preview-info{padding:1.25rem 1.4rem;border-top:1px solid rgba(224,112,16,.14)}
-.preview-name{font-family:'Bangers',cursive;font-size:2rem;letter-spacing:3px}
-.preview-saying{color:var(--sauce);font-style:italic;margin-top:.25rem}
-.badges{display:flex;gap:.5rem;flex-wrap:wrap;margin-top:.9rem}
-.badge{border:1px solid rgba(224,112,16,.22);background:rgba(224,112,16,.06);padding:.28rem .65rem;border-radius:999px;font-family:'Barlow Condensed',sans-serif;font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
-.notice{max-width:1180px;margin:1.25rem auto 0;color:rgba(245,236,216,.55);font-size:.88rem;line-height:1.5;text-align:center}
-.back-footer{display:block;text-decoration:none;text-align:center;padding:3rem 2rem;background:linear-gradient(135deg,#050810,#0A1428);border-top:2px solid rgba(27,95,204,.3)}
-.bf-label{font-family:'Barlow Condensed',sans-serif;font-size:.68rem;letter-spacing:4px;text-transform:uppercase;color:rgba(75,150,255,.52)}
-.bf-name{margin-top:.35rem;font-family:'Bangers',cursive;font-size:clamp(2rem,5vw,3.5rem);letter-spacing:5px;color:#F0F4FF;text-shadow:0 0 28px rgba(27,95,204,.28)}
+.hero-sub{
+  font-family:'Permanent Marker',cursive;
+  font-size:clamp(1.25rem,4vw,2.2rem);
+  color:var(--cream);
+  margin-top:1.2rem;
+  text-shadow:2px 2px 0 rgba(204,24,0,.45);
+}
+.hero-desc{
+  max-width:600px;
+  margin:1.2rem 0 0;
+  color:var(--dim);
+  line-height:1.75;
+  font-size:.98rem;
+}
+.hero-actions{
+  display:flex;
+  gap:1rem;
+  flex-wrap:wrap;
+  margin-top:2rem;
+}
+.btn{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  font-size:.85rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  padding:.9rem 1.6rem;
+  border-radius:4px;
+  text-decoration:none;
+}
+.btn-hot{background:var(--fire);border:1px solid rgba(255,140,32,.42);color:var(--cream)}
+.btn-blue{background:rgba(27,95,204,.12);border:1px solid rgba(75,150,255,.36);color:var(--blue2)}
+.btn:hover{transform:translateY(-2px)}
+
+.featured-drop{
+  background:linear-gradient(180deg,rgba(13,22,48,.96),rgba(5,8,16,.98));
+  border:1px solid rgba(224,112,16,.32);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 26px 70px rgba(0,0,0,.28),0 0 40px rgba(204,24,0,.08);
+  position:relative;
+}
+.featured-drop::before{
+  content:'FIRST DROP FAVORITE';
+  position:absolute;
+  top:14px;
+  left:14px;
+  z-index:8;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.62rem;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#140600;
+  background:var(--amber);
+  padding:.35rem .55rem;
+  border-radius:999px;
+  box-shadow:0 0 16px rgba(255,140,32,.26);
+}
+.featured-stage{
+  aspect-ratio:1/1;
+  min-height:315px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(224,112,16,.18),transparent 43%),
+    linear-gradient(135deg,#070c18 0%,#050914 62%,#020406 100%);
+}
+.featured-stage img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.featured-info{padding:1rem 1.1rem 1.15rem}
+.featured-info-top{
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  align-items:flex-start;
+}
+.featured-name{
+  font-family:'Bangers',cursive;
+  font-size:1.55rem;
+  letter-spacing:2px;
+}
+.featured-price{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  color:var(--amber);
+  letter-spacing:1px;
+  padding-top:.2rem;
+}
+.featured-saying{color:var(--sauce);font-style:italic;font-size:.84rem;margin-top:.4rem}
+
+.quick-strip{
+  position:relative;
+  z-index:5;
+  background:#030608;
+  border-top:1px solid rgba(224,112,16,.28);
+  border-bottom:1px solid rgba(224,112,16,.18);
+  text-align:center;
+  padding:1rem;
+}
+.quick-strip a{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:var(--sauce);
+  text-decoration:none;
+  font-size:.85rem;
+}
+
+.section-head{
+  text-align:center;
+  position:relative;
+  z-index:2;
+  max-width:780px;
+  margin:0 auto 3rem;
+}
+.eyebrow{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.72rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:var(--sauce);
+  font-weight:900;
+  margin-bottom:.5rem;
+}
+.section-title{
+  font-family:'Bangers',cursive;
+  font-size:clamp(2.4rem,7vw,5rem);
+  letter-spacing:4px;
+  line-height:.95;
+  color:var(--cream);
+  text-shadow:3px 3px 0 rgba(204,24,0,.28);
+}
+.section-sub{margin-top:.8rem;color:var(--dim);line-height:1.7}
+
+.merch{
+  position:relative;
+  padding:5rem 2rem 6rem;
+  overflow:hidden;
+  background:
+    radial-gradient(ellipse 45% 35% at 75% 15%,rgba(204,24,0,.09),transparent 70%),
+    var(--navy);
+}
+.merch::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;
+  height:2px;
+  background:linear-gradient(to right,transparent,var(--fire),var(--sauce),var(--amber),transparent);
+}
+.how-it-works{
+  max-width:760px;
+  margin:-1.15rem auto 2.6rem;
+  position:relative;
+  z-index:5;
+  background:rgba(3,6,8,.48);
+  border:1px solid rgba(224,112,16,.18);
+  border-left:3px solid var(--sauce);
+  border-radius:8px;
+  padding:.95rem 1.15rem;
+  color:rgba(245,236,216,.68);
+  font-size:.92rem;
+  line-height:1.55;
+  text-align:center;
+}
+.how-it-works strong{color:var(--amber)}
+.drop-grid{
+  position:relative;
+  z-index:5;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+  gap:1.5rem;
+  max-width:1180px;
+  margin:0 auto;
+}
+.drop-card{
+  background:linear-gradient(180deg,rgba(13,22,48,.96),rgba(5,8,16,.98));
+  border:1px solid rgba(224,112,16,.18);
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 20px 50px rgba(0,0,0,.22);
+  position:relative;
+}
+.drop-card:hover{transform:translateY(-4px);border-color:rgba(224,112,16,.48)}
+.drop-card::after{
+  content:'CONCEPT MOCKUP';
+  position:absolute;
+  top:14px;
+  right:14px;
+  z-index:10;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.58rem;
+  letter-spacing:2px;
+  color:rgba(245,236,216,.45);
+  border:1px solid rgba(245,236,216,.10);
+  background:rgba(3,6,8,.58);
+  padding:.22rem .45rem;
+  border-radius:999px;
+}
+.drop-card.featured-card{
+  border-color:rgba(255,140,32,.35);
+}
+.drop-card.featured-card::after{
+  content:'FIRST DROP FAVORITE';
+  background:var(--amber);
+  color:#140600;
+  border-color:rgba(255,140,32,.65);
+  font-weight:900;
+}
+.product-stage{
+  aspect-ratio:1/1;
+  background:
+    radial-gradient(circle at 50% 42%,rgba(224,112,16,.12),transparent 43%),
+    linear-gradient(135deg,#070c18 0%,#050914 62%,#020406 100%);
+  position:relative;
+  overflow:hidden;
+}
+.product-stage::before{
+  content:'';
+  position:absolute;
+  inset:18px;
+  border:1px solid rgba(75,150,255,.08);
+  border-radius:10px;
+  z-index:2;
+  pointer-events:none;
+}
+.product-stage img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .25s ease, filter .25s ease;
+}
+.drop-card:hover .product-stage img{transform:scale(1.035);filter:brightness(1.08)}
+.product-info{padding:1.25rem 1.35rem 1.4rem}
+.product-row{
+  display:flex;
+  justify-content:space-between;
+  gap:1rem;
+  align-items:flex-start;
+}
+.product-name{
+  font-family:'Bangers',cursive;
+  font-size:1.55rem;
+  letter-spacing:2px;
+  color:var(--cream);
+}
+.product-price{
+  font-family:'Barlow Condensed',sans-serif;
+  font-weight:900;
+  color:var(--amber);
+  letter-spacing:1px;
+  white-space:nowrap;
+  padding-top:.18rem;
+}
+.product-price.soon{color:rgba(245,236,216,.42)}
+.product-saying{
+  color:var(--sauce);
+  font-style:italic;
+  font-size:.84rem;
+  margin:.45rem 0 .9rem;
+  line-height:1.45;
+}
+.slogan-select-wrap{margin:.85rem 0 1rem}
+.slogan-select-label{
+  display:block;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.68rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:rgba(245,236,216,.38);
+  margin-bottom:.35rem;
+}
+.slogan-select{
+  width:100%;
+  background:#050914;
+  color:var(--cream);
+  border:1px solid rgba(224,112,16,.28);
+  border-radius:4px;
+  padding:.65rem .75rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.9rem;
+  letter-spacing:.5px;
+  outline:none;
+}
+.product-meta{
+  display:flex;
+  gap:.5rem;
+  flex-wrap:wrap;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.66rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:var(--muted);
+}
+.pill{
+  border:1px solid rgba(224,112,16,.22);
+  background:rgba(224,112,16,.06);
+  padding:.28rem .65rem;
+  border-radius:999px;
+}
+
+.disclaimer{
+  position:relative;
+  padding:5rem 2rem;
+  background:var(--black);
+  overflow:hidden;
+  text-align:center;
+}
+.disclaimer-box{
+  position:relative;
+  z-index:4;
+  max-width:850px;
+  margin:0 auto;
+  border:1px solid rgba(224,112,16,.25);
+  background:linear-gradient(135deg,rgba(204,24,0,.12),rgba(224,112,16,.06));
+  padding:2.2rem;
+  border-radius:10px;
+}
+.disclaimer-title{
+  font-family:'Bangers',cursive;
+  font-size:clamp(2rem,6vw,4rem);
+  letter-spacing:4px;
+  color:var(--cream);
+  text-shadow:3px 3px 0 rgba(204,24,0,.28);
+}
+.disclaimer-text{
+  font-family:'Permanent Marker',cursive;
+  font-size:clamp(1rem,3vw,1.65rem);
+  color:var(--sauce);
+  margin-top:.75rem;
+  line-height:1.35;
+}
+.notify{
+  position:relative;
+  padding:5.5rem 2rem;
+  background:var(--navy);
+  text-align:center;
+  overflow:hidden;
+}
+.notify-card{
+  position:relative;
+  z-index:4;
+  max-width:620px;
+  margin:0 auto;
+}
+.notify h2{
+  font-family:'Bangers',cursive;
+  font-size:clamp(2.2rem,7vw,4.5rem);
+  letter-spacing:4px;
+  color:var(--cream);
+}
+.notify p{color:var(--dim);line-height:1.7;margin:.75rem 0 1.6rem}
+.fake-form{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+.fake-input{
+  min-width:220px;
+  flex:1;
+  max-width:360px;
+  background:#050914;
+  border:1px solid rgba(224,112,16,.25);
+  color:var(--dim);
+  padding:.95rem 1rem;
+  border-radius:4px;
+  text-align:left;
+}
+.fake-button{
+  font-family:'Bangers',cursive;
+  letter-spacing:3px;
+  background:var(--fire);
+  color:var(--cream);
+  padding:.95rem 1.4rem;
+  border-radius:4px;
+  border:1px solid rgba(255,140,32,.42);
+}
+.back-footer{
+  display:block;
+  text-decoration:none;
+  text-align:center;
+  padding:3rem 2rem;
+  background:linear-gradient(135deg,#050810,#0A1428);
+  border-top:2px solid rgba(27,95,204,.3);
+}
+.bf-label{
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.68rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  color:rgba(75,150,255,.52);
+}
+.bf-name{
+  margin-top:.35rem;
+  font-family:'Bangers',cursive;
+  font-size:clamp(2rem,5vw,3.5rem);
+  letter-spacing:5px;
+  color:var(--white);
+  text-shadow:0 0 28px rgba(27,95,204,.28);
+}
 .bf-name span{color:var(--blue2)}
-.page-footer{background:#020406;padding:1.35rem 2rem;text-align:center;font-family:'Barlow Condensed',sans-serif;font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(245,236,216,.2)}
-.footer-credit{display:flex;align-items:center;justify-content:center;gap:.35rem;flex-wrap:wrap}
-.builder-link{display:inline-flex;align-items:center;gap:.25rem;color:rgba(75,150,255,.62);text-decoration:none}
-.builder-link img{height:18px;width:auto;border-radius:3px;opacity:.85;filter:drop-shadow(0 0 6px rgba(75,150,255,.35))}
-@media(max-width:900px){.config-grid{grid-template-columns:1fr}.preview-stage{min-height:460px}.topbar{padding:.85rem 1rem}.brand-sub{display:none}.back-btn{font-size:.68rem;padding:.58rem .8rem}}
+.bf-arrow{
+  margin-top:.55rem;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.82rem;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  color:rgba(75,150,255,.62);
+}
+.page-footer{
+  background:#020406;
+  padding:1.5rem 2rem;
+  text-align:center;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.7rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:rgba(245,236,216,.18);
+}
+
+.page-footer a{color:rgba(75,150,255,.55);text-decoration:none}
+
+@media(max-width:980px){
+  .hero-layout{grid-template-columns:1fr}
+  .hero-copy{text-align:center}
+  .hero-desc{margin-left:auto;margin-right:auto}
+  .hero-actions{justify-content:center}
+  .featured-drop{max-width:420px;margin:0 auto}
+}
+@media(max-width:640px){
+  .topbar{padding:.85rem 1rem}
+  .brand-sub{display:none}
+  .back-btn{font-size:.68rem;padding:.58rem .8rem}
+  .hero{min-height:auto;padding:6.5rem 1.1rem 2.5rem}
+  .hero-title{letter-spacing:4px}
+  .hero-actions{flex-direction:column;max-width:280px;margin-left:auto;margin-right:auto}
+  .btn{width:100%}
+  .merch,.disclaimer,.notify{padding-left:1.1rem;padding-right:1.1rem}
+  .drop-grid{grid-template-columns:1fr}
+}
+
+/* ── FOOTER CREDIT FIX ── */
+.page-footer {
+  background:#020406;
+  padding:1.35rem 2rem;
+  text-align:center;
+  font-family:'Barlow Condensed',sans-serif;
+  font-size:.7rem;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:rgba(245,236,216,.2);
+}
+.footer-credit {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.35rem;
+  flex-wrap:wrap;
+}
+.builder-link {
+  display:inline-flex;
+  align-items:center;
+  gap:.25rem;
+  color:rgba(75,150,255,.62);
+  text-decoration:none;
+}
+.builder-link img {
+  height:18px;
+  width:auto;
+  border-radius:3px;
+  opacity:.85;
+  filter:drop-shadow(0 0 6px rgba(75,150,255,.35));
+}
+.builder-link:hover img {
+  opacity:1;
+}
+
 </style>
 </head>
 <body>
+
 <nav class="topbar">
-  <div><div class="brand-mark">LOKÉ'S <span>SAUCE</span> CO.</div><div class="brand-sub">An Extension of Smash N Smoke</div></div>
+  <div>
+    <div class="brand-mark">LOKÉ'S <span>SAUCE</span> CO.</div>
+    <div class="brand-sub">An Extension of Smash N Smoke</div>
+  </div>
   <a href="index.html" class="back-btn">← Back to the Truck</a>
 </nav>
 
 <section class="hero">
   <div class="hero-content">
-    <div class="hero-kicker">Build Your Concept</div>
-    <h1 class="hero-title">LOKÉ'S<br><span>SAUCE</span> CO.</h1>
-    <div class="hero-sub">Smash N Smoke’s messy little side hustle.</div>
-    <p class="hero-desc">Pick a product, color, slogan, and sauce treatment. The preview updates live so the merch looks like an actual drop, even before the store is real.</p>
-    <a class="btn" href="#builder">Start Building</a>
+    <div class="hero-layout">
+      <div class="hero-copy">
+        <div class="hero-kicker">Merch Concept Drop</div>
+        <h1 class="hero-title">LOKÉ'S<br><span>SAUCE</span> CO.</h1>
+        <div class="hero-sub">Smash N Smoke’s messy little side hustle.</div>
+        <p class="hero-desc">Same bold truck. Different kind of trouble. Sauce jokes, koozies, shirts, hats, stickers, and loud little ideas that people remember.</p>
+        <div class="hero-actions">
+          <a class="btn btn-hot" href="#drops">See the Merch</a>
+          <a class="btn btn-blue" href="index.html">Back to Smash N Smoke</a>
+        </div>
+      </div>
+
+      <aside class="featured-drop" aria-label="Featured merch concept">
+        <div class="featured-stage">
+          <img src="images/merch/face-sauce-tee-black.png" alt="Black Face Sauce Tee concept">
+        </div>
+        <div class="featured-info">
+          <div class="featured-info-top">
+            <div class="featured-name">Face Sauce Tee</div>
+            <div class="featured-price">$28</div>
+          </div>
+          <div class="featured-saying">“My sauce. Your face.”</div>
+        </div>
+      </aside>
+    </div>
   </div>
 </section>
 
-<section class="configurator" id="builder">
-  <div class="config-grid">
-    <aside class="panel controls">
-      <h2 class="panel-title">Merch Builder</h2>
-      <p class="panel-copy">This is still concept merch. The dropdowns show how the item, color, slogan, and specialty treatment would look.</p>
+<section class="quick-strip">
+  <a href="#drops">↓ View the Concept Drops ↓</a>
+</section>
 
-      <div class="field">
-        <label for="productSelect">Product</label>
-        <select id="productSelect"></select>
-      </div>
-
-      <div class="field">
-        <label for="colorSelect">Color</label>
-        <select id="colorSelect"></select>
-      </div>
-
-      <div class="field">
-        <label for="sloganSelect">Slogan</label>
-        <select id="sloganSelect"></select>
-      </div>
-
-      <div class="field">
-        <label for="styleSelect">Style</label>
-        <select id="styleSelect"></select>
-      </div>
-
-      <div class="price-box">
-        <div class="price-row"><span>Base</span><strong id="basePrice">$0</strong></div>
-        <div class="price-row"><span>Style Add-On</span><strong id="addonPrice">$0</strong></div>
-        <div class="price-row total"><span>Total</span><strong id="totalPrice">$0</strong></div>
-      </div>
-    </aside>
-
-    <main class="panel preview-panel">
-      <div class="preview-stage">
-        <div class="preview-wrap product-tee" id="previewWrap">
-          <img id="productImage" src="" alt="Merch preview">
-          <div class="print-layer" id="printLayer"><span id="previewText"></span></div>
-        </div>
-      </div>
-      <div class="preview-info">
-        <div class="preview-name" id="previewName">Product Name</div>
-        <div class="preview-saying" id="previewSaying">“Slogan”</div>
-        <div class="badges">
-          <span class="badge" id="productBadge">Product</span>
-          <span class="badge" id="colorBadge">Color</span>
-          <span class="badge" id="styleBadge">Style</span>
-        </div>
-      </div>
-    </main>
+<section class="merch" id="drops">
+  <div class="section-head">
+    <div class="eyebrow">Product Drops</div>
+    <h2 class="section-title">Wear The Sauce</h2>
+    <p class="section-sub">Realistic concept mockups for the first merch run. These can later be replaced with Printify, Printful, Shopify, Square, or real product photos.</p>
   </div>
-  <p class="notice">Preview text is live and flexible. Real production art would still need final print files before ordering.</p>
+
+  <div class="how-it-works"><strong>How this works:</strong> Pick the item. Pick the saying. We’ll print the mess later. These are concept placeholders, not live checkout yet.</div>
+
+  <div class="drop-grid">
+
+    <article class="drop-card featured-card">
+      <div class="product-stage">
+        <img src="images/merch/face-sauce-tee-black.png" alt="Black graphic tee with My sauce Your face design">
+      </div>
+      <div class="product-info">
+        <div class="product-row">
+          <div class="product-name">Face Sauce Tee</div>
+          <div class="product-price">$28</div>
+        </div>
+        <div class="product-saying">“My sauce. Your face.”</div>
+        <div class="slogan-select-wrap">
+          <label class="slogan-select-label">Choose slogan concept</label>
+          <select class="slogan-select">
+            <option>My sauce. Your face.</option>
+            <option>Everyone loves my sauce on their face.</option>
+            <option>Get my sauce on your face.</option>
+            <option>Bold flavor. Messy face.</option>
+            <option>Sauce happens.</option>
+            <option>Face first. Sauce second.</option>
+            <option>Ask me about my sauce.</option>
+          </select>
+        </div>
+        <div class="product-meta"><span class="pill">Black Tee</span><span class="pill">Front Print</span><span class="pill">Concept Price</span></div>
+      </div>
+    </article>
+
+    <article class="drop-card">
+      <div class="product-stage">
+        <img src="images/merch/sauce-impact-tee-cream.png" alt="Cream tee with Get my sauce on your face design">
+      </div>
+      <div class="product-info">
+        <div class="product-row">
+          <div class="product-name">Sauce Impact Tee</div>
+          <div class="product-price soon">Coming Soon</div>
+        </div>
+        <div class="product-saying">“Get my sauce on your face.”</div>
+        <div class="slogan-select-wrap">
+          <label class="slogan-select-label">Choose slogan concept</label>
+          <select class="slogan-select">
+            <option>Get my sauce on your face.</option>
+            <option>My sauce. Your face.</option>
+            <option>Everyone loves my sauce on their face.</option>
+            <option>Bold flavor. Messy face.</option>
+            <option>Sauce happens.</option>
+            <option>Face first. Sauce second.</option>
+            <option>Ask me about my sauce.</option>
+          </select>
+        </div>
+        <div class="product-meta"><span class="pill">Cream Tee</span><span class="pill">Sauce Splat</span><span class="pill">Drop Later</span></div>
+      </div>
+    </article>
+
+    <article class="drop-card">
+      <div class="product-stage">
+        <img src="images/merch/messy-face-koozie-black.png" alt="Black koozie with Everyone loves my sauce design">
+      </div>
+      <div class="product-info">
+        <div class="product-row">
+          <div class="product-name">Messy Face Koozie</div>
+          <div class="product-price">$8</div>
+        </div>
+        <div class="product-saying">“Everyone loves my sauce on their face.”</div>
+        <div class="slogan-select-wrap">
+          <label class="slogan-select-label">Choose slogan concept</label>
+          <select class="slogan-select">
+            <option>Everyone loves my sauce on their face.</option>
+            <option>My sauce. Your face.</option>
+            <option>Get my sauce on your face.</option>
+            <option>Bold flavor. Messy face.</option>
+            <option>Sauce happens.</option>
+            <option>Face first. Sauce second.</option>
+            <option>Ask me about my sauce.</option>
+          </select>
+        </div>
+        <div class="product-meta"><span class="pill">Koozie</span><span class="pill">Tailgate Drop</span><span class="pill">Concept Price</span></div>
+      </div>
+    </article>
+
+    <article class="drop-card">
+      <div class="product-stage">
+        <img src="images/merch/sauce-happens-koozie-orange.png" alt="Orange koozie with Sauce happens design">
+      </div>
+      <div class="product-info">
+        <div class="product-row">
+          <div class="product-name">Sauce Happens Koozie</div>
+          <div class="product-price">$8</div>
+        </div>
+        <div class="product-saying">“Sauce happens.”</div>
+        <div class="slogan-select-wrap">
+          <label class="slogan-select-label">Choose slogan concept</label>
+          <select class="slogan-select">
+            <option>Sauce happens.</option>
+            <option>My sauce. Your face.</option>
+            <option>Everyone loves my sauce on their face.</option>
+            <option>Get my sauce on your face.</option>
+            <option>Bold flavor. Messy face.</option>
+            <option>Face first. Sauce second.</option>
+            <option>Ask me about my sauce.</option>
+          </select>
+        </div>
+        <div class="product-meta"><span class="pill">Orange Koozie</span><span class="pill">Counter Display</span><span class="pill">Concept Price</span></div>
+      </div>
+    </article>
+
+    <article class="drop-card">
+      <div class="product-stage">
+        <img src="images/merch/ask-me-sauce-hat.png" alt="Black hat with Ask me about my sauce design">
+      </div>
+      <div class="product-info">
+        <div class="product-row">
+          <div class="product-name">Ask Me Sauce Hat</div>
+          <div class="product-price soon">Coming Soon</div>
+        </div>
+        <div class="product-saying">“Ask me about my sauce.”</div>
+        <div class="slogan-select-wrap">
+          <label class="slogan-select-label">Choose slogan concept</label>
+          <select class="slogan-select">
+            <option>Ask me about my sauce.</option>
+            <option>My sauce. Your face.</option>
+            <option>Everyone loves my sauce on their face.</option>
+            <option>Get my sauce on your face.</option>
+            <option>Bold flavor. Messy face.</option>
+            <option>Sauce happens.</option>
+            <option>Face first. Sauce second.</option>
+          </select>
+        </div>
+        <div class="product-meta"><span class="pill">Hat</span><span class="pill">Patch Concept</span><span class="pill">Drop Later</span></div>
+      </div>
+    </article>
+
+    <article class="drop-card">
+      <div class="product-stage">
+        <img src="images/merch/messy-little-sticker-pack.png" alt="Sticker pack with Loké's Sauce Co designs">
+      </div>
+      <div class="product-info">
+        <div class="product-row">
+          <div class="product-name">Messy Little Sticker Pack</div>
+          <div class="product-price">$5</div>
+        </div>
+        <div class="product-saying">“Bold flavor. Messy face.”</div>
+        <div class="slogan-select-wrap">
+          <label class="slogan-select-label">Choose slogan concept</label>
+          <select class="slogan-select">
+            <option>Bold flavor. Messy face.</option>
+            <option>My sauce. Your face.</option>
+            <option>Everyone loves my sauce on their face.</option>
+            <option>Get my sauce on your face.</option>
+            <option>Sauce happens.</option>
+            <option>Face first. Sauce second.</option>
+            <option>Ask me about my sauce.</option>
+          </select>
+        </div>
+        <div class="product-meta"><span class="pill">Sticker Pack</span><span class="pill">3 Pack</span><span class="pill">Easy Add-On</span></div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<section class="disclaimer">
+  <div class="disclaimer-box">
+    <div class="eyebrow">Fine Print</div>
+    <h2 class="disclaimer-title">No Apologies</h2>
+    <div class="disclaimer-text">Not responsible for stained shirts, messy faces, or repeat cravings.</div>
+  </div>
+</section>
+
+<section class="notify">
+  <div class="notify-card">
+    <div class="eyebrow">Placeholder Store</div>
+    <h2>Merch Drops Soon</h2>
+    <p>This is a concept page for now. Once the store is real, replace this section with a Printify, Printful, Shopify, Square, or order-form link.</p>
+    <div class="fake-form">
+      <div class="fake-input">email@example.com</div>
+      <div class="fake-button">Notify Me</div>
+    </div>
+  </div>
 </section>
 
 <a class="back-footer" href="index.html">
   <div class="bf-label">Back to the main truck</div>
   <div class="bf-name">SMASH <span>N</span> SMOKE</div>
+  <div class="bf-arrow">Go Home →</div>
 </a>
 
 <footer class="page-footer">
   <div class="footer-credit">
     © Loké's Sauce Co. · A Smash N Smoke merch concept · Built by
     <a class="builder-link" href="https://aalbertsberg.us" target="_blank" rel="noopener">
-      <img src="logo.png" alt="A³ Logo"><span>A³</span>
+      <img src="logo.png" alt="A³ Logo">
+      <span>A³</span>
     </a>
   </div>
 </footer>
 
 <script>
-const products = {
-  tee: { label:'Tee', base:28, colors:['black','cream','navy','red','orange','blue'], image:c=>`images/merch/configurator/tee-${c}.png` },
-  koozie: { label:'Koozie', base:8, colors:['black','navy','red','orange','blue'], image:c=>`images/merch/configurator/koozie-${c}.png` },
-  hat: { label:'Hat', base:24, colors:['black','navy','red','blue'], image:c=>`images/merch/configurator/hat-${c}.png` },
-  apron: { label:'Sauce Boss Apron', base:38, colors:['black','navy','red','orange'], image:c=>`images/merch/configurator/apron-${c}.png` },
-  sticker: { label:'Sticker Pack', base:5, colors:['multi'], image:c=>'images/merch/configurator/sticker-multi.png' }
-};
-
-const colorLabels = { black:'Black', cream:'Cream', navy:'Navy', red:'Red', orange:'Orange', blue:'Blue', multi:'Multi' };
-
-const slogans = [
-  'My sauce. Your face.',
-  'Everyone loves my sauce on their face.',
-  'Get my sauce on your face.',
-  'Bold flavor. Messy face.',
-  'Sauce happens.',
-  'Face first. Sauce second.',
-  'Ask me about my sauce.',
-  'Repeat cravings.',
-  'Smash N Smoke'
-];
-
-const styles = {
-  standard:{label:'Standard Print', addon:0, cls:''},
-  sauce:{label:'Full Sauce Splatter Special', addon:6, cls:'special-sauce'},
-  premium:{label:'Premium Badge Treatment', addon:4, cls:'special-premium'},
-  truck:{label:'Smash N Smoke Option', addon:4, cls:'special-premium'}
-};
-
-const productSelect = document.getElementById('productSelect');
-const colorSelect = document.getElementById('colorSelect');
-const sloganSelect = document.getElementById('sloganSelect');
-const styleSelect = document.getElementById('styleSelect');
-
-Object.entries(products).forEach(([key,p]) => productSelect.add(new Option(p.label, key)));
-slogans.forEach(s => sloganSelect.add(new Option(s, s)));
-Object.entries(styles).forEach(([key,s]) => styleSelect.add(new Option(`${s.label}${s.addon ? ' +$' + s.addon : ''}`, key)));
-
-productSelect.value = 'tee';
-sloganSelect.value = 'My sauce. Your face.';
-styleSelect.value = 'standard';
-
-function fillColors(){
-  const p = products[productSelect.value];
-  const current = colorSelect.value;
-  colorSelect.innerHTML = '';
-  p.colors.forEach(c => colorSelect.add(new Option(colorLabels[c], c)));
-  colorSelect.value = p.colors.includes(current) ? current : p.colors[0];
-}
-
-function sloganLines(text){
-  const t = text.toLowerCase();
-  if(t.includes('everyone')) return 'EVERYONE\\nLOVES MY\\nSAUCE';
-  if(t.includes('get my')) return 'GET MY\\nSAUCE ON\\nYOUR FACE';
-  if(t.includes('bold')) return 'BOLD FLAVOR.\\nMESSY FACE.';
-  if(t.includes('sauce happens')) return 'SAUCE\\nHAPPENS.';
-  if(t.includes('face first')) return 'FACE FIRST.\\nSAUCE SECOND.';
-  if(t.includes('ask me')) return 'ASK ME\\nABOUT MY\\nSAUCE';
-  if(t.includes('repeat')) return 'REPEAT\\nCRAVINGS.';
-  if(t.includes('smash')) return 'SMASH\\nN\\nSMOKE';
-  return 'MY SAUCE.\\nYOUR FACE.';
-}
-
-function setPrintColor(product, color, style){
-  const wrap = document.getElementById('previewWrap');
-  let printColor = '#F5ECD8';
-  if(color === 'cream' || color === 'orange') printColor = '#140600';
-  if(style === 'sauce') printColor = '#F5ECD8';
-  wrap.style.setProperty('--printColor', printColor);
-}
-
-function updatePreview(){
-  fillColors();
-  const productKey = productSelect.value;
-  const colorKey = colorSelect.value;
-  const slogan = sloganSelect.value;
-  const styleKey = styleSelect.value;
-  const p = products[productKey];
-  const style = styles[styleKey];
-  const wrap = document.getElementById('previewWrap');
-
-  wrap.className = `preview-wrap product-${productKey} ${style.cls}`;
-  document.getElementById('productImage').src = p.image(colorKey);
-  document.getElementById('productImage').alt = `${colorLabels[colorKey]} ${p.label} with ${slogan}`;
-  document.getElementById('previewText').textContent = sloganLines(slogan);
-  document.getElementById('previewName').textContent = `${colorLabels[colorKey]} ${p.label}`;
-  document.getElementById('previewSaying').textContent = `“${slogan}”`;
-  document.getElementById('productBadge').textContent = p.label;
-  document.getElementById('colorBadge').textContent = colorLabels[colorKey];
-  document.getElementById('styleBadge').textContent = style.label;
-  document.getElementById('basePrice').textContent = `$${p.base}`;
-  document.getElementById('addonPrice').textContent = style.addon ? `+$${style.addon}` : '$0';
-  document.getElementById('totalPrice').textContent = `$${p.base + style.addon}`;
-  setPrintColor(productKey, colorKey, styleKey);
-}
-
-productSelect.addEventListener('change', updatePreview);
-colorSelect.addEventListener('change', updatePreview);
-sloganSelect.addEventListener('change', updatePreview);
-styleSelect.addEventListener('change', updatePreview);
-
-fillColors();
-updatePreview();
+document.querySelectorAll('.drop-card').forEach(card => {
+  const select = card.querySelector('.slogan-select');
+  const saying = card.querySelector('.product-saying');
+  if(select && saying){
+    select.addEventListener('change', () => {
+      saying.textContent = '“' + select.value + '”';
+    });
+  }
+});
 </script>
 </body>
 </html>
