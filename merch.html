@@ -663,10 +663,10 @@ img{max-width:100%;display:block}
   <div class="section-head">
     <div class="eyebrow">Product Drops</div>
     <h2 class="section-title">Wear The Sauce</h2>
-    <p class="section-sub">Realistic concept mockups for the first merch run. Use the dropdowns on each item to preview color and slogan options.</p>
+    <p class="section-sub">Realistic concept mockups for the first merch run. Use the dropdowns on each item to preview every available color and slogan option.</p>
   </div>
 
-  <div class="how-it-works"><strong>How this works:</strong> Pick a color. Pick a slogan. The image above that item changes to match the selection where a preview exists.</div>
+  <div class="how-it-works"><strong>How this works:</strong> Pick a color. Pick a slogan. The image above that item changes to match the selection.</div>
 
   <div class="drop-grid">
 
@@ -892,17 +892,28 @@ img{max-width:100%;display:block}
 const previewImages = {
   tee: {
     "black|my-sauce-your-face": "images/merch/options/tee-black-my-sauce-your-face.png",
-    "red|sauce-happens": "images/merch/options/tee-red-sauce-happens.png",
-    "cream|get-my-sauce": "images/merch/options/tee-cream-get-my-sauce.png",
+    "black|sauce-happens": "images/merch/options/tee-black-sauce-happens.png",
+    "black|get-my-sauce": "images/merch/options/tee-black-get-my-sauce.png",
     "black|smash-n-smoke": "images/merch/options/tee-black-smash-n-smoke.png",
+    "red|my-sauce-your-face": "images/merch/options/tee-red-my-sauce-your-face.png",
+    "red|sauce-happens": "images/merch/options/tee-red-sauce-happens.png",
+    "red|get-my-sauce": "images/merch/options/tee-red-get-my-sauce.png",
+    "red|smash-n-smoke": "images/merch/options/tee-red-smash-n-smoke.png",
+    "cream|my-sauce-your-face": "images/merch/options/tee-cream-my-sauce-your-face.png",
+    "cream|sauce-happens": "images/merch/options/tee-cream-sauce-happens.png",
+    "cream|get-my-sauce": "images/merch/options/tee-cream-get-my-sauce.png",
     "cream|smash-n-smoke": "images/merch/options/tee-cream-smash-n-smoke.png"
   },
   koozie: {
     "black|everyone-loves-my-sauce": "images/merch/options/koozie-black-everyone-loves-my-sauce.png",
+    "black|sauce-happens": "images/merch/options/koozie-black-sauce-happens.png",
+    "red|everyone-loves-my-sauce": "images/merch/options/koozie-red-everyone-loves-my-sauce.png",
     "red|sauce-happens": "images/merch/options/koozie-red-sauce-happens.png"
   },
   hat: {
     "blue|ask-me-about-my-sauce": "images/merch/options/hat-blue-ask-me-about-my-sauce.png",
+    "blue|bold-flavor": "images/merch/options/hat-blue-bold-flavor.png",
+    "black|ask-me-about-my-sauce": "images/merch/options/hat-black-ask-me-about-my-sauce.png",
     "black|bold-flavor": "images/merch/options/hat-black-bold-flavor.png"
   },
   stickers: {
@@ -913,8 +924,9 @@ const previewImages = {
   },
   smash: {
     "black|smash-n-smoke": "images/merch/options/tee-black-smash-n-smoke.png",
-    "cream|get-my-sauce": "images/merch/options/tee-cream-get-my-sauce.png",
-    "cream|smash-n-smoke": "images/merch/options/tee-cream-smash-n-smoke.png"
+    "black|get-my-sauce": "images/merch/options/tee-black-get-my-sauce.png",
+    "cream|smash-n-smoke": "images/merch/options/tee-cream-smash-n-smoke.png",
+    "cream|get-my-sauce": "images/merch/options/tee-cream-get-my-sauce.png"
   }
 };
 
@@ -937,9 +949,11 @@ function updateCard(card) {
   const saying = card.querySelector(".product-saying");
   const options = previewImages[product] || {};
   const key = `${color}|${slogan}`;
-  const fallback = Object.values(options)[0];
+  const imagePath = options[key];
 
-  img.src = options[key] || fallback;
+  if (imagePath) {
+    img.src = imagePath;
+  }
   img.alt = `${card.querySelector(".product-name").textContent} preview`;
   saying.textContent = `“${sloganLabels[slogan] || slogan}”`;
 }
