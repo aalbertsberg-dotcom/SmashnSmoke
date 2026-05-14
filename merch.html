@@ -414,8 +414,13 @@ img{max-width:100%;display:block}
   margin:.45rem 0 .9rem;
   line-height:1.45;
 }
-.slogan-select-wrap{margin:.85rem 0 1rem}
-.slogan-select-label{
+.option-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:.75rem;
+  margin:.85rem 0 1rem;
+}
+.select-wrap label{
   display:block;
   font-family:'Barlow Condensed',sans-serif;
   font-size:.68rem;
@@ -424,7 +429,7 @@ img{max-width:100%;display:block}
   color:rgba(245,236,216,.38);
   margin-bottom:.35rem;
 }
-.slogan-select{
+.select-wrap select{
   width:100%;
   background:#050914;
   color:var(--cream);
@@ -432,7 +437,7 @@ img{max-width:100%;display:block}
   border-radius:4px;
   padding:.65rem .75rem;
   font-family:'Barlow Condensed',sans-serif;
-  font-size:.9rem;
+  font-size:.85rem;
   letter-spacing:.5px;
   outline:none;
 }
@@ -559,16 +564,35 @@ img{max-width:100%;display:block}
 }
 .page-footer{
   background:#020406;
-  padding:1.5rem 2rem;
+  padding:1.35rem 2rem;
   text-align:center;
   font-family:'Barlow Condensed',sans-serif;
   font-size:.7rem;
   letter-spacing:2px;
   text-transform:uppercase;
-  color:rgba(245,236,216,.18);
+  color:rgba(245,236,216,.2);
 }
-
-.page-footer a{color:rgba(75,150,255,.55);text-decoration:none}
+.footer-credit{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:.35rem;
+  flex-wrap:wrap;
+}
+.builder-link{
+  display:inline-flex;
+  align-items:center;
+  gap:.25rem;
+  color:rgba(75,150,255,.62);
+  text-decoration:none;
+}
+.builder-link img{
+  height:18px;
+  width:auto;
+  border-radius:3px;
+  opacity:.85;
+  filter:drop-shadow(0 0 6px rgba(75,150,255,.35));
+}
 
 @media(max-width:980px){
   .hero-layout{grid-template-columns:1fr}
@@ -587,44 +611,8 @@ img{max-width:100%;display:block}
   .btn{width:100%}
   .merch,.disclaimer,.notify{padding-left:1.1rem;padding-right:1.1rem}
   .drop-grid{grid-template-columns:1fr}
+  .option-row{grid-template-columns:1fr}
 }
-
-/* ── FOOTER CREDIT FIX ── */
-.page-footer {
-  background:#020406;
-  padding:1.35rem 2rem;
-  text-align:center;
-  font-family:'Barlow Condensed',sans-serif;
-  font-size:.7rem;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:rgba(245,236,216,.2);
-}
-.footer-credit {
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:.35rem;
-  flex-wrap:wrap;
-}
-.builder-link {
-  display:inline-flex;
-  align-items:center;
-  gap:.25rem;
-  color:rgba(75,150,255,.62);
-  text-decoration:none;
-}
-.builder-link img {
-  height:18px;
-  width:auto;
-  border-radius:3px;
-  opacity:.85;
-  filter:drop-shadow(0 0 6px rgba(75,150,255,.35));
-}
-.builder-link:hover img {
-  opacity:1;
-}
-
 </style>
 </head>
 <body>
@@ -653,7 +641,7 @@ img{max-width:100%;display:block}
 
       <aside class="featured-drop" aria-label="Featured merch concept">
         <div class="featured-stage">
-          <img src="images/merch/face-sauce-tee-black.png" alt="Black Face Sauce Tee concept">
+          <img src="images/merch/options/tee-black-my-sauce-your-face.png" alt="Black Face Sauce Tee concept">
         </div>
         <div class="featured-info">
           <div class="featured-info-top">
@@ -675,16 +663,16 @@ img{max-width:100%;display:block}
   <div class="section-head">
     <div class="eyebrow">Product Drops</div>
     <h2 class="section-title">Wear The Sauce</h2>
-    <p class="section-sub">Realistic concept mockups for the first merch run. These can later be replaced with Printify, Printful, Shopify, Square, or real product photos.</p>
+    <p class="section-sub">Realistic concept mockups for the first merch run. Use the dropdowns on each item to preview color and slogan options.</p>
   </div>
 
-  <div class="how-it-works"><strong>How this works:</strong> Pick the item. Pick the saying. We’ll print the mess later. These are concept placeholders, not live checkout yet.</div>
+  <div class="how-it-works"><strong>How this works:</strong> Pick a color. Pick a slogan. The image above that item changes to match the selection where a preview exists.</div>
 
   <div class="drop-grid">
 
-    <article class="drop-card featured-card">
+    <article class="drop-card featured-card" data-product="tee">
       <div class="product-stage">
-        <img src="images/merch/face-sauce-tee-black.png" alt="Black graphic tee with My sauce Your face design">
+        <img class="product-preview" src="images/merch/options/tee-black-my-sauce-your-face.png" alt="Face Sauce Tee preview">
       </div>
       <div class="product-info">
         <div class="product-row">
@@ -692,51 +680,32 @@ img{max-width:100%;display:block}
           <div class="product-price">$28</div>
         </div>
         <div class="product-saying">“My sauce. Your face.”</div>
-        <div class="slogan-select-wrap">
-          <label class="slogan-select-label">Choose slogan concept</label>
-          <select class="slogan-select">
-            <option>My sauce. Your face.</option>
-            <option>Everyone loves my sauce on their face.</option>
-            <option>Get my sauce on your face.</option>
-            <option>Bold flavor. Messy face.</option>
-            <option>Sauce happens.</option>
-            <option>Face first. Sauce second.</option>
-            <option>Ask me about my sauce.</option>
-          </select>
+        <div class="option-row">
+          <div class="select-wrap">
+            <label>Color</label>
+            <select class="color-select">
+              <option value="black">Black</option>
+              <option value="red">Red</option>
+              <option value="cream">Cream</option>
+            </select>
+          </div>
+          <div class="select-wrap">
+            <label>Slogan</label>
+            <select class="slogan-select">
+              <option value="my-sauce-your-face">My sauce. Your face.</option>
+              <option value="sauce-happens">Sauce happens.</option>
+              <option value="get-my-sauce">Get my sauce on your face.</option>
+              <option value="smash-n-smoke">Smash N Smoke</option>
+            </select>
+          </div>
         </div>
-        <div class="product-meta"><span class="pill">Black Tee</span><span class="pill">Front Print</span><span class="pill">Concept Price</span></div>
+        <div class="product-meta"><span class="pill">Tee</span><span class="pill">Front Print</span><span class="pill">First Drop</span></div>
       </div>
     </article>
 
-    <article class="drop-card">
+    <article class="drop-card" data-product="koozie">
       <div class="product-stage">
-        <img src="images/merch/sauce-impact-tee-cream.png" alt="Cream tee with Get my sauce on your face design">
-      </div>
-      <div class="product-info">
-        <div class="product-row">
-          <div class="product-name">Sauce Impact Tee</div>
-          <div class="product-price soon">Coming Soon</div>
-        </div>
-        <div class="product-saying">“Get my sauce on your face.”</div>
-        <div class="slogan-select-wrap">
-          <label class="slogan-select-label">Choose slogan concept</label>
-          <select class="slogan-select">
-            <option>Get my sauce on your face.</option>
-            <option>My sauce. Your face.</option>
-            <option>Everyone loves my sauce on their face.</option>
-            <option>Bold flavor. Messy face.</option>
-            <option>Sauce happens.</option>
-            <option>Face first. Sauce second.</option>
-            <option>Ask me about my sauce.</option>
-          </select>
-        </div>
-        <div class="product-meta"><span class="pill">Cream Tee</span><span class="pill">Sauce Splat</span><span class="pill">Drop Later</span></div>
-      </div>
-    </article>
-
-    <article class="drop-card">
-      <div class="product-stage">
-        <img src="images/merch/messy-face-koozie-black.png" alt="Black koozie with Everyone loves my sauce design">
+        <img class="product-preview" src="images/merch/options/koozie-black-everyone-loves-my-sauce.png" alt="Messy Face Koozie preview">
       </div>
       <div class="product-info">
         <div class="product-row">
@@ -744,51 +713,29 @@ img{max-width:100%;display:block}
           <div class="product-price">$8</div>
         </div>
         <div class="product-saying">“Everyone loves my sauce on their face.”</div>
-        <div class="slogan-select-wrap">
-          <label class="slogan-select-label">Choose slogan concept</label>
-          <select class="slogan-select">
-            <option>Everyone loves my sauce on their face.</option>
-            <option>My sauce. Your face.</option>
-            <option>Get my sauce on your face.</option>
-            <option>Bold flavor. Messy face.</option>
-            <option>Sauce happens.</option>
-            <option>Face first. Sauce second.</option>
-            <option>Ask me about my sauce.</option>
-          </select>
+        <div class="option-row">
+          <div class="select-wrap">
+            <label>Color</label>
+            <select class="color-select">
+              <option value="black">Black</option>
+              <option value="red">Red</option>
+            </select>
+          </div>
+          <div class="select-wrap">
+            <label>Slogan</label>
+            <select class="slogan-select">
+              <option value="everyone-loves-my-sauce">Everyone loves my sauce.</option>
+              <option value="sauce-happens">Sauce happens.</option>
+            </select>
+          </div>
         </div>
         <div class="product-meta"><span class="pill">Koozie</span><span class="pill">Tailgate Drop</span><span class="pill">Concept Price</span></div>
       </div>
     </article>
 
-    <article class="drop-card">
+    <article class="drop-card" data-product="hat">
       <div class="product-stage">
-        <img src="images/merch/sauce-happens-koozie-orange.png" alt="Orange koozie with Sauce happens design">
-      </div>
-      <div class="product-info">
-        <div class="product-row">
-          <div class="product-name">Sauce Happens Koozie</div>
-          <div class="product-price">$8</div>
-        </div>
-        <div class="product-saying">“Sauce happens.”</div>
-        <div class="slogan-select-wrap">
-          <label class="slogan-select-label">Choose slogan concept</label>
-          <select class="slogan-select">
-            <option>Sauce happens.</option>
-            <option>My sauce. Your face.</option>
-            <option>Everyone loves my sauce on their face.</option>
-            <option>Get my sauce on your face.</option>
-            <option>Bold flavor. Messy face.</option>
-            <option>Face first. Sauce second.</option>
-            <option>Ask me about my sauce.</option>
-          </select>
-        </div>
-        <div class="product-meta"><span class="pill">Orange Koozie</span><span class="pill">Counter Display</span><span class="pill">Concept Price</span></div>
-      </div>
-    </article>
-
-    <article class="drop-card">
-      <div class="product-stage">
-        <img src="images/merch/ask-me-sauce-hat.png" alt="Black hat with Ask me about my sauce design">
+        <img class="product-preview" src="images/merch/options/hat-blue-ask-me-about-my-sauce.png" alt="Ask Me Sauce Hat preview">
       </div>
       <div class="product-info">
         <div class="product-row">
@@ -796,25 +743,29 @@ img{max-width:100%;display:block}
           <div class="product-price soon">Coming Soon</div>
         </div>
         <div class="product-saying">“Ask me about my sauce.”</div>
-        <div class="slogan-select-wrap">
-          <label class="slogan-select-label">Choose slogan concept</label>
-          <select class="slogan-select">
-            <option>Ask me about my sauce.</option>
-            <option>My sauce. Your face.</option>
-            <option>Everyone loves my sauce on their face.</option>
-            <option>Get my sauce on your face.</option>
-            <option>Bold flavor. Messy face.</option>
-            <option>Sauce happens.</option>
-            <option>Face first. Sauce second.</option>
-          </select>
+        <div class="option-row">
+          <div class="select-wrap">
+            <label>Color</label>
+            <select class="color-select">
+              <option value="blue">Blue</option>
+              <option value="black">Black</option>
+            </select>
+          </div>
+          <div class="select-wrap">
+            <label>Slogan</label>
+            <select class="slogan-select">
+              <option value="ask-me-about-my-sauce">Ask me about my sauce.</option>
+              <option value="bold-flavor">Bold flavor. Messy face.</option>
+            </select>
+          </div>
         </div>
         <div class="product-meta"><span class="pill">Hat</span><span class="pill">Patch Concept</span><span class="pill">Drop Later</span></div>
       </div>
     </article>
 
-    <article class="drop-card">
+    <article class="drop-card" data-product="stickers">
       <div class="product-stage">
-        <img src="images/merch/messy-little-sticker-pack.png" alt="Sticker pack with Loké's Sauce Co designs">
+        <img class="product-preview" src="images/merch/options/stickers-multi-bold-flavor.png" alt="Sticker Pack preview">
       </div>
       <div class="product-info">
         <div class="product-row">
@@ -822,19 +773,79 @@ img{max-width:100%;display:block}
           <div class="product-price">$5</div>
         </div>
         <div class="product-saying">“Bold flavor. Messy face.”</div>
-        <div class="slogan-select-wrap">
-          <label class="slogan-select-label">Choose slogan concept</label>
-          <select class="slogan-select">
-            <option>Bold flavor. Messy face.</option>
-            <option>My sauce. Your face.</option>
-            <option>Everyone loves my sauce on their face.</option>
-            <option>Get my sauce on your face.</option>
-            <option>Sauce happens.</option>
-            <option>Face first. Sauce second.</option>
-            <option>Ask me about my sauce.</option>
-          </select>
+        <div class="option-row">
+          <div class="select-wrap">
+            <label>Color</label>
+            <select class="color-select">
+              <option value="multi">Multi</option>
+            </select>
+          </div>
+          <div class="select-wrap">
+            <label>Slogan</label>
+            <select class="slogan-select">
+              <option value="bold-flavor">Bold flavor. Messy face.</option>
+            </select>
+          </div>
         </div>
-        <div class="product-meta"><span class="pill">Sticker Pack</span><span class="pill">3 Pack</span><span class="pill">Easy Add-On</span></div>
+        <div class="product-meta"><span class="pill">Sticker Pack</span><span class="pill">Multi Pack</span><span class="pill">Easy Add-On</span></div>
+      </div>
+    </article>
+
+    <article class="drop-card" data-product="apron">
+      <div class="product-stage">
+        <img class="product-preview" src="images/merch/options/apron-black-sauce-boss.png" alt="Sauce Boss Apron preview">
+      </div>
+      <div class="product-info">
+        <div class="product-row">
+          <div class="product-name">Sauce Boss Apron</div>
+          <div class="product-price soon">Special +$12</div>
+        </div>
+        <div class="product-saying">“Sauce Boss.”</div>
+        <div class="option-row">
+          <div class="select-wrap">
+            <label>Color</label>
+            <select class="color-select">
+              <option value="black">Black</option>
+            </select>
+          </div>
+          <div class="select-wrap">
+            <label>Slogan</label>
+            <select class="slogan-select">
+              <option value="sauce-boss">Sauce Boss</option>
+            </select>
+          </div>
+        </div>
+        <div class="product-meta"><span class="pill">Special</span><span class="pill">Sauce Theme</span><span class="pill">Add-On</span></div>
+      </div>
+    </article>
+
+    <article class="drop-card" data-product="smash">
+      <div class="product-stage">
+        <img class="product-preview" src="images/merch/options/tee-black-smash-n-smoke.png" alt="Smash N Smoke Tee preview">
+      </div>
+      <div class="product-info">
+        <div class="product-row">
+          <div class="product-name">Smash N Smoke Tee</div>
+          <div class="product-price soon">Special +$4</div>
+        </div>
+        <div class="product-saying">“Smash N Smoke.”</div>
+        <div class="option-row">
+          <div class="select-wrap">
+            <label>Color</label>
+            <select class="color-select">
+              <option value="black">Black</option>
+              <option value="cream">Cream</option>
+            </select>
+          </div>
+          <div class="select-wrap">
+            <label>Slogan</label>
+            <select class="slogan-select">
+              <option value="smash-n-smoke">Smash N Smoke</option>
+              <option value="get-my-sauce">Get my sauce on your face.</option>
+            </select>
+          </div>
+        </div>
+        <div class="product-meta"><span class="pill">Special</span><span class="pill">Truck Brand</span><span class="pill">Add-On</span></div>
       </div>
     </article>
 
@@ -878,14 +889,66 @@ img{max-width:100%;display:block}
 </footer>
 
 <script>
-document.querySelectorAll('.drop-card').forEach(card => {
-  const select = card.querySelector('.slogan-select');
-  const saying = card.querySelector('.product-saying');
-  if(select && saying){
-    select.addEventListener('change', () => {
-      saying.textContent = '“' + select.value + '”';
-    });
+const previewImages = {
+  tee: {
+    "black|my-sauce-your-face": "images/merch/options/tee-black-my-sauce-your-face.png",
+    "red|sauce-happens": "images/merch/options/tee-red-sauce-happens.png",
+    "cream|get-my-sauce": "images/merch/options/tee-cream-get-my-sauce.png",
+    "black|smash-n-smoke": "images/merch/options/tee-black-smash-n-smoke.png",
+    "cream|smash-n-smoke": "images/merch/options/tee-cream-smash-n-smoke.png"
+  },
+  koozie: {
+    "black|everyone-loves-my-sauce": "images/merch/options/koozie-black-everyone-loves-my-sauce.png",
+    "red|sauce-happens": "images/merch/options/koozie-red-sauce-happens.png"
+  },
+  hat: {
+    "blue|ask-me-about-my-sauce": "images/merch/options/hat-blue-ask-me-about-my-sauce.png",
+    "black|bold-flavor": "images/merch/options/hat-black-bold-flavor.png"
+  },
+  stickers: {
+    "multi|bold-flavor": "images/merch/options/stickers-multi-bold-flavor.png"
+  },
+  apron: {
+    "black|sauce-boss": "images/merch/options/apron-black-sauce-boss.png"
+  },
+  smash: {
+    "black|smash-n-smoke": "images/merch/options/tee-black-smash-n-smoke.png",
+    "cream|get-my-sauce": "images/merch/options/tee-cream-get-my-sauce.png",
+    "cream|smash-n-smoke": "images/merch/options/tee-cream-smash-n-smoke.png"
   }
+};
+
+const sloganLabels = {
+  "my-sauce-your-face": "My sauce. Your face.",
+  "sauce-happens": "Sauce happens.",
+  "get-my-sauce": "Get my sauce on your face.",
+  "smash-n-smoke": "Smash N Smoke.",
+  "everyone-loves-my-sauce": "Everyone loves my sauce on their face.",
+  "ask-me-about-my-sauce": "Ask me about my sauce.",
+  "bold-flavor": "Bold flavor. Messy face.",
+  "sauce-boss": "Sauce Boss."
+};
+
+function updateCard(card) {
+  const product = card.dataset.product;
+  const color = card.querySelector(".color-select").value;
+  const slogan = card.querySelector(".slogan-select").value;
+  const img = card.querySelector(".product-preview");
+  const saying = card.querySelector(".product-saying");
+  const options = previewImages[product] || {};
+  const key = `${color}|${slogan}`;
+  const fallback = Object.values(options)[0];
+
+  img.src = options[key] || fallback;
+  img.alt = `${card.querySelector(".product-name").textContent} preview`;
+  saying.textContent = `“${sloganLabels[slogan] || slogan}”`;
+}
+
+document.querySelectorAll(".drop-card").forEach(card => {
+  card.querySelectorAll("select").forEach(select => {
+    select.addEventListener("change", () => updateCard(card));
+  });
+  updateCard(card);
 });
 </script>
 </body>
